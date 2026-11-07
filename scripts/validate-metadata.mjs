@@ -1,12 +1,10 @@
 import { readdir, readFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import Ajv2020 from 'ajv/dist/2020.js';
-import YAML from 'yaml';
+import { validateMetadataText } from './metadata-validation.mjs';
 
 const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const metadataRoot = path.join(projectRoot, 'metadata', 'journeys');
-const schemaPath = path.join(projectRoot, 'schemas', 'journey.schema.json');
 
 async function listYamlFiles(directory) {
   const entries = await readdir(directory, { withFileTypes: true });
@@ -18,20 +16,17 @@ async function listYamlFiles(directory) {
   return nested.flat();
 }
 
-const schema = JSON.parse(await readFile(schemaPath, 'utf8'));
-const ajv = new Ajv2020({ allErrors: true, strict: true, validateFormats: true });
-const validate = ajv.compile(schema);
 const files = await listYamlFiles(metadataRoot);
 let invalidCount = 0;
 
 for (const filePath of files) {
   const relativePath = path.relative(projectRoot, filePath);
   try {
-    const data = YAML.parse(await readFile(filePath, 'utf8'));
-    if (!validate(data)) {
+    const result = validateMetadataText(await readFile(filePath, 'utf8'));
+    if (!result.valid) {
       invalidCount += 1;
       console.error(`\n${relativePath}`);
-      for (const error of validate.errors ?? []) {
+      for (const error of result.errors) {
         console.error(`  ${error.instancePath || '/'} ${error.message}`);
       }
     } else {

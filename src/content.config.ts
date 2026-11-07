@@ -1,11 +1,11 @@
-import { defineCollection } from 'astro:content';
+import { defineCollection, reference } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 
 const journeyPages = defineCollection({
   loader: glob({ pattern: '**/*.mdx', base: './content/journeys' }),
   schema: z.object({
-    journey_id: z.string(),
+    journey_id: reference('journeyMetadata'),
     episode_id: z.string(),
     title: z.string(),
     language: z.enum(['pt', 'en']),

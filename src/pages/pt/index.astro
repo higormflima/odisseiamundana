@@ -33,7 +33,7 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
     {publishedPages.length ? (
       <div class="journey-list">
         {publishedPages.map((page) => (
-          <a class="journey-row" href={`${base}pt/viagens/${page.data.journey_id}/${page.data.episode_id}/`}>
+          <a class="journey-row" href={`${base}pt/viagens/${page.data.journey_id.id}/${page.data.episode_id}/`}>
             <span class="journey-number">{String(page.data.sort_order ?? 1).padStart(2, '0')}</span>
             <span class="journey-title">{page.data.title}</span>
             <span class="journey-arrow" aria-hidden="true">↗</span>

@@ -14,11 +14,12 @@ pnpm dev
 Abra o endereço local exibido pelo Astro. Para gerar o website estático:
 
 ```powershell
+pnpm test
 pnpm build
 pnpm preview
 ```
 
-O build valida os metadados YAML contra os contratos JSON Schema antes de gerar as páginas.
+Os testes verificam casos válidos e inválidos dos contratos JSON Schema e as referências entre páginas editoriais e viagens. O build valida os metadados YAML contra os contratos JSON Schema antes de gerar as páginas.
 
 ## Organização do conteúdo
 
