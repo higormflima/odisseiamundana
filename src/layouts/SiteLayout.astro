@@ -1,0 +1,43 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  lang?: string;
+}
+
+const { title, description = 'Histórias, roteiros e experiências de viagem.', lang = 'pt-BR' } = Astro.props;
+const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#151714" />
+    <title>{title} | Odisseia Mundana</title>
+    <slot name="head" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="wordmark" href={`${base}pt/`} aria-label="Odisseia Mundana — início">
+        <span class="wordmark-mark" aria-hidden="true">OM</span>
+        <span>ODISSEIA<br />MUNDANA</span>
+      </a>
+      <nav aria-label="Navegação principal">
+        <a href={`${base}pt/viagens/`}>Viagens</a>
+        <span class="language-note">PT</span>
+      </nav>
+    </header>
+    <main>
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <span>Odisseia Mundana</span>
+      <span>Histórias de lugares e caminhos.</span>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://higormflima.github.io/odisseiamundana/schemas/journey.schema.json",
+  "title": "Metadados de viagem — rascunho 0.1",
+  "description": "Contrato inicial e provisório para os metadados de uma viagem.",
+  "type": "object",
+  "required": ["journey_id"],
+  "additionalProperties": false,
+  "properties": {
+    "journey_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "description": "Identificador estável da viagem, escrito em inglês.",
+      "examples": ["finland-2026"]
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Título da viagem em português brasileiro."
+    },
+    "dates": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "year": { "type": "integer", "minimum": 1900, "maximum": 2200 },
+        "month": { "type": "integer", "minimum": 1, "maximum": 12 },
+        "start_date": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$" },
+        "end_date": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$" }
+      }
+    },
+    "geography": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "countries": { "type": "array", "items": { "type": "string" } },
+        "regions": { "type": "array", "items": { "type": "string" } },
+        "destinations": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "duration_days": { "type": "integer", "minimum": 1 },
+    "duration_nights": { "type": "integer", "minimum": 0 },
+    "provenance": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["source_type", "verification_status"],
+        "additionalProperties": false,
+        "properties": {
+          "source_type": {
+            "type": "string",
+            "enum": ["manual", "transcript", "youtube_metadata", "external_source", "ai_inference"]
+          },
+          "verification_status": {
+            "type": "string",
+            "enum": ["unverified", "reviewed", "confirmed"]
+          },
+          "source_id": { "type": "string" },
+          "fields": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,24 @@
+---
+interface Props {
+  videoId: string;
+  title: string;
+}
+
+const { videoId, title } = Astro.props;
+const safeVideoId = /^[A-Za-z0-9_-]{11}$/.test(videoId) ? videoId : undefined;
+---
+
+{safeVideoId ? (
+  <div class="video-frame">
+    <iframe
+      src={`https://www.youtube-nocookie.com/embed/${safeVideoId}?rel=0`}
+      title={title}
+      loading="lazy"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      referrerpolicy="strict-origin-when-cross-origin"
+      allowfullscreen
+    ></iframe>
+  </div>
+) : (
+  <p class="media-note">Vídeo indisponível: confira o identificador do YouTube.</p>
+)}

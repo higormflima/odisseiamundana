@@ -1,0 +1,15 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+
+const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+const portugueseHome = `${base}pt/`;
+---
+
+<SiteLayout title="Início" description="Revista digital de viagens Odisseia Mundana.">
+  <meta http-equiv="refresh" content={`0;url=${portugueseHome}`} slot="head" />
+  <section class="redirect-page">
+    <p class="eyebrow">Odisseia Mundana</p>
+    <h1>Uma revista de viagens, em construção.</h1>
+    <a class="text-link" href={portugueseHome}>Acessar a versão em português <span aria-hidden="true">↗</span></a>
+  </section>
+</SiteLayout>

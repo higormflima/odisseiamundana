@@ -1,0 +1,3 @@
+nodeLinker: hoisted
+virtualStoreType: project
+storeDir: .pnpm-store

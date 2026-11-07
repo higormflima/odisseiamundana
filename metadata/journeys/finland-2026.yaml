@@ -1,0 +1,28 @@
+journey_id: finland-2026
+title: Finlândia — 2026
+dates:
+  year: 2026
+  month: 2
+geography:
+  countries:
+    - Finlândia
+  regions:
+    - Lapônia
+  destinations:
+    - Rovaniemi
+    - Ranua
+duration_days: 5
+duration_nights: 4
+provenance:
+  - source_type: transcript
+    verification_status: confirmed
+    source_id: ZliBIZGRQBI
+    fields:
+      - dates
+  - source_type: transcript
+    verification_status: unverified
+    source_id: ZliBIZGRQBI
+    fields:
+      - geography
+      - duration_days
+      - duration_nights
