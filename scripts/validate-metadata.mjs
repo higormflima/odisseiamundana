@@ -4,7 +4,10 @@ import { fileURLToPath } from 'node:url';
 import { validateMetadataText } from './metadata-validation.mjs';
 
 const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const metadataRoot = path.join(projectRoot, 'metadata', 'journeys');
+const metadataCollections = [
+  { kind: 'journey', directory: path.join(projectRoot, 'metadata', 'journeys') },
+  { kind: 'video', directory: path.join(projectRoot, 'metadata', 'videos') },
+];
 
 async function listYamlFiles(directory) {
   const entries = await readdir(directory, { withFileTypes: true });
@@ -16,13 +19,15 @@ async function listYamlFiles(directory) {
   return nested.flat();
 }
 
-const files = await listYamlFiles(metadataRoot);
+const files = (await Promise.all(metadataCollections.map(async ({ kind, directory }) =>
+  (await listYamlFiles(directory)).map((filePath) => ({ kind, filePath })),
+))).flat();
 let invalidCount = 0;
 
-for (const filePath of files) {
+for (const { kind, filePath } of files) {
   const relativePath = path.relative(projectRoot, filePath);
   try {
-    const result = validateMetadataText(await readFile(filePath, 'utf8'));
+    const result = validateMetadataText(await readFile(filePath, 'utf8'), kind);
     if (!result.valid) {
       invalidCount += 1;
       console.error(`\n${relativePath}`);
@@ -39,7 +44,7 @@ for (const filePath of files) {
 }
 
 if (files.length === 0) {
-  console.log('Nenhum arquivo YAML de viagem encontrado.');
+  console.log('Nenhum arquivo YAML de metadados encontrado.');
 }
 
 if (invalidCount > 0) {

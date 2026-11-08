@@ -10,7 +10,7 @@ const journeyPages = defineCollection({
     title: z.string(),
     language: z.enum(['pt', 'en']),
     status: z.enum(['draft', 'reviewed', 'published']),
-    youtube_video_id: z.string().optional(),
+    youtube_video_id: reference('videoMetadata').optional(),
     sort_order: z.number().int().optional(),
   }),
 });
@@ -23,7 +23,16 @@ const journeyMetadata = defineCollection({
   }),
 });
 
+const videoMetadata = defineCollection({
+  loader: glob({
+    pattern: '**/*.yaml',
+    base: './metadata/videos',
+    generateId: ({ entry }) => entry.split('/').at(-1)?.replace(/\.yaml$/i, '') ?? entry,
+  }),
+});
+
 export const collections = {
   journeyPages,
   journeyMetadata,
+  videoMetadata,
 };

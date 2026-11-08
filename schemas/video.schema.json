@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://higormflima.github.io/odisseiamundana/schemas/video.schema.json",
+  "title": "Metadados de vídeo — rascunho 0.1",
+  "description": "Contrato inicial e provisório para metadados de vídeos associados a uma viagem.",
+  "type": "object",
+  "required": ["video_id", "journey_id", "youtube_url"],
+  "additionalProperties": false,
+  "properties": {
+    "video_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_-]{11}$",
+      "description": "Identificador do vídeo no YouTube."
+    },
+    "journey_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "description": "Identificador da viagem relacionada."
+    },
+    "youtube_url": {
+      "type": "string",
+      "pattern": "^https://www\\.youtube\\.com/watch\\?v=[A-Za-z0-9_-]{11}$",
+      "description": "URL canônica do vídeo no YouTube, usada para link e incorporação."
+    },
+    "playlist_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_-]+$"
+    },
+    "playlist_position": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Posição do vídeo na playlist de origem."
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Título do vídeo conforme publicado no YouTube."
+    },
+    "description": {
+      "type": "string",
+      "description": "Descrição do vídeo conforme publicada no YouTube."
+    },
+    "thumbnail_url": {
+      "type": "string",
+      "description": "URL de uma miniatura do vídeo hospedada pelo YouTube."
+    },
+    "duration_seconds": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Duração do vídeo em segundos, conforme a YouTube Data API."
+    },
+    "video_published_at": {
+      "type": "string",
+      "description": "Data de publicação do vídeo; não representa a data da viagem."
+    },
+    "narration_status": {
+      "type": "string",
+      "enum": ["expected", "present", "absent", "unknown"],
+      "description": "Estado da narração, distinguido da disponibilidade de legendas."
+    },
+    "caption_status": {
+      "type": "string",
+      "enum": ["available", "unavailable", "not_expected", "not_checked"],
+      "description": "Disponibilidade conhecida de uma faixa de legenda utilizável."
+    },
+    "transcript_files": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Caminhos relativos ao repositório para as fontes de transcrição existentes."
+    },
+    "provenance": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["source_type", "verification_status"],
+        "additionalProperties": false,
+        "properties": {
+          "source_type": {
+            "type": "string",
+            "enum": ["manual", "transcript", "youtube_metadata", "external_source", "ai_inference"]
+          },
+          "verification_status": {
+            "type": "string",
+            "enum": ["unverified", "reviewed", "confirmed"]
+          },
+          "source_id": { "type": "string" },
+          "fields": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    }
+  }
+}

@@ -26,3 +26,13 @@ provenance:
       - geography
       - duration_days
       - duration_nights
+  - source_type: transcript
+    verification_status: unverified
+    source_id: MoYc1xOJ0ww
+    fields:
+      - geography.destinations
+  - source_type: transcript
+    verification_status: unverified
+    source_id: B6DJ_dQnZ8Q
+    fields:
+      - geography.destinations

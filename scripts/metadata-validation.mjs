@@ -5,12 +5,22 @@ import Ajv2020 from 'ajv/dist/2020.js';
 import YAML from 'yaml';
 
 const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const schemaPath = path.join(projectRoot, 'schemas', 'journey.schema.json');
-const schema = JSON.parse(await readFile(schemaPath, 'utf8'));
 const ajv = new Ajv2020({ allErrors: true, strict: true, validateFormats: true });
-const validate = ajv.compile(schema);
+const schemaFiles = {
+  journey: 'journey.schema.json',
+  video: 'video.schema.json',
+};
+const validators = new Map();
 
-export function validateMetadataText(source) {
+for (const [kind, filename] of Object.entries(schemaFiles)) {
+  const schemaPath = path.join(projectRoot, 'schemas', filename);
+  const schema = JSON.parse(await readFile(schemaPath, 'utf8'));
+  validators.set(kind, ajv.compile(schema));
+}
+
+export function validateMetadataText(source, kind = 'journey') {
+  const validate = validators.get(kind);
+  if (!validate) throw new Error(`Tipo de metadado desconhecido: ${kind}`);
   const data = YAML.parse(source);
   const valid = validate(data);
   const errors = valid
