@@ -9,3 +9,4 @@
 - Prefira componentes nativos Astro e não acrescente React ou outras dependências sem necessidade aprovada.
 - Não escolha soluções de mapas por conta própria.
 - Prefira implementações simples e incrementais. Explique decisões técnicas em português.
+- Antes de qualquer alteração visual, consulte `media/branding/BRAND_GUIDELINES.md`.

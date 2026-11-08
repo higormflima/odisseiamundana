@@ -17,14 +17,17 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
-    <meta name="theme-color" content="#151714" />
+    <meta name="theme-color" content="#fefefe" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <title>{title} | Odisseia Mundana</title>
     <slot name="head" />
   </head>
   <body>
     <header class="site-header">
       <a class="wordmark" href={`${base}pt/`} aria-label="Odisseia Mundana — início">
-        <span class="wordmark-mark" aria-hidden="true">OM</span>
+        <img src={`${base}media/branding/optimized/logo-primary.png`} alt="" width="54" height="54" />
         <span>ODISSEIA<br />MUNDANA</span>
       </a>
       <nav aria-label="Navegação principal">
