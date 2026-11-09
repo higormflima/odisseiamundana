@@ -3,6 +3,7 @@ interface GalleryImage {
   src: string;
   alt: string;
   caption?: string;
+  href?: string;
 }
 
 interface Props {
@@ -15,7 +16,13 @@ const { images } = Astro.props;
 <div class="photo-gallery">
   {images.map((image) => (
     <figure>
-      <img src={image.src} alt={image.alt} loading="lazy" decoding="async" />
+      {image.href ? (
+        <a class="photo-gallery-link" href={image.href}>
+          <img src={image.src} alt={image.alt} loading="lazy" decoding="async" />
+        </a>
+      ) : (
+        <img src={image.src} alt={image.alt} loading="lazy" decoding="async" />
+      )}
       {image.caption && <figcaption>{image.caption}</figcaption>}
     </figure>
   ))}

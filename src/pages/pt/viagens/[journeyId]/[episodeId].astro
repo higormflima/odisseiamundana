@@ -35,7 +35,7 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
       <p class="eyebrow">{journeyTitle}</p>
       <h1>{entry.data.title}</h1>
     </header>
-    {entry.data.youtube_video_id && <YouTubeVideo videoId={entry.data.youtube_video_id} title={entry.data.title} />}
+    {entry.data.youtube_video_id && <YouTubeVideo videoId={entry.data.youtube_video_id.id} title={entry.data.title} />}
     <div class="story-body"><Content /></div>
   </article>
 </SiteLayout>
