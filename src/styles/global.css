@@ -151,8 +151,6 @@ h1, h2, p { margin-top: 0; }
 .footer-contact h2 { margin: 0; color: var(--ink); font-size: inherit; font-weight: 800; letter-spacing: inherit; text-transform: inherit; }
 .social-links--footer { gap: 22px; }
 .social-links--footer .social-link { font-size: 10px; }
-.social-link-label { display: flex; flex-direction: column; gap: 3px; }
-.social-email { color: var(--muted); font-size: 9px; letter-spacing: .01em; text-transform: none; }
 
 @media (max-width: 900px) {
   .home-hero { grid-template-columns: 1fr; gap: 56px; }
