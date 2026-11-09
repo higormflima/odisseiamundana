@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://higormflima.github.io/odisseiamundana/schemas/journey.schema.json",
-  "title": "Metadados de viagem — rascunho 0.2",
-  "description": "Contrato provisório para os metadados de uma viagem, expandido com participantes, transporte, hospedagem, atividades, orçamento e coordenadas.",
+  "title": "Metadados de viagem — rascunho 0.3",
+  "description": "Contrato provisório para os metadados de uma viagem, expandido com participantes, transporte, hospedagem, atividades, orçamento, coordenadas, resumo e ponto representativo para o mapa.",
   "type": "object",
   "required": ["journey_id"],
   "additionalProperties": false,
@@ -17,6 +17,11 @@
       "type": "string",
       "minLength": 1,
       "description": "Título da viagem em português brasileiro."
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Descrição curta da viagem, aprovada pelo proprietário, usada em cards e listagens."
     },
     "dates": {
       "type": "object",
@@ -34,7 +39,17 @@
       "properties": {
         "countries": { "type": "array", "items": { "type": "string" } },
         "regions": { "type": "array", "items": { "type": "string" } },
-        "destinations": { "type": "array", "items": { "type": "string" } }
+        "destinations": { "type": "array", "items": { "type": "string" } },
+        "representative_point": {
+          "type": "object",
+          "description": "Ponto de referência confirmado da viagem, usado no mapa da homepage. Omitir quando não houver localização precisa.",
+          "required": ["name", "coordinates"],
+          "additionalProperties": false,
+          "properties": {
+            "name": { "type": "string", "minLength": 1 },
+            "coordinates": { "$ref": "#/$defs/coordinates" }
+          }
+        }
       }
     },
     "duration_days": { "type": "integer", "minimum": 1 },

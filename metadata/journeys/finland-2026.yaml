@@ -1,5 +1,8 @@
 journey_id: finland-2026
 title: Finlândia — 2026
+summary: >
+  Uma cabana na floresta como base para explorar a Lapônia no inverno — de trenó
+  de huskies e renas até a Santa Claus Village, no Círculo Polar Ártico.
 dates:
   year: 2026
   month: 2
@@ -12,6 +15,11 @@ geography:
     - Rovaniemi
     - Ranua
     - Santa Claus Village
+  representative_point:
+    name: Lystikämän Tupa
+    coordinates:
+      lat: 66.2273506
+      lng: 26.4807929
 duration_days: 5
 duration_nights: 4
 participants:
@@ -108,3 +116,5 @@ provenance:
       - activities
       - budget
       - geography.destinations
+      - geography.representative_point
+      - summary

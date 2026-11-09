@@ -77,6 +77,8 @@ h1, h2, p { margin-top: 0; }
 .text-link span { color: #f0d38b; }
 .hero-index { position: absolute; z-index: 1; right: clamp(24px, 7vw, 100px); bottom: 34px; color: rgba(255,255,255,.76); font-size: 10px; line-height: 1.7; letter-spacing: .1em; text-align: right; text-transform: uppercase; }
 
+.map-section { padding: var(--space-section) var(--page-gutter) 0; }
+.map-section-hint { margin: 0; padding-bottom: 7px; color: var(--muted); font-size: var(--text-sm); }
 .journeys-section, .archive-page { padding: var(--space-section) var(--content-gutter) 130px; }
 .section-heading { display: flex; justify-content: space-between; align-items: end; margin-bottom: 36px; }
 .section-heading .eyebrow { margin-bottom: 12px; }
@@ -125,6 +127,8 @@ h1, h2, p { margin-top: 0; }
   .home-hero { min-height: 620px; padding: 76px 26px; align-items: start; }
   .home-hero::before { background-image: linear-gradient(90deg, rgb(22 28 27 / 84%), rgb(22 28 27 / 38%)), var(--hero-image); background-position: 58% center; }
   .hero-index { right: 24px; bottom: 28px; }
+  .map-section { padding: 64px 16px 0; }
+  .map-section .section-heading { padding-inline: 8px; }
   .journeys-section, .archive-page { padding: 76px 24px 92px; }
   .section-heading { align-items: start; gap: 20px; flex-direction: column; }
   .journey-row { grid-template-columns: 34px 1fr 24px; min-height: 78px; gap: 8px; }

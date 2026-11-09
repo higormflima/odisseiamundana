@@ -1,11 +1,19 @@
 ---
 import SiteLayout from '../../layouts/SiteLayout.astro';
+import InteractiveWorldMap from '../../components/InteractiveWorldMap.astro';
 import { getCollection } from 'astro:content';
+import { buildJourneyMapEntries } from '../../lib/journeyMapData.mjs';
 
 const pages = await getCollection('journeyPages');
 const publishedPages = pages.filter((page) => page.data.status === 'published');
 const draftPages = import.meta.env.DEV ? pages.filter((page) => page.data.status !== 'published') : [];
 const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+const mapEntries = buildJourneyMapEntries({
+  journeys: await getCollection('journeyMetadata'),
+  pages,
+  videos: await getCollection('videoMetadata'),
+  base,
+});
 ---
 
 <SiteLayout title="Viagens" description="Histórias, roteiros e experiências de viagem.">
@@ -18,6 +26,19 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
     </div>
     <p class="hero-index">Uma coleção em movimento<br />Desde 2026</p>
   </section>
+
+  {mapEntries.length > 0 && (
+    <section class="map-section" id="mapa" aria-labelledby="mapa-titulo">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Mapa de viagens</p>
+          <h2 id="mapa-titulo">Explore pelo mapa</h2>
+        </div>
+        <p class="map-section-hint">Selecione um marcador para conhecer a viagem.</p>
+      </div>
+      <InteractiveWorldMap entries={mapEntries} skipTarget="#viagens" />
+    </section>
+  )}
 
   <section class="journeys-section" id="viagens">
     <div class="section-heading">

@@ -1,0 +1,4 @@
+journey_id: sample-trip
+geography:
+  representative_point:
+    name: Ponto sem coordenadas

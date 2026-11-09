@@ -1,0 +1,85 @@
+---
+import JourneyCard, { type JourneyCardData } from './JourneyCard.astro';
+
+export interface WorldMapEntry extends JourneyCardData {
+  pointName: string;
+  lat: number;
+  lng: number;
+}
+
+interface Props {
+  entries: WorldMapEntry[];
+  label?: string;
+  skipTarget?: string;
+}
+
+const { entries, label = 'Mapa-múndi interativo das viagens', skipTarget } = Astro.props;
+const markers = entries.map(({ journeyId, title, pointName, lat, lng }) => ({ journeyId, title, pointName, lat, lng }));
+const markersJson = JSON.stringify(markers).replace(/</g, '\\u003c');
+---
+
+<div class="world-map" data-world-map>
+  {skipTarget && <a class="world-map-skip" href={skipTarget}>Pular o mapa e ver a lista de viagens</a>}
+  <div class="world-map-frame">
+    <div class="world-map-canvas" data-world-map-canvas role="region" aria-label={label} tabindex="0">
+      <noscript><p class="world-map-fallback">O mapa interativo precisa de JavaScript. As viagens estão listadas logo abaixo.</p></noscript>
+    </div>
+    <p class="world-map-error">Não foi possível carregar o mapa agora. As viagens estão listadas logo abaixo.</p>
+    <aside class="world-map-panel" data-world-map-panel tabindex="-1" aria-label="Viagem selecionada" hidden>
+      <button class="world-map-close" type="button" data-world-map-close aria-label="Fechar card da viagem">
+        <span aria-hidden="true">×</span>
+      </button>
+      {entries.map((entry) => (
+        <div data-journey-card={entry.journeyId} hidden>
+          <JourneyCard journey={entry} />
+        </div>
+      ))}
+    </aside>
+  </div>
+  <p class="world-map-note">Mapa-base © colaboradores do OpenStreetMap, carregado de openstreetmap.org quando o mapa aparece na tela.</p>
+  <script type="application/json" data-world-map-data set:html={markersJson} />
+</div>
+
+<script>
+  import { initWorldMaps } from '../scripts/worldMap';
+
+  initWorldMaps();
+</script>
+
+<style>
+  .world-map { position: relative; }
+  .world-map-skip { position: absolute; top: var(--space-2); left: 64px; z-index: 1100; padding: var(--space-1) var(--space-2); background: var(--paper); color: var(--ink); font-size: var(--text-sm); font-weight: 700; clip-path: inset(50%); }
+  .world-map-skip:focus { clip-path: none; }
+  .world-map-frame { position: relative; isolation: isolate; overflow: hidden; background: #aad3df; }
+  .world-map-canvas { height: min(640px, 72vh); min-height: 420px; background: #aad3df; font-family: var(--font-body); }
+  .world-map-canvas:focus-visible { outline: var(--focus-outline); outline-offset: -3px; }
+  .world-map-fallback, .world-map-error { margin: 0; padding: var(--space-5); color: var(--ink); font-size: var(--text-base); }
+  .world-map-error { display: none; position: absolute; inset: 0; background: var(--surface); }
+  .world-map.is-unavailable .world-map-error { display: block; }
+  .world-map-panel { position: absolute; z-index: 1000; top: var(--space-4); right: var(--space-4); width: min(360px, calc(100% - 48px)); max-height: calc(100% - 48px); overflow: auto; background: var(--paper); box-shadow: var(--shadow-soft); }
+  .world-map-panel:focus { outline: none; }
+  .world-map-panel:focus-visible { outline: var(--focus-outline); outline-offset: 2px; }
+  .world-map-close { position: absolute; top: var(--space-1); right: var(--space-1); z-index: 1; display: grid; place-items: center; width: 36px; height: 36px; border: 0; border-radius: var(--radius-pill); background: rgb(254 254 254 / 92%); color: var(--ink); font-size: 22px; line-height: 1; cursor: pointer; }
+  .world-map-close:hover { color: var(--accent-dark); }
+  .world-map-note { margin: var(--space-2) 0 0; color: var(--dim); font-size: var(--text-xs); letter-spacing: .04em; }
+
+  .world-map :global(.leaflet-container) { font-family: var(--font-body); }
+  .world-map :global(.leaflet-bar a) { width: 36px; height: 36px; line-height: 36px; color: var(--ink); }
+  .world-map :global(.leaflet-bar a:focus-visible) { outline: var(--focus-outline); outline-offset: 2px; }
+  .world-map :global(.world-map-marker) { display: grid; place-items: center; background: transparent; border: 0; border-radius: 50%; cursor: pointer; }
+  .world-map :global(.world-map-marker span) { width: 16px; height: 16px; border-radius: 50%; background: var(--nautical); border: 3px solid var(--paper); box-shadow: 0 0 0 1px var(--nautical), 0 2px 6px rgb(40 40 41 / 30%); transition: width .15s, height .15s, background-color .15s; }
+  .world-map :global(.world-map-marker:hover span) { background: var(--accent-dark); }
+  .world-map :global(.world-map-marker.is-selected span) { width: 24px; height: 24px; background: var(--accent-dark); border-width: 4px; box-shadow: 0 0 0 2px var(--accent-dark), 0 4px 14px rgb(40 40 41 / 35%); }
+  .world-map :global(.world-map-marker:focus-visible) { outline: var(--focus-outline); outline-offset: 2px; }
+
+  @media (max-width: 760px) {
+    .world-map-canvas { height: 68vh; min-height: 380px; }
+    .world-map-panel { top: auto; right: var(--space-2); bottom: var(--space-2); left: var(--space-2); width: auto; max-height: 62%; }
+    .world-map-panel :global(.journey-card) { display: grid; grid-template-columns: 104px 1fr; }
+    .world-map-panel :global(.journey-card-image) { height: 100%; aspect-ratio: auto; }
+    .world-map-panel :global(.journey-card-body) { padding: 14px 44px 14px 14px; }
+    .world-map-panel :global(.journey-card-title) { font-size: 22px; }
+    .world-map-panel :global(.journey-card-meta) { margin-bottom: var(--space-1); }
+    .world-map-panel :global(.journey-card-summary) { display: -webkit-box; margin-bottom: var(--space-2); overflow: hidden; font-size: 13px; line-height: 1.55; -webkit-box-orient: vertical; -webkit-line-clamp: 3; line-clamp: 3; }
+  }
+</style>

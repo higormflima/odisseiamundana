@@ -32,6 +32,13 @@ test('rejeita propriedade não permitida', async () => {
   assert.ok(result.errors.some((error) => error.keyword === 'additionalProperties'));
 });
 
+test('rejeita ponto representativo sem coordenadas', async () => {
+  const result = await validateFixture('invalid-representative-point.yaml');
+
+  assert.equal(result.valid, false);
+  assert.ok(result.errors.some((error) => error.keyword === 'required' && error.instancePath === '/geography/representative_point'));
+});
+
 test('rejeita tipo de dado incorreto', async () => {
   const result = await validateFixture('wrong-type.yaml');
 

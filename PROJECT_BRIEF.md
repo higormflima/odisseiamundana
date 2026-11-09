@@ -171,7 +171,7 @@ Expected features:
 - Embedded YouTube videos using the official YouTube player.
 - Destination pages.
 - Travel stories.
-- Interactive maps and routes (provider and library not yet selected).
+- Interactive maps and routes (homepage map: Leaflet + OpenStreetMap, see Section 13).
 - Editorial descriptions.
 - Responsive design.
 - Good mobile experience.
@@ -374,7 +374,8 @@ These decisions were approved after the initial version of this document:
 - Dates mentioned in video transcripts are the authoritative dates for the corresponding journeys, including when they differ from earlier planning notes.
 - The first release is Brazilian Portuguese only, under `/pt/`; the future English version will use `/en/`. No translations or automatic language detection in the first phase.
 - Use the official embedded YouTube player for video.
-- No map provider or library has been selected. Present alternatives when that implementation stage is reached.
+- The homepage world map uses Leaflet with OpenStreetMap Standard raster tiles (approved 2026-11-09 after comparing Leaflet and MapLibre GL JS). No API key is required; keep the OpenStreetMap attribution visible and follow the OSMF tile usage policy. The library loads only on the homepage when the map enters the viewport. Changing the library or tile provider still requires owner approval.
+- Each journey shown on the map uses one owner-confirmed `geography.representative_point`; journeys without it get no marker. The marker links to the published `journey-summary` page. Marker clustering, filters, routes and multiple points per journey are deferred.
 - Store only optimized versions of photographs in the repository to keep the website light. Review image quality during implementation and revisit this approach if the quality is insufficient.
 - Use pnpm as the package manager for this repository. The development environment provides Node.js and pnpm; npm is not installed, and pnpm avoids adding a separate global tool.
 - Use the `yaml` package to parse YAML and Ajv to validate the parsed data against JSON Schema Draft 2020-12. Keep JSON Schema as the authoritative metadata contract and avoid maintaining a separate, divergent metadata contract in Astro.
