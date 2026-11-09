@@ -127,6 +127,16 @@ h1, h2, p { margin-top: 0; }
 .photo-gallery-link:hover img { transform: scale(1.03); opacity: .92; }
 .photo-gallery figcaption { padding-top: var(--space-1); color: var(--muted); font: var(--text-xs)/1.5 var(--font-body); }
 .media-note { color: var(--muted); font-size: 12px; }
+.cost-table { width: 100%; margin: 0 0 1.6em; border-collapse: collapse; color: var(--ink); font: var(--text-base)/1.5 var(--font-body); font-variant-numeric: tabular-nums; }
+.cost-table caption { padding-bottom: var(--space-2); color: var(--muted); font-size: var(--text-sm); text-align: left; caption-side: top; }
+.cost-table thead th { padding: 0 0 var(--space-1); border-bottom: 1px solid var(--ink); color: var(--muted); font-size: var(--text-xs); font-weight: 800; letter-spacing: .18em; text-align: left; text-transform: uppercase; }
+.cost-table thead th:last-child, .cost-table td { text-align: right; white-space: nowrap; }
+.cost-table tbody th, .cost-table tbody td { padding: var(--space-2) 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+.cost-table tbody th { padding-right: var(--space-4); font-weight: 700; text-align: left; }
+.cost-table td { font-weight: 600; white-space: nowrap; }
+.cost-table-detail { display: block; color: var(--muted); font-size: 13px; font-weight: 500; }
+.cost-table tfoot th, .cost-table tfoot td { padding: var(--space-3) 0 0; border-top: 1px solid var(--ink); color: var(--nautical); font-family: var(--font-display); font-size: 22px; font-weight: 400; }
+.cost-table tfoot th { text-align: left; }
 .redirect-page { display: grid; min-height: 75vh; align-content: center; justify-items: start; padding: 70px clamp(24px, 12vw, 180px); }
 .redirect-page h1 { max-width: 750px; margin-bottom: 30px; font-size: clamp(46px, 7vw, 84px); }
 .site-footer { border-top: 1px solid var(--line); border-bottom: 0; color: var(--muted); font-size: 10px; letter-spacing: .08em; text-transform: uppercase; }

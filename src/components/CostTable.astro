@@ -1,0 +1,43 @@
+---
+interface CostRow {
+  item: string;
+  detail?: string;
+  amount: string;
+}
+
+interface Props {
+  caption: string;
+  amountLabel: string;
+  rows: CostRow[];
+  total: { label: string; amount: string };
+}
+
+const { caption, amountLabel, rows, total } = Astro.props;
+---
+
+<table class="cost-table">
+  <caption>{caption}</caption>
+  <thead>
+    <tr>
+      <th scope="col">Item</th>
+      <th scope="col">{amountLabel}</th>
+    </tr>
+  </thead>
+  <tbody>
+    {rows.map((row) => (
+      <tr>
+        <th scope="row">
+          {row.item}
+          {row.detail && <span class="cost-table-detail">{row.detail}</span>}
+        </th>
+        <td>{row.amount}</td>
+      </tr>
+    ))}
+  </tbody>
+  <tfoot>
+    <tr>
+      <th scope="row">{total.label}</th>
+      <td>{total.amount}</td>
+    </tr>
+  </tfoot>
+</table>

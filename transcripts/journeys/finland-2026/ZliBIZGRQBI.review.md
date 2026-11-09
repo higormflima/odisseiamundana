@@ -19,7 +19,7 @@
 | Husky | **112€/pessoa**, ~20 min; **Wild Arctic Husky Park** (Ranua) |
 | Ranua Zoo | Entrada adulto **26,50€** |
 | Papai Noel | Visita/estacionamento/encontro grátis; foto ~45–50€ (não comprada); cartões **10€**; **Santa Claus Village** |
-| Renas | **40€** / ~1 h; **Raitola Reindeer & Husky Farm** |
+| Renas | **40€ por pessoa** (80€ o casal) / ~1 h; **Raitola Reindeer & Husky Farm**. O áudio diz só "custou 40 euros"; valor por pessoa confirmado pelo proprietário e coerente com o total |
 | Total | ~**2.537€** para o casal |
 | Participantes | **Higor** e **Maja** (grávida na viagem) |
 | “mus” | **Alce** (moose) |

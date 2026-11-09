@@ -8,6 +8,7 @@ youtube_video_id: ZliBIZGRQBI
 sort_order: 1
 ---
 
+import CostTable from '../../../src/components/CostTable.astro';
 import PhotoGallery from '../../../src/components/PhotoGallery.astro';
 
 Em fevereiro de 2026, passamos cinco dias e quatro noites na Lapônia finlandesa. Nossa base foi a cabana Lystikämän Tupa, no meio da floresta, a cerca de 50–60 km de Rovaniemi — longe das luzes da cidade, com mais chance de ver a aurora.
@@ -18,19 +19,21 @@ Voamos de Varsóvia, com conexão em Helsinque, até Rovaniemi. Com um carro alu
 
 Para economizar em um destino caro, nossa escolha foi clara: cabana fora da cidade, supermercado em Rovaniemi e refeições feitas em casa. Fomos duas vezes ao mercado e gastamos cerca de 95€ em comida — o suficiente para o período, inclusive para os lanches nos passeios.
 
-Os valores abaixo são o que pagamos nesta viagem, não preços atuais.
-
-| Item | Quanto pagamos |
-|---|---|
-| Passagem aérea | 330€ por pessoa + 65€ de mala extra |
-| Carro (5 dias) | 590€ + cerca de 50€ de combustível |
-| Cabana (4 noites) | 710€ |
-| Supermercado | 95€ |
-| Trenó de huskies | 112€ por pessoa (~20 min) |
-| Ranua Zoo | 26,50€ por adulto |
-| Santa Claus Village | visita/estacionamento/encontro grátis; cartões 10€; foto oficial ~45–50€ (não compramos) |
-| Fazenda de renas | 40€ (~1 h) |
-| **Total aproximado (casal)** | **~2.537€** |
+<CostTable
+  caption="O que pagamos nesta viagem, em fevereiro de 2026 — não são preços atuais."
+  amountLabel="Total do casal"
+  rows={[
+    { item: 'Passagem aérea', detail: '330€ por pessoa + 65€ de mala extra', amount: '725€' },
+    { item: 'Carro', detail: '5 dias: 590€ + cerca de 50€ de combustível', amount: '~640€' },
+    { item: 'Cabana', detail: '4 noites', amount: '710€' },
+    { item: 'Supermercado', detail: 'Duas idas ao mercado em Rovaniemi', amount: '~95€' },
+    { item: 'Trenó de huskies', detail: '112€ por pessoa, cerca de 20 min', amount: '224€' },
+    { item: 'Ranua Zoo', detail: '26,50€ por adulto', amount: '53€' },
+    { item: 'Santa Claus Village', detail: 'Visita, estacionamento e encontro com o Papai Noel grátis; pagamos só os cartões postais e não compramos a foto oficial (~45–50€)', amount: '10€' },
+    { item: 'Fazenda de renas', detail: '40€ por pessoa, cerca de 1 h', amount: '80€' },
+  ]}
+  total={{ label: 'Total aproximado', amount: '~2.537€' }}
+/>
 
 ## O roteiro em experiências
 

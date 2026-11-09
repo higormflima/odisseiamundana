@@ -83,7 +83,7 @@ activities:
   - activity_id: reindeer-farm
     name: Fazenda de renas
     provider: Raitola Reindeer & Husky Farm
-    cost_eur: 40
+    cost_eur_per_person: 40
     duration_minutes: 60
     map_url: https://www.google.com/maps/place/Raitola+Reindeer+%26+Husky+Farm/@66.5667531,25.9435988,17z
     coordinates:
