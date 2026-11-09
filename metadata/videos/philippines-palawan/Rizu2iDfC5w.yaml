@@ -1,0 +1,28 @@
+video_id: Rizu2iDfC5w
+journey_id: philippines-palawan
+youtube_url: https://www.youtube.com/watch?v=Rizu2iDfC5w
+playlist_id: PLA8vGdq_0fiNe1wS4NLOb-D2dcNhdXa8u
+playlist_position: 5
+title: 'Filipinas vs Brasil: minha honesta opinião!'
+thumbnail_url: https://i.ytimg.com/vi/Rizu2iDfC5w/maxresdefault.jpg
+duration_seconds: 774
+narration_status: present
+caption_status: available
+transcript_files:
+  - media/journeys/philippines-palawan/transcripts/Rizu2iDfC5w.txt
+provenance:
+  - source_type: manual
+    verification_status: confirmed
+    source_id: owner-provided-playlist-screenshot
+    fields:
+      - video_id
+      - journey_id
+      - playlist_id
+      - playlist_position
+      - title
+      - duration_seconds
+  - source_type: transcript
+    verification_status: unverified
+    source_id: Rizu2iDfC5w
+    fields:
+      - transcript_files

@@ -1,0 +1,48 @@
+journey_id: china-stopover
+title: Escala em Pequim: nossa visita à Grande Muralha
+summary: >
+  Uma conexão de cerca de 13 horas entre Varsóvia e Manila nos permitiu visitar
+  Mutianyu, um trecho da Grande Muralha nos arredores de Pequim.
+dates:
+  month: 11
+geography:
+  countries:
+    - China
+  regions:
+    - Pequim
+  destinations:
+    - Pequim
+    - Mutianyu
+transport:
+  flights:
+    - route:
+        - Varsóvia
+        - Pequim
+        - Manila
+      notes: A bagagem seguiu despachada até as Filipinas.
+activities:
+  - activity_id: mutianyu-great-wall
+    name: Grande Muralha em Mutianyu
+    provider: Mutianyu
+    notes: >
+      Didi: 160 na ida e 109 na volta, na unidade monetária falada no vídeo,
+      que não foi identificada com segurança. Entrada, shuttle e teleférico:
+      cerca de 400 para duas pessoas, também sem moeda confirmada.
+provenance:
+  - source_type: transcript
+    verification_status: unverified
+    source_id: U4adHvxje8w
+    fields:
+      - dates.month
+      - geography
+      - transport
+      - activities
+      - costs
+  - source_type: manual
+    verification_status: confirmed
+    source_id: owner-provided-task
+    fields:
+      - connection_duration_approximate
+      - route
+      - Mutianyu_visit
+      - Forbidden_City_planned_not_confirmed

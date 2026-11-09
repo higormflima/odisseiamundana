@@ -1,0 +1,112 @@
+journey_id: philippines-palawan
+title: Duas semanas em Palawan
+summary: >
+  Um roteiro de cerca de duas semanas pelas Filipinas, com chegada por Manila
+  e paradas em Puerto Princesa, Port Barton e El Nido, em Palawan.
+geography:
+  countries:
+    - Filipinas
+  regions:
+    - Palawan
+  destinations:
+    - Manila
+    - Puerto Princesa
+    - Port Barton
+    - El Nido
+transport:
+  flights:
+    - route:
+        - Varsóvia
+        - Pequim
+        - Manila
+    - route:
+        - Manila
+        - Puerto Princesa
+activities:
+  - activity_id: puerto-princesa-firefly-watching
+    name: Firefly Watching
+    provider: passeio de barco pelos manguezais
+    notes: >
+      O passeio incluía jantar. A transcrição registra um valor pouco claro
+      como 100 pesos e em seguida diz que o valor correto seria inserido na
+      tela; não usar como preço confirmado.
+  - activity_id: port-barton-beaches
+    name: Praias de Port Barton
+    notes: >
+      Visitamos Coconut Beach e White Beach. A taxa de acesso foi relatada
+      como cerca de 50 pesos filipinos por pessoa em cada praia.
+  - activity_id: scooter-rental
+    name: Aluguel de scooter
+    notes: Cerca de 500 pesos filipinos por dia; combustível foi relatado à parte.
+  - activity_id: el-nido-tour-d
+    name: Tour D
+    provider: Spider
+    notes: >
+      Barco menor e sem música. Paradas citadas: Cadlao Lagoon, Small Lagoon,
+      pontos de snorkeling, parada para almoço e Paradise Beach. Valores
+      transcritos: 1.200 pesos, mais 200 de outra taxa e 400 de taxa ambiental
+      válida por cinco dias. O início do trecho de preços contém um valor
+      conflitante reconhecido como provável erro de transcrição.
+  - activity_id: el-nido-tour-a
+    name: Tour A
+    provider: Happy Life, associada ao Friends Hostel
+    notes: >
+      Barco maior, música e snorkeling incluído. Valor aproximado de 1.290
+      pesos; a taxa ambiental de 400 pesos vale por cinco dias, a entrada da
+      Big Lagoon foi relatada como 200 pesos e o caiaque como 300 pesos.
+  - activity_id: underground-river
+    name: Rio Subterrâneo
+    notes: Foi considerado, mas não visitamos.
+budget:
+  currency: PHP
+  notes: >
+    Médias relatadas: hospedagem por volta de 3.000 pesos filipinos; refeições
+    em torno de 500 pesos, com pratos de 400 a 600 e nenhum acima de 700. Os
+    valores são aproximados e não representam preços atuais. A tarifa exata
+    do Firefly Watching não pôde ser confirmada na transcrição.
+provenance:
+  - source_type: transcript
+    verification_status: unverified
+    source_id: 0iLs18v0Tr8
+    fields:
+      - route
+      - destination_sequence
+      - durations_approximate
+      - Coron_cancellation
+  - source_type: transcript
+    verification_status: unverified
+    source_id: 5ulkhWIpAZM
+    fields:
+      - Puerto_Princesa
+      - Firefly_Watching
+      - Port_Barton
+      - scooter_cost
+  - source_type: transcript
+    verification_status: unverified
+    source_id: Cb3LfPYJ5Fk
+    fields:
+      - Coron_cancellation
+      - Tour_D
+      - Tour_D_costs
+  - source_type: transcript
+    verification_status: unverified
+    source_id: R5h7jwQeG60
+    fields:
+      - Tour_A
+      - Tour_A_costs
+  - source_type: transcript
+    verification_status: unverified
+    source_id: Rizu2iDfC5w
+    fields:
+      - accommodation_average
+      - meal_average
+      - Brazil_comparison
+  - source_type: manual
+    verification_status: confirmed
+    source_id: owner-provided-task
+    fields:
+      - countries
+      - destination_sequence
+      - Manila_overnight
+      - Puerto_Princesa_two_nights
+      - Coron_planned_cancelled

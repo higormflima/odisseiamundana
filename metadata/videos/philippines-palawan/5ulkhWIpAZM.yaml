@@ -1,0 +1,28 @@
+video_id: 5ulkhWIpAZM
+journey_id: philippines-palawan
+youtube_url: https://www.youtube.com/watch?v=5ulkhWIpAZM
+playlist_id: PLA8vGdq_0fiNe1wS4NLOb-D2dcNhdXa8u
+playlist_position: 4
+title: FILIPINAS têm praias melhores que o Brasil? Viemos conferir!
+thumbnail_url: https://i.ytimg.com/vi/5ulkhWIpAZM/maxresdefault.jpg
+duration_seconds: 713
+narration_status: present
+caption_status: available
+transcript_files:
+  - media/journeys/philippines-palawan/transcripts/5ulkhWIpAZM.txt
+provenance:
+  - source_type: manual
+    verification_status: confirmed
+    source_id: owner-provided-playlist-screenshot
+    fields:
+      - video_id
+      - journey_id
+      - playlist_id
+      - playlist_position
+      - title
+      - duration_seconds
+  - source_type: transcript
+    verification_status: unverified
+    source_id: 5ulkhWIpAZM
+    fields:
+      - transcript_files

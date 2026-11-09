@@ -1,0 +1,28 @@
+video_id: R5h7jwQeG60
+journey_id: philippines-palawan
+youtube_url: https://www.youtube.com/watch?v=R5h7jwQeG60
+playlist_id: PLA8vGdq_0fiNe1wS4NLOb-D2dcNhdXa8u
+playlist_position: 2
+title: É aqui que estão as PRAIAS MAIS BONITAS DO PLANETA? - Filipinas, El Nido | Tour A
+thumbnail_url: https://i.ytimg.com/vi/R5h7jwQeG60/maxresdefault.jpg
+duration_seconds: 668
+narration_status: present
+caption_status: available
+transcript_files:
+  - media/journeys/philippines-palawan/transcripts/R5h7jwQeG60.txt
+provenance:
+  - source_type: manual
+    verification_status: confirmed
+    source_id: owner-provided-playlist-screenshot
+    fields:
+      - video_id
+      - journey_id
+      - playlist_id
+      - playlist_position
+      - title
+      - duration_seconds
+  - source_type: transcript
+    verification_status: unverified
+    source_id: R5h7jwQeG60
+    fields:
+      - transcript_files
