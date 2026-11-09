@@ -1,0 +1,481 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          119.1783563,
+          10.4122216
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2025-12-02T04:50:04Z",
+        "google_maps_url": "http://maps.google.com/?cid=735598053538868311",
+        "location": {
+          "address": "Bonifacio St, Port Barton, San Vicente, Palawan, Philippines",
+          "country_code": "PH",
+          "name": "Gorgonzola Pizza & Pasta - Port Barton"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          119.1770158,
+          10.4111024
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2025-12-02T04:47:03Z",
+        "google_maps_url": "http://maps.google.com/?cid=7306803856873560355",
+        "location": {
+          "address": "Rizal Street, Port Barton, San Vicente, Palawan, Philippines",
+          "country_code": "PH",
+          "name": "CocoRico Hostel"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          0,
+          0
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2025-08-27T16:23:46Z",
+        "google_maps_url": "http://maps.google.com/?q=aleja+Kasztanowa,+05-806+Komor%C3%B3w&ftid=0x471935d21cd079a3:0x448d71d3bae1242c",
+        "Comment": "No location information is available for this saved place"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          0,
+          0
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2025-08-25T15:52:40Z",
+        "google_maps_url": "http://maps.google.com/?q=Las+Caba%C3%B1as+Beach,+Taytay+-+El+Nido+National+Hwy,+El+Nido,+Palawan,+Filipiny&ftid=0x33b655be1e99de95:0x314adfe0f19d76c5",
+        "Comment": "No location information is available for this saved place"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          0,
+          0
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2025-04-22T11:26:02Z",
+        "google_maps_url": "http://maps.google.com/?q=Nowy+S%C4%85cz&ftid=0x473de53cb3f195cf:0x9865e0e4a3f03225",
+        "Comment": "No location information is available for this saved place"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -45.3653306,
+          -23.8073432
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2025-03-23T22:41:47Z",
+        "google_maps_url": "http://maps.google.com/?cid=16340595732798174078",
+        "location": {
+          "address": "Av. Princesa Isabel - Perequê, Ilhabela - SP, 11630-000, Brazil",
+          "country_code": "BR",
+          "name": "Churros Lorac"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -45.3573933,
+          -23.7764033
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2025-03-23T22:41:03Z",
+        "google_maps_url": "http://maps.google.com/?cid=14639688854325239349",
+        "location": {
+          "address": "Av. Força Expedicionária Brasileira, 13 - Barreiro, Ilhabela - SP, 11630-000, Brazil",
+          "country_code": "BR",
+          "name": "Pastel do Zé"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          36.9245295,
+          -1.3225242
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2024-12-26T20:10:32Z",
+        "google_maps_url": "http://maps.google.com/?cid=17277372221327018994",
+        "location": {
+          "address": "Embakasi, Nairobi, Kenya",
+          "country_code": "KE",
+          "name": "Jomo Kenyatta International Airport"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          36.8987007,
+          -1.3547729
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2024-12-26T20:10:16Z",
+        "google_maps_url": "http://maps.google.com/?cid=10975602862351160617",
+        "location": {
+          "address": "SGR TERMINAL, Nairobi, Kenya",
+          "name": "SGR Terminus Nairobi"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          35.8703362,
+          -1.0884288
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2024-12-25T13:51:51Z",
+        "google_maps_url": "http://maps.google.com/?cid=6653984445465125345",
+        "location": {
+          "address": "C57, Narok, Kenya",
+          "country_code": "KE",
+          "name": "Narok Bus Station"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          0,
+          0
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2024-12-25T13:38:08Z",
+        "google_maps_url": "http://maps.google.com/?q=-1.283312,36.830188",
+        "Comment": "No location information is available for this saved place"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          0,
+          0
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2024-12-25T13:33:00Z",
+        "google_maps_url": "http://maps.google.com/?q=-1.3304444,36.9249167",
+        "Comment": "No location information is available for this saved place"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          36.9265723,
+          -1.3323638
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2024-12-25T13:31:50Z",
+        "google_maps_url": "http://maps.google.com/?cid=6816984234837240037",
+        "location": {
+          "address": "Nairobi, Kenya",
+          "country_code": "KE",
+          "name": "Airport town stage"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          0,
+          0
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2024-10-25T12:22:14Z",
+        "google_maps_url": "http://maps.google.com/?q=Bibury,+Cirencester,+Wielka+Brytania&ftid=0x48713c0f0f8c3f59:0xf2cbb2d020e0df9e",
+        "Comment": "No location information is available for this saved place"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          0,
+          0
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2024-10-14T08:56:49Z",
+        "google_maps_url": "http://maps.google.com/?q=Jana+Bytnara+%E2%80%9ERudego%E2%80%9D+19,+02-645+Warszawa&ftid=0x4719332200898a07:0x3f77af32d3471d34",
+        "Comment": "No location information is available for this saved place"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          18.1400096,
+          54.8309719
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2024-09-04T17:23:09Z",
+        "google_maps_url": "http://maps.google.com/?cid=13823172344625485851",
+        "location": {
+          "address": "Krokowa, Poland",
+          "country_code": "PL",
+          "name": "Widowo Nature Reserve"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          20.8717344,
+          52.1772374
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2024-08-24T08:59:09Z",
+        "google_maps_url": "http://maps.google.com/?cid=11949537396824032123",
+        "location": {
+          "address": "Al. Jerozolimskie 285, 05-816 Michałowice, Poland",
+          "country_code": "PL",
+          "name": "4overland - namioty dachowe, przyczepy, sprzęt kempingowy"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          0,
+          0
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2024-07-30T06:40:05Z",
+        "google_maps_url": "http://maps.google.com/?q=52.13239831380824,21.0242660343647",
+        "Comment": "No location information is available for this saved place"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          0,
+          0
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2024-05-25T09:36:43Z",
+        "google_maps_url": "http://maps.google.com/?q=52.310001,21.167394",
+        "Comment": "No location information is available for this saved place"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          20.8542853,
+          51.1001217
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2024-05-25T09:36:08Z",
+        "google_maps_url": "http://maps.google.com/?cid=14872509622893424118",
+        "location": {
+          "address": "Spokojna 1, 26-110 Skarżysko-Kamienna, Poland",
+          "country_code": "PL",
+          "name": "Skarland Pumptrack & Skatepark"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          20.9926499,
+          52.2343505
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2023-11-30T18:47:11Z",
+        "google_maps_url": "http://maps.google.com/?cid=17155697103147847182",
+        "location": {
+          "address": "Mirów, 00-001 Warszawa, Poland",
+          "country_code": "PL",
+          "name": "Muro del Gueto Judío"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          28.9808646,
+          41.0255996
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2023-10-30T18:15:59Z",
+        "google_maps_url": "http://maps.google.com/?cid=5333448871286289799",
+        "location": {
+          "address": "Kemankeş Karamustafa Paşa, Kılıç Ali Paşa Mescidi Sk. No:15, 34425, 34425 Beyoğlu/İstanbul, Türkiye",
+          "country_code": "TR",
+          "name": "Key Karaköy Cafe Restoran"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          28.9762220,
+          41.0317480
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2023-10-30T18:15:34Z",
+        "google_maps_url": "http://maps.google.com/?cid=11386415952348934108",
+        "location": {
+          "address": "Tomtom, İstiklal Cd. no: 185/A, 34443 Beyoğlu/İstanbul, Türkiye",
+          "country_code": "TR",
+          "name": "Patatos"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          28.9809764,
+          41.0248860
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2023-10-30T18:03:02Z",
+        "google_maps_url": "http://maps.google.com/?cid=17311290756710144728",
+        "location": {
+          "address": "Kemankeş Karamustafa Paşa, Kemankeş Cd. No:67, 34425 Beyoğlu/İstanbul, Türkiye",
+          "country_code": "TR",
+          "name": "Karaköy Güllüoğlu - Nadir Güllü"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          28.9714676,
+          41.0082561
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2023-10-30T08:19:50Z",
+        "google_maps_url": "http://maps.google.com/?cid=4286413553809624226",
+        "location": {
+          "address": "Binbirdirek, Yeniçeriler Cd. No:1, 34122 Fatih/İstanbul, Türkiye",
+          "country_code": "TR",
+          "name": "Galata Dondurma"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          28.9752568,
+          41.0139781
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2023-10-30T08:10:35Z",
+        "google_maps_url": "http://maps.google.com/?cid=4193175250874352887",
+        "location": {
+          "address": "Hoca Paşa, Hocapaşa Camii Sok. No:6 D:4, 34110 Fatih/İstanbul, Türkiye",
+          "country_code": "TR",
+          "name": "Şehzade Cağ Kebap"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          28.9534420,
+          41.0174141
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2023-10-29T09:06:01Z",
+        "google_maps_url": "http://maps.google.com/?cid=3973693403671479757",
+        "location": {
+          "address": "Zeyrek, Refah Sk. No: 25/A, 34083 Fatih/İstanbul, Türkiye",
+          "country_code": "TR",
+          "name": "Dondurmacı Yunus Fatih İstanbul"
+        }
+      },
+      "type": "Feature"
+    }
+  ]
+}

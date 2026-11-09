@@ -27,6 +27,7 @@ Os testes verificam casos válidos e inválidos dos contratos JSON Schema e as r
 - `schemas/`: contratos JSON Schema para validação.
 - `content/`: páginas editoriais Markdown/MDX. Cada viagem pode ter uma visão geral e páginas para seus vídeos por roteiro, cidade ou assunto.
 - `transcripts/`: transcrições originais preservadas e registros de revisão em arquivos separados.
+- `imports/`: exportações brutas de fontes externas (por exemplo Google Maps), preservadas antes da conversão em metadados.
 - `media/`: somente imagens otimizadas usadas pelo site.
 - `src/`: páginas, layouts e componentes Astro.
 
