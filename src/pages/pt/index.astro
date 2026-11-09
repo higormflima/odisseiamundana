@@ -17,14 +17,17 @@ const mapEntries = buildJourneyMapEntries({
 ---
 
 <SiteLayout title="Viagens" description="Histórias, roteiros e experiências de viagem.">
-  <section class="home-hero" style={`--hero-image: url("${base}media/branding/optimized/hero-travel.webp")`}>
+  <section class="home-hero">
     <div class="hero-copy">
       <p class="eyebrow">Odisseia Mundana · revista de viagens</p>
       <h1>O mundo, contado<br /><em>por quem o vive.</em></h1>
       <p class="hero-intro">Roteiros, encontros e histórias de lugares que ficam com a gente. Uma jornada contada em imagens e boas histórias.</p>
-      <a class="text-link" href="#viagens">Explore as viagens <span aria-hidden="true">↓</span></a>
+      <a class="text-link" href={mapEntries.length > 0 ? '#mapa' : '#viagens'}>Explore as viagens <span aria-hidden="true">↓</span></a>
     </div>
-    <p class="hero-index">Uma coleção em movimento<br />Desde 2026</p>
+    <figure class="hero-portrait">
+      <span class="hero-route" aria-hidden="true"></span>
+      <img src={`${base}media/branding/optimized/hero-portrait.webp`} alt="Selfie do casal na neve, diante de uma casa de madeira e de montanhas nevadas" width="640" height="640" />
+    </figure>
   </section>
 
   {mapEntries.length > 0 && (
