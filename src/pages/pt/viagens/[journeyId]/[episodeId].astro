@@ -1,6 +1,7 @@
 ---
 import SiteLayout from '../../../../layouts/SiteLayout.astro';
 import YouTubeVideo from '../../../../components/YouTubeVideo.astro';
+import TripScoreCard from '../../../../components/TripScoreCard.astro';
 import { getCollection, getEntry, render } from 'astro:content';
 import { assertJourneyReferences } from '../../../../lib/journeyReferences.mjs';
 
@@ -36,6 +37,7 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
       <h1>{entry.data.title}</h1>
     </header>
     {entry.data.youtube_video_id && <YouTubeVideo videoId={entry.data.youtube_video_id.id} title={entry.data.title} />}
+    <TripScoreCard tripCard={metadataEntry.data.trip_card} />
     <div class="story-body"><Content /></div>
   </article>
 </SiteLayout>

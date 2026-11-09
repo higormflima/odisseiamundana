@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://higormflima.github.io/odisseiamundana/schemas/journey.schema.json",
-  "title": "Metadados de viagem — rascunho 0.3",
-  "description": "Contrato provisório para os metadados de uma viagem, expandido com participantes, transporte, hospedagem, atividades, orçamento, coordenadas, resumo e ponto representativo para o mapa.",
+  "title": "Metadados de viagem — rascunho 0.4",
+  "description": "Contrato provisório para os metadados de uma viagem, expandido com participantes, transporte, hospedagem, atividades, orçamento, coordenadas, resumo, ponto representativo para o mapa e avaliação pessoal da viagem (trip_card).",
   "type": "object",
   "required": ["journey_id"],
   "additionalProperties": false,
@@ -152,6 +152,33 @@
         "notes": { "type": "string" }
       }
     },
+    "trip_card": {
+      "type": "object",
+      "description": "Avaliação pessoal dos viajantes sobre esta viagem, em notas inteiras de 1 a 10. Não representa uma classificação oficial do destino. Omitir critérios não avaliados; a nota geral é independente das notas por categoria e nunca é calculada como média.",
+      "minProperties": 1,
+      "additionalProperties": false,
+      "properties": {
+        "overall_rating": {
+          "$ref": "#/$defs/trip_rating",
+          "description": "Nota geral da experiência como um todo."
+        },
+        "ratings": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": false,
+          "properties": {
+            "nature": { "$ref": "#/$defs/trip_rating", "description": "Paisagens, fauna, flora e ambientes naturais." },
+            "experiences": { "$ref": "#/$defs/trip_rating", "description": "Atividades, atrações e experiências únicas." },
+            "food": { "$ref": "#/$defs/trip_rating", "description": "Gastronomia, variedade e qualidade da comida." },
+            "prices": { "$ref": "#/$defs/trip_rating", "description": "Preços favoráveis e custo-benefício; quanto maior a nota, mais favoráveis." },
+            "infrastructure": { "$ref": "#/$defs/trip_rating", "description": "Estradas, transporte, hospedagem e serviços." },
+            "accessibility": { "$ref": "#/$defs/trip_rating", "description": "Facilidade de chegar, circular e visitar os lugares." },
+            "culture": { "$ref": "#/$defs/trip_rating", "description": "História, tradições e contato cultural." },
+            "safety": { "$ref": "#/$defs/trip_rating", "description": "Percepção de segurança durante a viagem." }
+          }
+        }
+      }
+    },
     "provenance": {
       "type": "array",
       "items": {
@@ -174,6 +201,11 @@
     }
   },
   "$defs": {
+    "trip_rating": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 10
+    },
     "coordinates": {
       "type": "object",
       "additionalProperties": false,

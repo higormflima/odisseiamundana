@@ -56,6 +56,7 @@ export function buildJourneyMapEntries({ journeys, pages, videos = [], base }) {
       period: formatJourneyPeriod(data.dates),
       duration: formatJourneyDuration(data.duration_days),
       summary: data.summary?.trim(),
+      overallRating: data.trip_card?.overall_rating,
       image: video?.thumbnail_url
         ? { src: video.thumbnail_url, alt: `Miniatura do vídeo ${video.title ?? data.title ?? id}` }
         : undefined,

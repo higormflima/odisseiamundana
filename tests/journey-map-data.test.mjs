@@ -89,6 +89,23 @@ test('usa somente dados disponíveis no card', () => {
   assert.equal(bare.image, undefined);
 });
 
+test('leva ao card apenas a nota geral, mantendo os marcadores de viagens avaliadas e não avaliadas', () => {
+  const entries = buildJourneyMapEntries({
+    journeys: [
+      journey('rated', { geography: { representative_point: point }, trip_card: { overall_rating: 7, ratings: { nature: 9 } } }),
+      journey('categories-only', { geography: { representative_point: point }, trip_card: { ratings: { nature: 9, food: 5 } } }),
+      journey('unrated', { geography: { representative_point: point } }),
+    ],
+    pages: [summaryPage('rated'), summaryPage('categories-only'), summaryPage('unrated')],
+    base: '/',
+  });
+
+  assert.deepEqual(entries.map((entry) => entry.journeyId), ['rated', 'categories-only', 'unrated']);
+  assert.deepEqual(entries.map((entry) => entry.overallRating), [7, undefined, undefined]);
+  assert.ok(entries.every((entry) => entry.lat === 60.1 && entry.lng === 24.9));
+  assert.ok(entries.every((entry) => !('ratings' in entry) && !('trip_card' in entry)));
+});
+
 test('formata período e duração em português', () => {
   assert.equal(formatJourneyPeriod({ year: 2019 }), '2019');
   assert.equal(formatJourneyPeriod(undefined), undefined);

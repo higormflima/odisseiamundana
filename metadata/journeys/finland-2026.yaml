@@ -97,6 +97,17 @@ budget:
   notes: >
     Supermercado em duas idas a Rovaniemi; refeições preparadas na cabana.
     Total aproximado para o casal no estilo de viagem descrito no guia.
+trip_card:
+  overall_rating: 8
+  ratings:
+    nature: 10
+    experiences: 10
+    food: 3
+    prices: 2
+    infrastructure: 7
+    accessibility: 5
+    culture: 9
+    safety: 9
 provenance:
   - source_type: transcript
     verification_status: confirmed
@@ -118,3 +129,8 @@ provenance:
       - geography.destinations
       - geography.representative_point
       - summary
+  - source_type: manual
+    verification_status: confirmed
+    source_id: owner-trip-card-2026-11-09
+    fields:
+      - trip_card
