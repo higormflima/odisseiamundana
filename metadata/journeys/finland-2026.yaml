@@ -11,28 +11,100 @@ geography:
   destinations:
     - Rovaniemi
     - Ranua
+    - Santa Claus Village
 duration_days: 5
 duration_nights: 4
+participants:
+  - name: Higor
+  - name: Maja
+    notes: grávida na viagem
+transport:
+  flights:
+    - route:
+        - Varsóvia
+        - Helsinque
+        - Rovaniemi
+      cost_eur_per_person: 330
+      extra_baggage_eur: 65
+  car_rental:
+    cost_eur: 590
+    days: 5
+    fuel_eur_approx: 50
+accommodation:
+  - name: Lystikämän Tupa
+    type: cabin
+    cost_eur: 710
+    nights: 4
+    map_url: https://www.google.com/maps/place/Lystik%C3%A4m%C3%A4n+Tupa/@66.2273506,26.4807929,17z
+    coordinates:
+      lat: 66.2273506
+      lng: 26.4807929
+    notes: Cabana na floresta, cerca de 50–60 km de Rovaniemi.
+activities:
+  - activity_id: husky-sledding
+    name: Trenó de huskies
+    provider: Wild Arctic Husky Park
+    cost_eur_per_person: 112
+    duration_minutes: 20
+    map_url: https://www.google.com/maps/place/Wild+Arctic+Husky+Park/@65.9439736,26.4643177,17z
+    coordinates:
+      lat: 65.9439736
+      lng: 26.4643177
+    notes: Agenciado por hotel/canil em Ranua; cerca de 20 minutos de passeio.
+  - activity_id: ranua-wildlife-park
+    name: Ranua Zoo
+    provider: Ranua Zoo
+    cost_eur_per_person: 26.5
+    map_url: https://www.google.com/maps/place/Ranua+Zoo/@65.943415,26.467017,17z
+    coordinates:
+      lat: 65.943415
+      lng: 26.467017
+    notes: Entrada de adulto relatada na viagem; 26,50€.
+  - activity_id: santa-claus-village
+    name: Santa Claus Village
+    provider: Santa Claus Village
+    cost_eur: 10
+    map_url: https://www.google.com/maps/place/Santa+Claus+Village/@66.5435112,25.8476064,17z
+    coordinates:
+      lat: 66.5435112
+      lng: 25.8476064
+    notes: >
+      Visita, estacionamento e encontro com o Papai Noel gratuitos.
+      Foto oficial cerca de 45–50€ (não comprada).
+      Cartões postais 10€.
+  - activity_id: reindeer-farm
+    name: Fazenda de renas
+    provider: Raitola Reindeer & Husky Farm
+    cost_eur: 40
+    duration_minutes: 60
+    map_url: https://www.google.com/maps/place/Raitola+Reindeer+%26+Husky+Farm/@66.5667531,25.9435988,17z
+    coordinates:
+      lat: 66.5667531
+      lng: 25.9435988
+budget:
+  currency: EUR
+  grocery_eur: 95
+  total_eur_approx: 2537
+  party_size: 2
+  notes: >
+    Supermercado em duas idas a Rovaniemi; refeições preparadas na cabana.
+    Total aproximado para o casal no estilo de viagem descrito no guia.
 provenance:
   - source_type: transcript
     verification_status: confirmed
     source_id: ZliBIZGRQBI
     fields:
       - dates
-  - source_type: transcript
-    verification_status: unverified
-    source_id: ZliBIZGRQBI
-    fields:
-      - geography
       - duration_days
       - duration_nights
-  - source_type: transcript
-    verification_status: unverified
-    source_id: MoYc1xOJ0ww
+      - geography
+  - source_type: manual
+    verification_status: confirmed
+    source_id: owner-confirmation-2026-11-09
     fields:
-      - geography.destinations
-  - source_type: transcript
-    verification_status: unverified
-    source_id: B6DJ_dQnZ8Q
-    fields:
+      - participants
+      - transport
+      - accommodation
+      - activities
+      - budget
       - geography.destinations
