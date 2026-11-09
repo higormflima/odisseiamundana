@@ -179,6 +179,30 @@
         }
       }
     },
+    "gallery": {
+      "type": "object",
+      "description": "Galeria editorial opcional de fotografias da viagem.",
+      "required": ["title", "photos"],
+      "additionalProperties": false,
+      "properties": {
+        "title": { "type": "string", "minLength": 1 },
+        "photos": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["src", "thumbnail", "alt"],
+            "additionalProperties": false,
+            "properties": {
+              "src": { "type": "string", "minLength": 1 },
+              "thumbnail": { "type": "string", "minLength": 1 },
+              "alt": { "type": "string", "minLength": 1 },
+              "featured": { "type": "boolean" },
+              "caption": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
     "provenance": {
       "type": "array",
       "items": {

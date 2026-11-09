@@ -108,6 +108,54 @@ trip_card:
     accessibility: 5
     culture: 9
     safety: 9
+gallery:
+  title: Inverno na Lapônia
+  photos:
+    - src: media/journeys/finland-2026/photos/finland-001.jpg
+      thumbnail: media/journeys/finland-2026/thumbnails/finland-001.jpg
+      alt: Casal em uma trilha cercada por árvores cobertas de neve, iluminada pelo sol baixo da Lapônia.
+      caption: Um dia de inverno na floresta da Lapônia.
+    - src: media/journeys/finland-2026/photos/finland-002.jpg
+      thumbnail: media/journeys/finland-2026/thumbnails/finland-002.jpg
+      alt: Casal diante de um grande boneco de neve na Santa Claus Village, sob céu azul.
+    - src: media/journeys/finland-2026/photos/finland-003.jpg
+      thumbnail: media/journeys/finland-2026/thumbnails/finland-003.jpg
+      alt: Cabana do Papai Noel coberta de neve, com visitantes em primeiro plano.
+      caption: A casa oficial do Papai Noel no Círculo Polar Ártico.
+    - src: media/journeys/finland-2026/photos/finland-004.jpg
+      thumbnail: media/journeys/finland-2026/thumbnails/finland-004.jpg
+      alt: Aurora boreal verde ondula sobre uma floresta escura e um campo nevado.
+      caption: A aurora boreal apareceu durante a noite.
+      featured: true
+    - src: media/journeys/finland-2026/photos/finland-005.jpg
+      thumbnail: media/journeys/finland-2026/thumbnails/finland-005.jpg
+      alt: Faixa verde de aurora boreal cruza o céu estrelado sobre a Lapônia.
+    - src: media/journeys/finland-2026/photos/finland-006.jpg
+      thumbnail: media/journeys/finland-2026/thumbnails/finland-006.jpg
+      alt: Aurora boreal brilhante forma um arco verde no céu escuro de inverno.
+    - src: media/journeys/finland-2026/photos/finland-007.jpg
+      thumbnail: media/journeys/finland-2026/thumbnails/finland-007.jpg
+      alt: Aurora boreal vertical ilumina o céu sobre as árvores cobertas de neve.
+    - src: media/journeys/finland-2026/photos/finland-008.jpg
+      thumbnail: media/journeys/finland-2026/thumbnails/finland-008.jpg
+      alt: Cabana de madeira na neve durante a queda de neve, com a família em frente.
+    - src: media/journeys/finland-2026/photos/finland-009.jpg
+      thumbnail: media/journeys/finland-2026/thumbnails/finland-009.jpg
+      alt: Criança em um trenó puxado na neve, acompanhada por um adulto, em uma trilha entre árvores.
+      caption: Passeio de trenó pela floresta nevada.
+    - src: media/journeys/finland-2026/photos/finland-010.jpg
+      thumbnail: media/journeys/finland-2026/thumbnails/finland-010.jpg
+      alt: Trenó puxado por cães percorre uma trilha na floresta, com a família a bordo.
+      caption: O passeio de trenó com huskies.
+    - src: media/journeys/finland-2026/photos/finland-011.jpg
+      thumbnail: media/journeys/finland-2026/thumbnails/finland-011.jpg
+      alt: Casal diante de uma cabana de madeira e de uma fogueira na neve.
+    - src: media/journeys/finland-2026/photos/finland-012.jpg
+      thumbnail: media/journeys/finland-2026/thumbnails/finland-012.jpg
+      alt: Casal caminha em meio à neve em uma floresta de pinheiros cobertos de branco.
+    - src: media/journeys/finland-2026/photos/finland-013.jpg
+      thumbnail: media/journeys/finland-2026/thumbnails/finland-013.jpg
+      alt: Vista panorâmica circular de duas pessoas em uma clareira cercada por uma floresta nevada.
 provenance:
   - source_type: transcript
     verification_status: confirmed

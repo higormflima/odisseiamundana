@@ -1,5 +1,13 @@
 ---
-interface GalleryImage {
+interface Photo {
+  src: string;
+  thumbnail: string;
+  alt: string;
+  featured?: boolean;
+  caption?: string;
+}
+
+interface VideoImage {
   src: string;
   alt: string;
   caption?: string;
@@ -7,23 +15,207 @@ interface GalleryImage {
 }
 
 interface Props {
-  images: GalleryImage[];
+  title?: string;
+  photos?: Photo[];
+  images?: VideoImage[];
 }
 
-const { images } = Astro.props;
+const { title = 'Galeria de fotos', photos = [], images = [] } = Astro.props;
+const featuredPhoto = photos.find((photo) => photo.featured) ?? photos[0];
+const mosaicPhotos = featuredPhoto
+  ? [featuredPhoto, ...photos.filter((photo) => photo !== featuredPhoto)].slice(0, 4)
+  : [];
 ---
 
-<div class="photo-gallery">
-  {images.map((image) => (
-    <figure>
-      {image.href ? (
-        <a class="photo-gallery-link" href={image.href}>
+{photos.length > 0 && featuredPhoto && (
+  <section
+    class="photo-gallery photo-gallery--editorial"
+    aria-label={title}
+    data-photos={JSON.stringify(photos)}
+  >
+    <header class="photo-gallery-heading">
+      <h2>{title}</h2>
+      <button class="photo-gallery-all" type="button" data-open-index="0">
+        {photos.length} {photos.length === 1 ? 'foto' : 'fotos'} · Ver todas
+      </button>
+    </header>
+
+    <div class="photo-mosaic">
+      {mosaicPhotos.map((photo, mosaicIndex) => {
+        const index = photos.indexOf(photo);
+        return (
+          <button
+            class:list={['photo-mosaic-item', { 'photo-mosaic-item--featured': photo === featuredPhoto }]}
+            type="button"
+            data-open-index={index}
+            aria-label={`Abrir foto ${index + 1} de ${photos.length}: ${photo.alt}`}
+          >
+            <img src={photo.thumbnail} alt={photo.alt} loading="lazy" decoding="async" />
+            {mosaicIndex === 3 && photos.length > 4 && (
+              <span class="photo-mosaic-more">+{photos.length - 4} fotos</span>
+            )}
+          </button>
+        );
+      })}
+    </div>
+
+    <dialog class="photo-lightbox" aria-label={title}>
+      <div class="photo-lightbox-toolbar">
+        <p class="photo-lightbox-counter" aria-live="polite" data-counter></p>
+        <button class="photo-lightbox-close" type="button" aria-label="Fechar galeria" data-close>
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="photo-lightbox-stage">
+        <button class="photo-lightbox-nav" type="button" aria-label="Foto anterior" data-previous>
+          <span aria-hidden="true">‹</span>
+        </button>
+        <img class="photo-lightbox-image" alt="" decoding="async" data-lightbox-image />
+        <button class="photo-lightbox-nav" type="button" aria-label="Próxima foto" data-next>
+          <span aria-hidden="true">›</span>
+        </button>
+      </div>
+      <p class="photo-lightbox-caption" data-caption hidden></p>
+    </dialog>
+  </section>
+)}
+
+{images.length > 0 && (
+  <div class="photo-gallery photo-gallery--videos">
+    {images.map((image) => (
+      <figure>
+        {image.href ? (
+          <a class="photo-gallery-link" href={image.href}>
+            <img src={image.src} alt={image.alt} loading="lazy" decoding="async" />
+          </a>
+        ) : (
           <img src={image.src} alt={image.alt} loading="lazy" decoding="async" />
-        </a>
-      ) : (
-        <img src={image.src} alt={image.alt} loading="lazy" decoding="async" />
-      )}
-      {image.caption && <figcaption>{image.caption}</figcaption>}
-    </figure>
-  ))}
-</div>
+        )}
+        {image.caption && <figcaption>{image.caption}</figcaption>}
+      </figure>
+    ))}
+  </div>
+)}
+
+<script>
+    document.querySelectorAll('.photo-gallery--editorial').forEach((gallery) => {
+      const photos = JSON.parse(gallery.getAttribute('data-photos') || '[]');
+      const dialog = gallery.querySelector('dialog.photo-lightbox');
+      const image = gallery.querySelector('img.photo-lightbox-image');
+      const caption = gallery.querySelector('p[data-caption]');
+      const counter = gallery.querySelector('p[data-counter]');
+      const closeButton = gallery.querySelector('button[data-close]');
+      let currentIndex = 0;
+      let opener = null;
+      let touchStartX = null;
+
+      if (!dialog || !image || !counter || !closeButton) return;
+
+      const showPhoto = (index) => {
+        currentIndex = (index + photos.length) % photos.length;
+        const photo = photos[currentIndex];
+        image.src = photo.src;
+        image.alt = photo.alt;
+        counter.textContent = `${currentIndex + 1} / ${photos.length}`;
+        if (caption) {
+          caption.textContent = photo.caption || '';
+          caption.hidden = !photo.caption;
+        }
+      };
+
+      const closeGallery = () => dialog.close();
+
+      gallery.querySelectorAll('button[data-open-index]').forEach((button) => {
+        button.addEventListener('click', () => {
+          opener = button;
+          showPhoto(Number(button.getAttribute('data-open-index')) || 0);
+          dialog.showModal();
+          closeButton.focus();
+        });
+      });
+
+      closeButton.addEventListener('click', closeGallery);
+      dialog.querySelector('button[data-previous]')?.addEventListener('click', () => showPhoto(currentIndex - 1));
+      dialog.querySelector('button[data-next]')?.addEventListener('click', () => showPhoto(currentIndex + 1));
+      dialog.addEventListener('click', (event) => {
+        if (event.target === dialog) closeGallery();
+      });
+      dialog.addEventListener('close', () => opener?.focus());
+      dialog.addEventListener('keydown', (event) => {
+        if (event.key === 'ArrowLeft') {
+          event.preventDefault();
+          showPhoto(currentIndex - 1);
+        } else if (event.key === 'ArrowRight') {
+          event.preventDefault();
+          showPhoto(currentIndex + 1);
+        }
+      });
+
+      image.addEventListener('pointerdown', (event) => {
+        touchStartX = event.clientX;
+        image.setPointerCapture(event.pointerId);
+      });
+      image.addEventListener('pointerup', (event) => {
+        if (touchStartX === null) return;
+        const delta = event.clientX - touchStartX;
+        touchStartX = null;
+        if (Math.abs(delta) < 45) return;
+        showPhoto(currentIndex + (delta < 0 ? 1 : -1));
+      });
+      image.addEventListener('pointercancel', () => {
+        touchStartX = null;
+      });
+    });
+</script>
+
+<style>
+  .photo-gallery--editorial { display: block; margin: 42px 0; }
+  .photo-gallery-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 16px; }
+  .photo-gallery-heading h2 { margin: 0; font: 400 clamp(25px, 3vw, 34px)/1.2 var(--font-display); color: var(--ink); }
+  .photo-gallery-all { border: 0; padding: 8px 0; background: transparent; color: var(--nautical); font: 700 11px/1.4 var(--font-body); letter-spacing: .05em; cursor: pointer; }
+  .photo-gallery-all:hover { color: var(--accent-dark); text-decoration: underline; text-underline-offset: 4px; }
+  .photo-mosaic { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr) minmax(0, 1fr); grid-template-rows: repeat(3, minmax(105px, 1fr)); gap: 10px; min-height: 390px; }
+  .photo-mosaic-item { position: relative; min-width: 0; min-height: 0; overflow: hidden; border: 0; padding: 0; background: var(--surface); cursor: zoom-in; }
+  .photo-mosaic-item--featured { grid-row: span 3; }
+  .photo-gallery--editorial .photo-mosaic-item img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .35s ease, opacity .2s ease; }
+  .photo-mosaic-item:hover img { transform: scale(1.025); opacity: .94; }
+  .photo-mosaic-more { position: absolute; inset: 0; display: grid; place-items: center; background: rgb(24 23 22 / 56%); color: white; font: 700 16px/1.4 var(--font-body); }
+  .photo-lightbox { width: 100vw; max-width: none; height: 100dvh; max-height: none; margin: 0; border: 0; padding: 20px 24px 16px; background: #111; color: white; }
+  .photo-lightbox::backdrop { background: #111; }
+  .photo-lightbox-toolbar { display: flex; align-items: center; justify-content: space-between; height: 48px; max-width: 1500px; margin: 0 auto; }
+  .photo-lightbox-counter { margin: 0; color: #eee; font: 600 12px/1.4 var(--font-body); letter-spacing: .08em; }
+  .photo-lightbox-close, .photo-lightbox-nav { display: grid; place-items: center; border: 1px solid rgb(255 255 255 / 40%); border-radius: 50%; background: rgb(0 0 0 / 30%); color: white; cursor: pointer; }
+  .photo-lightbox-close { width: 42px; height: 42px; font: 300 30px/1 var(--font-body); }
+  .photo-lightbox-stage { display: grid; grid-template-columns: 48px minmax(0, 1fr) 48px; align-items: center; gap: clamp(12px, 3vw, 36px); width: min(1500px, 100%); height: calc(100dvh - 112px); margin: 0 auto; }
+  .photo-gallery--editorial .photo-lightbox-image { display: block; max-width: 100%; max-height: 100%; width: auto; height: auto; justify-self: center; object-fit: contain; touch-action: pan-y; }
+  .photo-lightbox-nav { width: 44px; height: 44px; font: 300 34px/1 var(--font-body); }
+  .photo-lightbox-close:hover, .photo-lightbox-nav:hover { background: rgb(255 255 255 / 15%); }
+  .photo-lightbox-caption { max-width: min(900px, calc(100% - 112px)); margin: 10px auto 0; color: #ddd; font: 400 13px/1.5 var(--font-body); text-align: center; }
+  .photo-gallery--videos { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin: 36px 0; }
+  .photo-gallery--videos figure { margin: 0; }
+  .photo-gallery--videos img { display: block; width: 100%; height: auto; }
+  .photo-gallery-link { display: block; overflow: hidden; }
+  .photo-gallery-link img { transition: transform .3s, opacity .2s; }
+  .photo-gallery-link:hover img { transform: scale(1.03); opacity: .92; }
+  .photo-gallery--videos figcaption { padding-top: var(--space-1); color: var(--muted); font: var(--text-xs)/1.5 var(--font-body); }
+  .photo-lightbox button:focus-visible { outline: 3px solid var(--copper); outline-offset: 3px; }
+
+  @media (max-width: 760px) {
+    .photo-mosaic { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: minmax(220px, 2fr) repeat(2, minmax(100px, 1fr)); min-height: 420px; }
+    .photo-mosaic-item--featured { grid-column: span 2; grid-row: auto; }
+    .photo-lightbox { padding: 12px; }
+    .photo-lightbox-stage { grid-template-columns: 38px minmax(0, 1fr) 38px; gap: 4px; height: calc(100dvh - 100px); }
+    .photo-lightbox-nav { width: 36px; height: 36px; }
+  }
+
+  @media (max-width: 420px) {
+    .photo-gallery-heading { align-items: flex-start; flex-direction: column; gap: 4px; }
+    .photo-mosaic { grid-template-rows: minmax(200px, 2fr) repeat(2, minmax(88px, 1fr)); gap: 7px; min-height: 390px; }
+    .photo-lightbox-stage { grid-template-columns: 32px minmax(0, 1fr) 32px; }
+    .photo-lightbox-nav { width: 32px; height: 32px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .photo-gallery--editorial .photo-mosaic-item img { transition: none; }
+  }
+</style>
