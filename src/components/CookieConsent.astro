@@ -1,0 +1,223 @@
+<div class="cookie-consent" data-cookie-consent>
+  <section id="cookie-panel" class="cookie-panel" data-consent-panel hidden aria-labelledby="cookie-title" aria-describedby="cookie-description" role="region">
+    <h2 id="cookie-title" tabindex="-1">Sua privacidade importa</h2>
+    <p id="cookie-description">Usamos armazenamento necessário para guardar esta escolha. Com sua autorização, o Google Analytics nos ajuda a entender como o site é utilizado. Não usamos cookies de publicidade.</p>
+    <div class="cookie-actions" data-consent-actions>
+      <button class="cookie-button cookie-button--primary" type="button" data-consent="accept">Aceitar todos</button>
+      <button class="cookie-button" type="button" data-consent="reject">Rejeitar opcionais</button>
+      <button class="cookie-manage" type="button" data-consent="customize">Personalizar preferências</button>
+    </div>
+    <div class="cookie-preferences" data-consent-preferences hidden>
+      <fieldset>
+        <legend>Preferências opcionais</legend>
+        <label><input type="checkbox" data-analytics-consent /> Permitir analytics para medir o uso do site</label>
+        <p>Publicidade e personalização de anúncios permanecem desativadas.</p>
+      </fieldset>
+      <div class="cookie-actions">
+        <button class="cookie-button cookie-button--primary" type="button" data-consent="save">Salvar preferências</button>
+        <button class="cookie-manage" type="button" data-consent="back">Voltar</button>
+      </div>
+    </div>
+  </section>
+  <button class="cookie-launcher" type="button" data-consent-launcher hidden aria-expanded="false" aria-controls="cookie-panel">Preferências de cookies</button>
+  <p class="visually-hidden" data-consent-status role="status" aria-live="polite" tabindex="-1"></p>
+</div>
+
+<script>
+  type ConsentWindow = Window & {
+    dataLayer: unknown[];
+    gtag: (...args: unknown[]) => void;
+    __omGtmInjected?: boolean;
+  };
+
+  type ConsentChoice = { analytics: boolean };
+
+  const root = document.querySelector<HTMLElement>('[data-cookie-consent]');
+
+  if (root) {
+    const panel = root.querySelector<HTMLElement>('[data-consent-panel]')!;
+    const actions = root.querySelector<HTMLElement>('[data-consent-actions]')!;
+    const preferences = root.querySelector<HTMLElement>('[data-consent-preferences]')!;
+    const analyticsCheckbox = root.querySelector<HTMLInputElement>('[data-analytics-consent]')!;
+    const launcher = root.querySelector<HTMLButtonElement>('[data-consent-launcher]')!;
+    const status = root.querySelector<HTMLElement>('[data-consent-status]')!;
+    const storageKey = 'om-cookie-consent-v1';
+    const win = window as ConsentWindow;
+    let choice: ConsentChoice | null = readChoice();
+    let lastPageUrl = window.location.href;
+
+    function readChoice(): ConsentChoice | null {
+      try {
+        const stored = localStorage.getItem(storageKey);
+        if (!stored) return null;
+        const parsed = JSON.parse(stored);
+        return typeof parsed.analytics === 'boolean' ? { analytics: parsed.analytics } : null;
+      } catch {
+        return null;
+      }
+    }
+
+    function updateConsent(analytics: boolean) {
+      win.gtag('consent', 'update', {
+        analytics_storage: analytics ? 'granted' : 'denied',
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied'
+      });
+      window.dispatchEvent(new CustomEvent('odisseia:consent-change', { detail: { analytics } }));
+    }
+
+    function loadGtm() {
+      if (win.__omGtmInjected) return;
+      win.__omGtmInjected = true;
+      win.dataLayer = win.dataLayer || [];
+      win.dataLayer.push({ 'gtm.start': Date.now(), event: 'gtm.js' });
+      const script = document.createElement('script');
+      script.async = true;
+      script.id = 'om-google-tag-manager';
+      script.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-TMJKPXHZ';
+      document.head.append(script);
+    }
+
+    function sendPageView() {
+      win.gtag('event', 'page_view', {
+        page_location: window.location.href,
+        page_path: `${window.location.pathname}${window.location.search}`,
+        page_title: document.title
+      });
+    }
+
+    function render() {
+      const open = !panel.hidden;
+      launcher.hidden = open || !choice;
+      launcher.setAttribute('aria-expanded', String(open));
+    }
+
+    function openPanel() {
+      panel.hidden = false;
+      actions.hidden = false;
+      preferences.hidden = true;
+      analyticsCheckbox.checked = choice?.analytics ?? false;
+      render();
+      panel.querySelector<HTMLElement>('h2')?.focus();
+    }
+
+    function saveChoice(analytics: boolean) {
+      const wasGtmLoaded = win.__omGtmInjected === true;
+      const wasGranted = choice?.analytics === true;
+      choice = { analytics };
+      try {
+        localStorage.setItem(storageKey, JSON.stringify(choice));
+      } catch {
+        // Keep this session's choice in memory if browser storage is unavailable.
+      }
+      updateConsent(analytics);
+      panel.hidden = true;
+      render();
+      status.textContent = analytics
+        ? 'Preferência salva. O analytics está autorizado.'
+        : 'Preferência salva. O analytics está desativado.';
+      status.focus();
+
+      if (analytics) {
+        loadGtm();
+        if (wasGtmLoaded && !wasGranted) sendPageView();
+      }
+    }
+
+    root.addEventListener('click', (event) => {
+      const button = (event.target as HTMLElement).closest<HTMLButtonElement>('[data-consent]');
+      if (!button) return;
+
+      switch (button.dataset.consent) {
+        case 'accept':
+          saveChoice(true);
+          break;
+        case 'reject':
+          saveChoice(false);
+          break;
+        case 'customize':
+          actions.hidden = true;
+          preferences.hidden = false;
+          analyticsCheckbox.focus();
+          break;
+        case 'save':
+          saveChoice(analyticsCheckbox.checked);
+          break;
+        case 'back':
+          preferences.hidden = true;
+          actions.hidden = false;
+          root.querySelector<HTMLButtonElement>('[data-consent="customize"]')?.focus();
+          break;
+      }
+    });
+
+    launcher.addEventListener('click', openPanel);
+
+    document.addEventListener('astro:page-load', () => {
+      const currentUrl = window.location.href;
+      if (currentUrl === lastPageUrl) return;
+      lastPageUrl = currentUrl;
+      if (choice?.analytics) sendPageView();
+    });
+
+    if (choice) {
+      panel.hidden = true;
+      updateConsent(choice.analytics);
+      if (choice.analytics) loadGtm();
+    } else {
+      panel.hidden = false;
+    }
+    render();
+  }
+</script>
+
+<style>
+  [hidden] { display: none !important; }
+  .cookie-consent { font-family: var(--font-body); }
+  .cookie-panel {
+    position: fixed;
+    z-index: 1000;
+    right: 20px;
+    bottom: 20px;
+    width: min(440px, calc(100vw - 32px));
+    max-height: min(82vh, 620px);
+    overflow: auto;
+    padding: 24px;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    box-shadow: var(--shadow-soft);
+    color: var(--ink);
+  }
+  .cookie-panel h2 { margin: 0 0 10px; font: 400 26px/1.2 var(--font-display); }
+  .cookie-panel p { margin: 0 0 18px; color: var(--muted); font-size: 13px; line-height: 1.65; }
+  .cookie-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+  .cookie-button, .cookie-launcher {
+    min-height: 42px;
+    padding: 9px 13px;
+    border: 1px solid var(--accent-dark);
+    border-radius: var(--radius-small);
+    background: var(--paper);
+    color: var(--accent-dark);
+    font: 700 12px/1.3 var(--font-body);
+    cursor: pointer;
+  }
+  .cookie-button--primary { background: var(--accent-dark); color: var(--white); }
+  .cookie-button:hover, .cookie-launcher:hover { border-color: var(--nautical); color: var(--nautical); }
+  .cookie-button--primary:hover { background: var(--nautical); color: var(--white); }
+  .cookie-manage { padding: 5px 0; border: 0; border-bottom: 1px solid var(--copper); background: transparent; color: var(--ink); font: 700 12px/1.4 var(--font-body); cursor: pointer; }
+  .cookie-preferences { margin-top: 18px; }
+  .cookie-preferences fieldset { margin: 0 0 16px; padding: 14px; border: 1px solid var(--line); }
+  .cookie-preferences legend { padding: 0 5px; font-size: 12px; font-weight: 800; }
+  .cookie-preferences label { display: flex; align-items: flex-start; gap: 9px; font-size: 13px; line-height: 1.5; }
+  .cookie-preferences input { margin-top: 3px; accent-color: var(--accent-dark); }
+  .cookie-preferences p { margin: 10px 0 0; font-size: 11px; }
+  .cookie-launcher { position: fixed; z-index: 999; right: 20px; bottom: 20px; box-shadow: var(--shadow-soft); }
+  .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; clip-path: inset(50%); }
+  :where(.cookie-panel, .cookie-launcher) :focus-visible { outline: var(--focus-outline); outline-offset: 3px; }
+  @media (max-width: 600px) {
+    .cookie-panel { right: 12px; bottom: 12px; width: calc(100vw - 24px); max-height: 78dvh; padding: 20px; }
+    .cookie-actions { align-items: stretch; flex-direction: column; }
+    .cookie-button, .cookie-manage { width: 100%; }
+  }
+</style>
