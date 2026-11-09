@@ -180,17 +180,17 @@ const mosaicPhotos = featuredPhoto
   .photo-gallery--editorial .photo-mosaic-item img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .35s ease, opacity .2s ease; }
   .photo-mosaic-item:hover img { transform: scale(1.025); opacity: .94; }
   .photo-mosaic-more { position: absolute; inset: 0; display: grid; place-items: center; background: rgb(24 23 22 / 56%); color: white; font: 700 16px/1.4 var(--font-body); }
-  .photo-lightbox { width: 100vw; max-width: none; height: 100dvh; max-height: none; margin: 0; border: 0; padding: 20px 24px 16px; background: #111; color: white; }
+  .photo-lightbox { display: flex; flex-direction: column; overflow: hidden; width: 100vw; max-width: none; height: 100dvh; max-height: none; margin: 0; border: 0; padding: 20px 24px 16px; background: #111; color: white; }
   .photo-lightbox::backdrop { background: #111; }
-  .photo-lightbox-toolbar { display: flex; align-items: center; justify-content: space-between; height: 48px; max-width: 1500px; margin: 0 auto; }
+  .photo-lightbox-toolbar { display: flex; flex: 0 0 48px; align-items: center; justify-content: space-between; width: 100%; max-width: 1500px; margin: 0 auto; }
   .photo-lightbox-counter { margin: 0; color: #eee; font: 600 12px/1.4 var(--font-body); letter-spacing: .08em; }
   .photo-lightbox-close, .photo-lightbox-nav { display: grid; place-items: center; border: 1px solid rgb(255 255 255 / 40%); border-radius: 50%; background: rgb(0 0 0 / 30%); color: white; cursor: pointer; }
   .photo-lightbox-close { width: 42px; height: 42px; font: 300 30px/1 var(--font-body); }
-  .photo-lightbox-stage { display: grid; grid-template-columns: 48px minmax(0, 1fr) 48px; align-items: center; gap: clamp(12px, 3vw, 36px); width: min(1500px, 100%); height: calc(100dvh - 112px); margin: 0 auto; }
-  .photo-gallery--editorial .photo-lightbox-image { display: block; max-width: 100%; max-height: 100%; width: auto; height: auto; justify-self: center; object-fit: contain; touch-action: pan-y; }
+  .photo-lightbox-stage { display: grid; flex: 1 1 auto; grid-template-columns: 48px minmax(0, 1fr) 48px; align-items: center; gap: clamp(12px, 3vw, 36px); width: min(1500px, 100%); min-height: 0; margin: 0 auto; }
+  .photo-gallery--editorial .photo-lightbox-image { display: block; max-width: min(90vw, 100%); max-height: min(82vh, 100%); width: auto; height: auto; margin: auto; justify-self: center; object-fit: contain; touch-action: pan-y; }
   .photo-lightbox-nav { width: 44px; height: 44px; font: 300 34px/1 var(--font-body); }
   .photo-lightbox-close:hover, .photo-lightbox-nav:hover { background: rgb(255 255 255 / 15%); }
-  .photo-lightbox-caption { max-width: min(900px, calc(100% - 112px)); margin: 10px auto 0; color: #ddd; font: 400 13px/1.5 var(--font-body); text-align: center; }
+  .photo-lightbox-caption { flex: 0 0 auto; max-width: min(900px, calc(100% - 112px)); margin: 10px auto 0; color: #ddd; font: 400 13px/1.5 var(--font-body); text-align: center; }
   .photo-gallery--videos { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin: 36px 0; }
   .photo-gallery--videos figure { margin: 0; }
   .photo-gallery--videos img { display: block; width: 100%; height: auto; }
@@ -204,7 +204,8 @@ const mosaicPhotos = featuredPhoto
     .photo-mosaic { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: minmax(220px, 2fr) repeat(2, minmax(100px, 1fr)); min-height: 420px; }
     .photo-mosaic-item--featured { grid-column: span 2; grid-row: auto; }
     .photo-lightbox { padding: 12px; }
-    .photo-lightbox-stage { grid-template-columns: 38px minmax(0, 1fr) 38px; gap: 4px; height: calc(100dvh - 100px); }
+    .photo-lightbox-stage { grid-template-columns: 38px minmax(0, 1fr) 38px; gap: 4px; }
+    .photo-gallery--editorial .photo-lightbox-image { max-width: min(92vw, 100%); max-height: min(75dvh, 100%); }
     .photo-lightbox-nav { width: 36px; height: 36px; }
   }
 
