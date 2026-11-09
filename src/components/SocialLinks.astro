@@ -59,10 +59,7 @@ const visibleLinks = variant === 'header' ? links.filter(({ external }) => exter
         )}
       </svg>
       {variant === 'footer' && (
-        <span class="social-link-label">
-          <span>{name}</span>
-          {name === 'Email' && <span class="social-email">odisseiamundana@gmail.com</span>}
-        </span>
+        <span class="social-link-label">{name}</span>
       )}
     </a>
   ))}
