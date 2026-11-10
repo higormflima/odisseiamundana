@@ -3,8 +3,11 @@ interface Photo {
   src: string;
   thumbnail: string;
   alt: string;
+  width?: number;
+  height?: number;
   featured?: boolean;
   caption?: string;
+  galleryIndex?: number;
 }
 
 interface VideoImage {
@@ -21,39 +24,41 @@ interface Props {
 }
 
 const { title = 'Galeria de fotos', photos = [], images = [] } = Astro.props;
-const featuredPhoto = photos.find((photo) => photo.featured) ?? photos[0];
-const mosaicPhotos = featuredPhoto
-  ? [featuredPhoto, ...photos.filter((photo) => photo !== featuredPhoto)].slice(0, 4)
-  : [];
+const lightboxPhotos = [...photos].sort((left, right) => (left.galleryIndex ?? 0) - (right.galleryIndex ?? 0));
+const ratioOf = (photo: Photo) => photo.width && photo.height ? photo.width / photo.height : 1.5;
+const photoCount = lightboxPhotos.length;
 ---
 
-{photos.length > 0 && featuredPhoto && (
+{photoCount > 0 && (
   <section
     class="photo-gallery photo-gallery--editorial"
     aria-label={title}
-    data-photos={JSON.stringify(photos)}
+    data-photos={JSON.stringify(lightboxPhotos.map((photo) => ({ src: photo.src, alt: photo.alt, caption: photo.caption || '' })))}
   >
     <header class="photo-gallery-heading">
       <h2>{title}</h2>
       <button class="photo-gallery-all" type="button" data-open-index="0">
-        {photos.length} {photos.length === 1 ? 'foto' : 'fotos'} · Ver todas
+        {photoCount} {photoCount === 1 ? 'foto' : 'fotos'} · Ver todas
       </button>
     </header>
 
     <div class="photo-mosaic">
-      {mosaicPhotos.map((photo, mosaicIndex) => {
-        const index = photos.indexOf(photo);
+      {photos.map((photo, index) => {
+        const photoIndex = photo.galleryIndex ?? index;
         return (
           <button
-            class:list={['photo-mosaic-item', { 'photo-mosaic-item--featured': photo === featuredPhoto }]}
+            class="photo-mosaic-item"
             type="button"
-            data-open-index={index}
-            aria-label={`Abrir foto ${index + 1} de ${photos.length}: ${photo.alt}`}
+            style={`--ratio: ${ratioOf(photo)}`}
+            data-w={photo.width}
+            data-h={photo.height}
+            data-photo-index={photoIndex}
+            data-open-index={photoIndex}
+            data-label={`Abrir foto ${photoIndex + 1} de ${photoCount}: ${photo.alt}`}
+            aria-label={`Abrir foto ${photoIndex + 1} de ${photoCount}: ${photo.alt}`}
           >
-            <img src={photo.thumbnail} alt={photo.alt} loading="lazy" decoding="async" />
-            {mosaicIndex === 3 && photos.length > 4 && (
-              <span class="photo-mosaic-more">+{photos.length - 4} fotos</span>
-            )}
+            <img src={photo.thumbnail} alt="" loading="lazy" decoding="async" />
+            <span class="photo-mosaic-more" hidden></span>
           </button>
         );
       })}
@@ -98,7 +103,99 @@ const mosaicPhotos = featuredPhoto
 )}
 
 <script>
+    const layoutMosaic = (mosaic) => {
+      const items = [...mosaic.querySelectorAll('.photo-mosaic-item')];
+      const containerWidth = Math.round(mosaic.clientWidth);
+      if (!items.length || containerWidth < 40) return;
+      const gap = 8;
+      const layoutKey = `${containerWidth}:${items.length}`;
+      if (mosaic.dataset.layout === layoutKey) return;
+      mosaic.dataset.layout = layoutKey;
+      const target = containerWidth < 560 ? 124 : 176;
+      const ratios = items.map((item) => {
+        const width = Number(item.dataset.w);
+        const height = Number(item.dataset.h);
+        return width > 0 && height > 0 ? width / height : Number(item.style.getPropertyValue('--ratio')) || 1.5;
+      });
+      const rows = [];
+      let row = [];
+      let rowWidth = 0;
+      ratios.forEach((ratio, index) => {
+        const itemWidth = ratio * target;
+        if (row.length && rowWidth + gap + itemWidth > containerWidth + 0.5) {
+          rows.push(row);
+          row = [];
+          rowWidth = 0;
+        }
+        row.push(index);
+        rowWidth += (row.length > 1 ? gap : 0) + itemWidth;
+      });
+      if (row.length) rows.push(row);
+
+      const visibleRows = rows.slice(0, 3);
+      const visibleIndexes = new Set(visibleRows.flat());
+      const hiddenItems = items.filter((_, index) => !visibleIndexes.has(index));
+      items.forEach((item, index) => {
+        item.hidden = !visibleIndexes.has(index);
+        const more = item.querySelector('.photo-mosaic-more');
+        if (more) more.hidden = true;
+        item.dataset.openIndex = item.dataset.photoIndex || '0';
+        if (item.dataset.label) item.setAttribute('aria-label', item.dataset.label);
+      });
+      if (hiddenItems.length) {
+        const lastVisibleIndex = visibleRows.at(-1)?.at(-1);
+        const lastVisible = items[lastVisibleIndex];
+        const more = lastVisible?.querySelector('.photo-mosaic-more');
+        const moreLabel = hiddenItems.length === 1 ? '+1 foto' : `+${hiddenItems.length} fotos`;
+        if (more) {
+          more.hidden = false;
+          more.textContent = moreLabel;
+        }
+        const firstHidden = hiddenItems
+          .map((item) => Number(item.dataset.photoIndex))
+          .filter((index) => Number.isInteger(index))
+          .sort((left, right) => left - right)[0];
+        if (lastVisible && Number.isInteger(firstHidden)) {
+          lastVisible.dataset.openIndex = String(firstHidden);
+          lastVisible.setAttribute('aria-label', hiddenItems.length === 1
+            ? 'Ver a outra foto da galeria'
+            : `Ver as outras ${hiddenItems.length} fotos da galeria`);
+        }
+      }
+
+      rows.forEach((indexes, rowIndex) => {
+        const sum = indexes.reduce((total, index) => total + ratios[index], 0);
+        const gaps = gap * Math.max(0, indexes.length - 1);
+        const natural = sum * target + gaps;
+        const last = rowIndex === rows.length - 1;
+        let stretchRow = !last || rows.length === 1 || natural >= containerWidth - 1;
+        let rowHeight = stretchRow ? (containerWidth - gaps) / sum : target;
+        if (rows.length === 1 && indexes.length === 1 && rowHeight > 540) {
+          rowHeight = 540;
+          stretchRow = false;
+        }
+        let used = 0;
+        indexes.forEach((index, position) => {
+          const lastInRow = position === indexes.length - 1;
+          const width = stretchRow && lastInRow
+            ? containerWidth - gaps - used
+            : Math.round(ratios[index] * rowHeight);
+          used += width;
+          items[index].style.width = `${Math.max(1, width)}px`;
+          items[index].style.height = `${rowHeight}px`;
+        });
+      });
+      mosaic.classList.add('is-measured');
+    };
+
     document.querySelectorAll('.photo-gallery--editorial').forEach((gallery) => {
+      const mosaic = gallery.querySelector('.photo-mosaic');
+      if (mosaic) {
+        const layout = () => layoutMosaic(mosaic);
+        layout();
+        if (typeof ResizeObserver !== 'undefined') new ResizeObserver(layout).observe(mosaic);
+      }
+
       const photos = JSON.parse(gallery.getAttribute('data-photos') || '[]');
       const dialog = gallery.querySelector('dialog.photo-lightbox');
       const image = gallery.querySelector('img.photo-lightbox-image');
@@ -174,13 +271,19 @@ const mosaicPhotos = featuredPhoto
   .photo-gallery-heading h2 { margin: 0; font: 400 clamp(25px, 3vw, 34px)/1.2 var(--font-display); color: var(--ink); }
   .photo-gallery-all { border: 0; padding: 8px 0; background: transparent; color: var(--nautical); font: 700 11px/1.4 var(--font-body); letter-spacing: .05em; cursor: pointer; }
   .photo-gallery-all:hover { color: var(--accent-dark); text-decoration: underline; text-underline-offset: 4px; }
-  .photo-mosaic { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr) minmax(0, 1fr); grid-template-rows: repeat(3, minmax(105px, 1fr)); gap: 10px; min-height: 390px; }
-  .photo-mosaic-item { position: relative; min-width: 0; min-height: 0; overflow: hidden; border: 0; padding: 0; background: var(--surface); cursor: zoom-in; }
-  .photo-mosaic-item--featured { grid-row: span 3; }
+  .photo-mosaic { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 8px; max-height: 640px; overflow: hidden; }
+  .photo-mosaic.is-measured { max-height: none; overflow: visible; }
+  .photo-mosaic::after { content: ''; flex-grow: 999; height: 0; }
+  .photo-mosaic-item { --ratio: 1.5; position: relative; flex: var(--ratio) 1 calc(var(--ratio) * 150px); aspect-ratio: var(--ratio); max-width: 100%; min-width: 0; overflow: hidden; border: 0; padding: 0; background: var(--surface); cursor: zoom-in; }
+  .photo-mosaic.is-measured .photo-mosaic-item { flex: none; aspect-ratio: auto; max-width: none; }
   .photo-gallery--editorial .photo-mosaic-item img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .35s ease, opacity .2s ease; }
   .photo-mosaic-item:hover img { transform: scale(1.025); opacity: .94; }
-  .photo-mosaic-more { position: absolute; inset: 0; display: grid; place-items: center; background: rgb(24 23 22 / 56%); color: white; font: 700 16px/1.4 var(--font-body); }
-  .photo-lightbox { display: flex; flex-direction: column; overflow: hidden; width: 100vw; max-width: none; height: 100dvh; max-height: none; margin: 0; border: 0; padding: 20px 24px 16px; background: #111; color: white; }
+  .photo-mosaic-item[hidden] { display: none; }
+  .photo-mosaic-more { position: absolute; inset: 0; display: grid; place-items: center; background: rgb(24 23 22 / 56%); color: white; font: 700 16px/1.4 var(--font-body); text-align: center; }
+  .photo-mosaic-more[hidden] { display: none; }
+  .photo-lightbox:not([open]) { display: none; }
+  .photo-lightbox[open] { display: flex; }
+  .photo-lightbox { flex-direction: column; overflow: hidden; width: 100vw; max-width: none; height: 100dvh; max-height: none; margin: 0; border: 0; padding: 20px 24px 16px; background: #111; color: white; }
   .photo-lightbox::backdrop { background: #111; }
   .photo-lightbox-toolbar { display: flex; flex: 0 0 48px; align-items: center; justify-content: space-between; width: 100%; max-width: 1500px; margin: 0 auto; }
   .photo-lightbox-counter { margin: 0; color: #eee; font: 600 12px/1.4 var(--font-body); letter-spacing: .08em; }
@@ -201,8 +304,6 @@ const mosaicPhotos = featuredPhoto
   .photo-lightbox button:focus-visible { outline: 3px solid var(--copper); outline-offset: 3px; }
 
   @media (max-width: 760px) {
-    .photo-mosaic { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: minmax(220px, 2fr) repeat(2, minmax(100px, 1fr)); min-height: 420px; }
-    .photo-mosaic-item--featured { grid-column: span 2; grid-row: auto; }
     .photo-lightbox { padding: 12px; }
     .photo-lightbox-stage { grid-template-columns: 38px minmax(0, 1fr) 38px; gap: 4px; }
     .photo-gallery--editorial .photo-lightbox-image { max-width: min(92vw, 100%); max-height: min(75dvh, 100%); }
@@ -211,7 +312,6 @@ const mosaicPhotos = featuredPhoto
 
   @media (max-width: 420px) {
     .photo-gallery-heading { align-items: flex-start; flex-direction: column; gap: 4px; }
-    .photo-mosaic { grid-template-rows: minmax(200px, 2fr) repeat(2, minmax(88px, 1fr)); gap: 7px; min-height: 390px; }
     .photo-lightbox-stage { grid-template-columns: 32px minmax(0, 1fr) 32px; }
     .photo-lightbox-nav { width: 32px; height: 32px; }
   }

@@ -1,5 +1,8 @@
 ---
 import { getEntry } from 'astro:content';
+import { readColorSignatureFromSrc } from '../lib/imageSignature.mjs';
+import { readImageSizeFromSrc } from '../lib/imageSize.mjs';
+import { orderPhotosByVariety } from '../lib/photoVariety.mjs';
 import PhotoGallery from './PhotoGallery.astro';
 
 interface Props {
@@ -13,11 +16,18 @@ const basePath = import.meta.env.BASE_URL.endsWith('/')
   ? import.meta.env.BASE_URL
   : `${import.meta.env.BASE_URL}/`;
 const publicPath = (path: string) => `${basePath}${path.replace(/^\/+/, '')}`;
-const photos = gallery?.photos?.map((photo) => ({
+const sourcePhotos = gallery?.photos ?? [];
+const annotatedPhotos = await Promise.all(sourcePhotos.map(async (photo, galleryIndex) => ({
+  ...photo,
+  ...readImageSizeFromSrc(photo.src),
+  signature: await readColorSignatureFromSrc(photo.thumbnail || photo.src),
+  galleryIndex,
+})));
+const photos = orderPhotosByVariety(annotatedPhotos).map(({ signature, ...photo }) => ({
   ...photo,
   src: publicPath(photo.src),
   thumbnail: publicPath(photo.thumbnail),
-})) ?? [];
+}));
 ---
 
 {photos.length > 0 && <PhotoGallery title={gallery.title} photos={photos} />}
