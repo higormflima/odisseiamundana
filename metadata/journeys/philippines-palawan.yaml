@@ -3,6 +3,10 @@ title: Duas semanas em Palawan
 summary: >
   Um roteiro de cerca de duas semanas pelas Filipinas, com chegada por Manila
   e paradas em Puerto Princesa, Port Barton e El Nido, em Palawan.
+dates:
+  year: 2025
+  month: 12
+  start_date: 2025-12-01
 geography:
   countries:
     - Filipinas
@@ -72,6 +76,15 @@ budget:
     as quantias misturam médias, diárias e preços avulsos.
 trip_card:
   overall_rating: 6
+  ratings:
+    nature: 10
+    experiences: 8
+    food: 7
+    prices: 7
+    infrastructure: 6
+    accessibility: 4
+    culture: 5
+    safety: 7
 provenance:
   - source_type: transcript
     verification_status: unverified
@@ -120,3 +133,6 @@ provenance:
       - Coron_planned_cancelled
       - geography.representative_point
       - trip_card.overall_rating
+      - dates.start_date
+      - dates.year
+      - dates.month

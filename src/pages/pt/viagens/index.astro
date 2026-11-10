@@ -1,8 +1,13 @@
 ---
 import SiteLayout from '../../../layouts/SiteLayout.astro';
 import { getCollection } from 'astro:content';
+import { compareJourneysByRecency, formatJourneyListDate } from '../../../lib/journeyMapData.mjs';
 
 const pages = await getCollection('journeyPages', ({ data }) => data.status === 'published');
+const journeys = await getCollection('journeyMetadata');
+const datesByJourney = new Map(journeys.map((journey) => [journey.id, journey.data.dates]));
+const journeyDate = (page) => datesByJourney.get(page.data.journey_id.id);
+const orderedPages = [...pages].sort((left, right) => compareJourneysByRecency(journeyDate(left), journeyDate(right)));
 const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
 ---
 
@@ -13,9 +18,9 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
     <p class="archive-intro">Roteiros, cidades e experiências, organizados em histórias.</p>
     {pages.length ? (
       <div class="journey-list">
-        {pages.map((page) => (
+        {orderedPages.map((page) => (
           <a class="journey-row" href={`${base}pt/viagens/${page.data.journey_id.id}/${page.data.episode_id}/`}>
-            <span class="journey-number">{String(page.data.sort_order ?? 1).padStart(2, '0')}</span>
+            <span class="journey-date">{formatJourneyListDate(journeyDate(page))}</span>
             <span class="journey-title">{page.data.title}</span>
             <span class="journey-arrow" aria-hidden="true">↗</span>
           </a>

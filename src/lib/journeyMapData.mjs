@@ -5,6 +5,8 @@ const MONTHS_PT = [
   'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro',
 ];
 
+const MONTHS_SHORT_PT = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
+
 /**
  * @param {{ year?: number, month?: number } | undefined} dates
  */
@@ -16,6 +18,32 @@ export function formatJourneyPeriod(dates) {
 /**
  * @param {number | undefined} days
  */
+/**
+ * Rótulo curto para a lista de viagens. Exige mês e ano; sem os dois, não inventa um período.
+ * @param {{ year?: number, month?: number } | undefined} dates
+ */
+export function formatJourneyListDate(dates) {
+  if (!dates?.year || !dates.month || dates.month < 1 || dates.month > 12) return undefined;
+  return `${MONTHS_SHORT_PT[dates.month - 1]} ${dates.year}`;
+}
+
+/**
+ * Mais recente primeiro. Viagem sem ano fica por último.
+ * @param {{ year?: number, month?: number } | undefined} left
+ * @param {{ year?: number, month?: number } | undefined} right
+ */
+export function compareJourneysByRecency(left, right) {
+  return dateSortKey(right) - dateSortKey(left);
+}
+
+/**
+ * @param {{ year?: number, month?: number } | undefined} dates
+ */
+function dateSortKey(dates) {
+  if (!dates?.year) return 0;
+  return dates.year * 100 + (dates.month || 0);
+}
+
 export function formatJourneyDuration(days) {
   if (!days) return undefined;
   return days === 1 ? '1 dia' : `${days} dias`;

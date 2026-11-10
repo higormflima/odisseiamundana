@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { buildJourneyMapEntries, formatJourneyDuration, formatJourneyPeriod } from '../src/lib/journeyMapData.mjs';
+import { buildJourneyMapEntries, compareJourneysByRecency, formatJourneyDuration, formatJourneyListDate, formatJourneyPeriod } from '../src/lib/journeyMapData.mjs';
 
 const point = { name: 'Base da viagem', coordinates: { lat: 60.1, lng: 24.9 } };
 
@@ -110,4 +110,20 @@ test('formata período e duração em português', () => {
   assert.equal(formatJourneyPeriod({ year: 2019 }), '2019');
   assert.equal(formatJourneyPeriod(undefined), undefined);
   assert.equal(formatJourneyDuration(1), '1 dia');
+});
+
+test('ordena viagens da mais recente para a mais antiga e rotula mês e ano', () => {
+  assert.equal(formatJourneyListDate({ year: 2026, month: 2 }), 'Fev 2026');
+  assert.equal(formatJourneyListDate({ year: 2026 }), undefined);
+  assert.equal(formatJourneyListDate({ month: 11 }), undefined);
+  const dates = [
+    { year: 2025, month: 11 },
+    { year: 2026, month: 2 },
+    { month: 11 },
+  ];
+  assert.deepEqual(dates.sort(compareJourneysByRecency), [
+    { year: 2026, month: 2 },
+    { year: 2025, month: 11 },
+    { month: 11 },
+  ]);
 });
