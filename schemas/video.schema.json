@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://higormflima.github.io/odisseiamundana/schemas/video.schema.json",
+  "$id": "https://odisseiamundana.com/schemas/video.schema.json",
   "title": "Metadados de vídeo — rascunho 0.1",
   "description": "Contrato inicial e provisório para metadados de vídeos associados a uma viagem.",
   "type": "object",

@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://higormflima.github.io/odisseiamundana/schemas/journey.schema.json",
+  "$id": "https://odisseiamundana.com/schemas/journey.schema.json",
   "title": "Metadados de viagem — rascunho 0.4",
   "description": "Contrato provisório para os metadados de uma viagem, expandido com participantes, transporte, hospedagem, atividades, orçamento, coordenadas, resumo, ponto representativo para o mapa e avaliação pessoal da viagem (trip_card).",
   "type": "object",

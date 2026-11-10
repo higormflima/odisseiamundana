@@ -48,14 +48,14 @@ test('ignora páginas de episódio que não são o resumo da viagem', () => {
   assert.equal(entries.length, 0);
 });
 
-test('monta o link respeitando a base do GitHub Pages', () => {
+test('monta o link a partir da base do site configurada', () => {
   const [entry] = buildJourneyMapEntries({
     journeys: [journey('trip', { geography: { representative_point: point } })],
     pages: [summaryPage('trip')],
-    base: '/odisseiamundana/',
+    base: '/',
   });
 
-  assert.equal(entry.href, '/odisseiamundana/pt/viagens/trip/journey-summary/');
+  assert.equal(entry.href, '/pt/viagens/trip/journey-summary/');
 });
 
 test('usa somente dados disponíveis no card', () => {
