@@ -13,6 +13,11 @@ geography:
   destinations:
     - Pequim
     - Mutianyu
+  representative_point:
+    name: Pequim
+    coordinates:
+      lat: 39.90667
+      lng: 116.3975
 transport:
   flights:
     - route:
@@ -25,9 +30,15 @@ activities:
     name: Grande Muralha em Mutianyu
     provider: Mutianyu
     notes: >
-      Didi: 160 na ida e 109 na volta, na unidade monetária falada no vídeo,
-      que não foi identificada com segurança. Entrada, shuttle e teleférico:
-      cerca de 400 para duas pessoas, também sem moeda confirmada.
+      Didi: 160 na ida e 109 na volta. Entrada, shuttle e teleférico: cerca de
+      400 para duas pessoas. Moeda confirmada pelo proprietário: yuan chinês (CNY).
+budget:
+  currency: CNY
+  notes: >
+    Didi 269 no total das duas corridas. Entrada, shuttle e teleférico cerca
+    de 400 para duas pessoas. Total aproximado de 669 yuan.
+trip_card:
+  overall_rating: 7
 provenance:
   - source_type: transcript
     verification_status: unverified
@@ -46,3 +57,6 @@ provenance:
       - route
       - Mutianyu_visit
       - Forbidden_City_planned_not_confirmed
+      - geography.representative_point
+      - trip_card.overall_rating
+      - budget.currency

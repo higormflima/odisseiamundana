@@ -13,7 +13,7 @@ export async function getStaticPaths() {
     journeys.map((journey) => journey.id),
   );
 
-  return pages.filter((entry) => entry.data.status === 'published').map((entry) => ({
+  return pages.filter((entry) => entry.data.status === 'published' || import.meta.env.DEV).map((entry) => ({
     params: { journeyId: entry.data.journey_id.id, episodeId: entry.data.episode_id },
     props: { entry },
   }));
@@ -31,6 +31,9 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
 
 <SiteLayout title={entry.data.title} description={journeyTitle}>
   <article class="story-page">
+    {import.meta.env.DEV && entry.data.status !== 'published' && (
+      <p class="eyebrow">Prévia local · não publicada</p>
+    )}
     <a class="back-link" href={`${base}pt/viagens/`}>← Todas as viagens</a>
     <header class="story-header">
       <p class="eyebrow">{journeyTitle}</p>

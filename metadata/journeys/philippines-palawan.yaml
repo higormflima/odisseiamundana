@@ -13,6 +13,11 @@ geography:
     - Puerto Princesa
     - Port Barton
     - El Nido
+  representative_point:
+    name: El Nido
+    coordinates:
+      lat: 11.183333
+      lng: 119.383333
 transport:
   flights:
     - route:
@@ -63,7 +68,10 @@ budget:
     Médias relatadas: hospedagem por volta de 3.000 pesos filipinos; refeições
     em torno de 500 pesos, com pratos de 400 a 600 e nenhum acima de 700. Os
     valores são aproximados e não representam preços atuais. A tarifa exata
-    do Firefly Watching não pôde ser confirmada na transcrição.
+    do Firefly Watching não pôde ser confirmada na transcrição. Não há total:
+    as quantias misturam médias, diárias e preços avulsos.
+trip_card:
+  overall_rating: 6
 provenance:
   - source_type: transcript
     verification_status: unverified
@@ -110,3 +118,5 @@ provenance:
       - Manila_overnight
       - Puerto_Princesa_two_nights
       - Coron_planned_cancelled
+      - geography.representative_point
+      - trip_card.overall_rating

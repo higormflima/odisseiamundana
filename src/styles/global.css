@@ -107,6 +107,7 @@ h1, h2, p { margin-top: 0; }
 .empty-state > span:last-child { color: var(--dim); font-size: 12px; }
 .empty-mark { display: block; margin-bottom: 18px; color: var(--gold); font-size: 23px; }
 .draft-note { margin-top: 48px; padding: 22px 24px; border-left: 3px solid var(--gold); background: var(--surface); color: var(--muted); font-size: 13px; }
+.draft-note a { border-bottom: 1px solid var(--copper); }
 .draft-note .eyebrow { margin-bottom: 12px; }
 .draft-note p:last-child { margin-bottom: 0; }
 

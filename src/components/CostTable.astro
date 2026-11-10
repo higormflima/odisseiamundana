@@ -9,7 +9,7 @@ interface Props {
   caption: string;
   amountLabel: string;
   rows: CostRow[];
-  total: { label: string; amount: string };
+  total?: { label: string; amount: string };
 }
 
 const { caption, amountLabel, rows, total } = Astro.props;
@@ -34,10 +34,12 @@ const { caption, amountLabel, rows, total } = Astro.props;
       </tr>
     ))}
   </tbody>
-  <tfoot>
-    <tr>
-      <th scope="row">{total.label}</th>
-      <td>{total.amount}</td>
-    </tr>
-  </tfoot>
+  {total && (
+    <tfoot>
+      <tr>
+        <th scope="row">{total.label}</th>
+        <td>{total.amount}</td>
+      </tr>
+    </tfoot>
+  )}
 </table>

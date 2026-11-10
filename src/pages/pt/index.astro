@@ -73,7 +73,9 @@ const mapEntries = buildJourneyMapEntries({
     {draftPages.length > 0 && (
       <aside class="draft-note" aria-label="Prévia de desenvolvimento">
         <p class="eyebrow">Prévia local · não publicada</p>
-        {draftPages.map((page) => <p>{page.data.title} — aguardando revisão editorial</p>)}
+        {draftPages.map((page) => (
+          <p><a href={`${base}pt/viagens/${page.data.journey_id.id}/${page.data.episode_id}/`}>{page.data.title}</a> — aguardando revisão editorial</p>
+        ))}
       </aside>
     )}
   </section>
