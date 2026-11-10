@@ -1,0 +1,237 @@
+---
+import { existsSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import YouTubeVideo from '../../components/YouTubeVideo.astro';
+
+const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+const image = (name: string) => `${base}media/journeys/about-us/photos/${name}.webp`;
+const thumbnail = (name: string) => `${base}media/journeys/about-us/thumbnails/${name}.webp`;
+const hasImage = (name: string) => existsSync(fileURLToPath(new URL(`../../../media/journeys/about-us/photos/${name}.webp`, import.meta.url)));
+const pageTitle = 'Sobre nós | Odisseia Mundana';
+const pageDescription = 'Conheça Higor e Maja, um casal brasileiro e polonês apaixonado por viagens, aventuras e descobertas. Nossa história, projetos e dicas para viajar gastando menos.';
+const heroPhoto = 'hero-tenerife';
+const closingPhoto = 'outro-chapada';
+
+const timeline = [
+  { date: '2016', title: 'O encontro no Brasil', text: 'Higor, brasileiro, e Maja, polonesa, se conheceram no Brasil.', photo: 'timeline-2016', alt: 'Higor e Maja no início da vida juntos.' },
+  { date: '2018', title: 'Uma vida juntos', text: 'O casamento marcou uma nova etapa da nossa vida.', photo: 'timeline-2018', alt: 'Higor e Maja no dia do casamento.' },
+  { date: '2019', title: 'Um sonho sobre rodas', text: 'Compramos uma Iveco Daily e começamos a construir nosso motorhome com as próprias mãos.', photo: 'timeline-2019-motorhome', alt: 'A construção do nosso motorhome sobre uma Iveco Daily.' },
+  { date: '2019–2020', title: 'Explorando o Brasil', text: 'Passamos seis meses viajando por diferentes regiões e destinos do Brasil.', photo: 'timeline-2019-brazil', alt: 'Uma parada durante nossa viagem de motorhome pelo Brasil.' },
+  { date: 'Fevereiro de 2020', title: 'Uma nova casa na Europa', text: 'Nos mudamos para a Polônia e começamos uma nova fase na Europa.', photo: 'timeline-2020-poland', alt: 'Nossa mudança para a Polônia.' },
+  { date: '2020 em diante', title: 'Novos horizontes', text: 'Seguimos viajando por Polônia, Croácia, Itália, França, Espanha, Turquia, Portugal e outros lugares.', photo: 'timeline-2020-present', alt: 'Uma de nossas viagens por novos destinos.' },
+];
+
+const playlists = [
+  { title: 'Viagens pela Europa', thumbnail: 'playlist-europa', url: 'https://youtube.com/playlist?list=PLA8vGdq_0fiN9SHI9mcXJWWwYPb4X7Fk8&si=JZgrITyHBmgStmZM' },
+  { title: 'Construção de Motorhome', thumbnail: 'playlist-motorhome', url: 'https://youtube.com/playlist?list=PLA8vGdq_0fiMR3RYUXQ-0xKridLUsSf1f&si=J3inMwx6KGUXm1T1' },
+  { title: 'Vida na Polônia', thumbnail: 'playlist-polonia', url: 'https://youtube.com/playlist?list=PLA8vGdq_0fiObsCAqJSQh0njqIZ1j87LS&si=NIhW743Q5hkmwL_g' },
+  { title: 'Mais sobre nós', thumbnail: 'playlist-sobre-nos', url: 'https://youtube.com/playlist?list=PLA8vGdq_0fiP0OQIgczECfpFwab5FAF2Z&si=1AhL9R_bl6WeFc82' },
+];
+
+const canonical = new URL(`${base}pt/sobre-nos/`, Astro.site);
+const heroUrl = hasImage(heroPhoto) ? new URL(image(heroPhoto), Astro.site).href : undefined;
+---
+
+<SiteLayout title="Sobre nós" fullTitle={pageTitle} description={pageDescription}>
+  <Fragment slot="head">
+    <link rel="canonical" href={canonical.href} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDescription} />
+    <meta property="og:url" content={canonical.href} />
+    {heroUrl && <meta property="og:image" content={heroUrl} />}
+  </Fragment>
+
+  <article class="about-page">
+    <section class="about-hero" aria-labelledby="about-title">
+      <div class="about-hero-copy">
+        <p class="eyebrow">Odisseia Mundana · nossa história</p>
+        <h1 id="about-title">Duas nacionalidades, um mundo inteiro para explorar.</h1>
+        <p>Somos Higor e Maja. Um brasileiro e uma polonesa que se encontraram em 2016 e descobriram que compartilhar a vida também significava compartilhar a vontade de explorar o mundo.</p>
+        <p>Em 2019, construímos nossa própria casa sobre rodas e partimos para uma viagem de seis meses pelo Brasil. Desde então, continuamos explorando novos destinos, vivendo experiências e registrando nossas aventuras pelo mundo.</p>
+      </div>
+      {hasImage(heroPhoto) && (
+        <figure class="about-hero-photo">
+          <img src={image(heroPhoto)} alt="Higor e Maja em Tenerife, com o Teide ao fundo." width="1600" height="900" fetchpriority="high" decoding="async" />
+        </figure>
+      )}
+    </section>
+
+    <section class="about-section about-story" aria-labelledby="story-title">
+      <div class="about-section-heading">
+        <p class="eyebrow">De dois caminhos a uma jornada</p>
+        <h2 id="story-title">Nossa história</h2>
+      </div>
+      <div class="about-reading">
+        <p>Tudo começou quando dois caminhos, vindos de países diferentes, se cruzaram. Desde então, construímos uma vida cheia de descobertas, projetos e viagens. Conheça um pouco da nossa história e descubra como nasceu a Odisseia Mundana.</p>
+      </div>
+      <div class="origin-video">
+        <YouTubeVideo videoId="GnA3EOjL59Y" title="Nossa história e como nasceu a Odisseia Mundana" />
+      </div>
+      <div class="origin-playlists" aria-label="Playlists sobre nossa história">
+        <a href="https://youtube.com/playlist?list=PLA8vGdq_0fiMR3RYUXQ-0xKridLUsSf1f&si=gUmF1QI6ZItwMsnH" target="_blank" rel="noopener noreferrer">Construção do motorhome <span aria-hidden="true">↗</span></a>
+        <a href="https://youtube.com/playlist?list=PLA8vGdq_0fiO6JcBq8U1WyrG6dKWUUBuw&si=uh0ZfYMFU7mRFFvP" target="_blank" rel="noopener noreferrer">Viagem pelo Brasil <span aria-hidden="true">↗</span></a>
+      </div>
+    </section>
+
+    <section class="about-section timeline-section" aria-labelledby="timeline-title">
+      <div class="about-section-heading">
+        <p class="eyebrow">Marcos pelo caminho</p>
+        <h2 id="timeline-title">Nossa jornada</h2>
+      </div>
+      <ol class="about-timeline">
+        {timeline.map((event, index) => (
+          <li class:list={['timeline-event', { 'timeline-event--reverse': index % 2 === 1, 'timeline-event--no-photo': !hasImage(event.photo) }]}>
+            {hasImage(event.photo) && (
+              <a class="timeline-photo" href={image(event.photo)} target="_blank" rel="noopener noreferrer" aria-label={`Ampliar foto: ${event.alt}`}>
+                <img src={thumbnail(event.photo)} alt={event.alt} loading="lazy" decoding="async" width="600" height="400" />
+              </a>
+            )}
+            <div class="timeline-copy">
+              <p class="timeline-date">{event.date}</p>
+              <h3>{event.title}</h3>
+              <p>{event.text}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </section>
+
+    <section class="about-section playlist-section" aria-labelledby="playlist-title">
+      <div class="about-section-heading">
+        <p class="eyebrow">Histórias em vídeo</p>
+        <h2 id="playlist-title">Continue a viagem</h2>
+      </div>
+      <div class="playlist-grid">
+        {playlists.map((playlist) => (
+          <a class="playlist-card" href={playlist.url} target="_blank" rel="noopener noreferrer" aria-label={`Abrir playlist ${playlist.title} no YouTube`}>
+            <span class="playlist-card-image">
+              <img src={thumbnail(playlist.thumbnail)} alt="" loading="lazy" decoding="async" width="600" height="338" />
+              <span class="playlist-play" aria-hidden="true">▶</span>
+            </span>
+            <span class="playlist-card-copy">
+              <span>{playlist.title}</span>
+              <span class="playlist-arrow" aria-hidden="true">↗</span>
+            </span>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <section class="about-section mission-section" aria-labelledby="mission-title">
+      <div class="about-section-heading">
+        <p class="eyebrow">Travel on a Budget</p>
+        <h2 id="mission-title">Nossa missão</h2>
+        <p class="mission-phrase">Viajar mais, gastando menos e vivendo mais experiências.</p>
+      </div>
+      <div class="about-reading mission-copy">
+        <p>Acreditamos que viajar é uma das melhores maneiras de aprender, descobrir novas perspectivas e compreender o mundo em que vivemos.</p>
+        <p>Nosso estilo de viagem é econômico, buscando aproveitar ao máximo cada destino sem precisar gastar uma fortuna. Acreditamos que grandes experiências não precisam de grandes orçamentos. Por isso, compartilhamos dicas, estratégias e experiências que ajudam outros viajantes a economizar, planejar melhor suas viagens e aproveitar cada aventura.</p>
+        <p>Criamos a Odisseia Mundana para compartilhar muito mais do que destinos. Queremos mostrar os caminhos, os desafios, os aprendizados e as histórias que fazem cada viagem valer a pena.</p>
+        <p>Também disponibilizamos materiais práticos que ajudam a transformar ideias em projetos reais: planilhas, tutoriais, guias e outros recursos. Esses materiais podem ser encontrados nos vídeos do nosso canal no YouTube e em seus respectivos links e descrições.</p>
+        <p>Nossa intenção é inspirar, compartilhar conhecimento e mostrar que o mundo está ao alcance de quem tem curiosidade, planejamento e vontade de explorá-lo.</p>
+      </div>
+      <ul class="mission-pillars">
+        <li><span>01</span><h3>Economia</h3><p>Viajar melhor, gastando menos</p></li>
+        <li><span>02</span><h3>Descobertas</h3><p>Conhecer lugares e culturas</p></li>
+        <li><span>03</span><h3>Compartilhamento</h3><p>Experiências e materiais práticos</p></li>
+      </ul>
+    </section>
+
+    <section class="about-closing" aria-labelledby="closing-title">
+      {hasImage(closingPhoto) && <img class="closing-photo" src={thumbnail(closingPhoto)} alt="Higor e Maja diante de uma cachoeira em uma paisagem rochosa." loading="lazy" decoding="async" width="600" height="400" />}
+      <div class="closing-content">
+        <p class="eyebrow">A jornada continua</p>
+        <h2 id="closing-title">Vamos viajar juntos?</h2>
+        <p>Continue acompanhando nossas aventuras, descubra novos destinos e faça parte da Odisseia Mundana.</p>
+        <div class="closing-links">
+          <a href="https://www.instagram.com/odisseiamundana?psln=NnNxN3B2MDhudmJv&utm_source=qr" target="_blank" rel="noopener noreferrer">Instagram ↗</a>
+          <a href="https://youtube.com/@odisseiamundana" target="_blank" rel="noopener noreferrer">YouTube ↗</a>
+          <a href="mailto:odisseiamundana@gmail.com">odisseiamundana@gmail.com</a>
+        </div>
+        <a class="collaboration-link" href="mailto:odisseiamundana@gmail.com?subject=Proposta%20de%20colabora%C3%A7%C3%A3o">Tem uma proposta de colaboração? Entre em contato conosco.</a>
+      </div>
+    </section>
+  </article>
+</SiteLayout>
+
+<style>
+  .about-page { overflow: hidden; }
+  .about-hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(300px, .92fr); align-items: center; gap: clamp(32px, 7vw, 104px); padding: clamp(68px, 10vw, 136px) var(--page-gutter); background: var(--surface); }
+  .about-hero-copy { max-width: 680px; }
+  .about-hero h1 { max-width: 700px; margin: 0 0 28px; font: 400 clamp(46px, 6.2vw, 82px)/1.04 var(--font-display); letter-spacing: -.035em; }
+  .about-hero-copy > p:not(.eyebrow) { max-width: 620px; color: var(--muted); font-size: 15px; line-height: 1.85; }
+  .about-hero-photo { position: relative; margin: 0; aspect-ratio: 4 / 3; }
+  .about-hero-photo img { display: block; width: 100%; height: 100%; object-fit: contain; }
+  .about-section { padding: var(--space-section) var(--page-gutter); }
+  .about-section-heading { max-width: 740px; margin: 0 auto 38px; text-align: center; }
+  .about-section-heading .eyebrow { margin-bottom: 14px; }
+  .about-section-heading h2, .closing-content h2 { margin: 0; font: 400 clamp(36px, 5vw, 58px)/1.1 var(--font-display); letter-spacing: -.025em; }
+  .about-reading { max-width: 740px; margin: 0 auto; color: #46423e; font: 400 19px/1.8 var(--font-display); }
+  .about-reading p { margin-bottom: 1.1em; }
+  .origin-video { max-width: 920px; margin: 38px auto 0; }
+  .origin-playlists { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; max-width: 920px; margin: 20px auto 0; }
+  .origin-playlists a, .playlist-card { display: flex; align-items: center; justify-content: space-between; gap: 18px; min-height: 76px; padding: 20px 22px; border: 1px solid var(--line); background: var(--paper); font-size: 14px; font-weight: 700; transition: border-color .2s, transform .2s; }
+  .origin-playlists a:hover, .playlist-card:hover { border-color: var(--copper); transform: translateY(-2px); }
+  .origin-playlists a span { color: var(--nautical); }
+  .timeline-section { background: var(--surface); }
+  .about-timeline { position: relative; display: grid; gap: 24px; max-width: 1020px; margin: 0 auto; padding: 0; list-style: none; }
+  .about-timeline::before { position: absolute; top: 0; bottom: 0; left: 50%; width: 1px; background: var(--copper); content: ''; }
+  .timeline-event { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; gap: 52px; min-height: 230px; }
+  .timeline-event--no-photo { grid-template-columns: 1fr; min-height: 140px; padding-left: 52px; }
+  .timeline-event--no-photo .timeline-copy, .timeline-event--no-photo.timeline-event--reverse .timeline-copy { grid-column: 1; grid-row: 1; justify-self: start; text-align: left; }
+  .timeline-event::before { position: absolute; z-index: 1; top: 50%; left: 50%; width: 11px; height: 11px; border: 3px solid var(--surface); border-radius: 50%; background: var(--nautical); content: ''; transform: translate(-50%, -50%); }
+  .timeline-photo { display: block; overflow: hidden; aspect-ratio: 4 / 3; background: var(--line); }
+  .timeline-photo img { display: block; width: 100%; height: 100%; object-fit: contain; transition: transform .35s; }
+  .timeline-photo:hover img { transform: scale(1.025); }
+  .timeline-copy { max-width: 390px; padding: 24px 0; }
+  .timeline-event--reverse .timeline-photo { grid-column: 2; grid-row: 1; }
+  .timeline-event--reverse .timeline-copy { grid-column: 1; grid-row: 1; justify-self: end; text-align: right; }
+  .timeline-date { margin-bottom: 10px; color: var(--nautical); font-size: 11px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
+  .timeline-copy h3, .mission-pillars h3 { margin: 0 0 10px; font: 400 29px/1.2 var(--font-display); }
+  .timeline-copy > p:last-child, .mission-pillars p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.8; }
+  .playlist-section { padding-bottom: 0; }
+  .playlist-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; max-width: 920px; margin: auto; }
+  .playlist-card { display: block; min-height: 0; padding: 0; }
+  .playlist-card-image { position: relative; display: block; overflow: hidden; aspect-ratio: 16 / 9; background: var(--ink); }
+  .playlist-card-image img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .35s; }
+  .playlist-card:hover .playlist-card-image img { transform: scale(1.025); }
+  .playlist-play { position: absolute; inset: 50% auto auto 50%; display: grid; width: 48px; height: 48px; place-items: center; border: 1px solid rgb(255 255 255 / 75%); border-radius: 50%; background: rgb(40 40 41 / 70%); color: white; font-size: 13px; transform: translate(-50%, -50%); }
+  .playlist-card-copy { display: flex; align-items: center; justify-content: space-between; gap: 14px; min-height: 66px; padding: 16px 18px; font-size: 14px; font-weight: 700; }
+  .playlist-arrow { flex: 0 0 auto; color: var(--nautical); }
+  .mission-section { padding-bottom: var(--space-section); }
+  .mission-phrase { margin: 16px 0 0; color: var(--nautical); font: 400 21px/1.5 var(--font-display); }
+  .mission-copy { margin-top: 38px; }
+  .mission-pillars { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; max-width: 1040px; margin: 54px auto 0; padding: 0; list-style: none; }
+  .mission-pillars li { padding: 24px 0; border-top: 1px solid var(--copper); }
+  .mission-pillars li > span { display: block; margin-bottom: 22px; color: var(--nautical); font-size: 11px; font-weight: 800; letter-spacing: .16em; }
+  .mission-pillars h3 { font-size: 25px; }
+  .about-closing { position: relative; display: grid; min-height: 500px; place-items: center; padding: 78px var(--page-gutter); background: var(--ink); color: white; text-align: center; }
+  .closing-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; opacity: .36; }
+  .closing-content { position: relative; max-width: 820px; }
+  .closing-content .eyebrow { color: #f0d38b; }
+  .closing-content > p:not(.eyebrow) { max-width: 600px; margin: 20px auto 0; color: rgb(255 255 255 / 86%); font-size: 15px; line-height: 1.8; }
+  .closing-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px 30px; margin: 30px 0 22px; }
+  .closing-links a, .collaboration-link { color: white; font-size: 13px; font-weight: 700; text-decoration: underline; text-decoration-color: var(--copper); text-underline-offset: 5px; }
+  .collaboration-link { display: inline-block; margin-top: 4px; }
+  a:focus-visible { outline-color: #f0d38b; }
+  @media (max-width: 760px) {
+    .about-hero { grid-template-columns: 1fr; }
+    .about-hero-photo { order: -1; }
+    .about-hero h1 { font-size: clamp(44px, 11vw, 64px); }
+    .timeline-event, .timeline-event--reverse { grid-template-columns: 1fr; gap: 0; padding-left: 26px; }
+    .timeline-event--no-photo { min-height: 0; padding-left: 26px; }
+    .about-timeline::before { left: 5px; }
+    .timeline-event::before { top: 22px; left: 5px; }
+    .timeline-photo, .timeline-event--reverse .timeline-photo { grid-column: 1; grid-row: 1; }
+    .timeline-copy, .timeline-event--reverse .timeline-copy { grid-column: 1; grid-row: 2; justify-self: stretch; padding: 20px 0 12px; text-align: left; }
+    .mission-pillars { grid-template-columns: 1fr; gap: 10px; margin-top: 36px; }
+  }
+  @media (max-width: 520px) {
+    .origin-playlists, .playlist-grid { grid-template-columns: 1fr; }
+    .about-reading { font-size: 17px; }
+    .about-closing { min-height: 440px; }
+    .closing-links { flex-direction: column; align-items: center; }
+  }
+</style>

@@ -163,7 +163,8 @@ h1, h2, p { margin-top: 0; }
 @media (max-width: 700px) {
   .site-header, .site-footer { padding: 14px 22px; }
   .wordmark img { width: 46px; height: 46px; }
-  .site-header nav { gap: 18px; }
+  .site-header { flex-wrap: wrap; gap: 12px; }
+  .site-header nav { width: 100%; flex-wrap: wrap; justify-content: flex-start; gap: 12px 18px; font-size: 12px; }
   .home-hero { padding: 64px 26px 56px; }
   .map-section { padding: 64px 16px 0; }
   .map-section .section-heading { padding-inline: 8px; }
