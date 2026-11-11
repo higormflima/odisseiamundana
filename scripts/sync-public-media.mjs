@@ -1,0 +1,31 @@
+import { cp, mkdir, rm, stat } from 'node:fs/promises';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const projectRoot = fileURLToPath(new URL('../', import.meta.url));
+const publicMediaDirectories = [
+  'journeys/about-us/photos',
+  'journeys/about-us/thumbnails',
+  'journeys/china-stopover/photos',
+  'journeys/china-stopover/thumbnails',
+  'journeys/finland-2026/photos',
+  'journeys/finland-2026/thumbnails',
+  'journeys/philippines-palawan/photos',
+  'journeys/philippines-palawan/thumbnails',
+];
+
+for (const relativeDirectory of publicMediaDirectories) {
+  const source = path.join(projectRoot, 'media', relativeDirectory);
+  const destination = path.join(projectRoot, 'public', 'media', relativeDirectory);
+
+  if (!(await stat(source).catch(() => null))?.isDirectory()) {
+    throw new Error(`Diretório de mídia de origem não encontrado: ${source}`);
+  }
+
+  // Apenas fotos e miniaturas são espelhadas; transcrições e materiais editoriais não são publicados.
+  await rm(destination, { recursive: true, force: true });
+  await mkdir(path.dirname(destination), { recursive: true });
+  await cp(source, destination, { recursive: true });
+}
+
+console.log(`Mídia pública sincronizada: ${publicMediaDirectories.length} diretórios.`);

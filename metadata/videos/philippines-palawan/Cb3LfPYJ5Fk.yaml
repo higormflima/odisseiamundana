@@ -9,7 +9,7 @@ duration_seconds: 569
 narration_status: present
 caption_status: available
 transcript_files:
-  - media/journeys/philippines-palawan/transcripts/Cb3LfPYJ5Fk.txt
+  - transcripts/journeys/philippines-palawan/Cb3LfPYJ5Fk.txt
 provenance:
   - source_type: manual
     verification_status: confirmed

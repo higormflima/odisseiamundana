@@ -85,6 +85,128 @@ trip_card:
     accessibility: 4
     culture: 5
     safety: 7
+gallery:
+  title: Praias e paisagens de Palawan
+  photos:
+    - src: media/journeys/philippines-palawan/photos/philippines-001.jpg
+      thumbnail: media/journeys/philippines-palawan/thumbnails/philippines-001.jpg
+      alt: Vista aérea de uma praia tropical entre coqueiros, areia clara e mar em tons de azul e verde.
+    - src: media/journeys/philippines-palawan/photos/philippines-002.jpg
+      thumbnail: media/journeys/philippines-palawan/thumbnails/philippines-002.jpg
+      alt: Praia de areia clara acompanhando uma fileira de coqueiros e uma encosta coberta de mata.
+    - src: media/journeys/philippines-palawan/photos/philippines-003.jpg
+      thumbnail: media/journeys/philippines-palawan/thumbnails/philippines-003.jpg
+      alt: Vista aérea da linha costeira, com mar raso de um lado e vegetação tropical do outro.
+    - src: media/journeys/philippines-palawan/photos/philippines-004.jpg
+      thumbnail: media/journeys/philippines-palawan/thumbnails/philippines-004.jpg
+      alt: Enseada de águas turquesa e praia clara cercada por floresta tropical.
+    - src: media/journeys/philippines-palawan/photos/philippines-005.jpg
+      thumbnail: media/journeys/philippines-palawan/thumbnails/philippines-005.jpg
+      alt: Baía cercada por falésias calcárias e barcos tradicionais sobre o mar.
+      featured: true
+    - src: media/journeys/philippines-palawan/photos/philippines-006.jpg
+      thumbnail: media/journeys/philippines-palawan/thumbnails/philippines-006.jpg
+      alt: Vista vertical de barcos tradicionais e caiaques em águas transparentes entre rochas.
+    - src: media/journeys/philippines-palawan/photos/philippines-007.jpg
+      thumbnail: media/journeys/philippines-palawan/thumbnails/philippines-007.jpg
+      alt: Baía entre grandes paredões de pedra, vista do alto.
+    - src: media/journeys/philippines-palawan/photos/philippines-008.jpg
+      thumbnail: media/journeys/philippines-palawan/thumbnails/philippines-008.jpg
+      alt: Vista aérea de uma lagoa estreita entre paredões cobertos de vegetação.
+    - src: media/journeys/philippines-palawan/photos/philippines-009.jpg
+      thumbnail: media/journeys/philippines-palawan/thumbnails/philippines-009.jpg
+      alt: Pequena praia de areia clara cercada por paredões e floresta tropical.
+    - src: media/journeys/philippines-palawan/photos/philippines-010.jpg
+      thumbnail: media/journeys/philippines-palawan/thumbnails/philippines-010.jpg
+      alt: Pessoas e caiaques em uma praia isolada entre paredões calcários.
+    - src: media/journeys/philippines-palawan/photos/philippines-011.jpg
+      thumbnail: media/journeys/philippines-palawan/thumbnails/philippines-011.jpg
+      alt: Ilhas e mar azul vistos de uma enseada tropical.
+    - src: media/journeys/philippines-palawan/photos/philippines-012.jpg
+      thumbnail: media/journeys/philippines-palawan/thumbnails/philippines-012.jpg
+      alt: Barcos tradicionais e caiaques espalhados sobre o mar azul-turquesa.
+    - src: media/journeys/philippines-palawan/photos/philippines-013.jpg
+      thumbnail: media/journeys/philippines-palawan/thumbnails/philippines-013.jpg
+      alt: Lagoa rasa e clara entre paredões de pedra, com caiaques na água.
+    - src: media/journeys/philippines-palawan/photos/philippines-014.jpg
+      thumbnail: media/journeys/philippines-palawan/thumbnails/philippines-014.jpg
+      alt: Vista de cima de uma lagoa de águas verdes e azul-escuras entre rochas.
+    - src: media/journeys/philippines-palawan/photos/philippines-015.jpg
+      thumbnail: media/journeys/philippines-palawan/thumbnails/philippines-015.jpg
+      alt: Praia tropical e barcos tradicionais vistos do alto.
+    - src: media/journeys/philippines-palawan/photos/philippines-016.jpg
+      thumbnail: media/journeys/philippines-palawan/thumbnails/philippines-016.jpg
+      alt: Baía com barcos tradicionais junto a uma praia cercada por vegetação e falésias.
+    - src: media/journeys/philippines-palawan/photos/philippines-017.jpg
+      thumbnail: media/journeys/philippines-palawan/thumbnails/philippines-017.jpg
+      alt: Vista aérea de uma praia movimentada e barcos tradicionais em águas turquesa.
+    - src: media/journeys/philippines-palawan/photos/philippines-018.jpg
+      thumbnail: media/journeys/philippines-palawan/thumbnails/philippines-018.jpg
+      alt: Selfie do casal em um restaurante ao ar livre junto a coqueiros.
+    - src: media/journeys/philippines-palawan/photos/philippines-019.jpg
+      thumbnail: media/journeys/philippines-palawan/thumbnails/philippines-019.jpg
+      alt: Praia tropical com coqueiros, gramado e mar azul ao fundo.
+    - src: media/journeys/philippines-palawan/photos/philippines-020.jpg
+      thumbnail: media/journeys/philippines-palawan/thumbnails/philippines-020.jpg
+      alt: Selfie do casal usando capacetes de scooter diante de coqueiros e do mar.
+    - src: media/journeys/philippines-palawan/photos/philippines-021.jpg
+      thumbnail: media/journeys/philippines-palawan/thumbnails/philippines-021.jpg
+      alt: Mulher sentada em um tronco de coqueiro sobre a água, com o mar ao fundo.
+    - src: media/journeys/philippines-palawan/photos/philippines-022.jpg
+      thumbnail: media/journeys/philippines-palawan/thumbnails/philippines-022.jpg
+      alt: Homem em pé sobre um tronco de coqueiro, cercado pelo mar e por palmeiras.
+    - src: media/journeys/philippines-palawan/photos/philippines-023.jpg
+      thumbnail: media/journeys/philippines-palawan/thumbnails/philippines-023.jpg
+      alt: Rua movimentada de El Nido, com fachadas, lanternas e montanhas ao fundo.
+      caption: El Nido
+    - src: media/journeys/philippines-palawan/photos/philippines-024.jpg
+      thumbnail: media/journeys/philippines-palawan/thumbnails/philippines-024.jpg
+      alt: Vista da cidade costeira e da baía entre montanhas, sob céu azul.
+      caption: El Nido
+    - src: media/journeys/philippines-palawan/photos/philippines-025.jpg
+      thumbnail: media/journeys/philippines-palawan/thumbnails/philippines-025.jpg
+      alt: Selfie do casal com capacetes de scooter diante de campos alagados e vegetação tropical.
+    - src: media/journeys/philippines-palawan/photos/philippines-026.jpg
+      thumbnail: media/journeys/philippines-palawan/thumbnails/philippines-026.jpg
+      alt: Selfie do casal em um caiaque amarelo sobre águas claras entre paredões.
+    - src: media/journeys/philippines-palawan/photos/philippines-027.jpg
+      thumbnail: media/journeys/philippines-palawan/thumbnails/philippines-027.jpg
+      alt: Casal em pé na água rasa de uma lagoa entre altas falésias calcárias.
+    - src: media/journeys/philippines-palawan/photos/philippines-028.jpg
+      thumbnail: media/journeys/philippines-palawan/thumbnails/philippines-028.jpg
+      alt: Praia sombreada por árvores, com barcos ancorados junto à areia.
+    - src: media/journeys/philippines-palawan/photos/philippines-029.jpg
+      thumbnail: media/journeys/philippines-palawan/thumbnails/philippines-029.jpg
+      alt: Casal em uma varanda diante da baía e de ilhas ao fundo.
+      caption: El Nido
+    - src: media/journeys/philippines-palawan/photos/philippines-030.jpg
+      thumbnail: media/journeys/philippines-palawan/thumbnails/philippines-030.jpg
+      alt: Pôr do sol sobre o mar, com barcos tradicionais em silhueta.
+
+    - src: media/journeys/philippines-palawan/photos/philippines-031.jpg
+      thumbnail: media/journeys/philippines-palawan/thumbnails/philippines-031.jpg
+      alt: Passeio de barco tradicional em mar azul, com passageiros a bordo.
+    - src: media/journeys/philippines-palawan/photos/philippines-032.jpg
+      thumbnail: media/journeys/philippines-palawan/thumbnails/philippines-032.jpg
+      alt: Casal usando capacetes em uma scooter, parado junto a campos alagados e vegetação tropical.
+    - src: media/journeys/philippines-palawan/photos/philippines-033.jpg
+      thumbnail: media/journeys/philippines-palawan/thumbnails/philippines-033.jpg
+      alt: Barco tradicional navega em águas azuis entre ilhas e montanhas.
+    - src: media/journeys/philippines-palawan/photos/philippines-034.jpg
+      thumbnail: media/journeys/philippines-palawan/thumbnails/philippines-034.jpg
+      alt: Homem em pé na proa de um barco, com mar turquesa ao redor.
+    - src: media/journeys/philippines-palawan/photos/philippines-035.jpg
+      thumbnail: media/journeys/philippines-palawan/thumbnails/philippines-035.jpg
+      alt: Casal em um caiaque sobre águas claras diante de paredões rochosos.
+    - src: media/journeys/philippines-palawan/photos/philippines-036.jpg
+      thumbnail: media/journeys/philippines-palawan/thumbnails/philippines-036.jpg
+      alt: Casal em uma scooter em uma estrada cercada por vegetação tropical.
+    - src: media/journeys/philippines-palawan/photos/philippines-037.jpg
+      thumbnail: media/journeys/philippines-palawan/thumbnails/philippines-037.jpg
+      alt: Pessoa nadando com máscara e snorkel sob a água azul-clara.
+    - src: media/journeys/philippines-palawan/photos/philippines-038.jpg
+      thumbnail: media/journeys/philippines-palawan/thumbnails/philippines-038.jpg
+      alt: Homem em pé sobre a estrutura de um barco em águas turquesa.
 provenance:
   - source_type: transcript
     verification_status: unverified

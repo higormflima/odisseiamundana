@@ -10,7 +10,7 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "pnpm validate:metadata && astro build",
+    "build": "node scripts/sync-public-media.mjs && pnpm validate:metadata && astro build",
     "preview": "astro preview",
     "validate:metadata": "node scripts/validate-metadata.mjs",
     "youtube:captions": "node scripts/youtube-captions.mjs",

@@ -9,7 +9,7 @@ duration_seconds: 774
 narration_status: present
 caption_status: available
 transcript_files:
-  - media/journeys/philippines-palawan/transcripts/Rizu2iDfC5w.txt
+  - transcripts/journeys/philippines-palawan/Rizu2iDfC5w.txt
 provenance:
   - source_type: manual
     verification_status: confirmed

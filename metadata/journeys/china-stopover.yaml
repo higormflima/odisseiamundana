@@ -50,6 +50,48 @@ trip_card:
     accessibility: 10
     culture: 9
     safety: 9
+gallery:
+  title: Nossa visita à Grande Muralha da China
+  photos:
+    - src: media/journeys/china-stopover/photos/china-001.jpg
+      thumbnail: media/journeys/china-stopover/thumbnails/china-001.jpg
+      alt: Trecho da Grande Muralha serpenteia por montanhas, visto através de uma pessoa em primeiro plano.
+    - src: media/journeys/china-stopover/photos/china-002.jpg
+      thumbnail: media/journeys/china-stopover/thumbnails/china-002.jpg
+      alt: Mulher posa com os braços abertos sobre os degraus da Grande Muralha, com montanhas ao fundo.
+    - src: media/journeys/china-stopover/photos/china-003.jpg
+      thumbnail: media/journeys/china-stopover/thumbnails/china-003.jpg
+      alt: Homem posa em um trecho de escadaria da Grande Muralha, cercado por muralhas de pedra.
+    - src: media/journeys/china-stopover/photos/china-004.jpg
+      thumbnail: media/journeys/china-stopover/thumbnails/china-004.jpg
+      alt: Sol baixo ilumina as montanhas e um trecho da Grande Muralha no horizonte.
+    - src: media/journeys/china-stopover/photos/china-005.jpg
+      thumbnail: media/journeys/china-stopover/thumbnails/china-005.jpg
+      alt: Casal posa junto à muralha de pedra, com montanhas ao fundo.
+      caption: Um registro do nosso passeio pela Grande Muralha em Mutianyu.
+      featured: true
+    - src: media/journeys/china-stopover/photos/china-006.jpg
+      thumbnail: media/journeys/china-stopover/thumbnails/china-006.jpg
+      alt: Mulher sentada sob um arco de pedra, com a Grande Muralha ao fundo.
+    - src: media/journeys/china-stopover/photos/china-007.jpg
+      thumbnail: media/journeys/china-stopover/thumbnails/china-007.jpg
+      alt: Homem em pé sobre a Grande Muralha diante das montanhas.
+    - src: media/journeys/china-stopover/photos/china-008.jpg
+      thumbnail: media/journeys/china-stopover/thumbnails/china-008.jpg
+      alt: Selfie do casal diante de um portal tradicional em uma rua de Pequim.
+    - src: media/journeys/china-stopover/photos/china-009.jpg
+      thumbnail: media/journeys/china-stopover/thumbnails/china-009.jpg
+      alt: Casal brinca junto à muralha de pedra em um trecho cercado por montanhas.
+    - src: media/journeys/china-stopover/photos/china-010.jpg
+      thumbnail: media/journeys/china-stopover/thumbnails/china-010.jpg
+      alt: Vista panorâmica da Grande Muralha com o casal em primeiro plano.
+    - src: media/journeys/china-stopover/photos/china-011.jpg
+      thumbnail: media/journeys/china-stopover/thumbnails/china-011.jpg
+      alt: Casal caminha pela Grande Muralha sob o sol, visto de cima.
+    - src: media/journeys/china-stopover/photos/china-012.jpg
+      thumbnail: media/journeys/china-stopover/thumbnails/china-012.jpg
+      alt: Casal posa junto à muralha com o sol e as montanhas ao fundo.
+
 provenance:
   - source_type: transcript
     verification_status: unverified

@@ -9,7 +9,7 @@ duration_seconds: 878
 narration_status: present
 caption_status: available
 transcript_files:
-  - media/journeys/china-stopover/transcripts/U4adHvxje8w.txt
+  - transcripts/journeys/china-stopover/U4adHvxje8w.txt
 provenance:
   - source_type: manual
     verification_status: confirmed
