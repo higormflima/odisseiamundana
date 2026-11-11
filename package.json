@@ -10,7 +10,7 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "node scripts/sync-public-media.mjs && pnpm validate:metadata && astro build",
+    "build": "node scripts/sync-public-media.mjs && pnpm validate:metadata && astro build && pagefind --site dist",
     "preview": "astro preview",
     "validate:metadata": "node scripts/validate-metadata.mjs",
     "youtube:captions": "node scripts/youtube-captions.mjs",
@@ -22,6 +22,7 @@
     "@types/leaflet": "^1.9.22",
     "ajv": "^8.20.0",
     "astro": "^7.4.7",
+    "pagefind": "^1.6.0",
     "sharp": "0.35.5",
     "yaml": "^2.9.1"
   },
