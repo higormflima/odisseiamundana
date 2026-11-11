@@ -2,6 +2,7 @@
 import { existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import SiteLayout from '../../layouts/SiteLayout.astro';
+import SocialLinks from '../../components/SocialLinks.astro';
 import YouTubeVideo from '../../components/YouTubeVideo.astro';
 
 const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
@@ -17,7 +18,7 @@ const timeline = [
   { date: '2016', title: 'O encontro no Brasil', text: 'Higor, brasileiro, e Maja, polonesa, se conheceram no Brasil.', photo: 'timeline-2016', alt: 'Higor e Maja no início da vida juntos.' },
   { date: '2018', title: 'Uma vida juntos', text: 'O casamento marcou uma nova etapa da nossa vida.', photo: 'timeline-2018', alt: 'Higor e Maja no dia do casamento.' },
   { date: '2019', title: 'Um sonho sobre rodas', text: 'Compramos uma Iveco Daily e começamos a construir nosso motorhome com as próprias mãos.', photo: 'timeline-2019-motorhome', alt: 'A construção do nosso motorhome sobre uma Iveco Daily.' },
-  { date: '2019–2020', title: 'Explorando o Brasil', text: 'Passamos seis meses viajando por diferentes regiões e destinos do Brasil.', photo: 'timeline-2019-brazil', alt: 'Uma parada durante nossa viagem de motorhome pelo Brasil.' },
+  { date: '2019–2020', title: 'Explorando o Brasil', text: 'Passamos seis meses viajando por diferentes regiões e destinos do Brasil.', photo: 'timeline-2019-brazil', alt: 'Uma parada durante nossa viagem de motorhome pelo Brasil.', playlist: 'https://youtube.com/playlist?list=PLA8vGdq_0fiO6JcBq8U1WyrG6dKWUUBuw' },
   { date: 'Fevereiro de 2020', title: 'Uma nova casa na Europa', text: 'Nos mudamos para a Polônia e começamos uma nova fase na Europa.', photo: 'timeline-2020-poland', alt: 'Nossa mudança para a Polônia.' },
   { date: '2020 em diante', title: 'Novos horizontes', text: 'Seguimos viajando por Polônia, Croácia, Itália, França, Espanha, Turquia, Portugal e outros lugares.', photo: 'timeline-2020-present', alt: 'Uma de nossas viagens por novos destinos.' },
 ];
@@ -69,10 +70,6 @@ const heroUrl = hasImage(heroPhoto) ? new URL(image(heroPhoto), Astro.site).href
       <div class="origin-video">
         <YouTubeVideo videoId="GnA3EOjL59Y" title="Nossa história e como nasceu a Odisseia Mundana" />
       </div>
-      <div class="origin-playlists" aria-label="Playlists sobre nossa história">
-        <a href="https://youtube.com/playlist?list=PLA8vGdq_0fiMR3RYUXQ-0xKridLUsSf1f&si=gUmF1QI6ZItwMsnH" target="_blank" rel="noopener noreferrer">Construção do motorhome <span aria-hidden="true">↗</span></a>
-        <a href="https://youtube.com/playlist?list=PLA8vGdq_0fiO6JcBq8U1WyrG6dKWUUBuw&si=uh0ZfYMFU7mRFFvP" target="_blank" rel="noopener noreferrer">Viagem pelo Brasil <span aria-hidden="true">↗</span></a>
-      </div>
     </section>
 
     <section class="about-section timeline-section" aria-labelledby="timeline-title">
@@ -91,7 +88,10 @@ const heroUrl = hasImage(heroPhoto) ? new URL(image(heroPhoto), Astro.site).href
             <div class="timeline-copy">
               <p class="timeline-date">{event.date}</p>
               <h3>{event.title}</h3>
-              <p>{event.text}</p>
+              <p>
+                {event.text}
+                {event.playlist && <> <a class="timeline-context-link" href={event.playlist} target="_blank" rel="noopener noreferrer">Veja a playlist da viagem pelo Brasil.</a></>}
+              </p>
             </div>
           </li>
         ))}
@@ -133,24 +133,49 @@ const heroUrl = hasImage(heroPhoto) ? new URL(image(heroPhoto), Astro.site).href
         <p>Nossa intenção é inspirar, compartilhar conhecimento e mostrar que o mundo está ao alcance de quem tem curiosidade, planejamento e vontade de explorá-lo.</p>
       </div>
       <ul class="mission-pillars">
-        <li><span>01</span><h3>Economia</h3><p>Viajar melhor, gastando menos</p></li>
-        <li><span>02</span><h3>Descobertas</h3><p>Conhecer lugares e culturas</p></li>
-        <li><span>03</span><h3>Compartilhamento</h3><p>Experiências e materiais práticos</p></li>
+        <li>
+          <svg class="mission-icon" viewBox="0 0 48 48" aria-hidden="true">
+            <path d="M7 14a4 4 0 0 1 4-4h25a4 4 0 0 1 4 4v4H11a4 4 0 0 0 0 8h29v8a4 4 0 0 1-4 4H11a4 4 0 0 1-4-4V14Z" />
+            <path d="M40 18H11a4 4 0 0 0 0 8h29v-8Z" />
+            <circle cx="33" cy="22" r="1.5" />
+          </svg>
+          <h3>Economia</h3><p>Viajar melhor, gastando menos</p>
+        </li>
+        <li>
+          <svg class="mission-icon" viewBox="0 0 48 48" aria-hidden="true">
+            <circle cx="24" cy="24" r="18" />
+            <path d="m30.5 17.5-4.2 10.8-8.8 2.2 4.2-10.8 8.8-2.2Z" />
+            <circle cx="24" cy="24" r="1.5" />
+          </svg>
+          <h3>Descobertas</h3><p>Conhecer lugares e culturas</p>
+        </li>
+        <li>
+          <svg class="mission-icon" viewBox="0 0 48 48" aria-hidden="true">
+            <path d="M24 13c-5-4-11-4-17-2v27c6-2 12-2 17 2 5-4 11-4 17-2V11c-6-2-12-2-17 2Z" />
+            <path d="M24 13v27M12 17c3-.7 6-.3 8 1M36 17c-3-.7-6-.3-8 1M12 24c3-.7 6-.3 8 1M36 24c-3-.7-6-.3-8 1" />
+          </svg>
+          <h3>Compartilhamento</h3><p>Experiências e materiais práticos</p>
+        </li>
       </ul>
     </section>
 
     <section class="about-closing" aria-labelledby="closing-title">
-      {hasImage(closingPhoto) && <img class="closing-photo" src={thumbnail(closingPhoto)} alt="Higor e Maja diante de uma cachoeira em uma paisagem rochosa." loading="lazy" decoding="async" width="600" height="400" />}
-      <div class="closing-content">
-        <p class="eyebrow">A jornada continua</p>
-        <h2 id="closing-title">Vamos viajar juntos?</h2>
-        <p>Continue acompanhando nossas aventuras, descubra novos destinos e faça parte da Odisseia Mundana.</p>
-        <div class="closing-links">
-          <a href="https://www.instagram.com/odisseiamundana?psln=NnNxN3B2MDhudmJv&utm_source=qr" target="_blank" rel="noopener noreferrer">Instagram ↗</a>
-          <a href="https://youtube.com/@odisseiamundana" target="_blank" rel="noopener noreferrer">YouTube ↗</a>
-          <a href="mailto:odisseiamundana@gmail.com">odisseiamundana@gmail.com</a>
+      {hasImage(closingPhoto) && (
+        <figure class="about-closing-photo">
+          <img src={image(closingPhoto)} alt="Higor e Maja diante de uma cachoeira em uma paisagem rochosa." loading="lazy" decoding="async" width="2400" height="1349" />
+        </figure>
+      )}
+      <div class="about-closing-content">
+        <div class="closing-content">
+          <h2 id="closing-title">Vamos viajar juntos?</h2>
+          <p>Continue acompanhando nossas aventuras, descubra novos destinos e faça parte da Odisseia Mundana.</p>
+          <div class="closing-social" aria-label="Redes sociais e contato">
+            <SocialLinks variant="footer" />
+          </div>
+          <div class="collaboration-block">
+            <a class="collaboration-link" href="mailto:odisseiamundana@gmail.com">Tem uma proposta de colaboração? Entre em contato conosco.</a>
+          </div>
         </div>
-        <a class="collaboration-link" href="mailto:odisseiamundana@gmail.com?subject=Proposta%20de%20colabora%C3%A7%C3%A3o">Tem uma proposta de colaboração? Entre em contato conosco.</a>
       </div>
     </section>
   </article>
@@ -164,17 +189,15 @@ const heroUrl = hasImage(heroPhoto) ? new URL(image(heroPhoto), Astro.site).href
   .about-hero-copy > p:not(.eyebrow) { max-width: 620px; color: var(--muted); font-size: 15px; line-height: 1.85; }
   .about-hero-photo { position: relative; margin: 0; aspect-ratio: 4 / 3; }
   .about-hero-photo img { display: block; width: 100%; height: 100%; object-fit: contain; }
-  .about-section { padding: var(--space-section) var(--page-gutter); }
-  .about-section-heading { max-width: 740px; margin: 0 auto 38px; text-align: center; }
+  .about-section { padding: clamp(72px, 8vw, 96px) var(--page-gutter); }
+  .about-section-heading { max-width: 740px; margin: 0 auto 32px; text-align: center; }
   .about-section-heading .eyebrow { margin-bottom: 14px; }
   .about-section-heading h2, .closing-content h2 { margin: 0; font: 400 clamp(36px, 5vw, 58px)/1.1 var(--font-display); letter-spacing: -.025em; }
   .about-reading { max-width: 740px; margin: 0 auto; color: #46423e; font: 400 19px/1.8 var(--font-display); }
   .about-reading p { margin-bottom: 1.1em; }
   .origin-video { max-width: 920px; margin: 38px auto 0; }
-  .origin-playlists { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; max-width: 920px; margin: 20px auto 0; }
-  .origin-playlists a, .playlist-card { display: flex; align-items: center; justify-content: space-between; gap: 18px; min-height: 76px; padding: 20px 22px; border: 1px solid var(--line); background: var(--paper); font-size: 14px; font-weight: 700; transition: border-color .2s, transform .2s; }
-  .origin-playlists a:hover, .playlist-card:hover { border-color: var(--copper); transform: translateY(-2px); }
-  .origin-playlists a span { color: var(--nautical); }
+  .playlist-card { display: flex; align-items: center; justify-content: space-between; gap: 18px; min-height: 76px; padding: 20px 22px; border: 1px solid var(--line); background: var(--paper); font-size: 14px; font-weight: 700; transition: border-color .2s, transform .2s; }
+  .playlist-card:hover { border-color: var(--copper); transform: translateY(-2px); }
   .timeline-section { background: var(--surface); }
   .about-timeline { position: relative; display: grid; gap: 24px; max-width: 1020px; margin: 0 auto; padding: 0; list-style: none; }
   .about-timeline::before { position: absolute; top: 0; bottom: 0; left: 50%; width: 1px; background: var(--copper); content: ''; }
@@ -182,9 +205,10 @@ const heroUrl = hasImage(heroPhoto) ? new URL(image(heroPhoto), Astro.site).href
   .timeline-event--no-photo { grid-template-columns: 1fr; min-height: 140px; padding-left: 52px; }
   .timeline-event--no-photo .timeline-copy, .timeline-event--no-photo.timeline-event--reverse .timeline-copy { grid-column: 1; grid-row: 1; justify-self: start; text-align: left; }
   .timeline-event::before { position: absolute; z-index: 1; top: 50%; left: 50%; width: 11px; height: 11px; border: 3px solid var(--surface); border-radius: 50%; background: var(--nautical); content: ''; transform: translate(-50%, -50%); }
-  .timeline-photo { display: block; overflow: hidden; aspect-ratio: 4 / 3; background: var(--line); }
-  .timeline-photo img { display: block; width: 100%; height: 100%; object-fit: contain; transition: transform .35s; }
-  .timeline-photo:hover img { transform: scale(1.025); }
+  .timeline-photo { display: block; min-width: 0; }
+  .timeline-photo img { display: block; width: 100%; height: auto; }
+  .timeline-context-link { color: var(--accent-dark); text-decoration: underline; text-decoration-color: rgb(0 175 239 / 45%); text-underline-offset: .18em; }
+  .timeline-context-link:hover { color: var(--nautical); text-decoration-color: var(--copper); }
   .timeline-copy { max-width: 390px; padding: 24px 0; }
   .timeline-event--reverse .timeline-photo { grid-column: 2; grid-row: 1; }
   .timeline-event--reverse .timeline-copy { grid-column: 1; grid-row: 1; justify-self: end; text-align: right; }
@@ -203,19 +227,24 @@ const heroUrl = hasImage(heroPhoto) ? new URL(image(heroPhoto), Astro.site).href
   .mission-section { padding-bottom: var(--space-section); }
   .mission-phrase { margin: 16px 0 0; color: var(--nautical); font: 400 21px/1.5 var(--font-display); }
   .mission-copy { margin-top: 38px; }
-  .mission-pillars { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; max-width: 1040px; margin: 54px auto 0; padding: 0; list-style: none; }
-  .mission-pillars li { padding: 24px 0; border-top: 1px solid var(--copper); }
-  .mission-pillars li > span { display: block; margin-bottom: 22px; color: var(--nautical); font-size: 11px; font-weight: 800; letter-spacing: .16em; }
+  .mission-pillars { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; max-width: 1040px; margin: 46px auto 0; padding: 0; list-style: none; text-align: center; }
+  .mission-pillars li { padding: 10px 16px; }
+  .mission-icon { display: block; width: 44px; height: 44px; margin: 0 auto 18px; fill: none; stroke: var(--accent-dark); stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.8; }
   .mission-pillars h3 { font-size: 25px; }
-  .about-closing { position: relative; display: grid; min-height: 500px; place-items: center; padding: 78px var(--page-gutter); background: var(--ink); color: white; text-align: center; }
-  .closing-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; opacity: .36; }
-  .closing-content { position: relative; max-width: 820px; }
-  .closing-content .eyebrow { color: #f0d38b; }
-  .closing-content > p:not(.eyebrow) { max-width: 600px; margin: 20px auto 0; color: rgb(255 255 255 / 86%); font-size: 15px; line-height: 1.8; }
-  .closing-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px 30px; margin: 30px 0 22px; }
-  .closing-links a, .collaboration-link { color: white; font-size: 13px; font-weight: 700; text-decoration: underline; text-decoration-color: var(--copper); text-underline-offset: 5px; }
-  .collaboration-link { display: inline-block; margin-top: 4px; }
-  a:focus-visible { outline-color: #f0d38b; }
+  .about-closing { background: var(--surface); }
+  .about-closing-photo { width: 100%; margin: 0; }
+  .about-closing-photo img { display: block; width: 100%; height: auto; }
+  .about-closing-content { padding: clamp(48px, 6vw, 72px) var(--page-gutter); text-align: center; }
+  .closing-content { max-width: 820px; margin: 0 auto; }
+  .closing-content > p { max-width: 600px; margin: 18px auto 0; color: var(--muted); font-size: 15px; line-height: 1.8; }
+  .closing-social { margin: 28px auto 0; }
+  .closing-social .social-links--footer { flex-wrap: wrap; justify-content: center; gap: 18px 32px; }
+  .closing-social .social-link { color: var(--ink); font-size: 13px; font-weight: 700; }
+  .closing-social .social-link:hover { color: var(--accent-dark); }
+  .closing-social .social-icon { width: 22px; height: 22px; }
+  .collaboration-block { max-width: 620px; margin: 30px auto 0; padding-top: 24px; border-top: 1px solid var(--line); }
+  .collaboration-link { display: inline-block; color: var(--nautical); font-size: 13px; font-weight: 700; text-decoration: underline; text-decoration-color: var(--copper); text-underline-offset: 5px; }
+  .collaboration-link:hover { color: var(--accent-dark); }
   @media (max-width: 760px) {
     .about-hero { grid-template-columns: 1fr; }
     .about-hero-photo { order: -1; }
@@ -226,12 +255,11 @@ const heroUrl = hasImage(heroPhoto) ? new URL(image(heroPhoto), Astro.site).href
     .timeline-event::before { top: 22px; left: 5px; }
     .timeline-photo, .timeline-event--reverse .timeline-photo { grid-column: 1; grid-row: 1; }
     .timeline-copy, .timeline-event--reverse .timeline-copy { grid-column: 1; grid-row: 2; justify-self: stretch; padding: 20px 0 12px; text-align: left; }
-    .mission-pillars { grid-template-columns: 1fr; gap: 10px; margin-top: 36px; }
+    .mission-pillars { grid-template-columns: 1fr; gap: 18px; margin-top: 36px; }
   }
   @media (max-width: 520px) {
-    .origin-playlists, .playlist-grid { grid-template-columns: 1fr; }
+    .playlist-grid { grid-template-columns: 1fr; }
     .about-reading { font-size: 17px; }
-    .about-closing { min-height: 440px; }
-    .closing-links { flex-direction: column; align-items: center; }
+    .closing-social .social-links--footer { gap: 16px 22px; }
   }
 </style>
