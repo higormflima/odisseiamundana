@@ -15,12 +15,12 @@ const heroPhoto = 'hero-tenerife';
 const closingPhoto = 'outro-chapada';
 
 const timeline = [
-  { date: '2016', title: 'O encontro no Brasil', text: 'Higor, brasileiro, e Maja, polonesa, se conheceram no Brasil.', photo: 'timeline-2016', alt: 'Higor e Maja no início da vida juntos.' },
-  { date: '2018', title: 'Uma vida juntos', text: 'O casamento marcou uma nova etapa da nossa vida.', photo: 'timeline-2018', alt: 'Higor e Maja no dia do casamento.' },
+  { date: '2016', title: 'O encontro no Brasil', text: 'Higor, brasileiro, e Maja, polonesa, se conheceram no Brasil.', photo: 'timeline-2016', alt: 'Higor e Maja em uma praia de Ilhabela durante uma viagem pelo litoral brasileiro.' },
+  { date: '2018', title: 'Uma vida juntos', text: 'O casamento marcou uma nova etapa da nossa vida.', photo: 'timeline-2018', alt: 'Higor e Maja sentados em um banco em uma rua histórica de Paraty.' },
   { date: '2019', title: 'Um sonho sobre rodas', text: 'Compramos uma Iveco Daily e começamos a construir nosso motorhome com as próprias mãos.', photo: 'timeline-2019-motorhome', alt: 'A construção do nosso motorhome sobre uma Iveco Daily.' },
-  { date: '2019–2020', title: 'Explorando o Brasil', text: 'Passamos seis meses viajando por diferentes regiões e destinos do Brasil.', photo: 'timeline-2019-brazil', alt: 'Uma parada durante nossa viagem de motorhome pelo Brasil.', playlist: 'https://youtube.com/playlist?list=PLA8vGdq_0fiO6JcBq8U1WyrG6dKWUUBuw' },
-  { date: 'Fevereiro de 2020', title: 'Uma nova casa na Europa', text: 'Nos mudamos para a Polônia e começamos uma nova fase na Europa.', photo: 'timeline-2020-poland', alt: 'Nossa mudança para a Polônia.' },
-  { date: '2020 em diante', title: 'Novos horizontes', text: 'Seguimos viajando por Polônia, Croácia, Itália, França, Espanha, Turquia, Portugal e outros lugares.', photo: 'timeline-2020-present', alt: 'Uma de nossas viagens por novos destinos.' },
+  { date: '2019–2020', title: 'Explorando o Brasil', text: 'Passamos seis meses viajando por diferentes regiões e destinos do Brasil.', photo: 'timeline-2019-brazil', alt: 'Mapa do roteiro percorrido em nossa viagem de motorhome pelo Brasil.', playlist: 'https://youtube.com/playlist?list=PLA8vGdq_0fiO6JcBq8U1WyrG6dKWUUBuw' },
+  { date: 'Fevereiro de 2020', title: 'Uma nova casa na Europa', text: 'Nos mudamos para a Polônia e começamos uma nova fase na Europa.', photo: 'timeline-2020-poland', alt: 'Higor e Maja com o cachorro diante de uma construção de madeira, entre pinheiros.' },
+  { date: '2020 em diante', title: 'Novos horizontes', text: 'Seguimos viajando por Polônia, Croácia, Itália, França, Espanha, Turquia, Portugal e outros lugares.', photo: 'timeline-2020-present', alt: 'Higor e Maja ao lado de um 4x4 no deserto de Omã, com camelos ao redor.' },
 ];
 
 const playlists = [
@@ -167,7 +167,7 @@ const heroUrl = hasImage(heroPhoto) ? new URL(image(heroPhoto), Astro.site).href
       )}
       <div class="about-closing-content">
         <div class="closing-content">
-          <h2 id="closing-title">Vamos viajar juntos?</h2>
+          <h2 id="closing-title">Bora viajar juntos?</h2>
           <p>Continue acompanhando nossas aventuras, descubra novos destinos e faça parte da Odisseia Mundana.</p>
           <div class="closing-social" aria-label="Redes sociais e contato">
             <SocialLinks variant="footer" />
