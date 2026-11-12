@@ -20,7 +20,19 @@ const mapEntries = buildJourneyMapEntries({
   base,
 });
 const galleryCollections = buildGalleryCollections({ journeys, pages, base });
-const galleryCover = galleryCollections.find((collection) => collection.cover.featured)?.cover ?? galleryCollections[0]?.cover;
+const homeGalleryPhotoPaths = [
+  'media/journeys/philippines-palawan/photos/philippines-005.jpg',
+  'media/journeys/finland-2026/photos/finland-010.jpg',
+  'media/journeys/china-stopover/photos/china-007.jpg',
+  'media/journeys/china-stopover/photos/china-006.jpg',
+  'media/journeys/philippines-palawan/photos/philippines-021.jpg',
+  'media/journeys/philippines-palawan/photos/philippines-004.jpg',
+];
+const availableGalleryPhotos = galleryCollections.flatMap((collection) => collection.photos);
+const homeGalleryPhotos = homeGalleryPhotoPaths.flatMap((path) => {
+  const photo = availableGalleryPhotos.find((item) => item.src === `${base}${path}`);
+  return photo ? [photo] : [];
+});
 ---
 
 <SiteLayout title="Viagens" description="Histórias, roteiros e experiências de viagem.">
@@ -86,9 +98,15 @@ const galleryCover = galleryCollections.find((collection) => collection.cover.fe
       </aside>
     )}
   </section>
-  {galleryCover && (
+  {homeGalleryPhotos.length > 0 && (
     <section class="home-gallery" aria-labelledby="home-gallery-title">
-      <img src={galleryCover.thumbnail} alt="" width={galleryCover.thumbnailSize?.width} height={galleryCover.thumbnailSize?.height} loading="lazy" decoding="async" />
+      <a class:list={['home-gallery-mosaic', { 'home-gallery-mosaic--six': homeGalleryPhotos.length === 6 }]} href={`${base}pt/galeria/`} aria-label="Explorar a galeria fotográfica">
+        {homeGalleryPhotos.map((photo) => (
+          <span class="home-gallery-tile">
+            <img src={photo.thumbnail} alt="" width={photo.thumbnailSize?.width} height={photo.thumbnailSize?.height} loading="lazy" decoding="async" />
+          </span>
+        ))}
+      </a>
       <div>
         <p class="eyebrow">Galeria fotográfica</p>
         <h2 id="home-gallery-title">Nossas viagens em imagens</h2>
@@ -101,7 +119,17 @@ const galleryCover = galleryCollections.find((collection) => collection.cover.fe
 
 <style>
   .home-gallery { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; gap: clamp(24px, 5vw, 72px); padding: 0 var(--content-gutter) var(--space-section); }
-  .home-gallery img { display: block; width: 100%; height: auto; }
+  .home-gallery-mosaic { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+  .home-gallery-tile { display: block; min-width: 0; overflow: hidden; aspect-ratio: 1; }
+  .home-gallery-tile img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .home-gallery-mosaic--six { grid-template-columns: repeat(4, minmax(0, 1fr)); grid-template-rows: repeat(3, minmax(0, 1fr)); aspect-ratio: 4 / 3; }
+  .home-gallery-mosaic--six .home-gallery-tile { aspect-ratio: auto; }
+  .home-gallery-mosaic--six .home-gallery-tile:nth-child(1) { grid-area: 1 / 1 / 2 / 3; }
+  .home-gallery-mosaic--six .home-gallery-tile:nth-child(2) { grid-area: 2 / 1 / 3 / 3; }
+  .home-gallery-mosaic--six .home-gallery-tile:nth-child(3) { grid-area: 3 / 1 / 4 / 3; }
+  .home-gallery-mosaic--six .home-gallery-tile:nth-child(4) { grid-area: 1 / 3 / 3 / 4; }
+  .home-gallery-mosaic--six .home-gallery-tile:nth-child(5) { grid-area: 1 / 4 / 3 / 5; }
+  .home-gallery-mosaic--six .home-gallery-tile:nth-child(6) { grid-area: 3 / 3 / 4 / 5; }
   .home-gallery .eyebrow { margin-bottom: 12px; }
   .home-gallery h2 { margin: 0 0 18px; font: 400 clamp(32px, 4vw, 52px)/1.1 var(--font-display); letter-spacing: -.025em; }
   .home-gallery p:not(.eyebrow) { max-width: 430px; color: var(--muted); line-height: 1.8; }
