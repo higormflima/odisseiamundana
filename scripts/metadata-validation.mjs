@@ -9,6 +9,7 @@ const ajv = new Ajv2020({ allErrors: true, strict: true, validateFormats: true }
 const schemaFiles = {
   journey: 'journey.schema.json',
   video: 'video.schema.json',
+  collaboration: 'collaboration.schema.json',
 };
 const validators = new Map();
 
@@ -22,8 +23,8 @@ export function validateMetadataText(source, kind = 'journey') {
   const validate = validators.get(kind);
   if (!validate) throw new Error(`Tipo de metadado desconhecido: ${kind}`);
   const data = YAML.parse(source);
-  const valid = validate(data);
-  const errors = valid
+  const schemaValid = validate(data);
+  const errors = schemaValid
     ? []
     : (validate.errors ?? []).map(({ instancePath, keyword, message }) => ({
         instancePath,
@@ -31,5 +32,13 @@ export function validateMetadataText(source, kind = 'journey') {
         message,
       }));
 
-  return { data, valid, errors };
+  if (schemaValid && kind === 'collaboration' && data.date?.day) {
+    const { year, month, day } = data.date;
+    const date = new Date(Date.UTC(year, month - 1, day));
+    if (date.getUTCFullYear() !== year || date.getUTCMonth() !== month - 1 || date.getUTCDate() !== day) {
+      errors.push({ instancePath: '/date/day', keyword: 'calendarDate', message: 'deve ser uma data existente' });
+    }
+  }
+
+  return { data, valid: errors.length === 0, errors };
 }

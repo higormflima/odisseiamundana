@@ -56,6 +56,8 @@ O status de publicação de uma página MDX deve ser `draft` até que conteúdo,
 
 Os arquivos em `metadata/journeys/` são processados por `yaml` e validados com Ajv contra `schemas/journey.schema.json`. O contrato JSON Schema é a fonte única das regras dos dados.
 
+Para cadastrar projetos de parceria, imagens e vídeos na seção de colaborações, consulte [Colaborações](docs/collaborations.md).
+
 ## Preparação de fotografias
 
 A primeira etapa do novo fluxo prepara e valida imagens, mas **ainda não as adiciona à galeria pública**. As galerias existentes permanecem independentes.

@@ -1,0 +1,43 @@
+---
+import SiteLayout from '../../../layouts/SiteLayout.astro';
+import CollaborationCards from '../../../components/CollaborationCards.astro';
+import CollaborationContact from '../../../components/CollaborationContact.astro';
+import { loadCollaborations } from '../../../lib/collaborationCollection';
+import '../../../styles/collaborations.css';
+
+const projects = await loadCollaborations();
+const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+const title = 'Colaborações | Odisseia Mundana';
+const description = 'Experiências que conectam marcas, destinos e pessoas. Conheça nossos projetos e converse conosco sobre parcerias.';
+const canonical = new URL(`${base}pt/colaboracoes/`, Astro.site);
+---
+<SiteLayout title="Colaborações" fullTitle={title} description={description}>
+  <Fragment slot="head">
+    <link rel="canonical" href={canonical.href} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical.href} />
+    {projects[0] && <meta property="og:image" content={new URL(`${base}${projects[0].cover.src}`, Astro.site).href} />}
+  </Fragment>
+  <div class="collaborations-page">
+    <header class="collaborations-intro">
+      <p class="eyebrow">Odisseia Mundana · parcerias</p>
+      <h1>Colaborações</h1>
+      <p class="collaborations-lead">Experiências que conectam marcas, destinos e pessoas.</p>
+      <div class="collaborations-intro-text">
+        <p>Acreditamos que as melhores parcerias nascem de experiências reais.</p>
+        <p>Por meio de fotografia, vídeos e conteúdo autêntico, queremos apresentar destinos e experiências ao nosso público em conjunto com empresas, agências e iniciativas locais.</p>
+        <p>Nosso objetivo é construir parcerias que valorizem os destinos, fortaleçam iniciativas locais e proporcionem experiências memoráveis.</p>
+      </div>
+    </header>
+    <section class="collaboration-projects" aria-labelledby="projects-title">
+      <div class="collaboration-heading">
+        <p class="eyebrow">Histórias em conjunto</p>
+        <h2 id="projects-title">Nossos projetos</h2>
+      </div>
+      {projects.length ? <CollaborationCards projects={projects} base={base} /> : <p>Ainda não há projetos publicados.</p>}
+    </section>
+    <CollaborationContact />
+  </div>
+</SiteLayout>

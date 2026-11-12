@@ -1,0 +1,22 @@
+# Conteúdo demonstrativo: não representa uma parceria real.
+collaboration_id: exemplo-laponia
+status: published
+kind: example
+title: Uma experiência na Lapônia
+description: Um exemplo ilustrativo de como apresentamos experiências e projetos em imagens.
+destination: Lapônia
+country: Finlândia
+cover:
+  src: media/journeys/finland-2026/photos/finland-004.jpg
+  thumbnail: media/journeys/finland-2026/thumbnails/finland-004.jpg
+  alt: Aurora boreal verde sobre uma floresta escura e um campo nevado.
+photos:
+  - src: media/journeys/finland-2026/photos/finland-001.jpg
+    thumbnail: media/journeys/finland-2026/thumbnails/finland-001.jpg
+    alt: Casal em uma trilha entre árvores cobertas de neve na Lapônia.
+  - src: media/journeys/finland-2026/photos/finland-008.jpg
+    thumbnail: media/journeys/finland-2026/thumbnails/finland-008.jpg
+    alt: Cabana de madeira e família durante uma nevasca.
+  - src: media/journeys/finland-2026/photos/finland-012.jpg
+    thumbnail: media/journeys/finland-2026/thumbnails/finland-012.jpg
+    alt: Casal caminha entre pinheiros cobertos de neve.

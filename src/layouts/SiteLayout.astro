@@ -17,8 +17,9 @@ const navigationLinks = [
   { label: 'Início', href: `${base}pt/` },
   { label: 'Viagens', href: `${base}pt/viagens/` },
   { label: 'Galeria', href: `${base}pt/galeria/` },
+  { label: 'Colaborações', href: `${base}pt/colaboracoes/` },
   { label: 'Sobre nós', href: `${base}pt/sobre-nos/` },
-  { label: 'Contato', href: 'mailto:odisseiamundana@gmail.com' },
+  { label: 'Contato', href: 'mailto:contato@odisseiamundana.com' },
 ];
 ---
 
@@ -86,6 +87,7 @@ const navigationLinks = [
       <section class="footer-contact" id="contato" aria-labelledby="footer-contact-title">
         <h2 id="footer-contact-title">Redes sociais e contato</h2>
         <a class="footer-about-link" href={`${base}pt/sobre-nos/`}>Sobre nós</a>
+        <a class="footer-about-link" href={`${base}pt/colaboracoes/`}>Colaborações</a>
         <SocialLinks variant="footer" />
       </section>
     </footer>
@@ -108,7 +110,7 @@ const navigationLinks = [
         summary?.focus();
       }
     });
-    window.matchMedia('(min-width: 1101px)').addEventListener('change', (event) => {
+    window.matchMedia('(min-width: 1351px)').addEventListener('change', (event) => {
       if (event.matches) menu.open = false;
     });
   }

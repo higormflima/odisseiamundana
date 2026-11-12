@@ -158,7 +158,7 @@ h1, h2, p { margin-top: 0; }
 .social-links--footer { gap: 22px; }
 .social-links--footer .social-link { font-size: 10px; }
 
-@media (max-width: 1100px) {
+@media (max-width: 1350px) {
   .site-header .desktop-navigation { display: none; }
   .mobile-navigation { display: block; }
   .mobile-navigation summary { display: grid; width: 44px; height: 44px; place-items: center; border: 1px solid var(--line); border-radius: var(--radius-pill); color: var(--ink); cursor: pointer; list-style: none; }

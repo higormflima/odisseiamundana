@@ -31,8 +31,25 @@ const videoMetadata = defineCollection({
   }),
 });
 
+const collaborationPages = defineCollection({
+  loader: glob({ pattern: '**/*.mdx', base: './content/collaborations' }),
+  schema: z.object({
+    collaboration_id: reference('collaborationMetadata'),
+  }),
+});
+
+const collaborationMetadata = defineCollection({
+  loader: glob({
+    pattern: '**/*.yaml',
+    base: './metadata/collaborations',
+    generateId: ({ entry }) => entry.replace(/\.yaml$/i, ''),
+  }),
+});
+
 export const collections = {
   journeyPages,
   journeyMetadata,
   videoMetadata,
+  collaborationPages,
+  collaborationMetadata,
 };

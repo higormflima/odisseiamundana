@@ -12,6 +12,7 @@ const publicMediaDirectories = [
   'journeys/finland-2026/thumbnails',
   'journeys/philippines-palawan/photos',
   'journeys/philippines-palawan/thumbnails',
+  'collaborations',
 ];
 
 for (const relativeDirectory of publicMediaDirectories) {
@@ -25,7 +26,7 @@ for (const relativeDirectory of publicMediaDirectories) {
   // Apenas fotos e miniaturas são espelhadas; transcrições e materiais editoriais não são publicados.
   await rm(destination, { recursive: true, force: true });
   await mkdir(path.dirname(destination), { recursive: true });
-  await cp(source, destination, { recursive: true });
+  await cp(source, destination, { recursive: true, filter: (entry) => path.basename(entry) !== '.gitkeep' });
 }
 
 console.log(`Mídia pública sincronizada: ${publicMediaDirectories.length} diretórios.`);

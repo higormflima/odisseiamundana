@@ -1,0 +1,64 @@
+<section class="collaboration-contact" id="contato-comercial" aria-labelledby="contact-title">
+  <div class="collaboration-contact-copy">
+    <p class="eyebrow">Novas parcerias</p>
+    <h2 id="contact-title">Vamos criar algo juntos?</h2>
+    <p>Estamos sempre abertos a novas experiências e parcerias que nos permitam explorar o mundo e compartilhar histórias autênticas.</p>
+    <p>Se você representa uma marca, agência de turismo, hospedagem ou empresa com uma proposta interessante, gostaríamos de conhecer sua ideia.</p>
+    <p>Entre em contato e vamos conversar sobre uma possível colaboração.</p>
+    <a class="collaboration-inline-link" href="mailto:contato@odisseiamundana.com">contato@odisseiamundana.com</a>
+  </div>
+  <form class="collaboration-form" data-collaboration-form>
+    <p class="collaboration-form-note">Campos obrigatórios indicados com *.</p>
+    <label>Nome * <input name="name" autocomplete="name" maxlength="100" required /></label>
+    <label>Empresa * <input name="company" autocomplete="organization" maxlength="100" required /></label>
+    <label>E-mail * <input name="email" type="email" autocomplete="email" maxlength="254" required /></label>
+    <label>Site ou Instagram da empresa <input name="website" type="text" maxlength="200" /></label>
+    <label>Tipo de colaboração desejada
+      <select name="type">
+        <option value="">Selecione, se desejar</option>
+        <option>Permuta</option>
+        <option>Patrocínio</option>
+        <option>Colaboração remunerada</option>
+        <option>Projeto especial</option>
+      </select>
+    </label>
+    <label>Destino ou projeto relacionado <input name="destination" maxlength="120" /></label>
+    <label>Descrição da proposta * <textarea name="proposal" rows="5" maxlength="1200" required></textarea></label>
+    <p class="collaboration-form-note">Ao continuar, seu aplicativo de e-mail será aberto com a mensagem preenchida. É necessário ter um aplicativo ou serviço de e-mail configurado; você deverá conferir e enviar a mensagem.</p>
+    <p class="collaboration-form-error" data-form-error role="alert" hidden></p>
+    <button class="button" type="submit" disabled>Preparar e-mail</button>
+    <noscript><p>Para usar o formulário, habilite o JavaScript ou escreva diretamente para o endereço acima.</p></noscript>
+  </form>
+</section>
+
+<script>
+  import { buildCollaborationEmail, MAX_MAILTO_LENGTH } from '../lib/collaborationEmail.mjs';
+  const form = document.querySelector<HTMLFormElement>('[data-collaboration-form]');
+  const submit = form?.querySelector<HTMLButtonElement>('button[type="submit"]');
+  const error = form?.querySelector<HTMLElement>('[data-form-error]');
+  if (form && submit && error) {
+    submit.disabled = false;
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const values = new FormData(form);
+      const field = (name: string) => String(values.get(name) ?? '').trim();
+      const fields = {
+        name: field('name'), company: field('company'), email: field('email'),
+        website: field('website'), type: field('type'), destination: field('destination'), proposal: field('proposal'),
+      };
+      if (!fields.name || !fields.company || !fields.proposal) {
+        error.textContent = 'Preencha nome, empresa e proposta com informações válidas.';
+        error.hidden = false;
+        return;
+      }
+      const url = buildCollaborationEmail(fields);
+      if (url.length > MAX_MAILTO_LENGTH) {
+        error.textContent = 'A mensagem ficou longa para o aplicativo de e-mail. Reduza o texto ou escreva diretamente para o endereço informado.';
+        error.hidden = false;
+        return;
+      }
+      error.hidden = true;
+      window.location.href = url;
+    });
+  }
+</script>

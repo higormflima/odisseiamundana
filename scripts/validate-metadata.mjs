@@ -7,6 +7,7 @@ const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '
 const metadataCollections = [
   { kind: 'journey', directory: path.join(projectRoot, 'metadata', 'journeys') },
   { kind: 'video', directory: path.join(projectRoot, 'metadata', 'videos') },
+  { kind: 'collaboration', directory: path.join(projectRoot, 'metadata', 'collaborations') },
 ];
 
 async function listYamlFiles(directory) {
