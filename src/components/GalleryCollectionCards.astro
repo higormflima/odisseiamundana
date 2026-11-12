@@ -1,0 +1,29 @@
+---
+interface Collection {
+  href: string;
+  title: string;
+  summary?: string;
+  period?: string;
+  photos: unknown[];
+  cover: { thumbnail: string; alt: string; width?: number; height?: number };
+}
+interface Props { collections: Collection[] }
+const { collections } = Astro.props;
+---
+
+<div class="gallery-collection-grid">
+  {collections.map((collection) => (
+    <a class="gallery-collection-card" href={collection.href}>
+      <img src={collection.cover.thumbnail} alt="" width={collection.cover.width} height={collection.cover.height} loading="lazy" decoding="async" />
+      <div>
+        <p class="gallery-collection-meta">
+          {collection.period && <span>{collection.period} · </span>}
+          {collection.photos.length} {collection.photos.length === 1 ? 'foto' : 'fotos'}
+        </p>
+        <h3>{collection.title}</h3>
+        {collection.summary && <p class="gallery-collection-summary">{collection.summary}</p>}
+        <span class="gallery-collection-link">Explorar coleção <span aria-hidden="true">→</span></span>
+      </div>
+    </a>
+  ))}
+</div>

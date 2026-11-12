@@ -56,6 +56,36 @@ O status de publicação de uma página MDX deve ser `draft` até que conteúdo,
 
 Os arquivos em `metadata/journeys/` são processados por `yaml` e validados com Ajv contra `schemas/journey.schema.json`. O contrato JSON Schema é a fonte única das regras dos dados.
 
+## Preparação de fotografias
+
+A primeira etapa do novo fluxo prepara e valida imagens, mas **ainda não as adiciona à galeria pública**. As galerias existentes permanecem independentes.
+
+1. Crie uma pasta local como `.gallery-input/finland-2026/` e coloque nela cópias das fotos editadas. Essa pasta é ignorada pelo Git; mantenha os originais em seu armazenamento pessoal.
+2. Para registrar uma nova foto, execute:
+
+   ```powershell
+   pnpm gallery:process --collection finland-2026 --file ".gallery-input/finland-2026/foto.jpg" --new
+   ```
+
+3. O comando informa o ID permanente e gera variantes JPEG e WebP em `media/gallery/` e um registro YAML em `metadata/gallery/`. Não envie a pasta de entrada nem fotos originais ao Git.
+4. Uma foto idêntica é reconhecida mesmo após renomeação. Se uma foto já registrada for editada ou convertida, use o ID informado no registro para conservar sua identidade:
+
+   ```powershell
+   pnpm gallery:process --collection finland-2026 --file ".gallery-input/finland-2026/foto-editada.jpg" --id ID-DA-FOTO
+   ```
+
+   Use `--new` apenas para uma foto realmente nova. A associação de uma imagem alterada ao ID é uma decisão manual; o sistema não identifica conteúdo parecido automaticamente.
+5. Se necessário, edite no YAML o campo opcional `overrides` da foto com `date` (`AAAA-MM-DD`), `country`, `region`, `city`, `alt` ou `featured`. A data EXIF extraída em `captured_at` não tem fuso horário e deve ser conferida; dados ausentes não são inventados.
+6. Execute `pnpm gallery:validate`. O comando verifica registros, IDs, variantes, dimensões e metadados privados e informa o tamanho das variantes registradas por coleção e no total. Opcionalmente, defina `$env:GALLERY_MAX_MIB = '100'` antes do comando para receber um aviso quando o total ultrapassar esse valor.
+
+O processamento aplica a orientação EXIF, preserva o perfil de cor quando disponível e remove EXIF, XMP e IPTC das cópias geradas; não envia coordenadas a serviços externos. Versões antigas de uma foto atualizada não são apagadas automaticamente: o relatório conta apenas as variantes referenciadas e não mede arquivos antigos ou o repositório inteiro. A migração das 63 fotos existentes, a publicação dos derivados e a escolha de um serviço de localização serão tratadas nas próximas etapas.
+
+### Galeria fotográfica
+
+Execute `pnpm dev` e acesse `/pt/galeria/` no endereço local exibido pelo Astro. A galeria reúne as fotos já disponíveis das viagens publicadas e inclui páginas para cada coleção. A ordem das coleções usa a data da viagem, não a data individual das fotos.
+
+A galeria e seu link no menu também são gerados no build de produção. O mosaico e o visualizador atuais são reaproveitados das viagens; filtros, carregamento progressivo, URLs individuais, coleções temáticas e integração com os IDs permanentes ainda serão implementados. As fotos existentes ainda não foram migradas para o novo registro.
+
 ## Publicação
 
 O site é gerado com Astro e publicado via GitHub Actions no GitHub Pages, usando o domínio personalizado https://odisseiamundana.com. O deploy ocorre após push para `main`; a configuração do workflow, por si só, não publica alterações locais.

@@ -1,0 +1,86 @@
+---
+import { getCollection } from 'astro:content';
+import SiteLayout from '../../../layouts/SiteLayout.astro';
+import PhotoGallery from '../../../components/PhotoGallery.astro';
+import GalleryCollectionCards from '../../../components/GalleryCollectionCards.astro';
+import { buildGalleryCollections } from '../../../lib/galleryCollections.mjs';
+import '../../../styles/gallery.css';
+
+export async function getStaticPaths() {
+  const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+  const collections = buildGalleryCollections({
+    journeys: await getCollection('journeyMetadata'),
+    pages: await getCollection('journeyPages'),
+    base,
+  });
+  return [
+    { params: { path: undefined }, props: { collections } },
+    ...collections.map((collection) => ({
+      params: { path: collection.id },
+      props: { collections, collection },
+    })),
+  ];
+}
+
+const { collections, collection } = Astro.props;
+const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+const photos = collections.flatMap((item) => item.photos);
+const featured = collections.flatMap((item) => item.photos.filter((photo) => photo.featured));
+const hero = featured[0];
+const others = collection ? collections.filter((item) => item.id !== collection.id) : [];
+---
+
+<SiteLayout title={collection ? `${collection.title} | Galeria` : 'Galeria'}>
+  <div class="gallery-page">
+    {collection ? (
+      <>
+        <nav class="gallery-breadcrumb" aria-label="Navegação estrutural">
+          <a href={`${base}pt/galeria/`}>← Galeria</a>
+          <span aria-hidden="true"> / </span>
+          <span class="gallery-breadcrumb-current" aria-current="page">{collection.title}</span>
+        </nav>
+        <header class="gallery-hero gallery-hero--collection">
+          <div>
+            <p class="eyebrow">Coleção de viagem</p>
+            <h1>{collection.title}</h1>
+            <p class="gallery-lead">{collection.period && <>{collection.period} · </>}{collection.photos.length} {collection.photos.length === 1 ? 'foto' : 'fotos'}</p>
+            {collection.summary && <p class="gallery-intro">{collection.summary}</p>}
+            <a class="gallery-text-link" href={collection.storyHref}>Ler relato da viagem →</a>
+          </div>
+          <img src={collection.cover.src} alt={collection.cover.alt} width={collection.cover.width} height={collection.cover.height} fetchpriority="high" decoding="async" />
+        </header>
+        <section class="gallery-section">
+          <PhotoGallery title="Fotografias da viagem" photos={collection.photos} />
+        </section>
+        {others.length > 0 && (
+          <section class="gallery-section">
+            <h2>Explore outras viagens</h2>
+            <GalleryCollectionCards collections={others} />
+          </section>
+        )}
+        <a class="gallery-text-link" href={`${base}pt/galeria/`}>← Voltar à galeria</a>
+      </>
+    ) : (
+      <>
+        <header class="gallery-hero">
+          <div>
+            <p class="eyebrow">Galeria fotográfica</p>
+            <h1>O mundo através das nossas lentes.</h1>
+            <p class="gallery-intro">Reunimos fotografias dos lugares e momentos que encontramos pelo caminho.</p>
+          </div>
+          {hero && <img src={hero.src} alt={hero.alt} width={hero.width} height={hero.height} fetchpriority="high" decoding="async" />}
+        </header>
+        {featured.length > 0 && (
+          <section class="gallery-section"><PhotoGallery title="Destaques fotográficos" photos={featured} /></section>
+        )}
+        <section class="gallery-section">
+          <h2>Coleções de viagens</h2>
+          {collections.length ? <GalleryCollectionCards collections={collections} /> : <p>Ainda não há coleções de fotografias disponíveis.</p>}
+        </section>
+        <section class="gallery-section">
+          {photos.length ? <PhotoGallery title="Todas as fotografias" photos={photos} /> : <h2>Todas as fotografias</h2>}
+        </section>
+      </>
+    )}
+  </div>
+</SiteLayout>

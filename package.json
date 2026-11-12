@@ -10,9 +10,11 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "node scripts/sync-public-media.mjs && pnpm validate:metadata && astro build && pagefind --site dist",
+    "build": "node scripts/sync-public-media.mjs && pnpm validate:metadata && pnpm gallery:validate && astro build && pagefind --site dist",
     "preview": "astro preview",
     "validate:metadata": "node scripts/validate-metadata.mjs",
+    "gallery:process": "node scripts/gallery-process.mjs",
+    "gallery:validate": "node scripts/gallery-validate.mjs",
     "youtube:captions": "node scripts/youtube-captions.mjs",
     "youtube:metadata": "node scripts/youtube-captions.mjs",
     "test": "node --test"
