@@ -3,6 +3,7 @@ import SiteLayout from '../../layouts/SiteLayout.astro';
 import InteractiveWorldMap from '../../components/InteractiveWorldMap.astro';
 import { getCollection } from 'astro:content';
 import { buildJourneyMapEntries, compareJourneysByRecency, formatJourneyListDate } from '../../lib/journeyMapData.mjs';
+import { buildGalleryCollections } from '../../lib/galleryCollections.mjs';
 
 const pages = await getCollection('journeyPages');
 const journeys = await getCollection('journeyMetadata');
@@ -18,6 +19,8 @@ const mapEntries = buildJourneyMapEntries({
   videos: await getCollection('videoMetadata'),
   base,
 });
+const galleryCollections = buildGalleryCollections({ journeys, pages, base });
+const galleryCover = galleryCollections.find((collection) => collection.cover.featured)?.cover ?? galleryCollections[0]?.cover;
 ---
 
 <SiteLayout title="Viagens" description="Histórias, roteiros e experiências de viagem.">
@@ -83,4 +86,25 @@ const mapEntries = buildJourneyMapEntries({
       </aside>
     )}
   </section>
+  {galleryCover && (
+    <section class="home-gallery" aria-labelledby="home-gallery-title">
+      <img src={galleryCover.thumbnail} alt="" width={galleryCover.thumbnailSize?.width} height={galleryCover.thumbnailSize?.height} loading="lazy" decoding="async" />
+      <div>
+        <p class="eyebrow">Galeria fotográfica</p>
+        <h2 id="home-gallery-title">Nossas viagens em imagens</h2>
+        <p>Reunimos fotografias dos lugares e momentos que encontramos pelo caminho.</p>
+        <a class="text-link" href={`${base}pt/galeria/`}>Explorar a galeria <span aria-hidden="true">→</span></a>
+      </div>
+    </section>
+  )}
 </SiteLayout>
+
+<style>
+  .home-gallery { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; gap: clamp(24px, 5vw, 72px); padding: 0 var(--content-gutter) var(--space-section); }
+  .home-gallery img { display: block; width: 100%; height: auto; }
+  .home-gallery .eyebrow { margin-bottom: 12px; }
+  .home-gallery h2 { margin: 0 0 18px; font: 400 clamp(32px, 4vw, 52px)/1.1 var(--font-display); letter-spacing: -.025em; }
+  .home-gallery p:not(.eyebrow) { max-width: 430px; color: var(--muted); line-height: 1.8; }
+  .home-gallery .text-link span { color: var(--copper); }
+  @media (max-width: 760px) { .home-gallery { grid-template-columns: 1fr; } }
+</style>

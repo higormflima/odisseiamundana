@@ -10,7 +10,7 @@ body:has(.gallery-page) { min-width: 0; }
 .gallery-collection-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 28px; }
 .gallery-collection-card { display: block; }
 .gallery-collection-card[hidden], .gallery-controls[hidden], .gallery-empty[hidden], [data-collection-empty][hidden] { display: none; }
-.gallery-collection-card img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: contain; background: var(--surface); }
+.gallery-collection-card img { display: block; width: 100%; height: auto; }
 .gallery-collection-meta { margin: 16px 0 8px; color: var(--muted); font-size: 12px; }
 .gallery-collection-card h3 { margin: 0 0 10px; font: 400 26px/1.2 var(--font-display); }
 .gallery-collection-summary { margin: 0 0 14px; color: var(--muted); font-size: 14px; line-height: 1.6; }
@@ -21,7 +21,7 @@ body:has(.gallery-page) { min-width: 0; }
 .gallery-masonry-count { color: var(--muted); font-size: 13px; white-space: nowrap; }
 .gallery-controls { display: flex; flex-wrap: wrap; align-items: end; gap: 16px; margin-bottom: 24px; }
 .gallery-controls label { display: grid; gap: 6px; color: var(--muted); font-size: 13px; }
-.gallery-controls input, .gallery-controls select, .gallery-controls button, .gallery-filter-panel summary { min-height: 44px; padding: 8px 12px; border: 1px solid var(--muted); background: transparent; color: inherit; font: inherit; }
+.gallery-controls input, .gallery-controls select, .gallery-controls button, .gallery-filter-panel summary { min-height: 44px; padding: 8px 12px; border: 1px solid var(--muted); border-radius: 6px; background: transparent; color: inherit; font: inherit; }
 .gallery-controls input, .gallery-controls select { color: var(--ink); max-width: 100%; }
 .gallery-controls button, .gallery-filter-panel summary { cursor: pointer; }
 .gallery-controls input:focus-visible, .gallery-controls select:focus-visible, .gallery-controls button:focus-visible, .gallery-filter-panel summary:focus-visible { outline: var(--focus-outline); outline-offset: 3px; }

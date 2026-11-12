@@ -75,7 +75,7 @@ const heroSources = (photo) => photo.thumbnailSize?.width && photo.width && phot
           {hero && <img src={hero.src} srcset={heroSources(hero)} sizes="(max-width: 700px) calc(100vw - 44px), 50vw" alt={hero.alt} width={hero.width} height={hero.height} fetchpriority="high" decoding="async" />}
         </header>
         {featured.length > 0 && (
-          <section class="gallery-section"><PhotoGallery title="Destaques fotográficos" photos={featured} /></section>
+          <section class="gallery-section"><PhotoGallery title="Destaques fotográficos" photos={featured} variant="featured" /></section>
         )}
         <section class="gallery-section">
           <h2>Coleções de viagens</h2>
