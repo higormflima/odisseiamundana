@@ -25,11 +25,10 @@ const links = [
   },
 ];
 
-const visibleLinks = variant === 'header' ? links.filter(({ external }) => external) : links;
 ---
 
-<div class:list={['social-links', `social-links--${variant}`]} aria-label={variant === 'header' ? 'Redes sociais' : 'Redes sociais e contato'}>
-  {visibleLinks.map(({ name, href, external, icon }) => (
+<div class:list={['social-links', `social-links--${variant}`]} aria-label="Redes sociais e contato">
+  {links.map(({ name, href, external, icon }) => (
     <a
       class="social-link"
       href={href}

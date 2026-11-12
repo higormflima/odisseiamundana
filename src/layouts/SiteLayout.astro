@@ -13,6 +13,12 @@ interface Props {
 
 const { title, fullTitle, description = 'Histórias, roteiros e experiências de viagem.', lang = 'pt-BR' } = Astro.props;
 const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+const navigationLinks = [
+  { label: 'Início', href: `${base}pt/` },
+  { label: 'Viagens', href: `${base}pt/viagens/` },
+  { label: 'Sobre nós', href: `${base}pt/sobre-nos/` },
+  { label: 'Contato', href: 'mailto:odisseiamundana@gmail.com' },
+];
 ---
 
 <!doctype html>
@@ -40,19 +46,31 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
   </head>
   <body>
     <header class="site-header">
-      <a class="wordmark" href={`${base}pt/`} aria-label="Odisseia Mundana — início">
-        <img src={`${base}media/branding/optimized/logo-primary.png`} alt="" width="54" height="54" />
-        <span>ODISSEIA<br />MUNDANA</span>
-      </a>
-      <nav aria-label="Navegação principal">
-        <a href={`${base}pt/`}>Início</a>
-        <a href={`${base}pt/viagens/`}>Viagens</a>
-        <a href={`${base}pt/sobre-nos/`}>Sobre nós</a>
-        <a href={`mailto:odisseiamundana@gmail.com`}>Contato</a>
-        <span class="language-note">PT</span>
-        <SearchModal base={base} />
+      <div class="header-brand">
+        <a class="wordmark" href={`${base}pt/`} aria-label="Odisseia Mundana — início">
+          <img src={`${base}media/branding/optimized/logo-primary.png`} alt="" width="54" height="54" />
+          <span>ODISSEIA<br />MUNDANA</span>
+        </a>
         <SocialLinks variant="header" />
-      </nav>
+      </div>
+      <div class="header-actions">
+        <nav class="desktop-navigation" aria-label="Navegação principal">
+          {navigationLinks.map(({ label, href }) => <a href={href}>{label}</a>)}
+          <span class="language-note">PT</span>
+        </nav>
+        <SearchModal base={base} />
+        <details class="mobile-navigation" data-mobile-navigation>
+          <summary aria-label="Menu de navegação">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+              <path d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+          </summary>
+          <nav aria-label="Navegação principal">
+            {navigationLinks.map(({ label, href }) => <a href={href}>{label}</a>)}
+            <span class="language-note">PT</span>
+          </nav>
+        </details>
+      </div>
     </header>
     <main data-pagefind-body>
       <slot />
@@ -71,3 +89,25 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
     </footer>
   </body>
 </html>
+
+<script>
+  const menu = document.querySelector<HTMLDetailsElement>('[data-mobile-navigation]');
+  if (menu) {
+    const summary = menu.querySelector<HTMLElement>('summary');
+    menu.addEventListener('click', (event) => {
+      if (event.target instanceof Element && event.target.closest('nav a')) menu.open = false;
+    });
+    document.addEventListener('click', (event) => {
+      if (event.target instanceof Node && !menu.contains(event.target)) menu.open = false;
+    });
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && menu.open) {
+        menu.open = false;
+        summary?.focus();
+      }
+    });
+    window.matchMedia('(min-width: 1101px)').addEventListener('change', (event) => {
+      if (event.matches) menu.open = false;
+    });
+  }
+</script>
