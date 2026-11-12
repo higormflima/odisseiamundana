@@ -1,0 +1,18 @@
+video_id: rVeHDYmA3dg
+journey_id: amazonia-brasil
+youtube_url: https://www.youtube.com/watch?v=rVeHDYmA3dg
+playlist_id: PLA8vGdq_0fiM11GbfoCYbhYr28tKXh8Kh
+playlist_position: 3
+title: 3 dias dentro da FLORESTA AMAZÔNICA
+thumbnail_url: https://i.ytimg.com/vi/rVeHDYmA3dg/maxresdefault.jpg
+transcript_files:
+  - transcripts/journeys/amazonia-brasil/rVeHDYmA3dg.txt
+provenance:
+  - source_type: youtube_metadata
+    verification_status: confirmed
+    source_id: PLA8vGdq_0fiM11GbfoCYbhYr28tKXh8Kh
+    fields: [video_id, youtube_url, playlist_id, playlist_position, title]
+  - source_type: transcript
+    verification_status: unverified
+    source_id: rVeHDYmA3dg
+    fields: [transcript_files]

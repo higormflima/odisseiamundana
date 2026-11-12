@@ -1,0 +1,24 @@
+video_id: 8qyuDLUv1Ng
+journey_id: tour-du-mont-blanc
+youtube_url: https://www.youtube.com/watch?v=8qyuDLUv1Ng
+playlist_id: PLA8vGdq_0fiOYiXeT5PdoRJuILOjflyQ6
+playlist_position: 6
+title: TMB | Le Tour - Lac Blanc - Chamonix (melhores visuais do Mont Blanc)
+thumbnail_url: https://i.ytimg.com/vi/8qyuDLUv1Ng/maxresdefault.jpg
+transcript_files:
+  - transcripts/journeys/tour-du-mont-blanc/8qyuDLUv1Ng.txt
+provenance:
+  - source_type: youtube_metadata
+    verification_status: confirmed
+    source_id: PLA8vGdq_0fiOYiXeT5PdoRJuILOjflyQ6
+    fields:
+      - video_id
+      - youtube_url
+      - playlist_id
+      - playlist_position
+      - title
+  - source_type: transcript
+    verification_status: unverified
+    source_id: 8qyuDLUv1Ng
+    fields:
+      - transcript_files

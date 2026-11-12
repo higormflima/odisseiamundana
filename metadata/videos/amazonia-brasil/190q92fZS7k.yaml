@@ -1,0 +1,18 @@
+video_id: 190q92fZS7k
+journey_id: amazonia-brasil
+youtube_url: https://www.youtube.com/watch?v=190q92fZS7k
+playlist_id: PLA8vGdq_0fiM11GbfoCYbhYr28tKXh8Kh
+playlist_position: 4
+title: O paraíso das cachoeiras na Floresta Amazônica - Presidente Figueiredo
+thumbnail_url: https://i.ytimg.com/vi/190q92fZS7k/maxresdefault.jpg
+transcript_files:
+  - transcripts/journeys/amazonia-brasil/190q92fZS7k.txt
+provenance:
+  - source_type: youtube_metadata
+    verification_status: confirmed
+    source_id: PLA8vGdq_0fiM11GbfoCYbhYr28tKXh8Kh
+    fields: [video_id, youtube_url, playlist_id, playlist_position, title]
+  - source_type: transcript
+    verification_status: unverified
+    source_id: 190q92fZS7k
+    fields: [transcript_files]

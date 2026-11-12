@@ -1,0 +1,12 @@
+journey_id: kenya
+title: Quênia — Safáris e Diani Beach
+geography:
+  countries:
+    - Quênia
+provenance:
+  - source_type: youtube_metadata
+    verification_status: confirmed
+    source_id: PLA8vGdq_0fiMmsgKcvknP29sy4i-KrLTt
+    fields:
+      - title
+      - geography

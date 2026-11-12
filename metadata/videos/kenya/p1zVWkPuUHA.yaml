@@ -1,0 +1,18 @@
+video_id: p1zVWkPuUHA
+journey_id: kenya
+youtube_url: https://www.youtube.com/watch?v=p1zVWkPuUHA
+playlist_id: PLA8vGdq_0fiMmsgKcvknP29sy4i-KrLTt
+playlist_position: 7
+title: Soul Breeze Hotel - Diani Beach, Kenya | Tour & Review
+thumbnail_url: https://i.ytimg.com/vi/p1zVWkPuUHA/maxresdefault.jpg
+transcript_files:
+  - transcripts/journeys/kenya/p1zVWkPuUHA.txt
+provenance:
+  - source_type: youtube_metadata
+    verification_status: confirmed
+    source_id: PLA8vGdq_0fiMmsgKcvknP29sy4i-KrLTt
+    fields: [video_id, youtube_url, playlist_id, playlist_position, title]
+  - source_type: transcript
+    verification_status: unverified
+    source_id: p1zVWkPuUHA
+    fields: [transcript_files]

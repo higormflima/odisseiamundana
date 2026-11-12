@@ -1,0 +1,18 @@
+video_id: ZnT0KqUFJa8
+journey_id: oman
+youtube_url: https://www.youtube.com/watch?v=ZnT0KqUFJa8
+playlist_id: PLA8vGdq_0fiM5TC5I6Emk1HqK7eCXltDX
+playlist_position: 1
+title: OMAN - TRAVEL GUIDE | 4x4 camping trip
+thumbnail_url: https://i.ytimg.com/vi/ZnT0KqUFJa8/maxresdefault.jpg
+transcript_files:
+  - transcripts/journeys/oman/ZnT0KqUFJa8.sbv
+provenance:
+  - source_type: youtube_metadata
+    verification_status: confirmed
+    source_id: PLA8vGdq_0fiM5TC5I6Emk1HqK7eCXltDX
+    fields: [video_id, youtube_url, playlist_id, playlist_position, title]
+  - source_type: transcript
+    verification_status: unverified
+    source_id: ZnT0KqUFJa8
+    fields: [transcript_files]

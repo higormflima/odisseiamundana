@@ -1,0 +1,18 @@
+video_id: rgWuN4XkOWk
+journey_id: oman
+youtube_url: https://www.youtube.com/watch?v=rgWuN4XkOWk
+playlist_id: PLA8vGdq_0fiM5TC5I6Emk1HqK7eCXltDX
+playlist_position: 7
+title: Ras Al Jinz Turtle Reserve - Oman
+thumbnail_url: https://i.ytimg.com/vi/rgWuN4XkOWk/maxresdefault.jpg
+transcript_files:
+  - transcripts/journeys/oman/rgWuN4XkOWk.txt
+provenance:
+  - source_type: youtube_metadata
+    verification_status: confirmed
+    source_id: PLA8vGdq_0fiM5TC5I6Emk1HqK7eCXltDX
+    fields: [video_id, youtube_url, playlist_id, playlist_position, title]
+  - source_type: transcript
+    verification_status: unverified
+    source_id: rgWuN4XkOWk
+    fields: [transcript_files]

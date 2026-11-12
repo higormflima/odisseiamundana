@@ -1,0 +1,18 @@
+video_id: TiBYPfzWNUQ
+journey_id: kenya
+youtube_url: https://www.youtube.com/watch?v=TiBYPfzWNUQ
+playlist_id: PLA8vGdq_0fiMmsgKcvknP29sy4i-KrLTt
+playlist_position: 1
+title: Kenya - How to safari on the budget
+thumbnail_url: https://i.ytimg.com/vi/TiBYPfzWNUQ/maxresdefault.jpg
+transcript_files:
+  - transcripts/journeys/kenya/TiBYPfzWNUQ.txt
+provenance:
+  - source_type: youtube_metadata
+    verification_status: confirmed
+    source_id: PLA8vGdq_0fiMmsgKcvknP29sy4i-KrLTt
+    fields: [video_id, youtube_url, playlist_id, playlist_position, title]
+  - source_type: transcript
+    verification_status: unverified
+    source_id: TiBYPfzWNUQ
+    fields: [transcript_files]

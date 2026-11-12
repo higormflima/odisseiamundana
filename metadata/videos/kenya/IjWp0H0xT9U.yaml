@@ -1,0 +1,18 @@
+video_id: IjWp0H0xT9U
+journey_id: kenya
+youtube_url: https://www.youtube.com/watch?v=IjWp0H0xT9U
+playlist_id: PLA8vGdq_0fiMmsgKcvknP29sy4i-KrLTt
+playlist_position: 8
+title: Quanto custam os produtos no Kenya, África?
+thumbnail_url: https://i.ytimg.com/vi/IjWp0H0xT9U/maxresdefault.jpg
+transcript_files:
+  - transcripts/journeys/kenya/IjWp0H0xT9U.txt
+provenance:
+  - source_type: youtube_metadata
+    verification_status: confirmed
+    source_id: PLA8vGdq_0fiMmsgKcvknP29sy4i-KrLTt
+    fields: [video_id, youtube_url, playlist_id, playlist_position, title]
+  - source_type: transcript
+    verification_status: unverified
+    source_id: IjWp0H0xT9U
+    fields: [transcript_files]

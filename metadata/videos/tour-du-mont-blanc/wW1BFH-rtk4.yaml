@@ -1,0 +1,24 @@
+video_id: wW1BFH-rtk4
+journey_id: tour-du-mont-blanc
+youtube_url: https://www.youtube.com/watch?v=wW1BFH-rtk4
+playlist_id: PLA8vGdq_0fiOYiXeT5PdoRJuILOjflyQ6
+playlist_position: 5
+title: Chalet Alpin du Tour - Tour & Review (TMB 2025)
+thumbnail_url: https://i.ytimg.com/vi/wW1BFH-rtk4/maxresdefault.jpg
+transcript_files:
+  - transcripts/journeys/tour-du-mont-blanc/wW1BFH-rtk4.txt
+provenance:
+  - source_type: youtube_metadata
+    verification_status: confirmed
+    source_id: PLA8vGdq_0fiOYiXeT5PdoRJuILOjflyQ6
+    fields:
+      - video_id
+      - youtube_url
+      - playlist_id
+      - playlist_position
+      - title
+  - source_type: transcript
+    verification_status: unverified
+    source_id: wW1BFH-rtk4
+    fields:
+      - transcript_files

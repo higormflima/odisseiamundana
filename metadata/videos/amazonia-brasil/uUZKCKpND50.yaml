@@ -1,0 +1,18 @@
+video_id: uUZKCKpND50
+journey_id: amazonia-brasil
+youtube_url: https://www.youtube.com/watch?v=uUZKCKpND50
+playlist_id: PLA8vGdq_0fiM11GbfoCYbhYr28tKXh8Kh
+playlist_position: 1
+title: Discovering MANAUS, the capital of Brazilian AMAZÔNIA
+thumbnail_url: https://i.ytimg.com/vi/uUZKCKpND50/maxresdefault.jpg
+transcript_files:
+  - transcripts/journeys/amazonia-brasil/uUZKCKpND50.txt
+provenance:
+  - source_type: youtube_metadata
+    verification_status: confirmed
+    source_id: PLA8vGdq_0fiM11GbfoCYbhYr28tKXh8Kh
+    fields: [video_id, youtube_url, playlist_id, playlist_position, title]
+  - source_type: transcript
+    verification_status: unverified
+    source_id: uUZKCKpND50
+    fields: [transcript_files]

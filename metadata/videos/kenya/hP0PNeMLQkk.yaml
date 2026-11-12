@@ -1,0 +1,18 @@
+video_id: hP0PNeMLQkk
+journey_id: kenya
+youtube_url: https://www.youtube.com/watch?v=hP0PNeMLQkk
+playlist_id: PLA8vGdq_0fiMmsgKcvknP29sy4i-KrLTt
+playlist_position: 2
+title: Maasai Mara national park safari vlog
+thumbnail_url: https://i.ytimg.com/vi/hP0PNeMLQkk/maxresdefault.jpg
+transcript_files:
+  - transcripts/journeys/kenya/hP0PNeMLQkk.txt
+provenance:
+  - source_type: youtube_metadata
+    verification_status: confirmed
+    source_id: PLA8vGdq_0fiMmsgKcvknP29sy4i-KrLTt
+    fields: [video_id, youtube_url, playlist_id, playlist_position, title]
+  - source_type: transcript
+    verification_status: unverified
+    source_id: hP0PNeMLQkk
+    fields: [transcript_files]

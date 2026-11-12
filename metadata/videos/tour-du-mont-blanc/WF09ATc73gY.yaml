@@ -1,0 +1,24 @@
+video_id: WF09ATc73gY
+journey_id: tour-du-mont-blanc
+youtube_url: https://www.youtube.com/watch?v=WF09ATc73gY
+playlist_id: PLA8vGdq_0fiOYiXeT5PdoRJuILOjflyQ6
+playlist_position: 3
+title: Auberge du Mont Blanc (Trient) - Tour & Review (TMB 2025)
+thumbnail_url: https://i.ytimg.com/vi/WF09ATc73gY/maxresdefault.jpg
+transcript_files:
+  - transcripts/journeys/tour-du-mont-blanc/WF09ATc73gY.txt
+provenance:
+  - source_type: youtube_metadata
+    verification_status: confirmed
+    source_id: PLA8vGdq_0fiOYiXeT5PdoRJuILOjflyQ6
+    fields:
+      - video_id
+      - youtube_url
+      - playlist_id
+      - playlist_position
+      - title
+  - source_type: transcript
+    verification_status: unverified
+    source_id: WF09ATc73gY
+    fields:
+      - transcript_files

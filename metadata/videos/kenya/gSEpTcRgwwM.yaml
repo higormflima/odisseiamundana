@@ -1,0 +1,18 @@
+video_id: gSEpTcRgwwM
+journey_id: kenya
+youtube_url: https://www.youtube.com/watch?v=gSEpTcRgwwM
+playlist_id: PLA8vGdq_0fiMmsgKcvknP29sy4i-KrLTt
+playlist_position: 6
+title: KENYA - 5 things we LOVED and 2 things we HATED
+thumbnail_url: https://i.ytimg.com/vi/gSEpTcRgwwM/maxresdefault.jpg
+transcript_files:
+  - transcripts/journeys/kenya/gSEpTcRgwwM.txt
+provenance:
+  - source_type: youtube_metadata
+    verification_status: confirmed
+    source_id: PLA8vGdq_0fiMmsgKcvknP29sy4i-KrLTt
+    fields: [video_id, youtube_url, playlist_id, playlist_position, title]
+  - source_type: transcript
+    verification_status: unverified
+    source_id: gSEpTcRgwwM
+    fields: [transcript_files]

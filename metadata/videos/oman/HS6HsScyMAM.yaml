@@ -1,0 +1,18 @@
+video_id: HS6HsScyMAM
+journey_id: oman
+youtube_url: https://www.youtube.com/watch?v=HS6HsScyMAM
+playlist_id: PLA8vGdq_0fiM5TC5I6Emk1HqK7eCXltDX
+playlist_position: 4
+title: Oman | Nizwa Souq & Birkat Al Mouz Ruins
+thumbnail_url: https://i.ytimg.com/vi/HS6HsScyMAM/maxresdefault.jpg
+transcript_files:
+  - transcripts/journeys/oman/HS6HsScyMAM.txt
+provenance:
+  - source_type: youtube_metadata
+    verification_status: confirmed
+    source_id: PLA8vGdq_0fiM5TC5I6Emk1HqK7eCXltDX
+    fields: [video_id, youtube_url, playlist_id, playlist_position, title]
+  - source_type: transcript
+    verification_status: unverified
+    source_id: HS6HsScyMAM
+    fields: [transcript_files]

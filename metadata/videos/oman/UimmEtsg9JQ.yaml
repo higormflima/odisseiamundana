@@ -1,0 +1,18 @@
+video_id: UimmEtsg9JQ
+journey_id: oman
+youtube_url: https://www.youtube.com/watch?v=UimmEtsg9JQ
+playlist_id: PLA8vGdq_0fiM5TC5I6Emk1HqK7eCXltDX
+playlist_position: 3
+title: OMAN | Camping at JEBEL SHAMs mountain & Balcony Walk hike
+thumbnail_url: https://i.ytimg.com/vi/UimmEtsg9JQ/maxresdefault.jpg
+transcript_files:
+  - transcripts/journeys/oman/UimmEtsg9JQ.txt
+provenance:
+  - source_type: youtube_metadata
+    verification_status: confirmed
+    source_id: PLA8vGdq_0fiM5TC5I6Emk1HqK7eCXltDX
+    fields: [video_id, youtube_url, playlist_id, playlist_position, title]
+  - source_type: transcript
+    verification_status: unverified
+    source_id: UimmEtsg9JQ
+    fields: [transcript_files]

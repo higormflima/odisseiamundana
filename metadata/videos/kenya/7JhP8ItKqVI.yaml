@@ -1,0 +1,18 @@
+video_id: 7JhP8ItKqVI
+journey_id: kenya
+youtube_url: https://www.youtube.com/watch?v=7JhP8ItKqVI
+playlist_id: PLA8vGdq_0fiMmsgKcvknP29sy4i-KrLTt
+playlist_position: 4
+title: Kenya - Safari in the AMBOSELI National Park
+thumbnail_url: https://i.ytimg.com/vi/7JhP8ItKqVI/maxresdefault.jpg
+transcript_files:
+  - transcripts/journeys/kenya/7JhP8ItKqVI.txt
+provenance:
+  - source_type: youtube_metadata
+    verification_status: confirmed
+    source_id: PLA8vGdq_0fiMmsgKcvknP29sy4i-KrLTt
+    fields: [video_id, youtube_url, playlist_id, playlist_position, title]
+  - source_type: transcript
+    verification_status: unverified
+    source_id: 7JhP8ItKqVI
+    fields: [transcript_files]

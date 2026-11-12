@@ -1,0 +1,18 @@
+video_id: nqjvV2b54NQ
+journey_id: oman
+youtube_url: https://www.youtube.com/watch?v=nqjvV2b54NQ
+playlist_id: PLA8vGdq_0fiM5TC5I6Emk1HqK7eCXltDX
+playlist_position: 8
+title: Oman - WADI TIWI (tips & tricks)
+thumbnail_url: https://i.ytimg.com/vi/nqjvV2b54NQ/maxresdefault.jpg
+transcript_files:
+  - transcripts/journeys/oman/nqjvV2b54NQ.txt
+provenance:
+  - source_type: youtube_metadata
+    verification_status: confirmed
+    source_id: PLA8vGdq_0fiM5TC5I6Emk1HqK7eCXltDX
+    fields: [video_id, youtube_url, playlist_id, playlist_position, title]
+  - source_type: transcript
+    verification_status: unverified
+    source_id: nqjvV2b54NQ
+    fields: [transcript_files]

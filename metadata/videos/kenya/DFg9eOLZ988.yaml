@@ -1,0 +1,18 @@
+video_id: DFg9eOLZ988
+journey_id: kenya
+youtube_url: https://www.youtube.com/watch?v=DFg9eOLZ988
+playlist_id: PLA8vGdq_0fiMmsgKcvknP29sy4i-KrLTt
+playlist_position: 5
+title: Quanto custa viajar para DIANI BEACH no Quênia? Preços e Dicas!
+thumbnail_url: https://i.ytimg.com/vi/DFg9eOLZ988/maxresdefault.jpg
+transcript_files:
+  - transcripts/journeys/kenya/DFg9eOLZ988.txt
+provenance:
+  - source_type: youtube_metadata
+    verification_status: confirmed
+    source_id: PLA8vGdq_0fiMmsgKcvknP29sy4i-KrLTt
+    fields: [video_id, youtube_url, playlist_id, playlist_position, title]
+  - source_type: transcript
+    verification_status: unverified
+    source_id: DFg9eOLZ988
+    fields: [transcript_files]

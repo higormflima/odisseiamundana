@@ -1,0 +1,18 @@
+video_id: 6Gz9La1hr7Y
+journey_id: amazonia-brasil
+youtube_url: https://www.youtube.com/watch?v=6Gz9La1hr7Y
+playlist_id: PLA8vGdq_0fiM11GbfoCYbhYr28tKXh8Kh
+playlist_position: 5
+title: Como são os helicópteros militares da Amazônia?
+thumbnail_url: https://i.ytimg.com/vi/6Gz9La1hr7Y/maxresdefault.jpg
+transcript_files:
+  - transcripts/journeys/amazonia-brasil/6Gz9La1hr7Y.txt
+provenance:
+  - source_type: youtube_metadata
+    verification_status: confirmed
+    source_id: PLA8vGdq_0fiM11GbfoCYbhYr28tKXh8Kh
+    fields: [video_id, youtube_url, playlist_id, playlist_position, title]
+  - source_type: transcript
+    verification_status: unverified
+    source_id: 6Gz9La1hr7Y
+    fields: [transcript_files]

@@ -1,0 +1,24 @@
+video_id: hySzWN-_QnM
+journey_id: tour-du-mont-blanc
+youtube_url: https://www.youtube.com/watch?v=hySzWN-_QnM
+playlist_id: PLA8vGdq_0fiOYiXeT5PdoRJuILOjflyQ6
+playlist_position: 7
+title: Chalet-Gite Chamoniard Volant Hostel (Chamonix) | - Tour & Review (TMB 2025)
+thumbnail_url: https://i.ytimg.com/vi/hySzWN-_QnM/maxresdefault.jpg
+transcript_files:
+  - transcripts/journeys/tour-du-mont-blanc/hySzWN-_QnM.txt
+provenance:
+  - source_type: youtube_metadata
+    verification_status: confirmed
+    source_id: PLA8vGdq_0fiOYiXeT5PdoRJuILOjflyQ6
+    fields:
+      - video_id
+      - youtube_url
+      - playlist_id
+      - playlist_position
+      - title
+  - source_type: transcript
+    verification_status: unverified
+    source_id: hySzWN-_QnM
+    fields:
+      - transcript_files

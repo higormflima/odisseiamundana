@@ -1,0 +1,24 @@
+video_id: c7fchrDc5sY
+journey_id: tour-du-mont-blanc
+youtube_url: https://www.youtube.com/watch?v=c7fchrDc5sY
+playlist_id: PLA8vGdq_0fiOYiXeT5PdoRJuILOjflyQ6
+playlist_position: 8
+title: TMB ou montanhas Tatra? Comparação das melhores montanhas da Europa
+thumbnail_url: https://i.ytimg.com/vi/c7fchrDc5sY/maxresdefault.jpg
+transcript_files:
+  - transcripts/journeys/tour-du-mont-blanc/c7fchrDc5sY.txt
+provenance:
+  - source_type: youtube_metadata
+    verification_status: confirmed
+    source_id: PLA8vGdq_0fiOYiXeT5PdoRJuILOjflyQ6
+    fields:
+      - video_id
+      - youtube_url
+      - playlist_id
+      - playlist_position
+      - title
+  - source_type: transcript
+    verification_status: unverified
+    source_id: c7fchrDc5sY
+    fields:
+      - transcript_files

@@ -1,0 +1,18 @@
+video_id: -9pPw_dbqHA
+journey_id: oman
+youtube_url: https://www.youtube.com/watch?v=-9pPw_dbqHA
+playlist_id: PLA8vGdq_0fiM5TC5I6Emk1HqK7eCXltDX
+playlist_position: 10
+title: Bimmah Sinkhole - what you must know before visiting
+thumbnail_url: https://i.ytimg.com/vi/-9pPw_dbqHA/maxresdefault.jpg
+transcript_files:
+  - transcripts/journeys/oman/-9pPw_dbqHA.txt
+provenance:
+  - source_type: youtube_metadata
+    verification_status: confirmed
+    source_id: PLA8vGdq_0fiM5TC5I6Emk1HqK7eCXltDX
+    fields: [video_id, youtube_url, playlist_id, playlist_position, title]
+  - source_type: transcript
+    verification_status: unverified
+    source_id: -9pPw_dbqHA
+    fields: [transcript_files]

@@ -1,0 +1,24 @@
+video_id: 09tbN_Lgf1s
+journey_id: tour-du-mont-blanc
+youtube_url: https://www.youtube.com/watch?v=09tbN_Lgf1s
+playlist_id: PLA8vGdq_0fiOYiXeT5PdoRJuILOjflyQ6
+playlist_position: 4
+title: TMB | Trient - Col du Balm - Le Tour (O que levar na mochila)
+thumbnail_url: https://i.ytimg.com/vi/09tbN_Lgf1s/maxresdefault.jpg
+transcript_files:
+  - transcripts/journeys/tour-du-mont-blanc/09tbN_Lgf1s.txt
+provenance:
+  - source_type: youtube_metadata
+    verification_status: confirmed
+    source_id: PLA8vGdq_0fiOYiXeT5PdoRJuILOjflyQ6
+    fields:
+      - video_id
+      - youtube_url
+      - playlist_id
+      - playlist_position
+      - title
+  - source_type: transcript
+    verification_status: unverified
+    source_id: 09tbN_Lgf1s
+    fields:
+      - transcript_files

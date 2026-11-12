@@ -1,0 +1,24 @@
+video_id: 9TW8EhnMexQ
+journey_id: tour-du-mont-blanc
+youtube_url: https://www.youtube.com/watch?v=9TW8EhnMexQ
+playlist_id: PLA8vGdq_0fiOYiXeT5PdoRJuILOjflyQ6
+playlist_position: 9
+title: TMB | Tour du Mont Blanc - Quais equipamentos levei na minha mochila
+thumbnail_url: https://i.ytimg.com/vi/9TW8EhnMexQ/maxresdefault.jpg
+transcript_files:
+  - transcripts/journeys/tour-du-mont-blanc/9TW8EhnMexQ.txt
+provenance:
+  - source_type: youtube_metadata
+    verification_status: confirmed
+    source_id: PLA8vGdq_0fiOYiXeT5PdoRJuILOjflyQ6
+    fields:
+      - video_id
+      - youtube_url
+      - playlist_id
+      - playlist_position
+      - title
+  - source_type: transcript
+    verification_status: unverified
+    source_id: 9TW8EhnMexQ
+    fields:
+      - transcript_files

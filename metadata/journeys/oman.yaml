@@ -1,0 +1,12 @@
+journey_id: oman
+title: Omã — Roadtrip
+geography:
+  countries:
+    - Omã
+provenance:
+  - source_type: youtube_metadata
+    verification_status: confirmed
+    source_id: PLA8vGdq_0fiM5TC5I6Emk1HqK7eCXltDX
+    fields:
+      - title
+      - geography

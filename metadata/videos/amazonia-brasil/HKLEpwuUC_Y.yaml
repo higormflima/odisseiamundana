@@ -1,0 +1,18 @@
+video_id: HKLEpwuUC_Y
+journey_id: amazonia-brasil
+youtube_url: https://www.youtube.com/watch?v=HKLEpwuUC_Y
+playlist_id: PLA8vGdq_0fiM11GbfoCYbhYr28tKXh8Kh
+playlist_position: 2
+title: O outro lado da Amazônia que ninguém conhece
+thumbnail_url: https://i.ytimg.com/vi/HKLEpwuUC_Y/maxresdefault.jpg
+transcript_files:
+  - transcripts/journeys/amazonia-brasil/HKLEpwuUC_Y.txt
+provenance:
+  - source_type: youtube_metadata
+    verification_status: confirmed
+    source_id: PLA8vGdq_0fiM11GbfoCYbhYr28tKXh8Kh
+    fields: [video_id, youtube_url, playlist_id, playlist_position, title]
+  - source_type: transcript
+    verification_status: unverified
+    source_id: HKLEpwuUC_Y
+    fields: [transcript_files]

@@ -1,0 +1,18 @@
+video_id: Pa4aAGDK7lY
+journey_id: oman
+youtube_url: https://www.youtube.com/watch?v=Pa4aAGDK7lY
+playlist_id: PLA8vGdq_0fiM5TC5I6Emk1HqK7eCXltDX
+playlist_position: 2
+title: OMAN - the best country we have visited in recent years. Find out why.
+thumbnail_url: https://i.ytimg.com/vi/Pa4aAGDK7lY/maxresdefault.jpg
+transcript_files:
+  - transcripts/journeys/oman/Pa4aAGDK7lY.txt
+provenance:
+  - source_type: youtube_metadata
+    verification_status: confirmed
+    source_id: PLA8vGdq_0fiM5TC5I6Emk1HqK7eCXltDX
+    fields: [video_id, youtube_url, playlist_id, playlist_position, title]
+  - source_type: transcript
+    verification_status: unverified
+    source_id: Pa4aAGDK7lY
+    fields: [transcript_files]

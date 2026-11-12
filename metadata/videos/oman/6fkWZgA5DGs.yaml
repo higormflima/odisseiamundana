@@ -1,0 +1,18 @@
+video_id: 6fkWZgA5DGs
+journey_id: oman
+youtube_url: https://www.youtube.com/watch?v=6fkWZgA5DGs
+playlist_id: PLA8vGdq_0fiM5TC5I6Emk1HqK7eCXltDX
+playlist_position: 5
+title: Off-road trip thru the desert of WAHIBA SANDS, OMAN
+thumbnail_url: https://i.ytimg.com/vi/6fkWZgA5DGs/maxresdefault.jpg
+transcript_files:
+  - transcripts/journeys/oman/6fkWZgA5DGs.txt
+provenance:
+  - source_type: youtube_metadata
+    verification_status: confirmed
+    source_id: PLA8vGdq_0fiM5TC5I6Emk1HqK7eCXltDX
+    fields: [video_id, youtube_url, playlist_id, playlist_position, title]
+  - source_type: transcript
+    verification_status: unverified
+    source_id: 6fkWZgA5DGs
+    fields: [transcript_files]

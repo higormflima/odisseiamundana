@@ -1,0 +1,14 @@
+journey_id: amazonia-brasil
+title: Amazônia — Brasil
+geography:
+  countries:
+    - Brasil
+  regions:
+    - Amazonas
+provenance:
+  - source_type: youtube_metadata
+    verification_status: confirmed
+    source_id: PLA8vGdq_0fiM11GbfoCYbhYr28tKXh8Kh
+    fields:
+      - title
+      - geography
