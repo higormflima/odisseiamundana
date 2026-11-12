@@ -112,11 +112,13 @@ trip_card:
     safety: 9
 gallery:
   title: Inverno na Lapônia
+  collection_title: Lapônia, Finlândia
   photos:
     - src: media/journeys/finland-2026/photos/finland-001.jpg
       thumbnail: media/journeys/finland-2026/thumbnails/finland-001.jpg
       alt: Casal em uma trilha cercada por árvores cobertas de neve, iluminada pelo sol baixo da Lapônia.
       caption: Um dia de inverno na floresta da Lapônia.
+      cover: true
     - src: media/journeys/finland-2026/photos/finland-002.jpg
       thumbnail: media/journeys/finland-2026/thumbnails/finland-002.jpg
       alt: Casal diante de um grande boneco de neve na Santa Claus Village, sob céu azul.

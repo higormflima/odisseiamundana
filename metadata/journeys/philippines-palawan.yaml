@@ -89,6 +89,7 @@ trip_card:
     safety: 7
 gallery:
   title: Praias e paisagens de Palawan
+  collection_title: Palawan, Filipinas
   photos:
     - src: media/journeys/philippines-palawan/photos/philippines-001.jpg
       thumbnail: media/journeys/philippines-palawan/thumbnails/philippines-001.jpg
@@ -105,7 +106,6 @@ gallery:
     - src: media/journeys/philippines-palawan/photos/philippines-005.jpg
       thumbnail: media/journeys/philippines-palawan/thumbnails/philippines-005.jpg
       alt: Baía cercada por falésias calcárias e barcos tradicionais sobre o mar.
-      featured: true
     - src: media/journeys/philippines-palawan/photos/philippines-006.jpg
       thumbnail: media/journeys/philippines-palawan/thumbnails/philippines-006.jpg
       alt: Vista vertical de barcos tradicionais e caiaques em águas transparentes entre rochas.
@@ -130,9 +130,11 @@ gallery:
     - src: media/journeys/philippines-palawan/photos/philippines-013.jpg
       thumbnail: media/journeys/philippines-palawan/thumbnails/philippines-013.jpg
       alt: Lagoa rasa e clara entre paredões de pedra, com caiaques na água.
+      featured: true
     - src: media/journeys/philippines-palawan/photos/philippines-014.jpg
       thumbnail: media/journeys/philippines-palawan/thumbnails/philippines-014.jpg
       alt: Vista de cima de uma lagoa de águas verdes e azul-escuras entre rochas.
+      cover: true
     - src: media/journeys/philippines-palawan/photos/philippines-015.jpg
       thumbnail: media/journeys/philippines-palawan/thumbnails/philippines-015.jpg
       alt: Praia tropical e barcos tradicionais vistos do alto.

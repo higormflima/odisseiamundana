@@ -18,13 +18,14 @@ export function buildGalleryCollections({ journeys, pages, base }) {
       regions: data.geography?.regions ?? [],
       destinations: data.geography?.destinations ?? [],
     };
-    const title = data.title ?? page.data.title;
+    const title = data.gallery?.collection_title ?? data.title ?? page.data.title;
     const dates = data.dates;
     const photos = sourcePhotos.map((photo) => ({
       src: path(photo.src),
       thumbnail: path(photo.thumbnail),
       alt: photo.alt,
       featured: photo.featured === true,
+      cover: photo.cover === true,
       collectionId: id,
       collectionTitle: title,
       geography,
@@ -39,7 +40,7 @@ export function buildGalleryCollections({ journeys, pages, base }) {
       dates: data.dates,
       period: formatJourneyPeriod(data.dates),
       photos,
-      cover: photos.find((photo) => photo.featured) ?? photos[0],
+      cover: photos.find((photo) => photo.cover) ?? photos.find((photo) => photo.featured) ?? photos[0],
       href: `${base}pt/galeria/${id}/`,
       storyHref: `${base}pt/viagens/${id}/${JOURNEY_SUMMARY_EPISODE_ID}/`,
     }];

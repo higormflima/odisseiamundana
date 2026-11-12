@@ -23,3 +23,14 @@ test('inclui apenas coleções com resumo publicado e fotos, ordenadas por data'
   assert.ok(collections[0].cover.thumbnailSize.width > 0);
   assert.ok(collections[0].cover.thumbnailSize.width < collections[0].cover.width);
 });
+
+test('separa título e capa da coleção do destaque fotográfico', () => {
+  const cover = { ...photo, cover: true };
+  const featured = { ...photo, src: 'media/journeys/finland-2026/photos/finland-002.jpg', featured: true };
+  const journeys = [{ id: 'trip', data: { title: 'Título da viagem', gallery: { collection_title: 'Título da coleção', photos: [cover, featured] } } }];
+  const [collection] = buildGalleryCollections({ journeys, pages: [published('trip')], base: '/' });
+  assert.equal(collection.title, 'Título da coleção');
+  assert.equal(collection.cover.src, `/${cover.src}`);
+  assert.equal(collection.photos.filter((item) => item.featured)[0].src, `/${featured.src}`);
+  assert.equal(journeys[0].data.title, 'Título da viagem');
+});

@@ -54,6 +54,7 @@ trip_card:
     safety: 9
 gallery:
   title: Nossa visita à Grande Muralha da China
+  collection_title: Pequim, China
   photos:
     - src: media/journeys/china-stopover/photos/china-001.jpg
       thumbnail: media/journeys/china-stopover/thumbnails/china-001.jpg
@@ -71,7 +72,7 @@ gallery:
       thumbnail: media/journeys/china-stopover/thumbnails/china-005.jpg
       alt: Casal posa junto à muralha de pedra, com montanhas ao fundo.
       caption: Um registro do nosso passeio pela Grande Muralha em Mutianyu.
-      featured: true
+      cover: true
     - src: media/journeys/china-stopover/photos/china-006.jpg
       thumbnail: media/journeys/china-stopover/thumbnails/china-006.jpg
       alt: Mulher sentada sob um arco de pedra, com a Grande Muralha ao fundo.
@@ -93,6 +94,7 @@ gallery:
     - src: media/journeys/china-stopover/photos/china-012.jpg
       thumbnail: media/journeys/china-stopover/thumbnails/china-012.jpg
       alt: Casal posa junto à muralha com o sol e as montanhas ao fundo.
+      featured: true
 
 provenance:
   - source_type: transcript

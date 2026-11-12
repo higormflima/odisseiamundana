@@ -187,6 +187,7 @@
       "additionalProperties": false,
       "properties": {
         "title": { "type": "string", "minLength": 1 },
+        "collection_title": { "type": "string", "minLength": 1 },
         "photos": {
           "type": "array",
           "items": {
@@ -198,6 +199,7 @@
               "thumbnail": { "type": "string", "minLength": 1 },
               "alt": { "type": "string", "minLength": 1 },
               "featured": { "type": "boolean" },
+              "cover": { "type": "boolean" },
               "caption": { "type": "string" }
             }
           }
