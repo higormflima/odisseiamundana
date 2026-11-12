@@ -41,7 +41,7 @@ const { base } = Astro.props;
   const resultsList = document.querySelector<HTMLUListElement>('[data-search-results]');
 
   if (trigger && dialog && input && closeButton && clearButton && status && resultsList) {
-    type PagefindResult = { data: () => Promise<{ url: string; excerpt: string; meta?: { title?: string } }> };
+    type PagefindResult = { data: () => Promise<{ url: string; meta?: { title?: string } }> };
     type Pagefind = { init: () => Promise<void>; search: (query: string) => Promise<{ results: PagefindResult[] }> };
 
     let pagefindPromise: Promise<Pagefind> | undefined;
@@ -101,17 +101,11 @@ const { base } = Astro.props;
         pages.forEach((page, index) => {
           const item = document.createElement('li');
           const link = document.createElement('a');
-          const title = document.createElement('span');
-          const excerpt = document.createElement('span');
           item.id = `site-search-result-${index}`;
           item.setAttribute('role', 'option');
           item.setAttribute('aria-selected', 'false');
           link.href = page.url;
-          title.className = 'result-title';
-          title.textContent = page.meta?.title || 'Página';
-          excerpt.className = 'result-excerpt';
-          excerpt.textContent = new DOMParser().parseFromString(page.excerpt, 'text/html').body.textContent?.trim() || '';
-          link.append(title, excerpt);
+          link.textContent = page.meta?.title || 'Página';
           item.append(link);
           resultsList.append(item);
         });
@@ -196,11 +190,9 @@ const { base } = Astro.props;
   .search-status { margin: 0; padding: 1rem 1.25rem .4rem; color: var(--muted); font-size: .84rem; }
   .search-results { margin: 0; padding: .5rem; overflow-y: auto; list-style: none; }
   .search-results:empty { display: none; }
-  .search-results li { border-radius: .65rem; }
-  .search-results li.is-active, .search-results li:hover { background: color-mix(in srgb, var(--accent) 9%, transparent); }
-  .search-results a { display: grid; gap: .25rem; padding: .8rem .85rem; color: inherit; text-decoration: none; }
-  .result-title { font-weight: 700; }
-  .result-excerpt { display: -webkit-box; overflow: hidden; color: var(--muted); font-size: .82rem; line-height: 1.5; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }
+  .search-results :global(li) { border-radius: .65rem; }
+  .search-results :global(li.is-active), .search-results :global(li:hover) { background: color-mix(in srgb, var(--accent) 9%, transparent); }
+  .search-results :global(a) { display: block; padding: .8rem .85rem; color: inherit; font-weight: 700; text-decoration: none; }
   .search-hint { margin: 0; padding: .75rem 1.2rem; border-top: 1px solid var(--line); color: var(--muted); font-size: .72rem; }
   .visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
   @media (max-width: 700px) {
