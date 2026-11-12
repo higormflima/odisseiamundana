@@ -20,4 +20,6 @@ test('inclui apenas coleções com resumo publicado e fotos, ordenadas por data'
   assert.equal(collections[1].cover, collections[1].photos[0]);
   assert.equal(collections[1].storyHref, '/site/pt/viagens/old/journey-summary/');
   assert.ok(collections[0].cover.src.startsWith('/site/'));
+  assert.ok(collections[0].cover.thumbnailSize.width > 0);
+  assert.ok(collections[0].cover.thumbnailSize.width < collections[0].cover.width);
 });

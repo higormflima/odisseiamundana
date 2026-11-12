@@ -12,16 +12,29 @@ export function buildGalleryCollections({ journeys, pages, base }) {
       entry.journey_id.id === id && entry.episode_id === JOURNEY_SUMMARY_EPISODE_ID && entry.status === 'published');
     const sourcePhotos = data.gallery?.photos ?? [];
     if (!page || !sourcePhotos.length) return [];
+    const geography = {
+      continents: data.geography?.continents ?? [],
+      countries: data.geography?.countries ?? [],
+      regions: data.geography?.regions ?? [],
+      destinations: data.geography?.destinations ?? [],
+    };
+    const title = data.title ?? page.data.title;
+    const dates = data.dates;
     const photos = sourcePhotos.map((photo) => ({
       src: path(photo.src),
       thumbnail: path(photo.thumbnail),
       alt: photo.alt,
       featured: photo.featured === true,
+      collectionId: id,
+      collectionTitle: title,
+      geography,
+      journeyDate: dates?.start_date ?? (dates?.year ? `${dates.year}${dates.month ? `-${String(dates.month).padStart(2, '0')}` : ''}` : ''),
       ...readImageSizeFromSrc(photo.src),
+      thumbnailSize: readImageSizeFromSrc(photo.thumbnail),
     }));
     return [{
       id,
-      title: data.title ?? page.data.title,
+      title,
       summary: data.summary?.trim(),
       dates: data.dates,
       period: formatJourneyPeriod(data.dates),

@@ -1,0 +1,253 @@
+---
+interface Photo {
+  src: string;
+  thumbnail: string;
+  alt: string;
+  width?: number;
+  height?: number;
+  thumbnailSize?: { width: number; height: number } | null;
+  collectionId: string;
+  collectionTitle: string;
+  journeyDate: string;
+  geography: { continents: string[]; countries: string[]; regions: string[]; destinations: string[] };
+}
+
+interface Props {
+  title: string;
+  photos: Photo[];
+  filterCollections?: boolean;
+}
+
+const { title, photos, filterCollections = false } = Astro.props;
+const continents = [...new Set(photos.flatMap((photo) => photo.geography.continents))].sort((a, b) => a.localeCompare(b, 'pt-BR'));
+---
+
+{photos.length > 0 && (
+  <section class="gallery-masonry" aria-label={title} data-gallery-masonry data-filter-collections={String(filterCollections)}>
+    <header class="gallery-masonry-heading">
+      <h2>{title}</h2>
+      <p class="gallery-masonry-count" aria-live="polite" data-count>{photos.length} {photos.length === 1 ? 'foto' : 'fotos'}</p>
+    </header>
+    <div class="gallery-controls" data-controls hidden>
+      <label>Buscar na galeria<input type="search" data-search placeholder="Viagem, local ou foto" /></label>
+      <details class="gallery-filter-panel">
+        <summary>Filtrar</summary>
+        <div class="gallery-filter-fields">
+          <label>Continente da viagem<select data-continent><option value="">Todos</option>{continents.map((continent) => <option value={continent}>{continent}</option>)}</select></label>
+          <label>País da viagem<select data-country><option value="">Todos</option></select></label>
+          <button type="button" data-clear>Limpar filtros e busca</button>
+        </div>
+      </details>
+      <label>Ordenar viagens<select data-sort><option value="recent">Mais recentes</option><option value="oldest">Mais antigas</option><option value="random">Aleatória</option></select></label>
+    </div>
+    <p class="gallery-empty" data-empty hidden>Nenhuma foto encontrada. Experimente alterar a busca ou os filtros.</p>
+    <div class="gallery-masonry-grid">
+      {photos.map((photo, index) => (
+        <button class="gallery-masonry-item" type="button" data-width={photo.width} data-height={photo.height} aria-label={`Abrir foto ${index + 1} de ${photos.length}: ${photo.alt}`}>
+          <img src={photo.thumbnail} alt="" width={photo.thumbnailSize?.width} height={photo.thumbnailSize?.height} loading="lazy" decoding="async" />
+        </button>
+      ))}
+    </div>
+    <button class="gallery-load-more" type="button" data-load-more hidden>Carregar mais</button>
+    <dialog class="gallery-viewer" aria-label={title} data-viewer>
+      <div class="gallery-viewer-toolbar">
+        <p data-counter aria-live="polite"></p>
+        <div class="gallery-viewer-actions">
+          <button type="button" data-zoom aria-label="Ampliar foto" aria-pressed="false">Ampliar</button>
+          <button type="button" data-close aria-label="Fechar galeria">×</button>
+        </div>
+      </div>
+      <div class="gallery-viewer-stage">
+        <button type="button" class="gallery-viewer-nav" data-previous aria-label="Foto anterior">‹</button>
+        <div class="gallery-viewer-image-wrap" data-image-wrap>
+          <img class="gallery-viewer-image" alt="" data-image decoding="async" />
+        </div>
+        <button type="button" class="gallery-viewer-nav" data-next aria-label="Próxima foto">›</button>
+      </div>
+    </dialog>
+    <script type="application/json" data-photos set:html={JSON.stringify(photos.map(({ src, alt, collectionId, collectionTitle, geography, journeyDate }) => ({ src, alt, collectionId, collectionTitle, geography, journeyDate }))).replace(/</g, '\\u003c')} />
+  </section>
+)}
+
+<script>
+  import { visiblePhotoCount, wrappedPhotoIndex } from '../lib/galleryPagination.mjs';
+  import { availableCountries, selectGalleryPhotos } from '../lib/gallerySearch.mjs';
+
+  document.querySelectorAll<HTMLElement>('[data-gallery-masonry]').forEach((gallery) => {
+    const items = [...gallery.querySelectorAll<HTMLButtonElement>('.gallery-masonry-item')];
+    const grid = gallery.querySelector<HTMLElement>('.gallery-masonry-grid');
+    const loadMore = gallery.querySelector<HTMLButtonElement>('[data-load-more]');
+    const count = gallery.querySelector<HTMLElement>('[data-count]');
+    const dialog = gallery.querySelector<HTMLDialogElement>('[data-viewer]');
+    const image = gallery.querySelector<HTMLImageElement>('[data-image]');
+    const imageWrap = gallery.querySelector<HTMLElement>('[data-image-wrap]');
+    const counter = gallery.querySelector<HTMLElement>('[data-counter]');
+    const close = gallery.querySelector<HTMLButtonElement>('[data-close]');
+    const zoom = gallery.querySelector<HTMLButtonElement>('[data-zoom]');
+    const photoData = gallery.querySelector<HTMLScriptElement>('[data-photos]');
+    const controls = gallery.querySelector<HTMLElement>('[data-controls]');
+    const search = gallery.querySelector<HTMLInputElement>('[data-search]');
+    const continent = gallery.querySelector<HTMLSelectElement>('[data-continent]');
+    const country = gallery.querySelector<HTMLSelectElement>('[data-country]');
+    const sort = gallery.querySelector<HTMLSelectElement>('[data-sort]');
+    const clear = gallery.querySelector<HTMLButtonElement>('[data-clear]');
+    const empty = gallery.querySelector<HTMLElement>('[data-empty]');
+    const filterPanel = gallery.querySelector<HTMLDetailsElement>('.gallery-filter-panel');
+    if (!grid || !loadMore || !count || !dialog || !image || !imageWrap || !counter || !close || !zoom || !photoData || !controls || !search || !continent || !country || !sort || !clear || !empty || !filterPanel) {
+      throw new Error('A galeria não possui todos os controles necessários.');
+    }
+
+    const photos: { src: string; alt: string; collectionId: string; collectionTitle: string; journeyDate: string; geography: { continents: string[]; countries: string[]; regions: string[]; destinations: string[] } }[] = JSON.parse(photoData.textContent || '[]');
+    const randomRanks = photos.map(() => Math.random());
+    let activeIndexes = photos.map((_, index) => index);
+    let visible = 0;
+    let currentIndex = 0;
+    let opener: HTMLButtonElement | null = null;
+    let previousOverflow = '';
+    let startX: number | null = null;
+    let layoutFrame = 0;
+
+    const layout = () => {
+      layoutFrame = 0;
+      grid.classList.add('is-measured');
+      const positions = items.filter((item) => !item.hidden).map((item) => {
+        const thumbnail = item.querySelector('img');
+        const width = thumbnail?.naturalWidth || Number(item.dataset.width) || 3;
+        const height = thumbnail?.naturalHeight || Number(item.dataset.height) || 2;
+        const imageHeight = item.getBoundingClientRect().width * height / width;
+        return { item, span: Math.max(1, Math.ceil((imageHeight + 8) / 12)) };
+      });
+      positions.forEach(({ item, span }) => { item.style.gridRowEnd = `span ${span}`; });
+    };
+    const requestLayout = () => {
+      if (!layoutFrame) layoutFrame = requestAnimationFrame(layout);
+    };
+    const setZoom = (active: boolean) => {
+      imageWrap.classList.toggle('is-zoomed', active);
+      if (active) {
+        imageWrap.tabIndex = 0;
+        imageWrap.setAttribute('role', 'region');
+        imageWrap.setAttribute('aria-label', 'Foto ampliada. Use as setas para mover a imagem.');
+      } else {
+        imageWrap.removeAttribute('tabindex');
+        imageWrap.removeAttribute('role');
+        imageWrap.removeAttribute('aria-label');
+      }
+      zoom.setAttribute('aria-pressed', String(active));
+      zoom.setAttribute('aria-label', active ? 'Reduzir foto' : 'Ampliar foto');
+      zoom.textContent = active ? 'Reduzir' : 'Ampliar';
+      imageWrap.scrollTop = 0;
+      imageWrap.scrollLeft = 0;
+    };
+    const show = (index: number) => {
+      currentIndex = wrappedPhotoIndex(index, activeIndexes.length);
+      const photo = photos[activeIndexes[currentIndex]];
+      image.src = photo.src;
+      image.alt = photo.alt;
+      counter.textContent = `${currentIndex + 1} / ${activeIndexes.length}`;
+      setZoom(false);
+    };
+    const showMore = () => {
+      visible = visiblePhotoCount(activeIndexes.length, visible);
+      const shown = new Set(activeIndexes.slice(0, visible));
+      items.forEach((item, index) => { item.hidden = !shown.has(index); });
+      requestLayout();
+      loadMore.hidden = visible >= activeIndexes.length;
+      count.textContent = `${activeIndexes.length} ${activeIndexes.length === 1 ? 'resultado' : 'resultados'} · ${visible} ${visible === 1 ? 'exibida' : 'exibidas'}`;
+    };
+
+    const updateCountries = () => {
+      const previous = country.value;
+      country.replaceChildren(new Option('Todos', ''));
+      availableCountries(photos, continent.value).forEach((value) => country.add(new Option(value, value)));
+      if ([...country.options].some((option) => option.value === previous)) country.value = previous;
+    };
+    const applyFilters = () => {
+      activeIndexes = selectGalleryPhotos(photos, { query: search.value, continent: continent.value, country: country.value, order: sort.value, randomRanks });
+      activeIndexes.forEach((index, position) => {
+        items[index].setAttribute('aria-label', `Abrir foto ${position + 1} de ${activeIndexes.length}: ${photos[index].alt}`);
+        grid.append(items[index]);
+      });
+      items.forEach((item) => { item.hidden = true; });
+      visible = 0;
+      empty.hidden = activeIndexes.length > 0;
+      if (gallery.dataset.filterCollections === 'true') {
+        const eligible = new Set(activeIndexes.map((index) => photos[index].collectionId));
+        const cards = [...document.querySelectorAll<HTMLElement>('.gallery-collection-card[data-collection-id]')];
+        cards.forEach((card) => { card.hidden = !eligible.has(card.dataset.collectionId || ''); });
+        const noCollections = document.querySelector<HTMLElement>('[data-collection-empty]');
+        if (noCollections) noCollections.hidden = cards.some((card) => !card.hidden);
+      }
+      showMore();
+    };
+    updateCountries();
+    applyFilters();
+    controls.hidden = false;
+    const desktop = window.matchMedia('(min-width: 701px)');
+    filterPanel.open = desktop.matches;
+    desktop.addEventListener('change', (event) => { filterPanel.open = event.matches; });
+    search.addEventListener('input', applyFilters);
+    continent.addEventListener('change', () => { updateCountries(); applyFilters(); });
+    country.addEventListener('change', applyFilters);
+    sort.addEventListener('change', applyFilters);
+    clear.addEventListener('click', () => {
+      search.value = '';
+      continent.value = '';
+      updateCountries();
+      country.value = '';
+      sort.value = 'recent';
+      applyFilters();
+    });
+    if (typeof ResizeObserver !== 'undefined') new ResizeObserver(requestLayout).observe(grid);
+    else window.addEventListener('resize', requestLayout);
+    loadMore.addEventListener('click', () => {
+      const firstNew = visible;
+      showMore();
+      if (loadMore.hidden) items[activeIndexes[firstNew]]?.focus({ preventScroll: true });
+    });
+    items.forEach((item) => item.querySelector('img')?.addEventListener('load', requestLayout));
+    items.forEach((item, index) => item.addEventListener('click', () => {
+      opener = item;
+      show(activeIndexes.indexOf(index));
+      previousOverflow = document.body.style.overflow;
+      document.body.style.overflow = 'hidden';
+      dialog.showModal();
+      close.focus();
+    }));
+    close.addEventListener('click', () => dialog.close());
+    dialog.addEventListener('close', () => {
+      document.body.style.overflow = previousOverflow;
+      setZoom(false);
+      opener?.focus({ preventScroll: true });
+    });
+    dialog.addEventListener('click', (event) => {
+      if (event.target === dialog) dialog.close();
+    });
+    gallery.querySelector<HTMLButtonElement>('[data-previous]')?.addEventListener('click', () => show(currentIndex - 1));
+    gallery.querySelector<HTMLButtonElement>('[data-next]')?.addEventListener('click', () => show(currentIndex + 1));
+    zoom.addEventListener('click', () => {
+      const active = zoom.getAttribute('aria-pressed') !== 'true';
+      setZoom(active);
+      if (active) imageWrap.focus({ preventScroll: true });
+    });
+    dialog.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        dialog.close();
+      } else if ((event.key === 'ArrowLeft' || event.key === 'ArrowRight') && event.target !== imageWrap) {
+        event.preventDefault();
+        show(currentIndex + (event.key === 'ArrowLeft' ? -1 : 1));
+      }
+    });
+    imageWrap.addEventListener('pointerdown', (event) => {
+      if (event.pointerType === 'touch' && zoom.getAttribute('aria-pressed') !== 'true') startX = event.clientX;
+    });
+    imageWrap.addEventListener('pointerup', (event) => {
+      if (startX === null) return;
+      const delta = event.clientX - startX;
+      startX = null;
+      if (Math.abs(delta) >= 45) show(currentIndex + (delta < 0 ? 1 : -1));
+    });
+    imageWrap.addEventListener('pointercancel', () => { startX = null; });
+  });
+</script>

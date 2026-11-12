@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import SiteLayout from '../../../layouts/SiteLayout.astro';
 import PhotoGallery from '../../../components/PhotoGallery.astro';
+import GalleryMasonry from '../../../components/GalleryMasonry.astro';
 import GalleryCollectionCards from '../../../components/GalleryCollectionCards.astro';
 import { buildGalleryCollections } from '../../../lib/galleryCollections.mjs';
 import '../../../styles/gallery.css';
@@ -28,6 +29,9 @@ const photos = collections.flatMap((item) => item.photos);
 const featured = collections.flatMap((item) => item.photos.filter((photo) => photo.featured));
 const hero = featured[0];
 const others = collection ? collections.filter((item) => item.id !== collection.id) : [];
+const heroSources = (photo) => photo.thumbnailSize?.width && photo.width && photo.thumbnailSize.width < photo.width
+  ? `${photo.thumbnail} ${photo.thumbnailSize.width}w, ${photo.src} ${photo.width}w`
+  : undefined;
 ---
 
 <SiteLayout title={collection ? `${collection.title} | Galeria` : 'Galeria'}>
@@ -47,10 +51,10 @@ const others = collection ? collections.filter((item) => item.id !== collection.
             {collection.summary && <p class="gallery-intro">{collection.summary}</p>}
             <a class="gallery-text-link" href={collection.storyHref}>Ler relato da viagem →</a>
           </div>
-          <img src={collection.cover.src} alt={collection.cover.alt} width={collection.cover.width} height={collection.cover.height} fetchpriority="high" decoding="async" />
+          <img src={collection.cover.src} srcset={heroSources(collection.cover)} sizes="(max-width: 700px) calc(100vw - 44px), 50vw" alt={collection.cover.alt} width={collection.cover.width} height={collection.cover.height} fetchpriority="high" decoding="async" />
         </header>
         <section class="gallery-section">
-          <PhotoGallery title="Fotografias da viagem" photos={collection.photos} />
+          <GalleryMasonry title="Fotografias da viagem" photos={collection.photos} />
         </section>
         {others.length > 0 && (
           <section class="gallery-section">
@@ -68,17 +72,18 @@ const others = collection ? collections.filter((item) => item.id !== collection.
             <h1>O mundo através das nossas lentes.</h1>
             <p class="gallery-intro">Reunimos fotografias dos lugares e momentos que encontramos pelo caminho.</p>
           </div>
-          {hero && <img src={hero.src} alt={hero.alt} width={hero.width} height={hero.height} fetchpriority="high" decoding="async" />}
+          {hero && <img src={hero.src} srcset={heroSources(hero)} sizes="(max-width: 700px) calc(100vw - 44px), 50vw" alt={hero.alt} width={hero.width} height={hero.height} fetchpriority="high" decoding="async" />}
         </header>
         {featured.length > 0 && (
           <section class="gallery-section"><PhotoGallery title="Destaques fotográficos" photos={featured} /></section>
         )}
         <section class="gallery-section">
           <h2>Coleções de viagens</h2>
+          <p data-collection-empty hidden>Nenhuma coleção encontrada.</p>
           {collections.length ? <GalleryCollectionCards collections={collections} /> : <p>Ainda não há coleções de fotografias disponíveis.</p>}
         </section>
         <section class="gallery-section">
-          {photos.length ? <PhotoGallery title="Todas as fotografias" photos={photos} /> : <h2>Todas as fotografias</h2>}
+          {photos.length ? <GalleryMasonry title="Todas as fotografias" photos={photos} filterCollections /> : <h2>Todas as fotografias</h2>}
         </section>
       </>
     )}

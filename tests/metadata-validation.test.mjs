@@ -46,6 +46,14 @@ test('rejeita tipo de dado incorreto', async () => {
   assert.ok(result.errors.some((error) => error.keyword === 'type'));
 });
 
+test('valida o continente opcional da viagem', () => {
+  const valid = validateMetadataText('journey_id: sample-trip\ngeography:\n  continents:\n    - Europa\n');
+  const invalid = validateMetadataText('journey_id: sample-trip\ngeography:\n  continents:\n    - ""\n');
+  assert.equal(valid.valid, true);
+  assert.equal(invalid.valid, false);
+  assert.ok(invalid.errors.some((error) => error.instancePath === '/geography/continents/0'));
+});
+
 function validateTripCard(tripCardYaml) {
   return validateMetadataText(`journey_id: sample-trip\ntrip_card:\n${tripCardYaml}`);
 }

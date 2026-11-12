@@ -8,6 +8,8 @@ dates:
   month: 12
   start_date: 2025-12-01
 geography:
+  continents:
+    - Ásia
   countries:
     - Filipinas
   regions:

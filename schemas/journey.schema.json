@@ -37,6 +37,7 @@
       "type": "object",
       "additionalProperties": false,
       "properties": {
+        "continents": { "type": "array", "items": { "type": "string", "minLength": 1 } },
         "countries": { "type": "array", "items": { "type": "string" } },
         "regions": { "type": "array", "items": { "type": "string" } },
         "destinations": { "type": "array", "items": { "type": "string" } },

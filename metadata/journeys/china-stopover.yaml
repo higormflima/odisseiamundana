@@ -8,6 +8,8 @@ dates:
   month: 11
   start_date: 2025-11-30
 geography:
+  continents:
+    - Ásia
   countries:
     - China
   regions:
