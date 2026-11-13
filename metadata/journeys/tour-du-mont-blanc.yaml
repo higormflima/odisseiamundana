@@ -31,6 +31,16 @@ budget:
     Para três pessoas, as hospedagens custaram 210 francos suíços em Trient
     e 318 euros na França, incluindo café da manhã nas três e jantar nas
     duas primeiras. Valores de setembro de 2025, sem outros gastos.
+trip_card:
+  overall_rating: 7
+  ratings:
+    nature: 10
+    experiences: 10
+    food: 7
+    prices: 2
+    infrastructure: 9
+    culture: 8
+    safety: 10
 gallery:
   title: Nossa caminhada pelo Tour du Mont Blanc em imagens
   collection_title: Tour du Mont Blanc
@@ -66,3 +76,8 @@ provenance:
     fields:
       - dates
       - budget
+  - source_type: manual
+    verification_status: confirmed
+    source_id: owner-trip-card-2026-11-13
+    fields:
+      - trip_card

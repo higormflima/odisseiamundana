@@ -2,7 +2,7 @@ journey_id: oman
 title: Omã — Roadtrip
 summary: >
   Uma viagem de carro entre Mascate, as montanhas de Jebel Shams, o deserto
-  de Wahiba Sands e os uádis da costa de Omã.
+  de Wahiba Sands e os wadis da costa de Omã.
 dates:
   year: 2024
   month: 4
@@ -36,6 +36,17 @@ budget:
     Estimativa relatada para o casal de aproximadamente 608 riais omanenses,
     incluindo carro com equipamento e seguro, combustível, hospedagens,
     restaurantes e extras; passagens aéreas não incluídas.
+trip_card:
+  overall_rating: 10
+  ratings:
+    nature: 10
+    experiences: 10
+    food: 10
+    prices: 10
+    infrastructure: 9
+    accessibility: 9
+    culture: 10
+    safety: 10
 gallery:
   title: Nossa viagem por Omã em imagens
   collection_title: Omã
@@ -91,3 +102,8 @@ provenance:
     source_id: owner-map-point-muscat
     fields:
       - geography.representative_point
+  - source_type: manual
+    verification_status: confirmed
+    source_id: owner-trip-card-2026-11-13
+    fields:
+      - trip_card

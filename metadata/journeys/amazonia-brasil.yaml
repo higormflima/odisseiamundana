@@ -32,6 +32,17 @@ activities:
     name: Passeio em Presidente Figueiredo
     provider: Iguana Tours
     notes: Bate-volta de Manaus; experiência oferecida em permuta all-inclusive.
+trip_card:
+  overall_rating: 8
+  ratings:
+    nature: 10
+    experiences: 10
+    food: 9
+    prices: 7
+    infrastructure: 6
+    accessibility: 4
+    culture: 10
+    safety: 8
 gallery:
   title: Nossa viagem pela Amazônia em imagens
   collection_title: Amazônia, Brasil
@@ -73,3 +84,8 @@ provenance:
     source_id: owner-map-point-manaus
     fields:
       - geography.representative_point
+  - source_type: manual
+    verification_status: confirmed
+    source_id: owner-trip-card-2026-11-13
+    fields:
+      - trip_card

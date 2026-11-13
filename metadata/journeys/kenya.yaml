@@ -30,6 +30,17 @@ budget:
   notes: >
     A hospedagem no Soul Breeze custou US$ 350 para o casal por seis noites,
     com café da manhã, em janeiro de 2025.
+trip_card:
+  overall_rating: 8
+  ratings:
+    nature: 10
+    experiences: 10
+    food: 7
+    prices: 7
+    infrastructure: 8
+    accessibility: 6
+    culture: 10
+    safety: 7
 gallery:
   title: Nossa viagem pelo Quênia em imagens
   collection_title: Quênia
@@ -85,3 +96,8 @@ provenance:
     source_id: owner-map-point-nairobi
     fields:
       - geography.representative_point
+  - source_type: manual
+    verification_status: confirmed
+    source_id: owner-trip-card-2026-11-13
+    fields:
+      - trip_card
