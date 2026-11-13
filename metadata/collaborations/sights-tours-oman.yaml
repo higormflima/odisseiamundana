@@ -1,0 +1,75 @@
+collaboration_id: sights-tours-oman
+status: draft
+kind: project
+title: Omã em 4x4 com a Sights Tours
+description: >
+  De 29 de abril a 6 de maio de 2024, percorremos Omã em uma Mitsubishi Pajero
+  Full equipada para camping, em uma parceria de permuta com a Sights Tours.
+destination: Omã
+country: Omã
+date:
+  year: 2024
+  month: 4
+  day: 29
+cover:
+  src: media/journeys/oman/optimized/photos/oman-004.jpg
+  thumbnail: media/journeys/oman/optimized/thumbnails/oman-004.jpg
+  alt: Carro com barraca de teto em uma área montanhosa ao entardecer.
+photos:
+  - src: media/journeys/oman/optimized/photos/oman-004.jpg
+    thumbnail: media/journeys/oman/optimized/thumbnails/oman-004.jpg
+    alt: Carro com barraca de teto em uma área montanhosa ao entardecer.
+  - src: media/journeys/oman/optimized/photos/oman-006.jpg
+    thumbnail: media/journeys/oman/optimized/thumbnails/oman-006.jpg
+    alt: Casal em selfie diante de dunas no deserto.
+  - src: media/journeys/oman/optimized/photos/oman-013.jpg
+    thumbnail: media/journeys/oman/optimized/thumbnails/oman-013.jpg
+    alt: Carro com barraca de teto estacionado em uma praia de pedras.
+  - src: media/journeys/oman/optimized/photos/oman-017.jpg
+    thumbnail: media/journeys/oman/optimized/thumbnails/oman-017.jpg
+    alt: Carro com barraca de teto aberta em uma montanha ao entardecer.
+partner:
+  name: Sights Tours
+  description: Agência de aluguel de carros e turismo em Omã.
+  website: https://sightstours.com/
+type: exchange
+received:
+  - >
+    Aluguel da Mitsubishi Pajero Full 4x4 com barraca de teto e colchão,
+    cobertores, travesseiros, saco de dormir, utensílios completos de cozinha,
+    chuveiro portátil e caixa térmica usada como geladeira.
+delivered:
+  - Vídeos no YouTube.
+  - Publicações no Instagram.
+  - Material fotográfico.
+videos:
+  - id: ZnT0KqUFJa8
+    title: OMAN - TRAVEL GUIDE | 4x4 camping trip
+    thumbnail: media/journeys/oman/thumbnails/ZnT0KqUFJa8.webp
+  - id: UimmEtsg9JQ
+    title: OMAN | Camping at JEBEL SHAMs mountain & Balcony Walk hike
+    thumbnail: media/journeys/oman/thumbnails/UimmEtsg9JQ.webp
+  - id: 6fkWZgA5DGs
+    title: Off-road trip thru the desert of WAHIBA SANDS, OMAN
+    thumbnail: media/journeys/oman/thumbnails/6fkWZgA5DGs.webp
+  - id: HS6HsScyMAM
+    title: Oman | Nizwa Souq & Birkat Al Mouz Ruins
+    thumbnail: media/journeys/oman/thumbnails/HS6HsScyMAM.webp
+  - id: sol6Rb8H004
+    title: WADI BANI KHALID - The jewel of Oman's desert
+    thumbnail: media/journeys/oman/thumbnails/sol6Rb8H004.webp
+  - id: rgWuN4XkOWk
+    title: Ras Al Jinz Turtle Reserve - Oman
+    thumbnail: media/journeys/oman/thumbnails/rgWuN4XkOWk.webp
+  - id: nqjvV2b54NQ
+    title: Oman - WADI TIWI (tips & tricks)
+    thumbnail: media/journeys/oman/thumbnails/nqjvV2b54NQ.webp
+  - id: Po1Kt9SkA0g
+    title: WADI SHAB - the most dangerous in Oman
+    thumbnail: media/journeys/oman/thumbnails/Po1Kt9SkA0g.webp
+  - id: "-9pPw_dbqHA"
+    title: Bimmah Sinkhole - what you must know before visiting
+    thumbnail: media/journeys/oman/thumbnails/-9pPw_dbqHA.webp
+  - id: Pa4aAGDK7lY
+    title: OMAN - the best country we have visited in recent years. Find out why.
+    thumbnail: media/journeys/oman/thumbnails/Pa4aAGDK7lY.webp

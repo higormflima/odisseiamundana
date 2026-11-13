@@ -76,7 +76,7 @@ const homeGalleryPhotos = homeGalleryPhotoPaths.flatMap((path) => {
     </div>
 
     {publishedJourneyPages.length ? (
-      <div class="journey-list">
+      <div class="journey-list" id="homepage-journey-list" data-journey-list>
         {orderedPages.map((page) => (
           <a class="journey-row" href={`${base}pt/viagens/${page.data.journey_id.id}/${page.data.episode_id}/`}>
             <span class="journey-date">{formatJourneyListDate(journeyDate(page))}</span>
@@ -91,6 +91,12 @@ const homeGalleryPhotos = homeGalleryPhotoPaths.flatMap((path) => {
         <p>As primeiras histórias estão sendo preparadas.</p>
         <span>Em breve, novos caminhos por aqui.</span>
       </div>
+    )}
+
+    {publishedJourneyPages.length > 5 && (
+      <button class="button-link journey-load-more" type="button" aria-controls="homepage-journey-list" data-journey-load-more hidden>
+        Ver mais <span aria-hidden="true">↓</span>
+      </button>
     )}
 
     {draftPages.length > 0 && (
@@ -121,7 +127,35 @@ const homeGalleryPhotos = homeGalleryPhotoPaths.flatMap((path) => {
   )}
 </SiteLayout>
 
+<script>
+  const journeyList = document.querySelector('[data-journey-list]');
+  const loadMoreButton = document.querySelector('[data-journey-load-more]');
+
+  if (journeyList instanceof HTMLElement && loadMoreButton instanceof HTMLButtonElement) {
+    const journeyRows = Array.from(journeyList.querySelectorAll<HTMLAnchorElement>('.journey-row'));
+    const pageSize = 5;
+    let visibleCount = Math.min(pageSize, journeyRows.length);
+
+    journeyRows.forEach((row, index) => {
+      row.hidden = index >= visibleCount;
+    });
+
+    loadMoreButton.hidden = visibleCount >= journeyRows.length;
+    loadMoreButton.addEventListener('click', () => {
+      const nextVisibleCount = Math.min(visibleCount + pageSize, journeyRows.length);
+      journeyRows.slice(visibleCount, nextVisibleCount).forEach((row) => {
+        row.hidden = false;
+      });
+      visibleCount = nextVisibleCount;
+      loadMoreButton.hidden = visibleCount >= journeyRows.length;
+    });
+  }
+</script>
+
 <style>
+  .journey-list .journey-row[hidden] { display: none; }
+  .journey-load-more { margin-top: 24px; }
+  .journey-load-more span { color: var(--copper); }
   .home-gallery { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; gap: clamp(24px, 5vw, 72px); padding: 0 var(--content-gutter) var(--space-section); }
   .home-gallery-mosaic { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
   .home-gallery-tile { display: block; min-width: 0; overflow: hidden; aspect-ratio: 1; }
