@@ -11,13 +11,13 @@ date:
   year: 2025
   month: 3
 cover:
-  src: media/journeys/amazonia-brasil/optimized/photos/amazonia-013.jpg
-  thumbnail: media/journeys/amazonia-brasil/optimized/thumbnails/amazonia-013.jpg
-  alt: Casal diante de abrigos de palha e uma fogueira na floresta.
+  src: media/journeys/amazonia-brasil/optimized/photos/amazonia-003.jpg
+  thumbnail: media/journeys/amazonia-brasil/optimized/thumbnails/amazonia-003.jpg
+  alt: Lancha com passageiros navega por um rio amazônico sob céu azul.
 photos:
-  - src: media/journeys/amazonia-brasil/optimized/photos/amazonia-003.jpg
-    thumbnail: media/journeys/amazonia-brasil/optimized/thumbnails/amazonia-003.jpg
-    alt: Lancha com passageiros navega por um rio sob céu azul.
+  - src: media/journeys/amazonia-brasil/optimized/photos/amazonia-005.jpg
+    thumbnail: media/journeys/amazonia-brasil/optimized/thumbnails/amazonia-005.jpg
+    alt: Casal sobre uma rocha diante de uma queda-d'água.
   - src: media/journeys/amazonia-brasil/optimized/photos/amazonia-007.jpg
     thumbnail: media/journeys/amazonia-brasil/optimized/thumbnails/amazonia-007.jpg
     alt: Casal em selfie diante do encontro de águas de cores diferentes.
@@ -29,8 +29,15 @@ photos:
     alt: Casal diante de abrigos de palha e uma fogueira na floresta.
 partner:
   name: Iguana Tours
+  logo:
+    src: media/collaborations/iguana-tours-logo.webp
+    alt: Logotipo da Iguana Tours, com uma iguana verde dentro de um círculo marrom.
+    width: 447
+    height: 447
+  address: "Rua 10 de Julho, 685 — Centro, Manaus — AM, 69010-060."
   website: https://www.amazonbrasil.com.br/
   instagram: https://www.instagram.com/iguanatour/
+  email: iguanatour@hotmail.com
   whatsapp: "+55 92 99351-3630"
 type: exchange
 received:

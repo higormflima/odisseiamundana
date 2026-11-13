@@ -65,7 +65,7 @@ const videos = (project.videos ?? []).map((video) => ({
           <div class="collaboration-partner-links">
             {project.partner.website && <a class="text-link" href={project.partner.website} target="_blank" rel="noopener noreferrer">Site oficial ↗</a>}
             {project.partner.email && <a class="text-link" href={`mailto:${project.partner.email}`}>{project.partner.email}</a>}
-            {project.partner.phone && <a class="text-link" href={`tel:${project.partner.phone}`}>{project.partner.phone}</a>}
+            {project.partner.phone && !project.partner.whatsapp && <a class="text-link" href={`tel:${project.partner.phone}`}>Telefone: {project.partner.phone}</a>}
             {project.partner.instagram && <a class="text-link" href={project.partner.instagram} target="_blank" rel="noopener noreferrer">Instagram ↗</a>}
             {project.partner.whatsapp && <a class="text-link" href={`https://wa.me/${project.partner.whatsapp.replace(/\D/g, '')}`} target="_blank" rel="noopener noreferrer">WhatsApp: {project.partner.whatsapp} ↗</a>}
           </div>
