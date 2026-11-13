@@ -7,12 +7,16 @@ import { buildGalleryCollections } from '../../lib/galleryCollections.mjs';
 
 const pages = await getCollection('journeyPages');
 const journeys = await getCollection('journeyMetadata');
-const publishedPages = pages.filter((page) => page.data.status === 'published');
-const draftPages = import.meta.env.DEV ? pages.filter((page) => page.data.status !== 'published') : [];
+const publishedJourneyPages = pages.filter(
+  (page) => page.data.status === 'published' && page.data.episode_id === 'journey-summary',
+);
+const draftPages = import.meta.env.DEV
+  ? pages.filter((page) => page.data.status !== 'published' && page.data.episode_id === 'journey-summary')
+  : [];
 const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
 const datesByJourney = new Map(journeys.map((journey) => [journey.id, journey.data.dates]));
 const journeyDate = (page) => datesByJourney.get(page.data.journey_id.id);
-const orderedPages = [...publishedPages].sort((left, right) => compareJourneysByRecency(journeyDate(left), journeyDate(right)));
+const orderedPages = [...publishedJourneyPages].sort((left, right) => compareJourneysByRecency(journeyDate(left), journeyDate(right)));
 const mapEntries = buildJourneyMapEntries({
   journeys,
   pages,
@@ -68,10 +72,10 @@ const homeGalleryPhotos = homeGalleryPhotoPaths.flatMap((path) => {
         <p class="eyebrow">Arquivo de viagens</p>
         <h2>Histórias pelo caminho</h2>
       </div>
-      <span class="section-count">{publishedPages.length.toString().padStart(2, '0')} publicadas</span>
+      <span class="section-count">{publishedJourneyPages.length.toString().padStart(2, '0')} publicadas</span>
     </div>
 
-    {publishedPages.length ? (
+    {publishedJourneyPages.length ? (
       <div class="journey-list">
         {orderedPages.map((page) => (
           <a class="journey-row" href={`${base}pt/viagens/${page.data.journey_id.id}/${page.data.episode_id}/`}>
