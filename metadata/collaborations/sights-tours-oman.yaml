@@ -3,8 +3,8 @@ status: draft
 kind: project
 title: Omã em 4x4 com a Sights Tours
 description: >
-  De 29 de abril a 6 de maio de 2024, percorremos Omã em uma Mitsubishi Pajero
-  Full equipada para camping, em uma parceria de permuta com a Sights Tours.
+  Exploramos as paisagens de Omã em uma Mitsubishi Pajero Full equipada para
+  camping, com o apoio da Sights Tours.
 destination: Omã
 country: Omã
 date:
@@ -32,6 +32,14 @@ partner:
   name: Sights Tours
   description: Agência de aluguel de carros e turismo em Omã.
   website: https://sightstours.com/
+  email: info@sightstours.com
+  phone: "+96871119983"
+  address: "Sultanate of Oman, Muscat. Map Location: H9VC+8J, Muscat Al Azaybah North, Muscat St 4464 Way, Building 4833, Office 4831."
+  logo:
+    src: media/collaborations/sights-tours-logo.webp
+    alt: Logotipo da Sights Tours, com uma torre estilizada acima do nome em árabe e inglês.
+    width: 480
+    height: 428
 type: exchange
 received:
   - >

@@ -79,6 +79,16 @@ test('valida número internacional de WhatsApp do parceiro', () => {
   assert.equal(validateMetadataText(withWhatsApp('+123'), 'collaboration').valid, false);
 });
 
+test('valida contatos opcionais do parceiro', () => {
+  const withContact = source.replace(
+    '  name: Parceiro\n',
+    '  name: Parceiro\n  email: info@example.com\n  phone: "+96871119983"\n  address: Muscat, Oman\n',
+  );
+  assert.equal(validateMetadataText(withContact, 'collaboration').valid, true);
+  assert.equal(validateMetadataText(withContact.replace('info@example.com', 'not-an-email'), 'collaboration').valid, false);
+  assert.equal(validateMetadataText(withContact.replace('+96871119983', '71119983'), 'collaboration').valid, false);
+});
+
 test('gera mailto com acentos, caracteres especiais e quebras de linha codificados', () => {
   const url = buildCollaborationEmail({
     name: 'João & Ana', company: 'Viagem + Cia', email: 'joao@example.com',

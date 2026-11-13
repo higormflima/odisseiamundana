@@ -34,6 +34,9 @@
         "logo": { "$ref": "#/$defs/photo" },
         "website": { "$ref": "#/$defs/url" },
         "instagram": { "$ref": "#/$defs/url" },
+        "email": { "type": "string", "pattern": "^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$" },
+        "phone": { "type": "string", "pattern": "^\\+[1-9][0-9]{7,14}$" },
+        "address": { "$ref": "#/$defs/text" },
         "whatsapp": {
           "type": "string",
           "pattern": "^\\+(?=(?:[^0-9]*[0-9]){8,15}[^0-9]*$)[1-9][0-9 ()-]*[0-9]$"
