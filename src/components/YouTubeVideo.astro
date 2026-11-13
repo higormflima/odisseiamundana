@@ -2,11 +2,11 @@
 interface Props {
   videoId: string;
   title: string;
+  thumbnailUrl?: string;
 }
 
-const { videoId, title } = Astro.props;
+const { videoId, title, thumbnailUrl: posterUrl } = Astro.props;
 const safeVideoId = /^[A-Za-z0-9_-]{11}$/.test(videoId) ? videoId : undefined;
-const thumbnailUrl = safeVideoId ? `https://i.ytimg.com/vi/${safeVideoId}/maxresdefault.jpg` : undefined;
 const thumbnailFallbackUrl = safeVideoId ? `https://i.ytimg.com/vi/${safeVideoId}/hqdefault.jpg` : undefined;
 ---
 
@@ -14,7 +14,7 @@ const thumbnailFallbackUrl = safeVideoId ? `https://i.ytimg.com/vi/${safeVideoId
   <div class="video-frame" data-youtube-player data-video-id={safeVideoId}>
     <button class="video-frame-poster" type="button" aria-label={`Reproduzir vídeo: ${title}`}>
       <img
-        src={thumbnailUrl}
+        src={posterUrl ?? `https://i.ytimg.com/vi/${safeVideoId}/maxresdefault.jpg`}
         alt={`Miniatura do vídeo: ${title}`}
         loading="lazy"
         referrerpolicy="strict-origin-when-cross-origin"

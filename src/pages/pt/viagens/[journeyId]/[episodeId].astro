@@ -1,4 +1,6 @@
 ---
+import { existsSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
 import SiteLayout from '../../../../layouts/SiteLayout.astro';
 import YouTubeVideo from '../../../../components/YouTubeVideo.astro';
 import TripScoreCard from '../../../../components/TripScoreCard.astro';
@@ -27,6 +29,16 @@ if (!metadataEntry) {
 const journeyTitle = metadataEntry.data.title ?? entry.data.title;
 const { Content } = await render(entry);
 const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+const videoId = entry.data.youtube_video_id?.id;
+const localThumbnailExtension = videoId && /^[A-Za-z0-9_-]{11}$/.test(videoId)
+  ? ['webp', 'jpg'].find((extension) => existsSync(fileURLToPath(new URL(
+    `../../../../../media/journeys/${entry.data.journey_id.id}/thumbnails/${videoId}.${extension}`,
+    import.meta.url,
+  ))))
+  : undefined;
+const localThumbnailUrl = videoId && localThumbnailExtension
+  ? `${base}media/journeys/${entry.data.journey_id.id}/thumbnails/${videoId}.${localThumbnailExtension}`
+  : undefined;
 ---
 
 <SiteLayout title={entry.data.title} description={journeyTitle}>
@@ -39,7 +51,7 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
       <p class="eyebrow">{journeyTitle}</p>
       <h1>{entry.data.title}</h1>
     </header>
-    {entry.data.youtube_video_id && <YouTubeVideo videoId={entry.data.youtube_video_id.id} title={entry.data.title} />}
+    {videoId && <YouTubeVideo videoId={videoId} title={entry.data.title} thumbnailUrl={localThumbnailUrl} />}
     <TripScoreCard tripCard={metadataEntry.data.trip_card} />
     <div class="story-body"><Content /></div>
   </article>

@@ -68,7 +68,11 @@ const heroUrl = hasImage(heroPhoto) ? new URL(image(heroPhoto), Astro.site).href
         <p>Tudo começou quando dois caminhos, vindos de países diferentes, se cruzaram. Desde então, construímos uma vida cheia de descobertas, projetos e viagens. Conheça um pouco da nossa história e descubra como nasceu a Odisseia Mundana.</p>
       </div>
       <div class="origin-video">
-        <YouTubeVideo videoId="GnA3EOjL59Y" title="Nossa história e como nasceu a Odisseia Mundana" />
+        <YouTubeVideo
+          videoId="GnA3EOjL59Y"
+          title="Nossa história e como nasceu a Odisseia Mundana"
+          thumbnailUrl={`${base}media/journeys/about-us/thumbnails/GnA3EOjL59Y.jpg`}
+        />
       </div>
     </section>
 

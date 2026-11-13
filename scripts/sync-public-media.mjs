@@ -12,10 +12,13 @@ const publicMediaDirectories = [
   'journeys/china-stopover/thumbnails',
   'journeys/finland-2026/photos',
   'journeys/finland-2026/thumbnails',
+  'journeys/kenya/thumbnails',
   'journeys/kenya/optimized',
+  'journeys/oman/thumbnails',
   'journeys/oman/optimized',
   'journeys/philippines-palawan/photos',
   'journeys/philippines-palawan/thumbnails',
+  'journeys/tour-du-mont-blanc/thumbnails',
   'journeys/tour-du-mont-blanc/optimized',
   'collaborations',
 ];

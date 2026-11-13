@@ -22,6 +22,10 @@ const photos = (project.photos ?? []).map((photo) => ({
   src: `${base}${photo.src}`,
   thumbnail: `${base}${photo.thumbnail ?? photo.src}`,
 }));
+const videos = (project.videos ?? []).map((video) => ({
+  ...video,
+  thumbnailUrl: video.thumbnail ? `${base}${video.thumbnail}` : undefined,
+}));
 ---
 <SiteLayout title={project.title} fullTitle={title} description={project.description}>
   <Fragment slot="head">
@@ -94,7 +98,7 @@ const photos = (project.photos ?? []).map((photo) => ({
     {project.videos?.length > 0 && (
       <section class="collaboration-media" aria-labelledby="videos-title">
         <h2 id="videos-title">Conteúdo em vídeo</h2>
-        <div class="collaboration-videos">{project.videos.map((video) => <YouTubeVideo videoId={video.id} title={video.title} />)}</div>
+        <div class="collaboration-videos">{videos.map((video) => <YouTubeVideo videoId={video.id} title={video.title} thumbnailUrl={video.thumbnailUrl} />)}</div>
       </section>
     )}
     {(project.partner?.website || project.partner?.instagram || project.partner?.whatsapp) && (

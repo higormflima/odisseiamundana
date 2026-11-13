@@ -51,7 +51,8 @@
         "required": ["id", "title"],
         "properties": {
           "id": { "type": "string", "pattern": "^[A-Za-z0-9_-]{11}$" },
-          "title": { "$ref": "#/$defs/text" }
+          "title": { "$ref": "#/$defs/text" },
+          "thumbnail": { "$ref": "#/$defs/path" }
         }
       }
     }
