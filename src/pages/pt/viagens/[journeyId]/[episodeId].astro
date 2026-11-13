@@ -1,6 +1,6 @@
 ---
 import { existsSync } from 'node:fs';
-import { fileURLToPath } from 'node:url';
+import { resolve } from 'node:path';
 import SiteLayout from '../../../../layouts/SiteLayout.astro';
 import YouTubeVideo from '../../../../components/YouTubeVideo.astro';
 import TripScoreCard from '../../../../components/TripScoreCard.astro';
@@ -31,10 +31,14 @@ const { Content } = await render(entry);
 const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
 const videoId = entry.data.youtube_video_id?.id;
 const localThumbnailExtension = videoId && /^[A-Za-z0-9_-]{11}$/.test(videoId)
-  ? ['webp', 'jpg'].find((extension) => existsSync(fileURLToPath(new URL(
-    `../../../../../media/journeys/${entry.data.journey_id.id}/thumbnails/${videoId}.${extension}`,
-    import.meta.url,
-  ))))
+  ? ['webp', 'jpg'].find((extension) => existsSync(resolve(
+    process.cwd(),
+    'media',
+    'journeys',
+    entry.data.journey_id.id,
+    'thumbnails',
+    `${videoId}.${extension}`,
+  )))
   : undefined;
 const localThumbnailUrl = videoId && localThumbnailExtension
   ? `${base}media/journeys/${entry.data.journey_id.id}/thumbnails/${videoId}.${localThumbnailExtension}`
