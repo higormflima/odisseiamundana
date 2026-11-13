@@ -1,6 +1,68 @@
 journey_id: tour-du-mont-blanc
 title: Tour du Mont Blanc — Suíça e França
+summary: >
+  Nossa caminhada de três dias entre Champex-Lac, Trient, Le Tour e
+  Chamonix, por um trecho do Tour du Mont Blanc.
+dates:
+  year: 2025
+  month: 9
+  start_date: 2025-09-03
+  end_date: 2025-09-07
 geography:
+  continents:
+    - Europa
   countries:
     - Suíça
     - França
+  destinations:
+    - Champex-Lac
+    - Trient
+    - Le Tour
+    - Lac Blanc
+    - Chamonix
+  representative_point:
+    name: Chamonix
+    coordinates:
+      lat: 45.916667
+      lng: 6.866667
+budget:
+  party_size: 3
+  notes: >
+    Para três pessoas, as hospedagens custaram 210 francos suíços em Trient
+    e 318 euros na França, incluindo café da manhã nas três e jantar nas
+    duas primeiras. Valores de setembro de 2025, sem outros gastos.
+gallery:
+  title: Nossa caminhada pelo Tour du Mont Blanc em imagens
+  collection_title: Tour du Mont Blanc
+  photos:
+    - { src: media/journeys/tour-du-mont-blanc/optimized/photos/tour-du-mont-blanc-001.jpg, thumbnail: media/journeys/tour-du-mont-blanc/optimized/thumbnails/tour-du-mont-blanc-001.jpg, alt: "Pessoas em um terraço de montanha com mesas e vista para os Alpes." }
+    - { src: media/journeys/tour-du-mont-blanc/optimized/photos/tour-du-mont-blanc-002.jpg, thumbnail: media/journeys/tour-du-mont-blanc/optimized/thumbnails/tour-du-mont-blanc-002.jpg, alt: "Caminhantes em trilha com montanhas ao fundo." }
+    - { src: media/journeys/tour-du-mont-blanc/optimized/photos/tour-du-mont-blanc-003.jpg, thumbnail: media/journeys/tour-du-mont-blanc/optimized/thumbnails/tour-du-mont-blanc-003.jpg, alt: "Caminhantes atravessam um trecho rochoso nas montanhas." }
+    - { src: media/journeys/tour-du-mont-blanc/optimized/photos/tour-du-mont-blanc-004.jpg, thumbnail: media/journeys/tour-du-mont-blanc/optimized/thumbnails/tour-du-mont-blanc-004.jpg, alt: "Caminhante em encosta cercada por nuvens." }
+    - { src: media/journeys/tour-du-mont-blanc/optimized/photos/tour-du-mont-blanc-005.jpg, thumbnail: media/journeys/tour-du-mont-blanc/optimized/thumbnails/tour-du-mont-blanc-005.jpg, alt: "Pessoas atravessam uma ponte suspensa sobre um curso d'água." }
+    - { src: media/journeys/tour-du-mont-blanc/optimized/photos/tour-du-mont-blanc-006.jpg, thumbnail: media/journeys/tour-du-mont-blanc/optimized/thumbnails/tour-du-mont-blanc-006.jpg, alt: "Pessoa de casaco vermelho diante de montanhas nevadas.", cover: true }
+    - { src: media/journeys/tour-du-mont-blanc/optimized/photos/tour-du-mont-blanc-007.jpg, thumbnail: media/journeys/tour-du-mont-blanc/optimized/thumbnails/tour-du-mont-blanc-007.jpg, alt: "Pessoa de casaco vermelho posa diante de uma montanha nevada." }
+    - { src: media/journeys/tour-du-mont-blanc/optimized/photos/tour-du-mont-blanc-008.jpg, thumbnail: media/journeys/tour-du-mont-blanc/optimized/thumbnails/tour-du-mont-blanc-008.jpg, alt: "Montanhas nevadas acima das nuvens." }
+    - { src: media/journeys/tour-du-mont-blanc/optimized/photos/tour-du-mont-blanc-009.jpg, thumbnail: media/journeys/tour-du-mont-blanc/optimized/thumbnails/tour-du-mont-blanc-009.jpg, alt: "Cabra selvagem de chifres curvos em uma encosta." }
+    - { src: media/journeys/tour-du-mont-blanc/optimized/photos/tour-du-mont-blanc-010.jpg, thumbnail: media/journeys/tour-du-mont-blanc/optimized/thumbnails/tour-du-mont-blanc-010.jpg, alt: "Trilha desce por um vale cercado por montanhas." }
+    - { src: media/journeys/tour-du-mont-blanc/optimized/photos/tour-du-mont-blanc-011.jpg, thumbnail: media/journeys/tour-du-mont-blanc/optimized/thumbnails/tour-du-mont-blanc-011.jpg, alt: "Ovelhas pastam perto de uma construção nas montanhas." }
+    - { src: media/journeys/tour-du-mont-blanc/optimized/photos/tour-du-mont-blanc-012.jpg, thumbnail: media/journeys/tour-du-mont-blanc/optimized/thumbnails/tour-du-mont-blanc-012.jpg, alt: "Pessoas em trilha rochosa diante de montanhas." }
+    - { src: media/journeys/tour-du-mont-blanc/optimized/photos/tour-du-mont-blanc-013.jpg, thumbnail: media/journeys/tour-du-mont-blanc/optimized/thumbnails/tour-du-mont-blanc-013.jpg, alt: "Trilha e pequena construção em encosta com árvores." }
+provenance:
+  - source_type: manual
+    verification_status: confirmed
+    source_id: owner-map-point-chamonix
+    fields:
+      - geography.representative_point
+  - source_type: transcript
+    verification_status: unverified
+    source_id: VIPiNWQaeR0
+    fields:
+      - summary
+      - geography.destinations
+  - source_type: manual
+    verification_status: confirmed
+    source_id: owner-tour-du-mont-blanc-trip-2025
+    fields:
+      - dates
+      - budget

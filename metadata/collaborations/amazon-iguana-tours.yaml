@@ -1,0 +1,47 @@
+collaboration_id: amazon-iguana-tours
+status: draft
+kind: project
+title: Amazônia com a Iguana Tours
+description: >
+  Uma parceria para contar nossa experiência na floresta amazônica e em
+  Presidente Figueiredo por meio de vídeos e fotografias.
+destination: Amazonas
+country: Brasil
+date:
+  year: 2025
+  month: 3
+cover:
+  src: media/journeys/amazonia-brasil/optimized/photos/amazonia-013.jpg
+  thumbnail: media/journeys/amazonia-brasil/optimized/thumbnails/amazonia-013.jpg
+  alt: Casal diante de abrigos de palha e uma fogueira na floresta.
+photos:
+  - src: media/journeys/amazonia-brasil/optimized/photos/amazonia-003.jpg
+    thumbnail: media/journeys/amazonia-brasil/optimized/thumbnails/amazonia-003.jpg
+    alt: Lancha com passageiros navega por um rio sob céu azul.
+  - src: media/journeys/amazonia-brasil/optimized/photos/amazonia-007.jpg
+    thumbnail: media/journeys/amazonia-brasil/optimized/thumbnails/amazonia-007.jpg
+    alt: Casal em selfie diante do encontro de águas de cores diferentes.
+  - src: media/journeys/amazonia-brasil/optimized/photos/amazonia-012.jpg
+    thumbnail: media/journeys/amazonia-brasil/optimized/thumbnails/amazonia-012.jpg
+    alt: Mulher diante do tronco de uma árvore alta na floresta.
+  - src: media/journeys/amazonia-brasil/optimized/photos/amazonia-013.jpg
+    thumbnail: media/journeys/amazonia-brasil/optimized/thumbnails/amazonia-013.jpg
+    alt: Casal diante de abrigos de palha e uma fogueira na floresta.
+partner:
+  name: Iguana Tours
+  website: https://www.amazonbrasil.com.br/
+  instagram: https://www.instagram.com/iguanatour/
+  whatsapp: "+55 92 99351-3630"
+type: exchange
+received:
+  - Experiência all-inclusive de três dias e duas noites na pousada de selva.
+  - Passeio all-inclusive de um dia em Presidente Figueiredo.
+delivered:
+  - Vídeos no YouTube.
+  - Publicações no Instagram.
+  - Material fotográfico.
+videos:
+  - id: rVeHDYmA3dg
+    title: Três dias dentro da floresta amazônica
+  - id: 190q92fZS7k
+    title: Grutas e cachoeiras em Presidente Figueiredo

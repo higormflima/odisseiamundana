@@ -6,19 +6,52 @@ interface Props {
 
 const { videoId, title } = Astro.props;
 const safeVideoId = /^[A-Za-z0-9_-]{11}$/.test(videoId) ? videoId : undefined;
+const thumbnailUrl = safeVideoId ? `https://i.ytimg.com/vi/${safeVideoId}/maxresdefault.jpg` : undefined;
+const thumbnailFallbackUrl = safeVideoId ? `https://i.ytimg.com/vi/${safeVideoId}/hqdefault.jpg` : undefined;
 ---
 
 {safeVideoId ? (
-  <div class="video-frame">
-    <iframe
-      src={`https://www.youtube-nocookie.com/embed/${safeVideoId}?rel=0`}
-      title={title}
-      loading="lazy"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-      referrerpolicy="strict-origin-when-cross-origin"
-      allowfullscreen
-    ></iframe>
+  <div class="video-frame" data-youtube-player data-video-id={safeVideoId}>
+    <button class="video-frame-poster" type="button" aria-label={`Reproduzir vídeo: ${title}`}>
+      <img
+        src={thumbnailUrl}
+        alt={`Miniatura do vídeo: ${title}`}
+        loading="lazy"
+        referrerpolicy="strict-origin-when-cross-origin"
+        onerror={`this.onerror=null;this.src='${thumbnailFallbackUrl}'`}
+      />
+      <span class="video-frame-play" aria-hidden="true">▶</span>
+    </button>
+    <noscript>
+      <iframe
+        src={`https://www.youtube-nocookie.com/embed/${safeVideoId}?rel=0`}
+        title={title}
+        loading="lazy"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allowfullscreen
+      ></iframe>
+    </noscript>
   </div>
 ) : (
   <p class="media-note">Vídeo indisponível: confira o identificador do YouTube.</p>
 )}
+
+<script>
+  const players = document.querySelectorAll('[data-youtube-player]');
+  for (const player of players) {
+    const videoId = player.getAttribute('data-video-id');
+    const poster = player.querySelector('.video-frame-poster');
+    if (!videoId || !(poster instanceof HTMLButtonElement)) continue;
+    poster.addEventListener('click', () => {
+      const iframe = document.createElement('iframe');
+      iframe.src = `https://www.youtube-nocookie.com/embed/${videoId}?rel=0&autoplay=1`;
+      iframe.title = poster.getAttribute('aria-label') ?? 'Vídeo do YouTube';
+      iframe.loading = 'lazy';
+      iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+      iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+      iframe.allowFullscreen = true;
+      player.replaceChildren(iframe);
+    }, { once: true });
+  }
+</script>

@@ -6,12 +6,17 @@ const projectRoot = fileURLToPath(new URL('../', import.meta.url));
 const publicMediaDirectories = [
   'journeys/about-us/photos',
   'journeys/about-us/thumbnails',
+  'journeys/amazonia-brasil/thumbnails',
+  'journeys/amazonia-brasil/optimized',
   'journeys/china-stopover/photos',
   'journeys/china-stopover/thumbnails',
   'journeys/finland-2026/photos',
   'journeys/finland-2026/thumbnails',
+  'journeys/kenya/optimized',
+  'journeys/oman/optimized',
   'journeys/philippines-palawan/photos',
   'journeys/philippines-palawan/thumbnails',
+  'journeys/tour-du-mont-blanc/optimized',
   'collaborations',
 ];
 

@@ -33,7 +33,11 @@
         "description": { "$ref": "#/$defs/text" },
         "logo": { "$ref": "#/$defs/photo" },
         "website": { "$ref": "#/$defs/url" },
-        "instagram": { "$ref": "#/$defs/url" }
+        "instagram": { "$ref": "#/$defs/url" },
+        "whatsapp": {
+          "type": "string",
+          "pattern": "^\\+(?=(?:[^0-9]*[0-9]){8,15}[^0-9]*$)[1-9][0-9 ()-]*[0-9]$"
+        }
       }
     },
     "type": { "enum": ["exchange", "sponsorship", "paid", "special"] },

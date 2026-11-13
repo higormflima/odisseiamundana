@@ -1,10 +1,54 @@
 journey_id: amazonia-brasil
 title: Amazônia — Brasil
+summary: >
+  Nossa viagem por Manaus, pelo Rio Negro e pela floresta amazônica, com
+  uma passagem pelas grutas e cachoeiras de Presidente Figueiredo.
+dates:
+  year: 2025
+  month: 3
+  start_date: 2025-03-08
+  end_date: 2025-03-15
 geography:
+  continents:
+    - América do Sul
   countries:
     - Brasil
   regions:
     - Amazonas
+  destinations:
+    - Manaus
+    - Presidente Figueiredo
+  representative_point:
+    name: Manaus
+    coordinates:
+      lat: -3.11306
+      lng: -60.02528
+activities:
+  - activity_id: jungle-lodge
+    name: Pousada de selva e atividades na floresta
+    provider: Iguana Tours
+    notes: Três dias e duas noites; experiência oferecida em permuta all-inclusive.
+  - activity_id: presidente-figueiredo
+    name: Passeio em Presidente Figueiredo
+    provider: Iguana Tours
+    notes: Bate-volta de Manaus; experiência oferecida em permuta all-inclusive.
+gallery:
+  title: Nossa viagem pela Amazônia em imagens
+  collection_title: Amazônia, Brasil
+  photos:
+    - { src: media/journeys/amazonia-brasil/optimized/photos/amazonia-001.jpg, thumbnail: media/journeys/amazonia-brasil/optimized/thumbnails/amazonia-001.jpg, alt: "Pessoas em um barco navegando entre árvores." }
+    - { src: media/journeys/amazonia-brasil/optimized/photos/amazonia-002.jpg, thumbnail: media/journeys/amazonia-brasil/optimized/thumbnails/amazonia-002.jpg, alt: "Grupo em lancha sobre um rio cercado por vegetação." }
+    - { src: media/journeys/amazonia-brasil/optimized/photos/amazonia-003.jpg, thumbnail: media/journeys/amazonia-brasil/optimized/thumbnails/amazonia-003.jpg, alt: "Lancha com passageiros navega por um rio sob céu azul.", cover: true }
+    - { src: media/journeys/amazonia-brasil/optimized/photos/amazonia-004.jpg, thumbnail: media/journeys/amazonia-brasil/optimized/thumbnails/amazonia-004.jpg, alt: "Pessoas em uma embarcação sobre o rio sob céu nublado." }
+    - { src: media/journeys/amazonia-brasil/optimized/photos/amazonia-005.jpg, thumbnail: media/journeys/amazonia-brasil/optimized/thumbnails/amazonia-005.jpg, alt: "Casal sobre uma rocha diante de uma queda-d'água." }
+    - { src: media/journeys/amazonia-brasil/optimized/photos/amazonia-006.jpg, thumbnail: media/journeys/amazonia-brasil/optimized/thumbnails/amazonia-006.jpg, alt: "Pessoas em barco diante da água iluminada pelo sol." }
+    - { src: media/journeys/amazonia-brasil/optimized/photos/amazonia-007.jpg, thumbnail: media/journeys/amazonia-brasil/optimized/thumbnails/amazonia-007.jpg, alt: "Casal em selfie diante do encontro de águas de cores diferentes." }
+    - { src: media/journeys/amazonia-brasil/optimized/photos/amazonia-008.jpg, thumbnail: media/journeys/amazonia-brasil/optimized/thumbnails/amazonia-008.jpg, alt: "Peixe suspenso diante de vegetação e água." }
+    - { src: media/journeys/amazonia-brasil/optimized/photos/amazonia-009.jpg, thumbnail: media/journeys/amazonia-brasil/optimized/thumbnails/amazonia-009.jpg, alt: "Casal segura um pequeno jacaré durante uma atividade noturna." }
+    - { src: media/journeys/amazonia-brasil/optimized/photos/amazonia-010.jpg, thumbnail: media/journeys/amazonia-brasil/optimized/thumbnails/amazonia-010.jpg, alt: "Mulher com um papagaio pousado no braço junto a um rio." }
+    - { src: media/journeys/amazonia-brasil/optimized/photos/amazonia-011.jpg, thumbnail: media/journeys/amazonia-brasil/optimized/thumbnails/amazonia-011.jpg, alt: "Pequeno anfíbio sobre a mão de uma pessoa, com a floresta ao fundo." }
+    - { src: media/journeys/amazonia-brasil/optimized/photos/amazonia-012.jpg, thumbnail: media/journeys/amazonia-brasil/optimized/thumbnails/amazonia-012.jpg, alt: "Mulher diante do tronco de uma árvore alta na floresta.", featured: true }
+    - { src: media/journeys/amazonia-brasil/optimized/photos/amazonia-013.jpg, thumbnail: media/journeys/amazonia-brasil/optimized/thumbnails/amazonia-013.jpg, alt: "Casal diante de abrigos de palha e uma fogueira na floresta." }
 provenance:
   - source_type: youtube_metadata
     verification_status: confirmed
@@ -12,3 +56,20 @@ provenance:
     fields:
       - title
       - geography
+  - source_type: transcript
+    verification_status: unverified
+    source_id: rVeHDYmA3dg
+    fields:
+      - dates.month
+      - activities
+  - source_type: manual
+    verification_status: confirmed
+    source_id: owner-amazonia-trip-2025
+    fields:
+      - dates
+      - activities.collaboration
+  - source_type: manual
+    verification_status: confirmed
+    source_id: owner-map-point-manaus
+    fields:
+      - geography.representative_point

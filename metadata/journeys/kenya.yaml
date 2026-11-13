@@ -1,8 +1,66 @@
 journey_id: kenya
 title: Quênia — Safáris e Diani Beach
+summary: >
+  Nossa viagem entre os safáris de Maasai Mara, Amboseli e Nairóbi
+  e as praias de Diani Beach.
+dates:
+  year: 2025
+  month: 1
+  start_date: 2025-01-05
+  end_date: 2025-01-17
 geography:
+  continents:
+    - África
   countries:
     - Quênia
+  destinations:
+    - Nairóbi
+    - Maasai Mara
+    - Amboseli
+    - Mombasa
+    - Diani Beach
+  representative_point:
+    name: Nairóbi
+    coordinates:
+      lat: -1.292797
+      lng: 36.820582
+budget:
+  currency: USD
+  party_size: 2
+  notes: >
+    A hospedagem no Soul Breeze custou US$ 350 para o casal por seis noites,
+    com café da manhã, em janeiro de 2025.
+gallery:
+  title: Nossa viagem pelo Quênia em imagens
+  collection_title: Quênia
+  photos:
+    - { src: media/journeys/kenya/optimized/photos/kenya-001.jpg, thumbnail: media/journeys/kenya/optimized/thumbnails/kenya-001.jpg, alt: "Elefante caminha pela savana.", cover: true }
+    - { src: media/journeys/kenya/optimized/photos/kenya-002.jpg, thumbnail: media/journeys/kenya/optimized/thumbnails/kenya-002.jpg, alt: "Elefante em uma paisagem com montanhas ao fundo." }
+    - { src: media/journeys/kenya/optimized/photos/kenya-003.jpg, thumbnail: media/journeys/kenya/optimized/thumbnails/kenya-003.jpg, alt: "Elefante entre a vegetação, com montanhas ao fundo." }
+    - { src: media/journeys/kenya/optimized/photos/kenya-004.jpg, thumbnail: media/journeys/kenya/optimized/thumbnails/kenya-004.jpg, alt: "Guepardos caminham pela savana." }
+    - { src: media/journeys/kenya/optimized/photos/kenya-005.jpg, thumbnail: media/journeys/kenya/optimized/thumbnails/kenya-005.jpg, alt: "Guepardo caminha pelo capim." }
+    - { src: media/journeys/kenya/optimized/photos/kenya-006.jpg, thumbnail: media/journeys/kenya/optimized/thumbnails/kenya-006.jpg, alt: "Dois guepardos caminham na vegetação." }
+    - { src: media/journeys/kenya/optimized/photos/kenya-007.jpg, thumbnail: media/journeys/kenya/optimized/thumbnails/kenya-007.jpg, alt: "Elefante caminha pela savana." }
+    - { src: media/journeys/kenya/optimized/photos/kenya-008.jpg, thumbnail: media/journeys/kenya/optimized/thumbnails/kenya-008.jpg, alt: "Rosto de um búfalo visto de perto." }
+    - { src: media/journeys/kenya/optimized/photos/kenya-009.jpg, thumbnail: media/journeys/kenya/optimized/thumbnails/kenya-009.jpg, alt: "Rosto de um babuíno visto de perto." }
+    - { src: media/journeys/kenya/optimized/photos/kenya-010.jpg, thumbnail: media/journeys/kenya/optimized/thumbnails/kenya-010.jpg, alt: "Grupo posa junto a um veículo de safári." }
+    - { src: media/journeys/kenya/optimized/photos/kenya-011.jpg, thumbnail: media/journeys/kenya/optimized/thumbnails/kenya-011.jpg, alt: "Zebra em uma área de capim." }
+    - { src: media/journeys/kenya/optimized/photos/kenya-012.jpg, thumbnail: media/journeys/kenya/optimized/thumbnails/kenya-012.jpg, alt: "Elefante visto de perto na savana." }
+    - { src: media/journeys/kenya/optimized/photos/kenya-013.jpg, thumbnail: media/journeys/kenya/optimized/thumbnails/kenya-013.jpg, alt: "Facócero caminha entre o capim." }
+    - { src: media/journeys/kenya/optimized/photos/kenya-014.jpg, thumbnail: media/journeys/kenya/optimized/thumbnails/kenya-014.jpg, alt: "Grupo de antílopes pasta na savana." }
+    - { src: media/journeys/kenya/optimized/photos/kenya-015.jpg, thumbnail: media/journeys/kenya/optimized/thumbnails/kenya-015.jpg, alt: "Rinoceronte e filhote entre o capim." }
+    - { src: media/journeys/kenya/optimized/photos/kenya-016.jpg, thumbnail: media/journeys/kenya/optimized/thumbnails/kenya-016.jpg, alt: "Rinocerontes adultos e filhote em uma estrada." }
+    - { src: media/journeys/kenya/optimized/photos/kenya-017.jpg, thumbnail: media/journeys/kenya/optimized/thumbnails/kenya-017.jpg, alt: "Detalhe das manchas de uma girafa." }
+    - { src: media/journeys/kenya/optimized/photos/kenya-018.jpg, thumbnail: media/journeys/kenya/optimized/thumbnails/kenya-018.jpg, alt: "Crocodilo descansa junto à água." }
+    - { src: media/journeys/kenya/optimized/photos/kenya-019.jpg, thumbnail: media/journeys/kenya/optimized/thumbnails/kenya-019.jpg, alt: "Mulher alimenta uma girafa junto a uma passarela." }
+    - { src: media/journeys/kenya/optimized/photos/kenya-020.jpg, thumbnail: media/journeys/kenya/optimized/thumbnails/kenya-020.jpg, alt: "Leão sentado na vegetação." }
+    - { src: media/journeys/kenya/optimized/photos/kenya-021.jpg, thumbnail: media/journeys/kenya/optimized/thumbnails/kenya-021.jpg, alt: "Girafa entre a vegetação." }
+    - { src: media/journeys/kenya/optimized/photos/kenya-022.jpg, thumbnail: media/journeys/kenya/optimized/thumbnails/kenya-022.jpg, alt: "Girafas caminham pela savana." }
+    - { src: media/journeys/kenya/optimized/photos/kenya-023.jpg, thumbnail: media/journeys/kenya/optimized/thumbnails/kenya-023.jpg, alt: "Antílope visto de perto." }
+    - { src: media/journeys/kenya/optimized/photos/kenya-024.jpg, thumbnail: media/journeys/kenya/optimized/thumbnails/kenya-024.jpg, alt: "Antílope em uma área de capim." }
+    - { src: media/journeys/kenya/optimized/photos/kenya-025.jpg, thumbnail: media/journeys/kenya/optimized/thumbnails/kenya-025.jpg, alt: "Duas leoas descansam juntas." }
+    - { src: media/journeys/kenya/optimized/photos/kenya-026.jpg, thumbnail: media/journeys/kenya/optimized/thumbnails/kenya-026.jpg, alt: "Duas leoas deitadas na vegetação." }
+    - { src: media/journeys/kenya/optimized/photos/kenya-027.jpg, thumbnail: media/journeys/kenya/optimized/thumbnails/kenya-027.jpg, alt: "Leão deitado no capim." }
 provenance:
   - source_type: youtube_metadata
     verification_status: confirmed
@@ -10,3 +68,20 @@ provenance:
     fields:
       - title
       - geography
+  - source_type: transcript
+    verification_status: unverified
+    source_id: TiBYPfzWNUQ
+    fields:
+      - summary
+      - geography.destinations
+  - source_type: manual
+    verification_status: confirmed
+    source_id: owner-kenya-trip-2025
+    fields:
+      - dates
+      - budget
+  - source_type: manual
+    verification_status: confirmed
+    source_id: owner-map-point-nairobi
+    fields:
+      - geography.representative_point

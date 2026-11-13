@@ -21,8 +21,8 @@ import CostTable from '../../../src/components/CostTable.astro';
 ## Regras de conteúdo
 
 - **Duas colunas.** A primeira traz o item; a segunda, o valor. Não acrescente colunas.
-- **Valor sempre para o grupo inteiro.** A coluna de valor mostra quanto o grupo da viagem pagou no total, e `amountLabel` nomeia esse grupo ("Total do casal", "Total da família"). Assim a coluna soma até a linha de total.
-- **Preço unitário no detalhe.** Preço por pessoa, por noite ou por dia, duração, quantidade e o que não foi comprado ficam em `detail`, em frase curta.
+- **Valor para o grupo inteiro, salvo exceção aprovada.** A coluna normalmente mostra quanto o grupo pagou, e `amountLabel` nomeia esse grupo ("Total do casal", "Total da família"). No Tour du Mont Blanc, o proprietário aprovou valores por pessoa; nesse caso, identifique claramente a base em `amountLabel` e use-a em todas as linhas e no total.
+- **Preço unitário no detalhe.** Quando a coluna mostra o valor do grupo, preço por pessoa, por noite ou por dia pode ficar em `detail`, junto de duração, quantidade e do que não foi comprado, em frase curta.
 - **Itens curtos.** `item` é um nome de duas ou três palavras. Quantidades como "5 dias" ou "4 noites" vão no detalhe.
 - **Valores aproximados com `~`.** Use `~` quando o valor for estimado ("cerca de 50€ de combustível") e no total, se ele for aproximado.
 - **Linha de total quando os valores somam.** Ela fecha a tabela e confere com a soma das linhas. Se não conferir, verifique antes de publicar. Omita `total` quando os valores forem médias, diárias ou preços avulsos que não podem ser somados.

@@ -1,8 +1,69 @@
 journey_id: oman
 title: Omã — Roadtrip
+summary: >
+  Uma viagem de carro entre Mascate, as montanhas de Jebel Shams, o deserto
+  de Wahiba Sands e os uádis da costa de Omã.
+dates:
+  year: 2024
+  month: 4
+  start_date: 2024-04-28
+  end_date: 2024-05-07
 geography:
+  continents:
+    - Ásia
   countries:
     - Omã
+  destinations:
+    - Mascate
+    - Jebel Shams
+    - Nizwa
+    - Birkat Al Mouz
+    - Wahiba Sands
+    - Wadi Bani Khalid
+    - Ras Al Jinz
+    - Wadi Tiwi
+    - Wadi Shab
+    - Bimmah Sinkhole
+  representative_point:
+    name: Mascate
+    coordinates:
+      lat: 23.58413
+      lng: 58.40778
+budget:
+  currency: OMR
+  party_size: 2
+  notes: >
+    Estimativa relatada para o casal de aproximadamente 608 riais omanenses,
+    incluindo carro com equipamento e seguro, combustível, hospedagens,
+    restaurantes e extras; passagens aéreas não incluídas.
+gallery:
+  title: Nossa viagem por Omã em imagens
+  collection_title: Omã
+  photos:
+    - { src: media/journeys/oman/optimized/photos/oman-001.jpg, thumbnail: media/journeys/oman/optimized/thumbnails/oman-001.jpg, alt: "Pessoas caminham sob uma formação rochosa com montanhas ao fundo." }
+    - { src: media/journeys/oman/optimized/photos/oman-002.jpg, thumbnail: media/journeys/oman/optimized/thumbnails/oman-002.jpg, alt: "Pessoa ao lado de carro em uma estrada nas montanhas." }
+    - { src: media/journeys/oman/optimized/photos/oman-003.jpg, thumbnail: media/journeys/oman/optimized/thumbnails/oman-003.jpg, alt: "Pessoa em uma trilha nas montanhas junto a um cânion." }
+    - { src: media/journeys/oman/optimized/photos/oman-004.jpg, thumbnail: media/journeys/oman/optimized/thumbnails/oman-004.jpg, alt: "Carro com barraca de teto em uma área montanhosa ao entardecer." }
+    - { src: media/journeys/oman/optimized/photos/oman-005.jpg, thumbnail: media/journeys/oman/optimized/thumbnails/oman-005.jpg, alt: "Pessoa sobre o teto de um carro." }
+    - { src: media/journeys/oman/optimized/photos/oman-006.jpg, thumbnail: media/journeys/oman/optimized/thumbnails/oman-006.jpg, alt: "Casal em selfie diante de dunas no deserto." }
+    - { src: media/journeys/oman/optimized/photos/oman-007.jpg, thumbnail: media/journeys/oman/optimized/thumbnails/oman-007.jpg, alt: "Mulher no deserto com camelos ao fundo." }
+    - { src: media/journeys/oman/optimized/photos/oman-008.jpg, thumbnail: media/journeys/oman/optimized/thumbnails/oman-008.jpg, alt: "Pessoa sobre carro em meio às dunas." }
+    - { src: media/journeys/oman/optimized/photos/oman-009.jpg, thumbnail: media/journeys/oman/optimized/thumbnails/oman-009.jpg, alt: "Camelo em uma paisagem de areia." }
+    - { src: media/journeys/oman/optimized/photos/oman-010.jpg, thumbnail: media/journeys/oman/optimized/thumbnails/oman-010.jpg, alt: "Pessoa de braços abertos sobre um carro no deserto." }
+    - { src: media/journeys/oman/optimized/photos/oman-011.jpg, thumbnail: media/journeys/oman/optimized/thumbnails/oman-011.jpg, alt: "Arco enquadra pátio e minarete de uma mesquita." }
+    - { src: media/journeys/oman/optimized/photos/oman-012.jpg, thumbnail: media/journeys/oman/optimized/thumbnails/oman-012.jpg, alt: "Pessoa diante de uma piscina natural entre rochas e uma queda-d'água." }
+    - { src: media/journeys/oman/optimized/photos/oman-013.jpg, thumbnail: media/journeys/oman/optimized/thumbnails/oman-013.jpg, alt: "Carro com barraca de teto estacionado em uma praia de pedras." }
+    - { src: media/journeys/oman/optimized/photos/oman-014.jpg, thumbnail: media/journeys/oman/optimized/thumbnails/oman-014.jpg, alt: "Pessoa em selfie diante de uma piscina entre rochas." }
+    - { src: media/journeys/oman/optimized/photos/oman-015.jpg, thumbnail: media/journeys/oman/optimized/thumbnails/oman-015.jpg, alt: "Vista de cima de carro em uma duna de areia." }
+    - { src: media/journeys/oman/optimized/photos/oman-016.jpg, thumbnail: media/journeys/oman/optimized/thumbnails/oman-016.jpg, alt: "Mulher em uma sequência de arcos de uma mesquita." }
+    - { src: media/journeys/oman/optimized/photos/oman-017.jpg, thumbnail: media/journeys/oman/optimized/thumbnails/oman-017.jpg, alt: "Carro com barraca de teto aberta em uma montanha ao entardecer." }
+    - { src: media/journeys/oman/optimized/photos/oman-018.jpg, thumbnail: media/journeys/oman/optimized/thumbnails/oman-018.jpg, alt: "Mulher diante de palmeiras e montanhas." }
+    - { src: media/journeys/oman/optimized/photos/oman-019.jpg, thumbnail: media/journeys/oman/optimized/thumbnails/oman-019.jpg, alt: "Dois camelos na carroceria de uma caminhonete em uma estrada." }
+    - { src: media/journeys/oman/optimized/photos/oman-020.jpg, thumbnail: media/journeys/oman/optimized/thumbnails/oman-020.jpg, alt: "Mulher em corredor de arcos com reflexos no chão." }
+    - { src: media/journeys/oman/optimized/photos/oman-021.jpg, thumbnail: media/journeys/oman/optimized/thumbnails/oman-021.jpg, alt: "Pessoa de pé sobre uma duna." }
+    - { src: media/journeys/oman/optimized/photos/oman-022.jpg, thumbnail: media/journeys/oman/optimized/thumbnails/oman-022.jpg, alt: "Mulher sentada sobre uma duna." }
+    - { src: media/journeys/oman/optimized/photos/oman-023.jpg, thumbnail: media/journeys/oman/optimized/thumbnails/oman-023.jpg, alt: "Mulher sentada sobre uma duna de areia alaranjada.", featured: true }
+    - { src: media/journeys/oman/optimized/photos/oman-024.jpg, thumbnail: media/journeys/oman/optimized/thumbnails/oman-024.jpg, alt: "Carro com pessoas diante de dunas no deserto.", cover: true }
 provenance:
   - source_type: youtube_metadata
     verification_status: confirmed
@@ -10,3 +71,23 @@ provenance:
     fields:
       - title
       - geography
+  - source_type: transcript
+    verification_status: unverified
+    source_id: ZnT0KqUFJa8
+    fields:
+      - summary
+      - geography.destinations
+      - budget
+  - source_type: manual
+    verification_status: confirmed
+    source_id: owner-oman-trip-2024
+    fields:
+      - dates
+      - budget.currency
+      - budget.party_size
+      - budget.notes
+  - source_type: manual
+    verification_status: confirmed
+    source_id: owner-map-point-muscat
+    fields:
+      - geography.representative_point

@@ -70,6 +70,15 @@ test('rejeita caminhos externos e identificadores de vídeo inválidos', () => {
   assert.equal(validateMetadataText(`${source}videos:\n  - id: invalid\n    title: Vídeo\n`, 'collaboration').valid, false);
 });
 
+test('valida número internacional de WhatsApp do parceiro', () => {
+  const withWhatsApp = (number) => source.replace('  name: Parceiro\n', `  name: Parceiro\n  whatsapp: "${number}"\n`);
+  assert.equal(validateMetadataText(withWhatsApp('+55 92 99351-3630'), 'collaboration').valid, true);
+  assert.equal(validateMetadataText(withWhatsApp('+5592993513630'), 'collaboration').valid, true);
+  assert.equal(validateMetadataText(withWhatsApp('92 99351-3630'), 'collaboration').valid, false);
+  assert.equal(validateMetadataText(withWhatsApp('+55 92 99351-3630?text=x'), 'collaboration').valid, false);
+  assert.equal(validateMetadataText(withWhatsApp('+123'), 'collaboration').valid, false);
+});
+
 test('gera mailto com acentos, caracteres especiais e quebras de linha codificados', () => {
   const url = buildCollaborationEmail({
     name: 'João & Ana', company: 'Viagem + Cia', email: 'joao@example.com',

@@ -3,20 +3,23 @@ import { getEntry } from 'astro:content';
 import { readColorSignatureFromSrc } from '../lib/imageSignature.mjs';
 import { readImageSizeFromSrc } from '../lib/imageSize.mjs';
 import { orderPhotosByVariety } from '../lib/photoVariety.mjs';
+import { selectJourneyPhotos } from '../lib/journeyPhotoSelection.mjs';
 import PhotoGallery from './PhotoGallery.astro';
 
 interface Props {
   journeyId: string;
+  photoNames?: string[];
+  title?: string;
 }
 
-const { journeyId } = Astro.props;
+const { journeyId, photoNames, title } = Astro.props;
 const journey = await getEntry('journeyMetadata', journeyId);
 const gallery = journey?.data.gallery;
 const basePath = import.meta.env.BASE_URL.endsWith('/')
   ? import.meta.env.BASE_URL
   : `${import.meta.env.BASE_URL}/`;
 const publicPath = (path: string) => `${basePath}${path.replace(/^\/+/, '')}`;
-const sourcePhotos = gallery?.photos ?? [];
+const sourcePhotos = selectJourneyPhotos(gallery?.photos ?? [], photoNames);
 const annotatedPhotos = await Promise.all(sourcePhotos.map(async (photo, galleryIndex) => ({
   ...photo,
   ...readImageSizeFromSrc(photo.src),
@@ -30,4 +33,4 @@ const photos = orderPhotosByVariety(annotatedPhotos).map(({ signature, ...photo 
 }));
 ---
 
-{photos.length > 0 && <PhotoGallery title={gallery.title} photos={photos} />}
+{photos.length > 0 && <PhotoGallery title={title ?? gallery.title} photos={photos} />}
