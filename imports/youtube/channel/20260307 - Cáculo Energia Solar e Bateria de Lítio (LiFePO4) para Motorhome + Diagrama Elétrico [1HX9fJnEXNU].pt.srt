@@ -1,0 +1,2296 @@
+1
+00:00:00,640 --> 00:00:04,880
+Quantas baterias de lítio eu preciso
+
+2
+00:00:02,639 --> 00:00:07,839
+para alimentar o meu motorome? Quantas
+
+3
+00:00:04,880 --> 00:00:10,200
+placas solares posso carregar utilizando
+
+4
+00:00:07,839 --> 00:00:13,200
+alternador? E como é que eu monto tudo
+
+5
+00:00:10,200 --> 00:00:15,559
+isso? Essas e outras dúvidas sobre
+
+6
+00:00:13,200 --> 00:00:17,840
+sistemas elétricos de motorome eu vou
+
+7
+00:00:15,559 --> 00:00:19,640
+responder nesse vídeo. Salve, galera.
+
+8
+00:00:17,840 --> 00:00:22,359
+Bem-vindos a mais um vídeo aqui do canal
+
+9
+00:00:19,640 --> 00:00:24,640
+Odisseia Mondana. Eu sou o Igor e alguns
+
+10
+00:00:22,359 --> 00:00:26,800
+anos atrás eu construí o meu próprio
+
+11
+00:00:24,640 --> 00:00:29,000
+motorome para realizar o meu sonho de
+
+12
+00:00:26,800 --> 00:00:30,960
+viajar por todo o Brasil. H algum tempo
+
+13
+00:00:29,000 --> 00:00:33,120
+atrás, eu gravei aqui no canal alguns
+
+14
+00:00:30,960 --> 00:00:35,800
+vídeos dando dicas de conceitos básicos
+
+15
+00:00:33,120 --> 00:00:38,360
+de eletricidade, dimensionamento de
+
+16
+00:00:35,800 --> 00:00:40,960
+sistemas e também de instalações no
+
+17
+00:00:38,360 --> 00:00:43,039
+motorome. E desde então, muito tempo se
+
+18
+00:00:40,960 --> 00:00:45,000
+passou e algumas novidades apareceram
+
+19
+00:00:43,039 --> 00:00:47,000
+pro mercado de motoromes, como, por
+
+20
+00:00:45,000 --> 00:00:50,440
+exemplo, as baterias de lítio, os
+
+21
+00:00:47,000 --> 00:00:52,440
+carregadores DCDC, entre outros. Então
+
+22
+00:00:50,440 --> 00:00:55,199
+eu decidi gravar esse vídeo aqui para
+
+23
+00:00:52,440 --> 00:00:57,239
+atualizar vocês sobre essas novidades.
+
+24
+00:00:55,199 --> 00:00:59,359
+Vocês vão acompanhar passo a passo o
+
+25
+00:00:57,239 --> 00:01:02,160
+dimensionamento de um sistema elétrico
+
+26
+00:00:59,359 --> 00:01:04,199
+para uma van e em seguida eu vou mostrar
+
+27
+00:01:02,160 --> 00:01:06,200
+como ficaria o diagrama para esse
+
+28
+00:01:04,199 --> 00:01:08,640
+sistema. E é claro que eu vou deixar
+
+29
+00:01:06,200 --> 00:01:11,119
+aqui também na descrição do vídeo os
+
+30
+00:01:08,640 --> 00:01:13,320
+links para você fazer o download da
+
+31
+00:01:11,119 --> 00:01:15,920
+planilha de dimensionamento e também do
+
+32
+00:01:13,320 --> 00:01:18,360
+diagrama elétrico. Então vamos começar
+
+33
+00:01:15,920 --> 00:01:19,880
+aqui o dimensionamento do sistema
+
+34
+00:01:18,360 --> 00:01:22,320
+fotovoltaico,
+
+35
+00:01:19,880 --> 00:01:24,600
+utilizando a planilha aqui que eu
+
+36
+00:01:22,320 --> 00:01:26,759
+desenvolvi alguns anos atrás, que eu já
+
+37
+00:01:24,600 --> 00:01:28,880
+fiz um vídeo aqui no no canal, já
+
+38
+00:01:26,759 --> 00:01:31,240
+disponibilizei para vocês, porém essa
+
+39
+00:01:28,880 --> 00:01:32,840
+nova versão aqui tem algumas alguns
+
+40
+00:01:31,240 --> 00:01:34,880
+melhoramentos.
+
+41
+00:01:32,840 --> 00:01:37,159
+Então, para trabalhar com essa planilha,
+
+42
+00:01:34,880 --> 00:01:39,960
+eu vou deixar ela disponível para para
+
+43
+00:01:37,159 --> 00:01:42,560
+download aqui na descrição do do vídeo.
+
+44
+00:01:39,960 --> 00:01:45,640
+Você vai preencher somente as células em
+
+45
+00:01:42,560 --> 00:01:48,479
+verde. Todas as outras células aqui vão
+
+46
+00:01:45,640 --> 00:01:50,799
+ser feitos os cálculos automaticamente e
+
+47
+00:01:48,479 --> 00:01:52,680
+no final ela vai te dar aqui a
+
+48
+00:01:50,799 --> 00:01:55,520
+capacidade das baterias que você vai
+
+49
+00:01:52,680 --> 00:01:58,600
+precisar e também a potência total
+
+50
+00:01:55,520 --> 00:02:01,520
+necessária dos painéis solares.
+
+51
+00:01:58,600 --> 00:02:03,439
+Então, eh, desse lado esquerdo aqui, eh,
+
+52
+00:02:01,520 --> 00:02:07,159
+são feitos por etapas, tá? preenchimento
+
+53
+00:02:03,439 --> 00:02:09,679
+aqui. Então, etapa 1, 2, 3 e 4. Na etapa
+
+54
+00:02:07,159 --> 00:02:12,040
+um, você vai ter que listar todos os
+
+55
+00:02:09,679 --> 00:02:14,160
+equipamentos elétricos e eletrônicos que
+
+56
+00:02:12,040 --> 00:02:15,599
+você vai ter no seu motor home. Então,
+
+57
+00:02:14,160 --> 00:02:17,840
+antes de construir o seu motor homeome,
+
+58
+00:02:15,599 --> 00:02:19,040
+é ideal saber quais equipamentos
+
+59
+00:02:17,840 --> 00:02:21,239
+elétricos e eletrônicos você vai
+
+60
+00:02:19,040 --> 00:02:22,840
+utilizar dentro dele, sendo que essa
+
+61
+00:02:21,239 --> 00:02:27,160
+tabela da esquerda são todos os
+
+62
+00:02:22,840 --> 00:02:29,760
+equipamentos em 12 V ou 24 V, se você
+
+63
+00:02:27,160 --> 00:02:32,000
+tiver um sistema em 24 V. E do lado
+
+64
+00:02:29,760 --> 00:02:36,160
+direito os equipamentos de corrente
+
+65
+00:02:32,000 --> 00:02:39,280
+alternada, ou seja, 127 V, o famoso 110
+
+66
+00:02:36,160 --> 00:02:41,879
+ou 220. Então, toma cuidado para não
+
+67
+00:02:39,280 --> 00:02:46,239
+inverter aí. Tudo que é 12 V fica desse
+
+68
+00:02:41,879 --> 00:02:49,280
+lado. Tudo que é 110 ou 220 desse lado
+
+69
+00:02:46,239 --> 00:02:52,280
+direito. Então, nesse exemplo aqui, a
+
+70
+00:02:49,280 --> 00:02:55,000
+gente tem eh são dois celulares. A a
+
+71
+00:02:52,280 --> 00:02:58,480
+pessoa que eh dona desse motor home, ela
+
+72
+00:02:55,000 --> 00:03:00,640
+vai carregar du dois celulares todo dia.
+
+73
+00:02:58,480 --> 00:03:04,239
+E a estimativa aqui de uso diário em
+
+74
+00:03:00,640 --> 00:03:07,200
+horas é 2 horas, ou seja, 2 horas aí
+
+75
+00:03:04,239 --> 00:03:09,000
+carregando dois celulares todo dia. E se
+
+76
+00:03:07,200 --> 00:03:10,760
+você tiver o equipamento em mãos ou
+
+77
+00:03:09,000 --> 00:03:12,440
+tiver apenas o link, ainda não tiver
+
+78
+00:03:10,760 --> 00:03:14,519
+comprado, com certeza você vai ter
+
+79
+00:03:12,440 --> 00:03:16,640
+acesso às especificações desse produto.
+
+80
+00:03:14,519 --> 00:03:18,120
+Então lá você vai ter a potência em wats
+
+81
+00:03:16,640 --> 00:03:19,879
+desse produto que você também vai
+
+82
+00:03:18,120 --> 00:03:22,360
+precisar. Então você vai preencher a
+
+83
+00:03:19,879 --> 00:03:24,680
+quantidade de produtos, a potência em
+
+84
+00:03:22,360 --> 00:03:27,080
+wats e a quantidade de horas em uso
+
+85
+00:03:24,680 --> 00:03:30,480
+diário. Se você não souber, você pode
+
+86
+00:03:27,080 --> 00:03:34,799
+estimar ou então você joga no Google aí
+
+87
+00:03:30,480 --> 00:03:37,799
+o a quantidade de horas e uso médio de
+
+88
+00:03:34,799 --> 00:03:39,519
+cada produto e o Google vai te saber te
+
+89
+00:03:37,799 --> 00:03:42,120
+informar esse valor. Por exemplo, uma
+
+90
+00:03:39,519 --> 00:03:44,360
+geladeira, ela não trabalha 24 horas por
+
+91
+00:03:42,120 --> 00:03:47,000
+dia, tá? Aí em média ela trabalha 8
+
+92
+00:03:44,360 --> 00:03:48,159
+horas porque ela atinge a temperatura e
+
+93
+00:03:47,000 --> 00:03:50,360
+ela desliga o compressor
+
+94
+00:03:48,159 --> 00:03:53,720
+automaticamente. Então se você tiver em
+
+95
+00:03:50,360 --> 00:03:55,280
+dúvida, vai no Google ou no chat GPT que
+
+96
+00:03:53,720 --> 00:03:58,519
+você vai encontrar essa informação.
+
+97
+00:03:55,280 --> 00:04:00,360
+Inclusive o chat GPT e é uma novidade aí
+
+98
+00:03:58,519 --> 00:04:01,920
+que não tinha na minha época e ele pode
+
+99
+00:04:00,360 --> 00:04:03,640
+te ajudar muito com esses cálculos. Se
+
+100
+00:04:01,920 --> 00:04:06,159
+você souber explicar exatamente o que
+
+101
+00:04:03,640 --> 00:04:08,879
+você precisa para ele, ele vai saber te
+
+102
+00:04:06,159 --> 00:04:11,680
+explicar. Mas a planilha aqui também eh
+
+103
+00:04:08,879 --> 00:04:14,640
+vai te ajudar, tá? mastigadinho. Então,
+
+104
+00:04:11,680 --> 00:04:17,040
+eh, esse projeto aqui tem uma claraboia
+
+105
+00:04:14,640 --> 00:04:19,919
+com utilização de 8 horas diária
+
+106
+00:04:17,040 --> 00:04:22,400
+aproximadamente. Tem iluminação de LED,
+
+107
+00:04:19,919 --> 00:04:24,639
+tem uma fita de LED, tem a geladeira
+
+108
+00:04:22,400 --> 00:04:28,440
+aqui que já tá convertida para 12 V,
+
+109
+00:04:24,639 --> 00:04:31,560
+isso é excelente. Uma geladeira por 8
+
+110
+00:04:28,440 --> 00:04:33,400
+horas, como eu falei, o climatizador e
+
+111
+00:04:31,560 --> 00:04:35,080
+uma bomba hidráulica. bomba hidráulica,
+
+112
+00:04:33,400 --> 00:04:37,960
+como só vai funcionar enquanto a
+
+113
+00:04:35,080 --> 00:04:40,479
+mangueira, a torneira tiver aberta, ela
+
+114
+00:04:37,960 --> 00:04:42,880
+é bem baixo o consumo, só meia hora por
+
+115
+00:04:40,479 --> 00:04:45,080
+dia. E relembrando aqui que eu já falei
+
+116
+00:04:42,880 --> 00:04:47,560
+em todos os outros vídeos, né? Eh,
+
+117
+00:04:45,080 --> 00:04:50,440
+talvez vocês já saibam disso, mas para
+
+118
+00:04:47,560 --> 00:04:52,880
+motor home ideal que a maioria ou se
+
+119
+00:04:50,440 --> 00:04:55,840
+possível todos os equipamentos estejam
+
+120
+00:04:52,880 --> 00:04:59,280
+já em corrente contínua, ou seja, em 12
+
+121
+00:04:55,840 --> 00:05:02,280
+V ou 24 V. Por quê? Porque quando você
+
+122
+00:04:59,280 --> 00:05:04,680
+usa um equipamento 110 ou 220, ele tem
+
+123
+00:05:02,280 --> 00:05:06,840
+que ser passado pelo nosso inversor, que
+
+124
+00:05:04,680 --> 00:05:08,320
+vai ser a etapa dois. E aí ele tem uma
+
+125
+00:05:06,840 --> 00:05:11,639
+perda de eficiência, a gente perde
+
+126
+00:05:08,320 --> 00:05:14,560
+energia nesse nessa inversão de tensão,
+
+127
+00:05:11,639 --> 00:05:16,919
+vamos dizer assim. E aproximadamente aí
+
+128
+00:05:14,560 --> 00:05:20,120
+um inversor, ele tem 85% de eficiência,
+
+129
+00:05:16,919 --> 00:05:21,479
+ou seja, ele joga 15% de energia fora.
+
+130
+00:05:20,120 --> 00:05:23,560
+Então a gente vai ver aqui pela etapa
+
+131
+00:05:21,479 --> 00:05:25,840
+dois, a gente vai perder um um pouco de
+
+132
+00:05:23,560 --> 00:05:27,639
+energia, então a gente tem que e ter uma
+
+133
+00:05:25,840 --> 00:05:31,240
+bateria um pouco maior e mais painéis
+
+134
+00:05:27,639 --> 00:05:33,400
+para gerar essa essa diferença. Então
+
+135
+00:05:31,240 --> 00:05:35,759
+aqui indo pros equipamentos 110, 220,
+
+136
+00:05:33,400 --> 00:05:37,560
+esse projeto tá tá bem OK, só tem três
+
+137
+00:05:35,759 --> 00:05:40,000
+equipamentos. Então ele tem um
+
+138
+00:05:37,560 --> 00:05:42,880
+microondas 20 L, que a potência é bem
+
+139
+00:05:40,000 --> 00:05:45,319
+alta. Então, além do microondas ser um
+
+140
+00:05:42,880 --> 00:05:48,280
+grande vilão por ter uma potência alta,
+
+141
+00:05:45,319 --> 00:05:51,680
+ele também tá em 110. Então, ele vai
+
+142
+00:05:48,280 --> 00:05:53,960
+ainda gastar mais do que e nesse esses
+
+143
+00:05:51,680 --> 00:05:56,759
+1300 W necessário, porque ele vai passar
+
+144
+00:05:53,960 --> 00:05:59,759
+pelo pelo inversor. Mas como é
+
+145
+00:05:56,759 --> 00:06:04,600
+utilização pouca aqui, aproximadamente
+
+146
+00:05:59,759 --> 00:06:06,960
+aí e 20 minutos por dia, então não não
+
+147
+00:06:04,600 --> 00:06:09,319
+fez um grande estrago nesse sistema. A
+
+148
+00:06:06,960 --> 00:06:11,479
+gente tem um depurador de ar e uma TV 24
+
+149
+00:06:09,319 --> 00:06:13,199
+V. Então, depois que você preencheu aqui
+
+150
+00:06:11,479 --> 00:06:16,400
+todos os equipamentos, a potência e o
+
+151
+00:06:13,199 --> 00:06:19,400
+uso diário, as a tabela vai trabalhar
+
+152
+00:06:16,400 --> 00:06:21,160
+sozinha aqui na na etapa dois. Ela vai
+
+153
+00:06:19,400 --> 00:06:25,880
+pegar esses valores aqui que eu tive,
+
+154
+00:06:21,160 --> 00:06:29,479
+total de 12 V e total de energia de 110
+
+155
+00:06:25,880 --> 00:06:33,120
+ou 20 ou 220 V. E ela vai somar aqui
+
+156
+00:06:29,479 --> 00:06:35,520
+nessa célula já adicionando os 15% a
+
+157
+00:06:33,120 --> 00:06:38,360
+mais para esse valor aqui do dos
+
+158
+00:06:35,520 --> 00:06:40,720
+equipamentos 110, 220. Então, como eu
+
+159
+00:06:38,360 --> 00:06:43,319
+falei aqui, a gente vai ter o e vai
+
+160
+00:06:40,720 --> 00:06:45,680
+adicionar 15% a mais porque a perda de
+
+161
+00:06:43,319 --> 00:06:48,680
+eficiência do inversor, resultando na
+
+162
+00:06:45,680 --> 00:06:52,199
+soma, nesse valor aqui, 1187
+
+163
+00:06:48,680 --> 00:06:54,960
+WH. Nesse outro painel aqui, a gente
+
+164
+00:06:52,199 --> 00:06:57,360
+pega esse valor que já foi convertido,
+
+165
+00:06:54,960 --> 00:07:00,560
+soma com o valor de 12 V e aí a gente
+
+166
+00:06:57,360 --> 00:07:02,919
+tem um total de 274
+
+167
+00:07:00,560 --> 00:07:06,720
+wat hora. Então esse é o seu consumo
+
+168
+00:07:02,919 --> 00:07:10,639
+total no nesse exemplo de Motro Home. E
+
+169
+00:07:06,720 --> 00:07:13,440
+aí na etapa três aí aqui a gente tem a o
+
+170
+00:07:10,639 --> 00:07:15,520
+dimensionamento da bateria. Então a
+
+171
+00:07:13,440 --> 00:07:17,759
+bateria, esse foi uma das modificações
+
+172
+00:07:15,520 --> 00:07:19,960
+que eu fiz nessa versão dessa planilha.
+
+173
+00:07:17,759 --> 00:07:22,319
+Antigamente eu fazia o dimensionamento
+
+174
+00:07:19,960 --> 00:07:25,000
+para sistemas e colocava bateria de
+
+175
+00:07:22,319 --> 00:07:27,319
+chumbo ácido, sendo a mais conhecida aí
+
+176
+00:07:25,000 --> 00:07:29,199
+aquela bateria Freedom, né, grandona de
+
+177
+00:07:27,319 --> 00:07:31,039
+240.
+
+178
+00:07:29,199 --> 00:07:32,639
+Porém, eu já tenho um vídeo aqui também
+
+179
+00:07:31,039 --> 00:07:35,720
+no canal explicando a diferença entre as
+
+180
+00:07:32,639 --> 00:07:37,160
+duas, o benefício da bateria de lítio
+
+181
+00:07:35,720 --> 00:07:40,199
+quando comparado as baterias
+
+182
+00:07:37,160 --> 00:07:42,319
+estacionárias de de chumbo ácido. E a
+
+183
+00:07:40,199 --> 00:07:45,159
+diferença é o quê? Aqui vocês estão
+
+184
+00:07:42,319 --> 00:07:46,919
+vendo? Vou até aumentar aqui,
+
+185
+00:07:45,159 --> 00:07:48,919
+eu deixei marcado aqui. Quando você
+
+186
+00:07:46,919 --> 00:07:51,759
+trabalha com a bateria de chumbo ácido,
+
+187
+00:07:48,919 --> 00:07:54,720
+o a profundidade de ciclo recomendada é
+
+188
+00:07:51,759 --> 00:07:56,520
+de apenas 30%, ou seja, do total da
+
+189
+00:07:54,720 --> 00:07:58,759
+bateria que você tem ali de carga, é
+
+190
+00:07:56,520 --> 00:08:00,440
+ideal que você só use 30%. Se você
+
+191
+00:07:58,759 --> 00:08:02,759
+descarregar mais que isso, essa bateria
+
+192
+00:08:00,440 --> 00:08:05,360
+de de chumbo ácido, a vida dela vai ser
+
+193
+00:08:02,759 --> 00:08:07,840
+menor. Ela vai acabar, ela vai morrer
+
+194
+00:08:05,360 --> 00:08:10,599
+antes do do que o previsto. Enquanto que
+
+195
+00:08:07,840 --> 00:08:13,639
+as baterias de lítio, né, de mais famosa
+
+196
+00:08:10,599 --> 00:08:16,680
+aí, a Life PO4, você pode descarregar aí
+
+197
+00:08:13,639 --> 00:08:19,479
+até 85% dela, sendo que ela também tem
+
+198
+00:08:16,680 --> 00:08:21,159
+aquele o BMS, né, o computador que já
+
+199
+00:08:19,479 --> 00:08:23,400
+vai fazer essa leitura automática. Se
+
+200
+00:08:21,159 --> 00:08:26,479
+você tiver abusando dela, ela desliga.
+
+201
+00:08:23,400 --> 00:08:27,759
+Se tiver uma uma sobretensão, curto o
+
+202
+00:08:26,479 --> 00:08:29,360
+circuito, ela vai desligar
+
+203
+00:08:27,759 --> 00:08:31,440
+automaticamente. Então, ela tem uma
+
+204
+00:08:29,360 --> 00:08:33,680
+série de benefícios. Eu vou deixar
+
+205
+00:08:31,440 --> 00:08:35,159
+também aqui na descrição do vídeo esse
+
+206
+00:08:33,680 --> 00:08:37,159
+esse vídeo que eu fiz comparando as
+
+207
+00:08:35,159 --> 00:08:39,959
+baterias de lítio com as baterias de
+
+208
+00:08:37,159 --> 00:08:42,519
+chumbo. Então hoje praticamente eu só
+
+209
+00:08:39,959 --> 00:08:47,120
+dimensiono aí pro pros meus clientes
+
+210
+00:08:42,519 --> 00:08:49,279
+sistemas com a a bateria de de lítio.
+
+211
+00:08:47,120 --> 00:08:52,160
+Então e essa foi a modificação. Então
+
+212
+00:08:49,279 --> 00:08:55,279
+esses 85% aqui já tá para uma bateria de
+
+213
+00:08:52,160 --> 00:08:57,959
+lítio. E aí aqui você tem a opção de de
+
+214
+00:08:55,279 --> 00:08:59,880
+mudar as os dias de autonomia. Com a
+
+215
+00:08:57,959 --> 00:09:01,200
+bateria de lítio, eu sempre deixo um
+
+216
+00:08:59,880 --> 00:09:04,040
+aqui. Por quê? Porque ela é mais
+
+217
+00:09:01,200 --> 00:09:06,480
+eficiente, como eu falei. E eu acho que
+
+218
+00:09:04,040 --> 00:09:09,640
+ter um dia inteiro de carga, vamos supor
+
+219
+00:09:06,480 --> 00:09:11,320
+que nesse dia você não vai carregar com
+
+220
+00:09:09,640 --> 00:09:13,440
+sol porque não tem sol, você não tem
+
+221
+00:09:11,320 --> 00:09:16,360
+acesso a uma tomada ou se você tem um
+
+222
+00:09:13,440 --> 00:09:18,480
+carregador descer descer, você não vai
+
+223
+00:09:16,360 --> 00:09:20,200
+rodar com carro, não vai carregar, você
+
+224
+00:09:18,480 --> 00:09:23,200
+tem um dia inteiro aí para abastecer
+
+225
+00:09:20,200 --> 00:09:25,240
+todos os seus equipamentos. Se você
+
+226
+00:09:23,200 --> 00:09:27,560
+quiser ter um sistema mais robusto, ser
+
+227
+00:09:25,240 --> 00:09:29,440
+mais conservador, ah, Igor, eu quero ter
+
+228
+00:09:27,560 --> 00:09:31,760
+dois dias completos de energia, mesmo
+
+229
+00:09:29,440 --> 00:09:34,680
+que eu não tenha acesso a a fonte de
+
+230
+00:09:31,760 --> 00:09:37,440
+energia nenhuma, sol e tomada e não vou
+
+231
+00:09:34,680 --> 00:09:40,000
+ligar o motorome. Então você vem aqui,
+
+232
+00:09:37,440 --> 00:09:42,120
+você pode colocar dois dias de autonomia
+
+233
+00:09:40,000 --> 00:09:44,920
+aqui, porém você vai ver que a
+
+234
+00:09:42,120 --> 00:09:46,680
+capacidade da bateria vai dobrar, ou
+
+235
+00:09:44,920 --> 00:09:48,200
+seja, para ter dois dias, você vai
+
+236
+00:09:46,680 --> 00:09:50,079
+precisar ter o dobro de bateria para
+
+237
+00:09:48,200 --> 00:09:53,120
+segurar esses dois dias sem
+
+238
+00:09:50,079 --> 00:09:55,360
+carregamento. Mas eu sempre deixo um dia
+
+239
+00:09:53,120 --> 00:09:56,880
+porque como vocês vão ver depois é na
+
+240
+00:09:55,360 --> 00:09:58,800
+sequência eu vou mostrar o diagrama
+
+241
+00:09:56,880 --> 00:10:00,519
+elétrico, como eu vou prever outras
+
+242
+00:09:58,800 --> 00:10:04,079
+formas de carregar a bateria, não só
+
+243
+00:10:00,519 --> 00:10:07,000
+pelos painéis solares. Então eu acho que
+
+244
+00:10:04,079 --> 00:10:08,839
+deixar um dia de autonomia tá tá OK.
+
+245
+00:10:07,000 --> 00:10:13,079
+Então para esse exemplo aqui, esse
+
+246
+00:10:08,839 --> 00:10:17,360
+sistema, e a gente precisa de 269, o
+
+247
+00:10:13,079 --> 00:10:21,040
+mínimo, né? E uma bateria de 269h
+
+248
+00:10:17,360 --> 00:10:24,079
+para tocar todo o nosso sistema em 12 V.
+
+249
+00:10:21,040 --> 00:10:26,399
+E aí aqui na etapa quatro a gente tem o
+
+250
+00:10:24,079 --> 00:10:28,120
+dimensionamento dos painéis solares.
+
+251
+00:10:26,399 --> 00:10:30,560
+Então eu deixei um mapa aqui para você
+
+252
+00:10:28,120 --> 00:10:32,200
+ver a região do Brasil que você mora ou
+
+253
+00:10:30,560 --> 00:10:34,880
+onde você vai viajar a maior parte do
+
+254
+00:10:32,200 --> 00:10:37,480
+tempo. Ou se for viajar todo o Brasil,
+
+255
+00:10:34,880 --> 00:10:39,720
+aí você pode fazer uma média. Você olha
+
+256
+00:10:37,480 --> 00:10:42,680
+aqui a cor da região que você vai que
+
+257
+00:10:39,720 --> 00:10:45,480
+você está. E aí você tem aqui uma média
+
+258
+00:10:42,680 --> 00:10:47,519
+de insolação diária, ou seja, quantas
+
+259
+00:10:45,480 --> 00:10:49,600
+horas de sol você tem por dia para gerar
+
+260
+00:10:47,519 --> 00:10:51,279
+energia para você. Então eu coloquei
+
+261
+00:10:49,600 --> 00:10:53,200
+aqui aproximadamente, como a maior parte
+
+262
+00:10:51,279 --> 00:10:55,399
+do Brasil tá esse amarelo aqui, eu
+
+263
+00:10:53,200 --> 00:10:56,920
+deixei 6 horas aqui. Mas se você mora,
+
+264
+00:10:55,399 --> 00:11:01,200
+por exemplo, no Nordeste, que tem mais
+
+265
+00:10:56,920 --> 00:11:03,760
+horas, 7 ou 8, você pode ajustar aqui. E
+
+266
+00:11:01,200 --> 00:11:06,639
+aqui perdas do sistema, eu já deixei 30%
+
+267
+00:11:03,760 --> 00:11:08,880
+padronizado, porque eh é uma média aí
+
+268
+00:11:06,639 --> 00:11:10,279
+que que os especialistas recomendam.
+
+269
+00:11:08,880 --> 00:11:12,600
+Você sempre vai perder um pouco de
+
+270
+00:11:10,279 --> 00:11:15,040
+geração de energia por conta de sujeira
+
+271
+00:11:12,600 --> 00:11:17,120
+nos seus painéis, eh, as nuvens que vão
+
+272
+00:11:15,040 --> 00:11:19,279
+passar na frente do sol e outros
+
+273
+00:11:17,120 --> 00:11:22,519
+problemas aí. Então é ser recomendado
+
+274
+00:11:19,279 --> 00:11:25,560
+deixar aqui 30% de de perdas no sistema.
+
+275
+00:11:22,519 --> 00:11:27,760
+E aí aqui a fórmula vai já eh te dizer
+
+276
+00:11:25,560 --> 00:11:29,480
+quanto que você vai precisar de potência
+
+277
+00:11:27,760 --> 00:11:32,959
+total necessária pros seus painéis
+
+278
+00:11:29,480 --> 00:11:36,760
+solares. Nesse caso aqui 653
+
+279
+00:11:32,959 --> 00:11:38,720
+e W pico. Eh, isso sendo o mínimo, tá?
+
+280
+00:11:36,760 --> 00:11:41,440
+Então, o mínimo ideal seria uma bateria
+
+281
+00:11:38,720 --> 00:11:43,320
+com esse valor e uma potência necessária
+
+282
+00:11:41,440 --> 00:11:45,560
+total dos painéis solares com esse
+
+283
+00:11:43,320 --> 00:11:48,320
+valor. E aí eu deixei umas questões
+
+284
+00:11:45,560 --> 00:11:50,040
+importantes aqui, eh, que devem ser
+
+285
+00:11:48,320 --> 00:11:52,720
+lembradas quando você vai dimensionar o
+
+286
+00:11:50,040 --> 00:11:54,880
+seu sistema. Número um, quantos painéis
+
+287
+00:11:52,720 --> 00:11:57,519
+cabem no teto do seu veículo? Não
+
+288
+00:11:54,880 --> 00:11:59,600
+adianta nada você encher de equipamentos
+
+289
+00:11:57,519 --> 00:12:02,160
+elétricos e eletrônicos aqui, querer
+
+290
+00:11:59,600 --> 00:12:04,120
+levar um monte de coisa e se o seu
+
+291
+00:12:02,160 --> 00:12:05,720
+veículo é pequeno ou não tem espaço no
+
+292
+00:12:04,120 --> 00:12:08,079
+teto para colocar placas solares
+
+293
+00:12:05,720 --> 00:12:11,000
+suficientes. Então o ideal é que você
+
+294
+00:12:08,079 --> 00:12:13,199
+meça ali o tanto de espaço que você tem
+
+295
+00:12:11,000 --> 00:12:14,560
+disponível no teto do seu veículo. Veja
+
+296
+00:12:13,199 --> 00:12:16,839
+as placas solares que você tem
+
+297
+00:12:14,560 --> 00:12:18,600
+disponível aí na sua região e veja
+
+298
+00:12:16,839 --> 00:12:20,760
+quantas você vai conseguir colocar.
+
+299
+00:12:18,600 --> 00:12:23,199
+Lembrando que o ideal é sempre colocar
+
+300
+00:12:20,760 --> 00:12:26,600
+placas de mesmo tamanho e do mesmo
+
+301
+00:12:23,199 --> 00:12:29,040
+fabricante pro seu sistema não ter
+
+302
+00:12:26,600 --> 00:12:31,160
+problemas aí, tá? Então esse é o
+
+303
+00:12:29,040 --> 00:12:32,360
+primeiro ponto. Segundo, qual o valor
+
+304
+00:12:31,160 --> 00:12:34,440
+que eu vou poder investir no meu
+
+305
+00:12:32,360 --> 00:12:37,279
+sistema? Mais uma vez, não adianta nada
+
+306
+00:12:34,440 --> 00:12:40,000
+você levar um monte de coisa, três TV,
+
+307
+00:12:37,279 --> 00:12:41,519
+ar condicionado e tudo, sendo que você
+
+308
+00:12:40,000 --> 00:12:43,920
+não vai ter dinheiro suficiente para
+
+309
+00:12:41,519 --> 00:12:45,240
+comprar de baterias ou painéis solares
+
+310
+00:12:43,920 --> 00:12:47,240
+ou os outros equipamentos que a gente
+
+311
+00:12:45,240 --> 00:12:49,399
+vai ver também que não são baratos. A
+
+312
+00:12:47,240 --> 00:12:51,600
+gente sabe que a bateria de lítio ela é
+
+313
+00:12:49,399 --> 00:12:54,079
+uma novidade, mas ela tá bem cara ainda,
+
+314
+00:12:51,600 --> 00:12:55,480
+principalmente no Brasil. Então, outro
+
+315
+00:12:54,079 --> 00:12:56,680
+ponto de se observar é esse, qual o
+
+316
+00:12:55,480 --> 00:12:58,600
+valor que eu posso investir no meu
+
+317
+00:12:56,680 --> 00:13:01,079
+sistema. Se você não pode investir num
+
+318
+00:12:58,600 --> 00:13:03,760
+num sistema muito robusto, muito grande,
+
+319
+00:13:01,079 --> 00:13:05,680
+você simplesmente faz uma viagem mais
+
+320
+00:13:03,760 --> 00:13:08,079
+minimalista, leva menos equipamentos
+
+321
+00:13:05,680 --> 00:13:10,160
+aqui e eu te garanto que você vai
+
+322
+00:13:08,079 --> 00:13:11,839
+aproveitar mais a viagem. Eu levei
+
+323
+00:13:10,160 --> 00:13:13,920
+poucas coisas, deixei um sistema bem
+
+324
+00:13:11,839 --> 00:13:16,440
+minimalista e não tive problema nenhum
+
+325
+00:13:13,920 --> 00:13:18,519
+na viagem. também consegui viajar com
+
+326
+00:13:16,440 --> 00:13:20,040
+uma bateria só e dois painéis solares e
+
+327
+00:13:18,519 --> 00:13:22,920
+foi OK.
+
+328
+00:13:20,040 --> 00:13:24,279
+E outro ponto é se você vai utilizar eh
+
+329
+00:13:22,920 --> 00:13:26,839
+rede elétrica, se você vai ficar em
+
+330
+00:13:24,279 --> 00:13:29,160
+camping ou pretende ficar parado local
+
+331
+00:13:26,839 --> 00:13:31,560
+com acesso a uma tomada muito tempo. Se
+
+332
+00:13:29,160 --> 00:13:32,880
+for assim, você basta ter uma um
+
+333
+00:13:31,560 --> 00:13:35,160
+carregador de baterias que eu vou
+
+334
+00:13:32,880 --> 00:13:37,720
+mostrar no diagrama, você não precisa se
+
+335
+00:13:35,160 --> 00:13:39,600
+preocupar muito com o tamanho da sua
+
+336
+00:13:37,720 --> 00:13:41,320
+bateria, com a quantidade de carga e
+
+337
+00:13:39,600 --> 00:13:44,160
+também com quantidade de painéis
+
+338
+00:13:41,320 --> 00:13:47,800
+solares. Mas como eu falei, vai depender
+
+339
+00:13:44,160 --> 00:13:48,880
+do do seu tipo de viagem. E aí o extra
+
+340
+00:13:47,800 --> 00:13:51,880
+que eu coloquei aqui também, a
+
+341
+00:13:48,880 --> 00:13:54,360
+modificação nessa versão da planilha é o
+
+342
+00:13:51,880 --> 00:13:56,959
+cálculo para pro dimensionamento do
+
+343
+00:13:54,360 --> 00:13:58,839
+gerador, a gasolina ou a diesel. alguns
+
+344
+00:13:56,959 --> 00:14:01,880
+projetos grandes que eu fiz para ônibus,
+
+345
+00:13:58,839 --> 00:14:03,800
+caminhões, microibus, eles queriam saber
+
+346
+00:14:01,880 --> 00:14:06,040
+qual o tamanho de gerador comprar para
+
+347
+00:14:03,800 --> 00:14:07,480
+alimentar o sistema deles. Então, para
+
+348
+00:14:06,040 --> 00:14:09,920
+esse exemplo aqui, se essa pessoa
+
+349
+00:14:07,480 --> 00:14:12,000
+quisesse levar um gerador, a gasolina,
+
+350
+00:14:09,920 --> 00:14:15,360
+comprar, tocar todos esses equipamentos
+
+351
+00:14:12,000 --> 00:14:18,920
+aqui e ainda carregar as baterias dele,
+
+352
+00:14:15,360 --> 00:14:21,160
+ele teria que ter no mínimo aí 3 k.
+
+353
+00:14:18,920 --> 00:14:23,360
+Essa é a medida, unidade de medida que
+
+354
+00:14:21,160 --> 00:14:28,040
+os geradores são vendidos. KVA, que é
+
+355
+00:14:23,360 --> 00:14:30,639
+aquilo é va. Então essa fórmula aqui ela
+
+356
+00:14:28,040 --> 00:14:33,720
+já arredonda para cima, tá? Então o para
+
+357
+00:14:30,639 --> 00:14:36,279
+esse sistema a gente teria que ter 2361
+
+358
+00:14:33,720 --> 00:14:38,800
+va ou 2,3
+
+359
+00:14:36,279 --> 00:14:41,399
+kva que é aquilo. Esse K significa
+
+360
+00:14:38,800 --> 00:14:43,360
+aquilo 1000. Então ele já arredonda para
+
+361
+00:14:41,399 --> 00:14:45,959
+cima, que é três. Então se você
+
+362
+00:14:43,360 --> 00:14:47,519
+adicionar mais componentes aqui, ele já
+
+363
+00:14:45,959 --> 00:14:49,880
+vai fazer a fórmula automaticamente e
+
+364
+00:14:47,519 --> 00:14:52,120
+vai aumentar para quatro, cinco ou seis.
+
+365
+00:14:49,880 --> 00:14:55,120
+Mas se você tem um veículo pequeno, não
+
+366
+00:14:52,120 --> 00:14:58,079
+quer levar gerador, basta ignorar essa
+
+367
+00:14:55,120 --> 00:15:01,240
+etapa extra aqui. Então essa esse foi o
+
+368
+00:14:58,079 --> 00:15:04,680
+dimensionamento do sistema fotovoltaico.
+
+369
+00:15:01,240 --> 00:15:08,120
+Agora a gente vai pro diagrama elétrico
+
+370
+00:15:04,680 --> 00:15:11,160
+do desse sistema aqui. E agora nós temos
+
+371
+00:15:08,120 --> 00:15:12,600
+o diagrama elétrico para aquele
+
+372
+00:15:11,160 --> 00:15:15,480
+dimensionamento que a gente acabou de
+
+373
+00:15:12,600 --> 00:15:18,160
+ver. Eh, eu tenho uma parceria com o
+
+374
+00:15:15,480 --> 00:15:20,320
+casal de arquitetos lá no Brasil, que
+
+375
+00:15:18,160 --> 00:15:22,519
+eles fazem o design de interiores pros
+
+376
+00:15:20,320 --> 00:15:24,839
+motoromes e os clientes que eles
+
+377
+00:15:22,519 --> 00:15:28,279
+precisam que faça o dimensionamento
+
+378
+00:15:24,839 --> 00:15:30,040
+elétrico, eu entrego um diagrama assim
+
+379
+00:15:28,279 --> 00:15:32,120
+como esse que vocês estão vendo aqui
+
+380
+00:15:30,040 --> 00:15:35,120
+para guiar, para orientar a instalação
+
+381
+00:15:32,120 --> 00:15:37,079
+elétrica deles. Então, eh, eu separo
+
+382
+00:15:35,120 --> 00:15:39,600
+aqui sempre nesses blocos verdes para
+
+383
+00:15:37,079 --> 00:15:42,519
+ficar mais fácil de visualização. E a
+
+384
+00:15:39,600 --> 00:15:45,560
+gente vai começar aqui pelo bloco solar,
+
+385
+00:15:42,519 --> 00:15:48,079
+que é a nossa geração de energia solar.
+
+386
+00:15:45,560 --> 00:15:49,360
+É o nosso painel solar. Aqui, como vocês
+
+387
+00:15:48,079 --> 00:15:52,240
+viram lá no dimensionamento, a gente
+
+388
+00:15:49,360 --> 00:15:55,120
+precisava de pelo menos 560 W, se eu não
+
+389
+00:15:52,240 --> 00:15:58,800
+me engano. Então, eu achei num site aqui
+
+390
+00:15:55,120 --> 00:16:01,680
+um um painel solar de 595 W que vai nos
+
+391
+00:15:58,800 --> 00:16:03,120
+atender e também vai caber no teto do
+
+392
+00:16:01,680 --> 00:16:05,360
+motor home. Como eu falei, você precisa
+
+393
+00:16:03,120 --> 00:16:07,120
+saber se os painéis vão caber no teto do
+
+394
+00:16:05,360 --> 00:16:09,040
+seu motor home. Se de repente você
+
+395
+00:16:07,120 --> 00:16:12,279
+precisar colocar dois painéis menores,
+
+396
+00:16:09,040 --> 00:16:14,680
+dois de 250, dois de 300, coloque o
+
+397
+00:16:12,279 --> 00:16:17,440
+máximo de painéis que puder eh no teto
+
+398
+00:16:14,680 --> 00:16:19,759
+do seu motorome, que aí você vai ter
+
+399
+00:16:17,440 --> 00:16:22,480
+mais geração de energia até do que você
+
+400
+00:16:19,759 --> 00:16:24,839
+precisa. Aí a gente vai ter o nosso
+
+401
+00:16:22,480 --> 00:16:27,800
+disjuntor aqui, dispositivo de proteção
+
+402
+00:16:24,839 --> 00:16:30,720
+e a energia vai ser eh vai passar pro
+
+403
+00:16:27,800 --> 00:16:33,920
+nosso controlador MPPT. Se você quiser
+
+404
+00:16:30,720 --> 00:16:36,040
+saber mais sobre controlador, MPPT,
+
+405
+00:16:33,920 --> 00:16:37,720
+disjuntor e qualquer outro equipamento
+
+406
+00:16:36,040 --> 00:16:39,759
+aqui,
+
+407
+00:16:37,720 --> 00:16:42,279
+dimensionamento dos fios, da bitola dos
+
+408
+00:16:39,759 --> 00:16:43,720
+fios, eu falo de tudo isso nos outros
+
+409
+00:16:42,279 --> 00:16:46,759
+vídeos que eu já gravei aqui no canal.
+
+410
+00:16:43,720 --> 00:16:49,639
+Eu vou deixar a playlist de energia
+
+411
+00:16:46,759 --> 00:16:51,360
+solar off grid que eu criei aqui na
+
+412
+00:16:49,639 --> 00:16:53,279
+descrição desse vídeo. Então, se você
+
+413
+00:16:51,360 --> 00:16:56,959
+quiser ver desde o básico, conceitos
+
+414
+00:16:53,279 --> 00:16:59,199
+básicos, instalação e etc, eh, eu falo
+
+415
+00:16:56,959 --> 00:17:00,759
+bastante nesses vídeos e é só você dar
+
+416
+00:16:59,199 --> 00:17:03,360
+uma olhada lá. Então, para esse vídeo
+
+417
+00:17:00,759 --> 00:17:06,120
+não ficar muito longo, eu vou só me ater
+
+418
+00:17:03,360 --> 00:17:08,079
+aqui a ao diagrama em si, como ficou a
+
+419
+00:17:06,120 --> 00:17:10,559
+montagem. Então, a gente tem o nosso
+
+420
+00:17:08,079 --> 00:17:13,120
+controlador, o nosso controlador entrega
+
+421
+00:17:10,559 --> 00:17:14,480
+energia aqui pra nossa bateria. Como
+
+422
+00:17:13,120 --> 00:17:16,839
+vocês viram lá, a gente precisava acho
+
+423
+00:17:14,480 --> 00:17:18,959
+que de 250.
+
+424
+00:17:16,839 --> 00:17:21,640
+Então, a gente tem essa bateria aqui da
+
+425
+00:17:18,959 --> 00:17:23,919
+JH Power. Não estou sendo patrocinado
+
+426
+00:17:21,640 --> 00:17:25,679
+nem nada, mas eu vi eh muitas pessoas
+
+427
+00:17:23,919 --> 00:17:28,280
+montando motoromes com ela e falando
+
+428
+00:17:25,679 --> 00:17:31,160
+muito bem. Então eu coloco aqui a imagem
+
+429
+00:17:28,280 --> 00:17:33,240
+dela só para ilustração. E ela atende,
+
+430
+00:17:31,160 --> 00:17:35,760
+ela tem 280
+
+431
+00:17:33,240 --> 00:17:37,559
+em 12 V. Então, esses foram os dois
+
+432
+00:17:35,760 --> 00:17:40,240
+valores que a gente encontrou lá na
+
+433
+00:17:37,559 --> 00:17:41,960
+planilha. Então, os principais eh
+
+434
+00:17:40,240 --> 00:17:45,280
+componentes, a nossa bateria, os painéis
+
+435
+00:17:41,960 --> 00:17:48,679
+solares, tem que estar de acordo. E
+
+436
+00:17:45,280 --> 00:17:50,600
+agora vem as novidades, né? Eh, a gente
+
+437
+00:17:48,679 --> 00:17:53,600
+eh tem no mercado agora aí os
+
+438
+00:17:50,600 --> 00:17:55,240
+carregadores, famosos carregadores DCDC
+
+439
+00:17:53,600 --> 00:17:58,600
+e eles vêm resolver um problema que
+
+440
+00:17:55,240 --> 00:18:01,120
+antigamente as pessoas eu inclusive fiz
+
+441
+00:17:58,600 --> 00:18:03,400
+isso no meu motorome que é totalmente
+
+442
+00:18:01,120 --> 00:18:06,400
+não recomendado, é errado, que é ligar o
+
+443
+00:18:03,400 --> 00:18:08,640
+alternador direto na nossa bateria. Por
+
+444
+00:18:06,400 --> 00:18:11,400
+quê? Porque o alternador ele vai mandar
+
+445
+00:18:08,640 --> 00:18:13,720
+uma corrente e não filtrada, não
+
+446
+00:18:11,400 --> 00:18:16,320
+modulada e ele pode estragar nossa
+
+447
+00:18:13,720 --> 00:18:19,840
+bateria. E aí entraram os carregadores
+
+448
+00:18:16,320 --> 00:18:23,159
+DCDC. Esse aqui, por exemplo, é um Orion
+
+449
+00:18:19,840 --> 00:18:25,760
+do marca famosa aí VCTron, que inclusive
+
+450
+00:18:23,159 --> 00:18:27,280
+é uma marca muito cara no Brasil. Aqui
+
+451
+00:18:25,760 --> 00:18:31,480
+na Europa é um pouco mais barato, mas
+
+452
+00:18:27,280 --> 00:18:33,480
+ela é cara mesmo assim. E e ela faz esse
+
+453
+00:18:31,480 --> 00:18:35,679
+serviço. Você conecta no alternador e
+
+454
+00:18:33,480 --> 00:18:37,679
+toda vez que seu carro está ligado, ele
+
+455
+00:18:35,679 --> 00:18:40,039
+vai estar carregando a sua bateria
+
+456
+00:18:37,679 --> 00:18:43,480
+também. Então é uma outra forma de
+
+457
+00:18:40,039 --> 00:18:45,159
+carregar e a sua bateria. Eh, existem
+
+458
+00:18:43,480 --> 00:18:46,240
+outras marcas, tá? Inclusive a usina,
+
+459
+00:18:45,159 --> 00:18:48,679
+que vocês estão vendo aqui, dois
+
+460
+00:18:46,240 --> 00:18:50,720
+equipamentos da usina, que é uma e
+
+461
+00:18:48,679 --> 00:18:53,799
+empresa brasileira. Eu vi que eles
+
+462
+00:18:50,720 --> 00:18:56,240
+lançaram também um carregador DC, DCDC,
+
+463
+00:18:53,799 --> 00:18:58,039
+inclusive é mais barato do que o o
+
+464
+00:18:56,240 --> 00:18:59,880
+Victor. Então, recomendo dar uma
+
+465
+00:18:58,039 --> 00:19:03,760
+olhadinha também nas opções que vocês
+
+466
+00:18:59,880 --> 00:19:05,240
+têm aí eh no Brasil. Então, é mais uma
+
+467
+00:19:03,760 --> 00:19:07,880
+opção de carregamento através do
+
+468
+00:19:05,240 --> 00:19:10,919
+alternador. Uma outra opção que você tem
+
+469
+00:19:07,880 --> 00:19:12,559
+também é o carregador de baterias. Esse
+
+470
+00:19:10,919 --> 00:19:16,000
+aqui eu, no caso, eu usei como
+
+471
+00:19:12,559 --> 00:19:17,200
+ilustração o da usina, um de 70. Então,
+
+472
+00:19:16,000 --> 00:19:19,200
+se você é uma pessoa que vai parar
+
+473
+00:19:17,200 --> 00:19:21,360
+bastante em camping, vai ter acesso à
+
+474
+00:19:19,200 --> 00:19:23,360
+energia externa, é legal você ter um
+
+475
+00:19:21,360 --> 00:19:25,559
+carregador de baterias a bordo do seu
+
+476
+00:19:23,360 --> 00:19:27,720
+motor home. Sempre que você parar, você
+
+477
+00:19:25,559 --> 00:19:29,840
+vai lá, liga na tomada, na sua extensão,
+
+478
+00:19:27,720 --> 00:19:32,120
+e ele vai carregar a sua bateria bem
+
+479
+00:19:29,840 --> 00:19:36,000
+rápido. Esse aqui, por exemplo, de 70,
+
+480
+00:19:32,120 --> 00:19:40,200
+ele ele carrega bem rápido a bateria.
+
+481
+00:19:36,000 --> 00:19:43,640
+E aí aqui no painel de 127 V a gente tem
+
+482
+00:19:40,200 --> 00:19:46,960
+o inversor que eu falei e tudo que é 127
+
+483
+00:19:43,640 --> 00:19:49,880
+V no caso desse sistema, ele precisa, a
+
+484
+00:19:46,960 --> 00:19:51,440
+energia vai sair 12 V da nossa bateria e
+
+485
+00:19:49,880 --> 00:19:52,760
+ele vai precisar passar pelo inversor
+
+486
+00:19:51,440 --> 00:19:54,520
+para poder alimentar os nossos
+
+487
+00:19:52,760 --> 00:19:57,280
+equipamentos. Nesse caso aqui, o
+
+488
+00:19:54,520 --> 00:20:01,280
+microondas, o depurador e o acendimento
+
+489
+00:19:57,280 --> 00:20:03,039
+automático do cook aqui. Então, eh,
+
+490
+00:20:01,280 --> 00:20:05,200
+normalmente as pessoas distribuem as
+
+491
+00:20:03,039 --> 00:20:07,600
+tomadas ali no motor home e aí elas
+
+492
+00:20:05,200 --> 00:20:09,120
+deixam essa tomada ligada ao inversor.
+
+493
+00:20:07,600 --> 00:20:12,720
+Então, quando o inversor tá trabalhando
+
+494
+00:20:09,120 --> 00:20:15,280
+e está ligado, eh, todas as suas eh
+
+495
+00:20:12,720 --> 00:20:18,880
+tomadas vão estar energizadas com
+
+496
+00:20:15,280 --> 00:20:21,120
+energia, nesse caso, 127 V já. E aí,
+
+497
+00:20:18,880 --> 00:20:22,840
+aqui também eu tenho uma uma chave de
+
+498
+00:20:21,120 --> 00:20:25,200
+transferência automática. Então, se você
+
+499
+00:20:22,840 --> 00:20:27,640
+também está no camping, além de você
+
+500
+00:20:25,200 --> 00:20:29,799
+carregar com o carregador de bateria,
+
+501
+00:20:27,640 --> 00:20:32,600
+você pode puxar uma extensão, ligar lá
+
+502
+00:20:29,799 --> 00:20:33,760
+na tomada externa do seu motor home. E
+
+503
+00:20:32,600 --> 00:20:35,320
+aí essa chave de transferência
+
+504
+00:20:33,760 --> 00:20:37,840
+automática, ela já vê que tem energia
+
+505
+00:20:35,320 --> 00:20:39,960
+externa, ela desabilita o inversor para
+
+506
+00:20:37,840 --> 00:20:42,880
+você não precisar usar sua bateria e aí
+
+507
+00:20:39,960 --> 00:20:45,840
+as suas tomadas vão ser alimentadas para
+
+508
+00:20:42,880 --> 00:20:47,280
+e por essa tomada externa. E os
+
+509
+00:20:45,840 --> 00:20:51,240
+principais componentes estão aqui no
+
+510
+00:20:47,280 --> 00:20:53,559
+quadro eh 12 V de corrente contínua, que
+
+511
+00:20:51,240 --> 00:20:56,799
+é a nossa iluminação, claraboia,
+
+512
+00:20:53,559 --> 00:20:59,120
+climatizador, a geladeira. E aqui também
+
+513
+00:20:56,799 --> 00:21:00,799
+tem alguns componentes da do sistema
+
+514
+00:20:59,120 --> 00:21:03,200
+hidráulico, que é a bomba hidráulica e a
+
+515
+00:21:00,799 --> 00:21:05,640
+caixa de esgoto, que ela também usa 12
+
+516
+00:21:03,200 --> 00:21:10,640
+V, e a aquecedora diesel, que precisa de
+
+517
+00:21:05,640 --> 00:21:12,440
+12 V para fazer o a a para ligar. Eh,
+
+518
+00:21:10,640 --> 00:21:14,760
+eh, muitos projetos não precisam, eles
+
+519
+00:21:12,440 --> 00:21:16,559
+não vão eh algumas pessoas não vão
+
+520
+00:21:14,760 --> 00:21:18,520
+visitar, não vão viajar por lugares
+
+521
+00:21:16,559 --> 00:21:20,440
+frios, mas eu sempre deixo aqui no
+
+522
+00:21:18,520 --> 00:21:22,760
+sistema, se a pessoa quiser ligar para
+
+523
+00:21:20,440 --> 00:21:24,919
+saber que ela vai tá contemplando no
+
+524
+00:21:22,760 --> 00:21:27,559
+sistema dela também um um aquecedor a
+
+525
+00:21:24,919 --> 00:21:29,760
+diesel, por exemplo. E também, como eu
+
+526
+00:21:27,559 --> 00:21:31,720
+falei lá na planila, ela faz o cálculo
+
+527
+00:21:29,760 --> 00:21:33,960
+do
+
+528
+00:21:31,720 --> 00:21:35,760
+gerador a gasolina, né? Então, se você
+
+529
+00:21:33,960 --> 00:21:38,960
+quiser ter o gerador, a gasolina ou a
+
+530
+00:21:35,760 --> 00:21:40,640
+diesel, é mais uma opção também para
+
+531
+00:21:38,960 --> 00:21:43,080
+fazer o carregamento da das suas
+
+532
+00:21:40,640 --> 00:21:45,200
+baterias. Para esse e sistema aqui, esse
+
+533
+00:21:43,080 --> 00:21:48,480
+exemplo, como a pessoa não queria, eu
+
+534
+00:21:45,200 --> 00:21:49,880
+não inseri aqui no no diagrama. E aí tem
+
+535
+00:21:48,480 --> 00:21:52,400
+outros componentes também, os
+
+536
+00:21:49,880 --> 00:21:54,919
+portafusíveis, os disjuntores e as
+
+537
+00:21:52,400 --> 00:21:57,120
+bitolas dos fios. Como eu falei lá no no
+
+538
+00:21:54,919 --> 00:21:58,520
+vídeo, eu ensino a como calcular. Isso é
+
+539
+00:21:57,120 --> 00:22:01,080
+muito importante para você não
+
+540
+00:21:58,520 --> 00:22:02,960
+subdimensionar as bitolas dos fios e
+
+541
+00:22:01,080 --> 00:22:05,679
+esse fio sobreaquecer e você causar um
+
+542
+00:22:02,960 --> 00:22:07,760
+acidente. Então, dá uma olhadinha lá no
+
+543
+00:22:05,679 --> 00:22:09,840
+outros vídeos se você quiser para
+
+544
+00:22:07,760 --> 00:22:13,000
+entender melhor. Ou então você
+
+545
+00:22:09,840 --> 00:22:15,320
+simplesmente contrata aí a os serviços
+
+546
+00:22:13,000 --> 00:22:17,200
+de um de um profissional e com o
+
+547
+00:22:15,320 --> 00:22:19,679
+dimensionamento em mãos e um diagrama
+
+548
+00:22:17,200 --> 00:22:21,679
+desse tipo aqui, você pode pegar um
+
+549
+00:22:19,679 --> 00:22:24,000
+profissional que faz qualquer instalação
+
+550
+00:22:21,679 --> 00:22:26,960
+elétrica que ele vai saber montar no seu
+
+551
+00:22:24,000 --> 00:22:30,320
+motor home também. Então esse é o
+
+552
+00:22:26,960 --> 00:22:31,760
+exemplo aqui do nosso diagrama elétrico.
+
+553
+00:22:30,320 --> 00:22:33,919
+Os links paraa planilha de
+
+554
+00:22:31,760 --> 00:22:35,679
+dimensionamento e também pro diagrama
+
+555
+00:22:33,919 --> 00:22:37,840
+elétrico vão estar aqui embaixo na
+
+556
+00:22:35,679 --> 00:22:39,640
+descrição do vídeo. Lembrando, se você
+
+557
+00:22:37,840 --> 00:22:42,320
+quiser fazer um dimensionamento
+
+558
+00:22:39,640 --> 00:22:44,840
+customizado pro seu projeto, eu ofereço
+
+559
+00:22:42,320 --> 00:22:47,200
+esse tipo de serviço e posso fazer esse
+
+560
+00:22:44,840 --> 00:22:48,480
+dimensionamento para você. É só clicar
+
+561
+00:22:47,200 --> 00:22:50,559
+no link que eu vou deixar aqui na
+
+562
+00:22:48,480 --> 00:22:52,520
+descrição também. E como sempre, se
+
+563
+00:22:50,559 --> 00:22:54,120
+ficou alguma dúvida aqui no vídeo, pode
+
+564
+00:22:52,520 --> 00:22:55,559
+deixar um comentário aqui embaixo que eu
+
+565
+00:22:54,120 --> 00:22:57,640
+vou responder todo mundo com maior
+
+566
+00:22:55,559 --> 00:23:00,120
+prazer. Espero que as informações desse
+
+567
+00:22:57,640 --> 00:23:03,000
+vídeo tenham sido úteis para você e pro
+
+568
+00:23:00,120 --> 00:23:05,159
+seu projeto. E é claro, se você curtiu,
+
+569
+00:23:03,000 --> 00:23:07,039
+deixa o like aí para fortalecer o canal.
+
+570
+00:23:05,159 --> 00:23:09,360
+E se você ainda não é inscrito, seja
+
+571
+00:23:07,039 --> 00:23:11,240
+bem-vindo, seja bem-vinda. Clica no
+
+572
+00:23:09,360 --> 00:23:13,200
+botão inscrever-se e ativa as
+
+573
+00:23:11,240 --> 00:23:16,880
+notificações pra gente se ver no próximo
+
+574
+00:23:13,200 --> 00:23:16,880
+vídeo. Valeu,
+
