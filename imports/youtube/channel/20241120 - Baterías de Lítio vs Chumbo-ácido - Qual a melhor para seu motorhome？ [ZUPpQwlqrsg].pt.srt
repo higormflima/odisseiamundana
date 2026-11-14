@@ -1,0 +1,1132 @@
+1
+00:00:00,080 --> 00:00:04,480
+nesse vídeo aqui você vai aprender um
+
+2
+00:00:02,320 --> 00:00:06,399
+Quais as diferenças entre uma bateria
+
+3
+00:00:04,480 --> 00:00:09,800
+estacionária de chumbo ácido e uma de
+
+4
+00:00:06,399 --> 00:00:13,080
+lítio dois Qual a melhor bateria para o
+
+5
+00:00:09,800 --> 00:00:15,360
+seu projeto e três de bônus eu ainda vou
+
+6
+00:00:13,080 --> 00:00:18,119
+mostrar como você mesmo pode dimensionar
+
+7
+00:00:15,360 --> 00:00:20,119
+o seu sistema elétrico fotovoltaico pro
+
+8
+00:00:18,119 --> 00:00:21,720
+seu motorhome ou qualquer outro sistema
+
+9
+00:00:20,119 --> 00:00:24,439
+offgrid que você
+
+10
+00:00:21,720 --> 00:00:26,760
+deseja salve galera bem-vindos a mais um
+
+11
+00:00:24,439 --> 00:00:28,640
+vídeo aqui do canal Odisseia mondana eu
+
+12
+00:00:26,760 --> 00:00:30,720
+sou o Igor e junto com a minha esposa
+
+13
+00:00:28,640 --> 00:00:33,079
+Maia nós construímos o nosso próprio
+
+14
+00:00:30,720 --> 00:00:35,360
+motor home para poder viajar por todo o
+
+15
+00:00:33,079 --> 00:00:38,120
+Brasil todos os vídeos dessa construção
+
+16
+00:00:35,360 --> 00:00:39,280
+e da viagem estão aqui no canal e alguns
+
+17
+00:00:38,120 --> 00:00:41,239
+dos vídeos que tiveram o melhor
+
+18
+00:00:39,280 --> 00:00:43,399
+desempenho nessa playlist foram os
+
+19
+00:00:41,239 --> 00:00:45,360
+vídeos de elétrica eu fiz uma série de
+
+20
+00:00:43,399 --> 00:00:47,600
+quatro vídeos ensinando desde os
+
+21
+00:00:45,360 --> 00:00:50,120
+conceitos básico de elétrica como
+
+22
+00:00:47,600 --> 00:00:51,719
+calcular o tamanho e também como fazer a
+
+23
+00:00:50,120 --> 00:00:54,039
+instalação do seu sistema elétrico
+
+24
+00:00:51,719 --> 00:00:56,199
+fotovoltaico offgrid o link para essa
+
+25
+00:00:54,039 --> 00:00:58,000
+playlist vai est aqui no card e também
+
+26
+00:00:56,199 --> 00:00:59,440
+na descrição desse vídeo aqui esses
+
+27
+00:00:58,000 --> 00:01:02,280
+vídeos foram gravados quando a gente
+
+28
+00:00:59,440 --> 00:01:04,960
+acabou nossa viagem pelo Brasil em 2020
+
+29
+00:01:02,280 --> 00:01:06,880
+e desde então já se foram 4 anos nesse
+
+30
+00:01:04,960 --> 00:01:09,400
+período as baterias de lío começaram a
+
+31
+00:01:06,880 --> 00:01:11,600
+se popularizar e mais importante começar
+
+32
+00:01:09,400 --> 00:01:13,600
+a ficar mais baratas e por isso
+
+33
+00:01:11,600 --> 00:01:15,520
+ultimamente as pessoas têm utilizado as
+
+34
+00:01:13,600 --> 00:01:17,119
+baterias de lítio para fazer o sistema
+
+35
+00:01:15,520 --> 00:01:19,080
+elétrico fotovoltaico dos seus
+
+36
+00:01:17,119 --> 00:01:21,079
+motorhomes muita gente não sabe as
+
+37
+00:01:19,080 --> 00:01:23,960
+diferenças entre as clássicas baterias
+
+38
+00:01:21,079 --> 00:01:26,240
+de chumbo e ácido e as novas baterias de
+
+39
+00:01:23,960 --> 00:01:28,479
+lítio e poucas pessoas também sabem
+
+40
+00:01:26,240 --> 00:01:31,000
+porque as baterias de lítio são tão mais
+
+41
+00:01:28,479 --> 00:01:32,600
+caras que as Class as baterias de chumbo
+
+42
+00:01:31,000 --> 00:01:35,000
+aço Será mesmo que vale esse
+
+43
+00:01:32,600 --> 00:01:37,200
+investimento Bora descobrir para
+
+44
+00:01:35,000 --> 00:01:39,360
+facilitar eu fiz uma tabela comparando
+
+45
+00:01:37,200 --> 00:01:41,960
+as vantagens e desvantagens entre uma
+
+46
+00:01:39,360 --> 00:01:45,159
+bateria de fosfato de ferro de lítio as
+
+47
+00:01:41,960 --> 00:01:47,880
+famosas Life po4 e as clássicas baterias
+
+48
+00:01:45,159 --> 00:01:49,360
+de chumbo ácido aquelas pesadonas sendo
+
+49
+00:01:47,880 --> 00:01:51,240
+uma das mais utilizadas aquela
+
+50
+00:01:49,360 --> 00:01:52,799
+Vermelhinha da Freedom na primeira
+
+51
+00:01:51,240 --> 00:01:55,200
+coluna eu listei as principais
+
+52
+00:01:52,799 --> 00:01:57,240
+propriedades das Baterias na segunda
+
+53
+00:01:55,200 --> 00:01:59,360
+coluna nós temos as características da
+
+54
+00:01:57,240 --> 00:02:01,439
+bateria de fosfato de lítio e na
+
+55
+00:01:59,360 --> 00:02:03,840
+terceira coluna as características da
+
+56
+00:02:01,439 --> 00:02:05,759
+bateria de chumbo ácido Eu também colori
+
+57
+00:02:03,840 --> 00:02:08,160
+em verde Qual das Baterias que saiu
+
+58
+00:02:05,759 --> 00:02:10,879
+melhor em cada quesito começando pela
+
+59
+00:02:08,160 --> 00:02:13,560
+densidade de energia que nada mais é que
+
+60
+00:02:10,879 --> 00:02:15,400
+quanta energia cada tipo de bateria
+
+61
+00:02:13,560 --> 00:02:17,640
+consegue armazenar num determinado
+
+62
+00:02:15,400 --> 00:02:19,800
+espaço de tempo a bateria de lítio que
+
+63
+00:02:17,640 --> 00:02:22,680
+se sai muito melhor nesse ponto consegue
+
+64
+00:02:19,800 --> 00:02:25,120
+armazenar mais energia no menor volume e
+
+65
+00:02:22,680 --> 00:02:28,120
+menor peso enquanto que as de chumbo aço
+
+66
+00:02:25,120 --> 00:02:30,000
+são mais pesadas e ocupam mais espaço a
+
+67
+00:02:28,120 --> 00:02:33,480
+título de comparação uma bateria de de
+
+68
+00:02:30,000 --> 00:02:35,599
+lítio de 100 a pesa em torno de 11 kg
+
+69
+00:02:33,480 --> 00:02:40,080
+enquanto que uma bateria de chumbo ácido
+
+70
+00:02:35,599 --> 00:02:43,000
+de 115 A pesa 27 kg e ocupa muito mais
+
+71
+00:02:40,080 --> 00:02:46,000
+espaço segunda propriedade que é a taxa
+
+72
+00:02:43,000 --> 00:02:47,959
+de autodescarga que é quanto de energia
+
+73
+00:02:46,000 --> 00:02:50,599
+a bateria perde quando ela não tá sendo
+
+74
+00:02:47,959 --> 00:02:52,800
+usada nesse ponto a bateria de lítio se
+
+75
+00:02:50,599 --> 00:02:55,000
+sai melhor porque perde menos carga
+
+76
+00:02:52,800 --> 00:02:57,400
+quando não está em uso agora a
+
+77
+00:02:55,000 --> 00:02:59,239
+temperatura de segurança as baterias de
+
+78
+00:02:57,400 --> 00:03:01,760
+lío aguentam trabalhar em temperaturas
+
+79
+00:02:59,239 --> 00:03:04,360
+maiores e portanto são mais seguras
+
+80
+00:03:01,760 --> 00:03:08,239
+contra incêndio mais uma vantagem paraas
+
+81
+00:03:04,360 --> 00:03:10,120
+baterias Live po4 e agora os três pontos
+
+82
+00:03:08,239 --> 00:03:12,840
+que na minha opinião são os mais
+
+83
+00:03:10,120 --> 00:03:16,000
+importantes nessa comparação que são o
+
+84
+00:03:12,840 --> 00:03:18,519
+custo a profundidade de descarga e os
+
+85
+00:03:16,000 --> 00:03:20,799
+ciclos de vida o custo como todos já
+
+86
+00:03:18,519 --> 00:03:23,799
+deve saber é bem maior paraas baterias
+
+87
+00:03:20,799 --> 00:03:25,239
+de fosfato de ferro de lítio as Life po4
+
+88
+00:03:23,799 --> 00:03:27,760
+enquanto que as de chumbo tem um valor
+
+89
+00:03:25,239 --> 00:03:31,200
+mais acessível mais uma vez a título de
+
+90
+00:03:27,760 --> 00:03:33,879
+comparação uma bateria Live 4 de 100 a
+
+91
+00:03:31,200 --> 00:03:36,159
+custa em torno de R 5.000 enquanto que
+
+92
+00:03:33,879 --> 00:03:39,080
+uma bateria estacionária de chumbo ácido
+
+93
+00:03:36,159 --> 00:03:41,280
+custa em torno de R 1.000 agora
+
+94
+00:03:39,080 --> 00:03:43,879
+profundidade de descarga que que é isso
+
+95
+00:03:41,280 --> 00:03:46,080
+Igor é basicamente quando você usa da
+
+96
+00:03:43,879 --> 00:03:48,519
+sua bateria antes de carregar ela
+
+97
+00:03:46,080 --> 00:03:50,920
+novamente se você por exemplo durante
+
+98
+00:03:48,519 --> 00:03:53,200
+todo o dia usar metade da carga da sua
+
+99
+00:03:50,920 --> 00:03:56,200
+bateria você tem uma profundidade de
+
+100
+00:03:53,200 --> 00:03:58,200
+descarga de 50% se você descarregar a
+
+101
+00:03:56,200 --> 00:04:01,280
+bateria completamente Você tem uma
+
+102
+00:03:58,200 --> 00:04:03,480
+profundidade de descarga de 100% nas
+
+103
+00:04:01,280 --> 00:04:05,640
+baterias de lítio você pode usar toda a
+
+104
+00:04:03,480 --> 00:04:08,599
+carga dela ou seja você pode fazer uma
+
+105
+00:04:05,640 --> 00:04:11,000
+profundidade de descarga de 100% sem
+
+106
+00:04:08,599 --> 00:04:13,319
+comprometer muito a vida útil dela
+
+107
+00:04:11,000 --> 00:04:16,440
+enquanto que as baterias de chumbo Ácido
+
+108
+00:04:13,319 --> 00:04:18,840
+é recomendado que se utilize apenas 30%
+
+109
+00:04:16,440 --> 00:04:21,720
+da sua carga para que a vida útil dela
+
+110
+00:04:18,840 --> 00:04:23,840
+não diminua drasticamente e os ciclos de
+
+111
+00:04:21,720 --> 00:04:25,680
+vida nada mais são do que o tempo de
+
+112
+00:04:23,840 --> 00:04:27,919
+vida das suas baterias se você
+
+113
+00:04:25,680 --> 00:04:30,639
+descarrega e carrega sua bateria uma vez
+
+114
+00:04:27,919 --> 00:04:34,160
+por dia então em um ano a sua bateria
+
+115
+00:04:30,639 --> 00:04:35,759
+vai ter 365 ciclos de vida e qual a
+
+116
+00:04:34,160 --> 00:04:38,360
+duração média de cada uma dessas
+
+117
+00:04:35,759 --> 00:04:40,440
+baterias quantos ciclos elas duram antes
+
+118
+00:04:38,360 --> 00:04:42,160
+de morrer vocês podem ver aí na tabela
+
+119
+00:04:40,440 --> 00:04:45,080
+que os fabricantes anunciam que as
+
+120
+00:04:42,160 --> 00:04:47,560
+baterias Life po4 podem durar mais de 15
+
+121
+00:04:45,080 --> 00:04:50,759
+anos enquanto que as de chubo ASO apenas
+
+122
+00:04:47,560 --> 00:04:52,759
+5 anos porém essas duas propriedades a
+
+123
+00:04:50,759 --> 00:04:55,840
+profundidade de descarga e o ciclo de
+
+124
+00:04:52,759 --> 00:04:57,800
+vida estão diretamente ligados quanto
+
+125
+00:04:55,840 --> 00:05:00,199
+mais profunda a descarga que você dá na
+
+126
+00:04:57,800 --> 00:05:01,960
+sua bateria menos ciclos de de vida ela
+
+127
+00:05:00,199 --> 00:05:04,199
+vai durar para entender melhor essa
+
+128
+00:05:01,960 --> 00:05:06,120
+relação eu vou mostrar dois exemplos no
+
+129
+00:05:04,199 --> 00:05:08,120
+exemplo número um Vamos considerar que
+
+130
+00:05:06,120 --> 00:05:11,240
+você queira que a sua bateria dure 5
+
+131
+00:05:08,120 --> 00:05:13,759
+anos que dá aproximadamente uns 1800
+
+132
+00:05:11,240 --> 00:05:15,160
+ciclos pegando aqui as tabelas de alguns
+
+133
+00:05:13,759 --> 00:05:17,479
+fabricantes que relacionam a
+
+134
+00:05:15,160 --> 00:05:19,639
+profundidade de descarga com o número de
+
+135
+00:05:17,479 --> 00:05:22,319
+ciclos de vida a gente vê que paraas
+
+136
+00:05:19,639 --> 00:05:25,039
+baterias Life po4 você pode utilizar
+
+137
+00:05:22,319 --> 00:05:28,440
+100% da carga dela e ainda vai contar
+
+138
+00:05:25,039 --> 00:05:30,280
+com os 1800 ciclos ou 5 anos de vida ou
+
+139
+00:05:28,440 --> 00:05:34,280
+seja você pode comprar um a bateria de
+
+140
+00:05:30,280 --> 00:05:37,280
+100 a você pode usar os 100 a todo dia
+
+141
+00:05:34,280 --> 00:05:40,160
+por 5 anos já na bateria de chumbo ácido
+
+142
+00:05:37,280 --> 00:05:42,360
+para que ela dure os mesmos 1800 ciclos
+
+143
+00:05:40,160 --> 00:05:45,000
+você só pode descarregar ela
+
+144
+00:05:42,360 --> 00:05:47,680
+30% ou seja se você comprar uma bateria
+
+145
+00:05:45,000 --> 00:05:50,160
+de 100 Amp para que ela não estrague
+
+146
+00:05:47,680 --> 00:05:53,240
+antes desses 5 anos você só vai poder
+
+147
+00:05:50,160 --> 00:05:56,319
+usar 30 ahh por dia se for uma bateria
+
+148
+00:05:53,240 --> 00:05:59,639
+de 200 vai poder usar 60 e assim por
+
+149
+00:05:56,319 --> 00:06:02,199
+diante esses 30% de profundidade de
+
+150
+00:05:59,639 --> 00:06:04,680
+descarga é exatamente o valor que eu uso
+
+151
+00:06:02,199 --> 00:06:06,680
+quando eu dimensiono os projetos
+
+152
+00:06:04,680 --> 00:06:08,800
+fotovoltaicos pros meus clientes que
+
+153
+00:06:06,680 --> 00:06:10,680
+decidem utilizar as baterias de chumbo
+
+154
+00:06:08,800 --> 00:06:13,000
+ácido quer dizer então Igor que eu não
+
+155
+00:06:10,680 --> 00:06:15,160
+vou poder usar mais do que 30% da minha
+
+156
+00:06:13,000 --> 00:06:17,680
+bateria de chumbo ácio não se por
+
+157
+00:06:15,160 --> 00:06:19,080
+exemplo num dia tiver nublado e as suas
+
+158
+00:06:17,680 --> 00:06:21,039
+placas solares não carregarem
+
+159
+00:06:19,080 --> 00:06:23,599
+completamente a sua bateria você vai
+
+160
+00:06:21,039 --> 00:06:25,840
+poder usar um pouquinho mais desses 30%
+
+161
+00:06:23,599 --> 00:06:28,280
+uma ou outra vez não vai ter problema
+
+162
+00:06:25,840 --> 00:06:30,319
+mas se você fizer isso constantemente O
+
+163
+00:06:28,280 --> 00:06:32,759
+que será que acontece vamos ver aqui no
+
+164
+00:06:30,319 --> 00:06:35,400
+exemplo número dois vamos supor agora
+
+165
+00:06:32,759 --> 00:06:38,720
+que eu precise usar todo dia metade da
+
+166
+00:06:35,400 --> 00:06:41,080
+carga da minha bateria ou seja 50% de
+
+167
+00:06:38,720 --> 00:06:43,360
+profundidade de descarga se eu tenho uma
+
+168
+00:06:41,080 --> 00:06:46,280
+bateria de 100 Ah isso significa que
+
+169
+00:06:43,360 --> 00:06:48,479
+meus equipamentos vão consumir 50 Amp no
+
+170
+00:06:46,280 --> 00:06:51,440
+final do dia se eu instalar uma bateria
+
+171
+00:06:48,479 --> 00:06:54,400
+Life po4 essa bateria vai durar
+
+172
+00:06:51,440 --> 00:06:55,360
+aproximadamente 6.000 ciclos que dá em
+
+173
+00:06:54,400 --> 00:06:58,400
+torno de
+
+174
+00:06:55,360 --> 00:07:00,639
+16,4 anos enquanto se eu instalar uma
+
+175
+00:06:58,400 --> 00:07:04,879
+bateria de chumbo ácido ela vai durar
+
+176
+00:07:00,639 --> 00:07:08,720
+apenas 1000 ciclos que dá só 2.7 anos
+
+177
+00:07:04,879 --> 00:07:11,759
+vira a diferença passando de 30% para só
+
+178
+00:07:08,720 --> 00:07:14,440
+50% de descarga a vida da bateria de
+
+179
+00:07:11,759 --> 00:07:16,840
+chumbo caiu de 5 anos para menos de 3
+
+180
+00:07:14,440 --> 00:07:18,800
+anos por isso que eu já vi muita gente
+
+181
+00:07:16,840 --> 00:07:21,039
+perder bateria de chumbo ácido em
+
+182
+00:07:18,800 --> 00:07:22,800
+pouquíssimo tempo porque não fizeram
+
+183
+00:07:21,039 --> 00:07:25,120
+corretamente o dimensionamento do
+
+184
+00:07:22,800 --> 00:07:27,400
+sistema elétrico fotovoltaico não
+
+185
+00:07:25,120 --> 00:07:29,840
+calcularam ali corretamente quanto cada
+
+186
+00:07:27,400 --> 00:07:32,360
+um dos seus equipamentos dentro do motor
+
+187
+00:07:29,840 --> 00:07:34,319
+iriam consumir e afinal qual que é a
+
+188
+00:07:32,360 --> 00:07:37,199
+melhor bateria pro seu projeto pro seu
+
+189
+00:07:34,319 --> 00:07:39,039
+motor home ou talvez pro seu sítio ficou
+
+190
+00:07:37,199 --> 00:07:41,400
+óbvio que a bateria de lítio tem uma
+
+191
+00:07:39,039 --> 00:07:43,520
+performance muito melhor então se o seu
+
+192
+00:07:41,400 --> 00:07:47,360
+orçamento permitir eu recomendo sem
+
+193
+00:07:43,520 --> 00:07:49,680
+dúvidas uma bateria de lítio L fp4 agora
+
+194
+00:07:47,360 --> 00:07:51,919
+se de repente o seu orçamento tá curto
+
+195
+00:07:49,680 --> 00:07:54,360
+talvez você vai consumir muito pouco de
+
+196
+00:07:51,919 --> 00:07:56,560
+energia ou até mesmo você não precisa de
+
+197
+00:07:54,360 --> 00:07:58,840
+uma vida longa paraa bateria você só
+
+198
+00:07:56,560 --> 00:08:01,159
+quer fazer uma temporada curta de viagem
+
+199
+00:07:58,840 --> 00:08:03,319
+se depois vai mais precisar dela nesse
+
+200
+00:08:01,159 --> 00:08:05,280
+caso uma bateria de chumbo ácido vai te
+
+201
+00:08:03,319 --> 00:08:07,039
+atender Sem problema nenhum assim como
+
+202
+00:08:05,280 --> 00:08:09,479
+atendeu o meu motorhome durante a minha
+
+203
+00:08:07,039 --> 00:08:11,360
+viagem pelo Brasil no nosso motor home
+
+204
+00:08:09,479 --> 00:08:14,319
+aquele ali da foto nós tínhamos
+
+205
+00:08:11,360 --> 00:08:16,759
+geladeira climatizador e mais um monte
+
+206
+00:08:14,319 --> 00:08:18,639
+de coisa e a gente utilizou a bateria de
+
+207
+00:08:16,759 --> 00:08:20,840
+chumbo ASO e ela nos atendeu
+
+208
+00:08:18,639 --> 00:08:23,520
+perfeitamente durante toda a viagem
+
+209
+00:08:20,840 --> 00:08:25,440
+porque eu fiz o correto dimensionamento
+
+210
+00:08:23,520 --> 00:08:28,479
+e sabia que estava utilizando ali no
+
+211
+00:08:25,440 --> 00:08:30,080
+máximo 30% da minha bateria mas Igor
+
+212
+00:08:28,479 --> 00:08:32,120
+como é que eu faço para calcular o meu
+
+213
+00:08:30,080 --> 00:08:34,880
+sistema elétrico além das Baterias tem
+
+214
+00:08:32,120 --> 00:08:37,719
+as placas solares o controlador de carga
+
+215
+00:08:34,880 --> 00:08:39,479
+inversor de tensão é muito complicado
+
+216
+00:08:37,719 --> 00:08:41,479
+como eu falei eu gravei uma série de
+
+217
+00:08:39,479 --> 00:08:43,800
+quatro vídeos explicando desde os
+
+218
+00:08:41,479 --> 00:08:45,600
+conceitos básicos até como fazer a
+
+219
+00:08:43,800 --> 00:08:47,920
+instalação de cada componente no seu
+
+220
+00:08:45,600 --> 00:08:50,399
+motor home e em um desses vídeos eu
+
+221
+00:08:47,920 --> 00:08:52,560
+mostro como fazer e ainda disponibilizo
+
+222
+00:08:50,399 --> 00:08:54,920
+a minha planilha que faz os cálculos
+
+223
+00:08:52,560 --> 00:08:56,760
+todos para você o link para esses vídeos
+
+224
+00:08:54,920 --> 00:08:58,480
+vão estar aqui na descrição qualquer
+
+225
+00:08:56,760 --> 00:09:00,760
+dúvida é só deixar um comentário aqui
+
+226
+00:08:58,480 --> 00:09:02,680
+também e se mesmo com os vídeos você não
+
+227
+00:09:00,760 --> 00:09:04,760
+conseguir ou simplesmente não quiser
+
+228
+00:09:02,680 --> 00:09:07,480
+fazer sozinho eu tenho outras duas
+
+229
+00:09:04,760 --> 00:09:09,320
+soluções a primeira são os diagramas
+
+230
+00:09:07,480 --> 00:09:11,560
+prontos de alguns projetos que eu já
+
+231
+00:09:09,320 --> 00:09:13,360
+dimensione eu tenho uma parceria com o
+
+232
+00:09:11,560 --> 00:09:16,120
+casal de arquitetos para motor Homes a
+
+233
+00:09:13,360 --> 00:09:18,079
+Stephanie o Tiago do estúdio s t e eu
+
+234
+00:09:16,120 --> 00:09:19,760
+faço os projetos elétricos e Hidráulicos
+
+235
+00:09:18,079 --> 00:09:22,160
+para alguns clientes que eles desenham o
+
+236
+00:09:19,760 --> 00:09:24,079
+interior do motorhome Inclusive eu vou
+
+237
+00:09:22,160 --> 00:09:25,880
+deixar o contato deles aqui também caso
+
+238
+00:09:24,079 --> 00:09:28,360
+você precise projetar o interior do seu
+
+239
+00:09:25,880 --> 00:09:30,120
+motor home então se você quiser adquirir
+
+240
+00:09:28,360 --> 00:09:31,959
+um desses diagramas elétrico e
+
+241
+00:09:30,120 --> 00:09:33,839
+hidráulico eu vou deixar o contato aqui
+
+242
+00:09:31,959 --> 00:09:35,880
+na descrição do vídeo e a segunda
+
+243
+00:09:33,839 --> 00:09:38,839
+solução caso nenhum desses diagramas
+
+244
+00:09:35,880 --> 00:09:40,640
+pré-prontos atenda suas necessidades é
+
+245
+00:09:38,839 --> 00:09:43,320
+contratar os meus serviços para fazer um
+
+246
+00:09:40,640 --> 00:09:46,040
+projeto customizado para você eu vou
+
+247
+00:09:43,320 --> 00:09:48,120
+pegar todos os dados do seu motorhome os
+
+248
+00:09:46,040 --> 00:09:50,000
+dados dos Equipamentos elétricos que vão
+
+249
+00:09:48,120 --> 00:09:52,040
+dentro do seu motorhome e vou
+
+250
+00:09:50,000 --> 00:09:54,519
+dimensionar um sistema elétrico e
+
+251
+00:09:52,040 --> 00:09:56,480
+hidráulico sob medida para você basta
+
+252
+00:09:54,519 --> 00:09:58,120
+entrar em contato comigo pelo e-mail ou
+
+253
+00:09:56,480 --> 00:10:00,120
+WhatsApp que eu vou deixar aqui na
+
+254
+00:09:58,120 --> 00:10:02,240
+descrição do vídeo se você tiver vendo
+
+255
+00:10:00,120 --> 00:10:04,320
+aí pelo celular é só clicar aqui embaixo
+
+256
+00:10:02,240 --> 00:10:06,279
+na setinha embaixo do vídeo que você vai
+
+257
+00:10:04,320 --> 00:10:08,680
+ter acesso a toda a descrição do vídeo
+
+258
+00:10:06,279 --> 00:10:10,560
+com os links e os contatos e se ficou
+
+259
+00:10:08,680 --> 00:10:12,519
+qualquer dúvida ou se você ainda quiser
+
+260
+00:10:10,560 --> 00:10:14,600
+acrescentar alguma coisa aqui no vídeo
+
+261
+00:10:12,519 --> 00:10:16,399
+fica à vontade e escreva aqui embaixo
+
+262
+00:10:14,600 --> 00:10:18,600
+nos comentários que eu vou responder um
+
+263
+00:10:16,399 --> 00:10:20,600
+por um Além disso se você quiser sugerir
+
+264
+00:10:18,600 --> 00:10:22,480
+outro assunto quiser que eu grave outro
+
+265
+00:10:20,600 --> 00:10:24,440
+vídeo por exemplo fazendo o
+
+266
+00:10:22,480 --> 00:10:26,880
+dimensionamento de um exemplo de um
+
+267
+00:10:24,440 --> 00:10:28,680
+motor home com uma bateria de lítio
+
+268
+00:10:26,880 --> 00:10:30,399
+deixa um comentário aqui ou talvez
+
+269
+00:10:28,680 --> 00:10:32,440
+qualquer outro tópico que você queira
+
+270
+00:10:30,399 --> 00:10:34,600
+que eu grave deixa aqui que eu vou ler
+
+271
+00:10:32,440 --> 00:10:36,560
+todos os comentários e vou considerar
+
+272
+00:10:34,600 --> 00:10:38,959
+gravar o vídeo com os tópicos sugeridos
+
+273
+00:10:36,560 --> 00:10:40,360
+por vocês e como sempre se você curtiu o
+
+274
+00:10:38,959 --> 00:10:42,079
+vídeo se as informações que eu
+
+275
+00:10:40,360 --> 00:10:44,120
+compartilhei foram importantes para
+
+276
+00:10:42,079 --> 00:10:46,320
+vocês Deixa aquele like aí para
+
+277
+00:10:44,120 --> 00:10:49,040
+fortalecer o canal e se você ainda não é
+
+278
+00:10:46,320 --> 00:10:51,320
+inscrito seja bem-vindo seja bem-vinda
+
+279
+00:10:49,040 --> 00:10:54,280
+clica no botão inscrever-se aqui embaixo
+
+280
+00:10:51,320 --> 00:10:59,480
+e a gente se vê no próximo vídeo valeu
+
+281
+00:10:54,280 --> 00:11:02,480
+[Música]
+
+282
+00:10:59,480 --> 00:11:02,480
+e
+
+283
+00:11:02,800 --> 00:11:08,789
+[Música]
+
