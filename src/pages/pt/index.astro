@@ -4,6 +4,7 @@ import InteractiveWorldMap from '../../components/InteractiveWorldMap.astro';
 import { getCollection } from 'astro:content';
 import { buildJourneyMapEntries, compareJourneysByRecency, formatJourneyListDate } from '../../lib/journeyMapData.mjs';
 import { buildGalleryCollections } from '../../lib/galleryCollections.mjs';
+import { buildMotorhomeMapEntries } from '../../lib/motorhomeMapData.mjs';
 
 const pages = await getCollection('journeyPages');
 const journeys = await getCollection('journeyMetadata');
@@ -17,12 +18,19 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
 const datesByJourney = new Map(journeys.map((journey) => [journey.id, journey.data.dates]));
 const journeyDate = (page) => datesByJourney.get(page.data.journey_id.id);
 const orderedPages = [...publishedJourneyPages].sort((left, right) => compareJourneysByRecency(journeyDate(left), journeyDate(right)));
-const mapEntries = buildJourneyMapEntries({
-  journeys,
-  pages,
-  videos: await getCollection('videoMetadata'),
-  base,
-});
+const mapEntries = [
+  ...buildJourneyMapEntries({
+    journeys,
+    pages,
+    videos: await getCollection('videoMetadata'),
+    base,
+  }),
+  ...buildMotorhomeMapEntries({
+    projects: await getCollection('motorhomeProjectMetadata'),
+    pages: await getCollection('motorhomeProjectPages'),
+    base,
+  }),
+];
 const galleryCollections = buildGalleryCollections({ journeys, pages, base });
 const homeGalleryPhotoPaths = [
   'media/journeys/philippines-palawan/photos/philippines-005.jpg',
@@ -57,12 +65,12 @@ const homeGalleryPhotos = homeGalleryPhotoPaths.flatMap((path) => {
     <section class="map-section" id="mapa" aria-labelledby="mapa-titulo">
       <div class="section-heading">
         <div>
-          <p class="eyebrow">Mapa de viagens</p>
+          <p class="eyebrow">Viagens e motorhome</p>
           <h2 id="mapa-titulo">Explore pelo mapa</h2>
         </div>
-        <p class="map-section-hint">Selecione um marcador para conhecer a viagem.</p>
+        <p class="map-section-hint">Selecione um marcador para conhecer nossas viagens e nosso motorhome.</p>
       </div>
-      <InteractiveWorldMap entries={mapEntries} skipTarget="#viagens" />
+      <InteractiveWorldMap entries={mapEntries} label="Mapa-múndi interativo de viagens e motorhome" skipTarget="#viagens" />
     </section>
   )}
 

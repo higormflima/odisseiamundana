@@ -46,10 +46,43 @@ const collaborationMetadata = defineCollection({
   }),
 });
 
+const motorhomeProjectPages = defineCollection({
+  loader: glob({ pattern: '**/*.mdx', base: './content/motorhome-projects' }),
+  schema: z.object({
+    project_id: reference('motorhomeProjectMetadata'),
+    title: z.string(),
+    language: z.enum(['pt', 'en']),
+    status: z.enum(['draft', 'reviewed', 'published']),
+  }),
+});
+
+const motorhomeProjectMetadata = defineCollection({
+  loader: glob({
+    pattern: '**/*.yaml',
+    base: './metadata/motorhome-projects',
+    generateId: ({ entry }) => entry.replace(/\.yaml$/i, ''),
+  }),
+});
+
+const motorhomeSystemPages = defineCollection({
+  loader: glob({ pattern: '**/*.mdx', base: './content/motorhome-systems' }),
+  schema: z.object({
+    project_id: reference('motorhomeProjectMetadata'),
+    system_id: z.string(),
+    title: z.string(),
+    language: z.enum(['pt', 'en']),
+    status: z.enum(['draft', 'reviewed', 'published']),
+    sort_order: z.number().int(),
+  }),
+});
+
 export const collections = {
   journeyPages,
   journeyMetadata,
   videoMetadata,
   collaborationPages,
   collaborationMetadata,
+  motorhomeProjectPages,
+  motorhomeProjectMetadata,
+  motorhomeSystemPages,
 };

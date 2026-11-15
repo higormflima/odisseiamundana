@@ -1,0 +1,2 @@
+transcripts/motorhome-projects/**/*.raw.*.vtt -text -whitespace
+imports/youtube/channel/*ZUPpQwlqrsg*.pt.srt -text -whitespace

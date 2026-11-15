@@ -1,0 +1,3903 @@
+# Fontes locais consolidadas; página principal aprovada pelo proprietário.
+project_id: iveco-daily-3510
+title: Construção do Motorhome Artesanal Iveco Daily 35.10
+summary: >
+  Construímos nosso motorhome artesanal em uma van Iveco Daily 35.10,
+  na garagem de casa. Reunimos o planejamento, os sistemas e as decisões
+  da montagem, com os vídeos da construção e conteúdos complementares.
+vehicle_model: Iveco Daily 35.10
+chassis: >
+  Ano 1998. Motor 2.8 turbodiesel, potência de 103 cv e tração traseira.
+  Entre-eixos de 3,30 m. Dimensões totais da van original, antes da conversão,
+  informadas pelo proprietário: comprimento de 6,00 m, largura de 2,00 m e
+  altura de 2,675 m. Não representam a altura do motorhome com equipamentos no teto.
+build_location: São José dos Campos, São Paulo
+representative_point:
+  name: São José dos Campos, São Paulo
+  coordinates:
+    lat: -23.17889
+    lng: -45.88694
+build_period:
+  start: "2018-12"
+  end: "2019-07"
+main_costs:
+  - description: Veículo e despesas associadas
+    amount: 16132.52
+    currency: BRL
+    unit: Subtotal dos 7 itens da categoria Veículo; não corresponde somente ao preço de compra da van.
+  - description: Manutenção
+    amount: 29161.23
+    currency: BRL
+    unit: Subtotal dos 151 itens da categoria Manutenção, incluindo lançamentos após o término da construção.
+  - description: Demais categorias da planilha
+    amount: 19270.87
+    currency: BRL
+    unit: Subtotal dos outros 222 itens; inclui sistemas, materiais, ferramentas e acessórios, não apenas uma categoria de conversão.
+downloads:
+  - title: Baixar planilha original de custos (.xlsx)
+    path: downloads/motorhome-projects/iveco-daily-3510/custos-motorhome-odisseia-mundana.xlsx
+cost_items:
+  - source_row: 4
+    description: Iveco Turbo Daily 35.10 1998 2.8L
+    quantity: 1
+    unit: und
+    unit_price: 15000
+    shipping: 100
+    amount: 15100
+    currency: BRL
+    detail: Furgão ? Iveco
+    category: Veículo
+  - source_row: 5
+    description: Escova de Aço com cabo
+    quantity: 1
+    unit: und
+    unit_price: 4.6
+    shipping: 0
+    amount: 4.6
+    currency: BRL
+    category: Manutenção
+  - source_row: 6
+    description: Pia de cozinha em aço inox com válvula
+    quantity: 1
+    unit: und
+    unit_price: 198
+    shipping: 0
+    amount: 198
+    currency: BRL
+    detail: Modelo Filo 40 FX - EX ? Tramontina
+    category: Cozinha
+  - source_row: 7
+    description: IPVA 2018
+    quantity: 1
+    unit: und
+    unit_price: 452.73
+    shipping: 0
+    amount: 452.73
+    currency: BRL
+    detail: Taxa
+    category: Veículo
+  - source_row: 8
+    description: DPVAT 2018
+    quantity: 1
+    unit: und
+    unit_price: 47.66
+    shipping: 0
+    amount: 47.66
+    currency: BRL
+    detail: Taxa
+    category: Veículo
+  - source_row: 9
+    description: Tanque A (Potável) - 70 L
+    quantity: 1
+    unit: und
+    unit_price: 335
+    amount: 335
+    currency: BRL
+    detail: Com parafusos para medição de nível
+    category: Hidráulica
+  - source_row: 10
+    description: Tanque B (Potável) - 150 L
+    quantity: 1
+    unit: und
+    unit_price: 430
+    amount: 430
+    currency: BRL
+    category: Hidráulica
+  - source_row: 11
+    description: Tanque C (Servida) - 70 L
+    quantity: 1
+    unit: und
+    unit_price: 335
+    shipping: 65
+    amount: 400
+    currency: BRL
+    detail: Com parafusos para medição de nível
+    category: Hidráulica
+  - source_row: 12
+    description: Janela corredica 400x1000mm
+    quantity: 1
+    unit: und
+    unit_price: 325
+    amount: 325
+    currency: BRL
+    detail: Mesa ? Finestracar
+    category: Estrutura
+  - source_row: 13
+    description: Janela corredica 300x900mm
+    quantity: 1
+    unit: und
+    unit_price: 315
+    amount: 315
+    currency: BRL
+    detail: Porta corrediça ? Finestracar
+    category: Estrutura
+  - source_row: 14
+    description: Janela maxiar 300x400
+    quantity: 1
+    unit: und
+    unit_price: 320
+    amount: 320
+    currency: BRL
+    detail: Banheiro ? Finestracar
+    category: Estrutura
+  - source_row: 15
+    description: Clarabóia 350x350mm
+    quantity: 1
+    unit: und
+    unit_price: 290
+    amount: 290
+    currency: BRL
+    detail: Teto ? Finestracar
+    category: Estrutura
+  - source_row: 16
+    description: Gatilho Porta Interno
+    quantity: 1
+    unit: und
+    unit_price: 25
+    amount: 25
+    currency: BRL
+    detail: Iveparts
+    category: Manutenção
+  - source_row: 17
+    description: Tampa reservatório de água motor c/ respiro
+    quantity: 1
+    unit: und
+    unit_price: 20
+    amount: 20
+    currency: BRL
+    detail: Iveparts
+    category: Manutenção
+  - source_row: 18
+    description: Manivela janela
+    quantity: 1
+    unit: und
+    unit_price: 20
+    amount: 20
+    currency: BRL
+    detail: Iveparts
+    category: Manutenção
+  - source_row: 19
+    description: Porca da roda
+    quantity: 6
+    unit: und
+    unit_price: 4
+    amount: 24
+    currency: BRL
+    detail: Iveparts
+    category: Manutenção
+  - source_row: 20
+    description: Jogo reparo pinça aneis
+    quantity: 2
+    unit: und
+    unit_price: 25
+    amount: 50
+    currency: BRL
+    detail: Iveparts
+    category: Manutenção
+  - source_row: 21
+    description: Lanterna dianteira direita
+    quantity: 1
+    unit: und
+    unit_price: 35
+    amount: 35
+    currency: BRL
+    detail: Iveparts
+    category: Manutenção
+  - source_row: 22
+    description: Lanterna dianteira esquerda
+    quantity: 1
+    unit: und
+    unit_price: 35
+    amount: 35
+    currency: BRL
+    detail: Iveparts
+    category: Manutenção
+  - source_row: 23
+    description: Auto Elétrico
+    quantity: 1
+    unit: und
+    unit_price: 2500
+    amount: 2500
+    currency: BRL
+    detail: Revisão completa das luzes, paínes e recondicionamento do arranque e alterador
+    category: Manutenção
+  - source_row: 24
+    description: Vistoria
+    quantity: 1
+    unit: und
+    unit_price: 100
+    amount: 100
+    currency: BRL
+    detail: Para transferencia
+    category: Veículo
+  - source_row: 25
+    description: Licenciamento 2018
+    quantity: 1
+    unit: und
+    unit_price: 103.53
+    amount: 103.53
+    currency: BRL
+    detail: Taxa
+    category: Veículo
+  - source_row: 26
+    description: Transferência de propriedade
+    quantity: 1
+    unit: und
+    unit_price: 199.92
+    amount: 199.92
+    currency: BRL
+    detail: Taxa
+    category: Veículo
+  - source_row: 27
+    description: Emplacamento
+    quantity: 1
+    unit: und
+    unit_price: 128.68
+    amount: 128.68
+    currency: BRL
+    detail: Taxa
+    category: Veículo
+  - source_row: 28
+    description: Convertedor de ferrugem para base de pintura
+    quantity: 1
+    unit: und
+    unit_price: 14
+    amount: 14
+    currency: BRL
+    detail: Confer
+    category: Manutenção
+  - source_row: 29
+    description: Spray preto fosco alta temperatura
+    quantity: 1
+    unit: und
+    unit_price: 25
+    amount: 25
+    currency: BRL
+    detail: Até 600º C ? Suvinil
+    category: Manutenção
+  - source_row: 30
+    description: Tinta Batida de Pedra
+    quantity: 1
+    unit: und
+    unit_price: 16
+    amount: 16
+    currency: BRL
+    detail: Maxi Rubber
+    category: Manutenção
+  - source_row: 31
+    description: Tinta Batida de Pedra
+    quantity: 1
+    unit: und
+    unit_price: 15
+    amount: 15
+    currency: BRL
+    detail: Maxi Rubber
+    category: Manutenção
+  - source_row: 32
+    description: Vaso Assento Sanitário Portátil 20l Banheiro
+    quantity: 1
+    unit: und
+    unit_price: 368.49
+    shipping: 0
+    amount: 368.49
+    currency: BRL
+    detail: 2 Vintens
+    category: Banheiro
+  - source_row: 33
+    description: FOGAO COOKTOP ASKOI 2 BOCAS PRETO
+    quantity: 1
+    unit: und
+    unit_price: 205
+    shipping: 23.9
+    amount: 228.9
+    currency: BRL
+    detail: Askoi
+    category: Cozinha
+  - source_row: 34
+    description: Turbina Iveco
+    quantity: 1
+    unit: und
+    unit_price: 890
+    shipping: 123
+    amount: 1013
+    currency: BRL
+    detail: Recondicionamento ? Biagio
+    category: Manutenção
+  - source_row: 35
+    description: Tinta Batida de Pedra
+    quantity: 1
+    unit: und
+    unit_price: 15
+    amount: 15
+    currency: BRL
+    detail: Maxi Rubber
+    category: Manutenção
+  - source_row: 36
+    description: Silicone
+    quantity: 1
+    unit: und
+    unit_price: 4
+    amount: 4
+    currency: BRL
+    detail: Bisnaga pequena
+    category: Manutenção
+  - source_row: 37
+    description: PINCA FREIO TRASEIRA ESQUERDA COMPLETA COM PASTILHAS
+    quantity: 1
+    unit: und
+    unit_price: 590
+    amount: 590
+    currency: BRL
+    category: Manutenção
+  - source_row: 38
+    description: PINCA FREIO TRASEIRA DIREITA COMPLETA COM PASTILHAS
+    quantity: 1
+    unit: und
+    unit_price: 590
+    amount: 590
+    currency: BRL
+    category: Manutenção
+  - source_row: 39
+    description: CRUZETA CARDAN
+    quantity: 4
+    unit: und
+    unit_price: 30
+    amount: 120
+    currency: BRL
+    category: Manutenção
+  - source_row: 40
+    description: BORRACHA PORTA DIANTEIRA (CONTORNO PORTA)
+    quantity: 2
+    unit: und
+    unit_price: 65
+    amount: 130
+    currency: BRL
+    category: Manutenção
+  - source_row: 41
+    description: MACANETA EXTERNA PORTA DIANTEIRA/CORRER/TRASEIRA DIREITA
+    quantity: 1
+    unit: und
+    unit_price: 48
+    amount: 48
+    currency: BRL
+    category: Manutenção
+  - source_row: 42
+    description: CALHA CHUVA (kit 2 portas)
+    quantity: 1
+    unit: und
+    unit_price: 75
+    amount: 75
+    currency: BRL
+    category: Manutenção
+  - source_row: 43
+    description: ROLAMENTO RODA DIANTEIRA
+    quantity: 1
+    unit: und
+    unit_price: 145
+    amount: 145
+    currency: BRL
+    category: Manutenção
+  - source_row: 44
+    description: PESTANA INTERNA VIDRO PORTA DIANTEIRA DIREITA
+    quantity: 1
+    unit: und
+    unit_price: 28
+    amount: 28
+    currency: BRL
+    category: Manutenção
+  - source_row: 45
+    description: PESTANA EXTERNA VIDRO PORTA DIANTEIRA DIREITA
+    quantity: 1
+    unit: und
+    unit_price: 28
+    amount: 28
+    currency: BRL
+    category: Manutenção
+  - source_row: 46
+    description: PESTANA INTERNA VIDRO PORTA DIANTEIRA ESQUERDA
+    quantity: 1
+    unit: und
+    unit_price: 28
+    amount: 28
+    currency: BRL
+    category: Manutenção
+  - source_row: 47
+    description: PESTANA EXTERNA VIDRO PORTA DIANTEIRA ESQUERDA
+    quantity: 1
+    unit: und
+    unit_price: 28
+    amount: 28
+    currency: BRL
+    category: Manutenção
+  - source_row: 48
+    description: DISCO FREIO DIANTEIRO
+    quantity: 2
+    unit: und
+    unit_price: 250
+    amount: 500
+    currency: BRL
+    category: Manutenção
+  - source_row: 49
+    description: JOGO SAPATA FREIO MAO
+    quantity: 2
+    unit: und
+    unit_price: 80
+    amount: 160
+    currency: BRL
+    category: Manutenção
+  - source_row: 50
+    description: JOGO MOLA SAPATA PATIM FREIO MÃO
+    quantity: 2
+    unit: und
+    unit_price: 23
+    amount: 46
+    currency: BRL
+    category: Manutenção
+  - source_row: 51
+    description: ALAVANCA SAPATA FREIO MÃO
+    quantity: 2
+    unit: und
+    unit_price: 52
+    amount: 104
+    currency: BRL
+    category: Manutenção
+  - source_row: 52
+    description: REGULADOR SAPATA PATIM FREIO MÃO
+    quantity: 2
+    unit: und
+    unit_price: 25
+    amount: 50
+    currency: BRL
+    category: Manutenção
+  - source_row: 53
+    description: CABO FREIO MÃO (ALAVANCA)
+    quantity: 1
+    unit: und
+    unit_price: 75
+    amount: 75
+    currency: BRL
+    category: Manutenção
+  - source_row: 54
+    description: "PASTILHA FREIO DIANTEIRO OU TRASEIRO (JOGO PARA AS DUAS RODAS) "
+    quantity: 1
+    unit: und
+    unit_price: 40
+    amount: 40
+    currency: BRL
+    category: Manutenção
+  - source_row: 55
+    description: DISCO FREIO TRASEIRO
+    quantity: 2
+    unit: und
+    unit_price: 130
+    amount: 260
+    currency: BRL
+    category: Manutenção
+  - source_row: 56
+    description: FILTRO RACOR ELEMENTO
+    quantity: 1
+    unit: und
+    unit_price: 25
+    amount: 25
+    currency: BRL
+    category: Manutenção
+  - source_row: 57
+    description: FILTRO AR GRANDE (43CM)
+    quantity: 1
+    unit: und
+    unit_price: 60
+    amount: 60
+    currency: BRL
+    category: Manutenção
+  - source_row: 58
+    description: CABO CAPO IVECO
+    quantity: 1
+    unit: und
+    unit_price: 40
+    amount: 40
+    currency: BRL
+    category: Manutenção
+  - source_row: 59
+    description: FILTRO COMBUSTIVEL DIESEL
+    quantity: 1
+    unit: und
+    unit_price: 20
+    amount: 20
+    currency: BRL
+    category: Manutenção
+  - source_row: 60
+    description: FILTRO OLEO LUBRIFICANTE MOTOR
+    quantity: 2
+    unit: und
+    unit_price: 35
+    amount: 70
+    currency: BRL
+    category: Manutenção
+  - source_row: 61
+    description: CORREIA DENTADA (154 DENTES)
+    quantity: 1
+    unit: und
+    unit_price: 145
+    amount: 145
+    currency: BRL
+    category: Manutenção
+  - source_row: 62
+    description: CORREIA ALTERNADOR (FINA EM V 10X940)
+    quantity: 1
+    unit: und
+    unit_price: 15
+    amount: 15
+    currency: BRL
+    category: Manutenção
+  - source_row: 63
+    description: ROLAMENTO ESTICADOR CORREIA DENTADA GRANDE
+    quantity: 2
+    unit: und
+    unit_price: 85
+    amount: 170
+    currency: BRL
+    category: Manutenção
+  - source_row: 64
+    description: RETENTOR DIANTEIRO VIRABREQUIM POLIA
+    quantity: 1
+    unit: und
+    unit_price: 69
+    amount: 69
+    currency: BRL
+    category: Manutenção
+  - source_row: 65
+    description: PIVO MANGA EIXO BANDEJA DIANT
+    quantity: 4
+    unit: und
+    unit_price: 58
+    amount: 232
+    currency: BRL
+    category: Manutenção
+  - source_row: 66
+    description: BUCHA BARRA ESTABILIZADORA DIANTEIRA
+    quantity: 4
+    unit: und
+    unit_price: 5
+    amount: 20
+    currency: BRL
+    category: Manutenção
+  - source_row: 67
+    description: AMORTECEDOR DIANTEIRO
+    quantity: 2
+    unit: und
+    unit_price: 140
+    amount: 280
+    currency: BRL
+    category: Manutenção
+  - source_row: 68
+    description: COXIM MOTOR DIREITO (CALÇO DIANTEIRO MOTOR)
+    quantity: 1
+    unit: und
+    unit_price: 50
+    amount: 50
+    currency: BRL
+    category: Manutenção
+  - source_row: 69
+    description: COXIM MOTOR ESQUERDO (CALÇO DIANTEIRO MOTOR)
+    quantity: 1
+    unit: und
+    unit_price: 50
+    amount: 50
+    currency: BRL
+    category: Manutenção
+  - source_row: 70
+    description: ROLAMENTO RODA TRASEIRA
+    quantity: 2
+    unit: und
+    unit_price: 190
+    amount: 380
+    currency: BRL
+    category: Manutenção
+  - source_row: 71
+    description: AMORTECEDOR TRASEIRO
+    quantity: 2
+    unit: und
+    unit_price: 145
+    amount: 290
+    currency: BRL
+    category: Manutenção
+  - source_row: 72
+    description: BUCHA FEIXE MOLAS TRASEIRO
+    quantity: 12
+    unit: und
+    unit_price: 15
+    amount: 180
+    currency: BRL
+    category: Manutenção
+  - source_row: 73
+    description: BARRA AXIAL
+    quantity: 2
+    unit: und
+    unit_price: 30
+    shipping: -261
+    amount: -201
+    currency: BRL
+    detail: Caixa de direção hidraulica
+    category: Manutenção
+  - source_row: 74
+    description: TERMINAL DIRECAO FINO
+    quantity: 2
+    unit: und
+    unit_price: 48
+    shipping: 108
+    amount: 204
+    currency: BRL
+    detail: Caixa de direção hidraulica
+    category: Manutenção
+  - source_row: 75
+    description: Caixa de Direção hidráulica
+    quantity: 1
+    unit: und
+    unit_price: 750
+    amount: 750
+    currency: BRL
+    detail: troca dos reparos
+    category: Manutenção
+  - source_row: 76
+    description: Gasolina para Ranger do Ricardo
+    quantity: 1
+    unit: und
+    unit_price: 30
+    amount: 30
+    currency: BRL
+    detail: Logística de peças
+    category: Manutenção
+  - source_row: 77
+    description: Lavagem caixa de câmbio
+    quantity: 1
+    unit: und
+    unit_price: 5
+    amount: 5
+    currency: BRL
+    category: Manutenção
+  - source_row: 78
+    description: RETENTOR VIRABREQUIM TRASEIRO
+    quantity: 1
+    unit: und
+    unit_price: 95
+    amount: 95
+    currency: BRL
+    category: Manutenção
+  - source_row: 79
+    description: TRAVA PASTILHA (INOX)
+    quantity: 2
+    unit: und
+    unit_price: 8
+    amount: 16
+    currency: BRL
+    category: Manutenção
+  - source_row: 80
+    description: JUNTA TAMPA VALVULAS
+    quantity: 1
+    unit: und
+    unit_price: 65
+    amount: 65
+    currency: BRL
+    category: Manutenção
+  - source_row: 81
+    description: FILTRO DIESEL
+    quantity: 1
+    unit: und
+    unit_price: 20
+    amount: 20
+    currency: BRL
+    category: Manutenção
+  - source_row: 82
+    description: CABO FREIO MAO DAILY (ALAV-1510MM0
+    quantity: 1
+    unit: und
+    unit_price: 85
+    shipping: -15
+    amount: 70
+    currency: BRL
+    category: Manutenção
+  - source_row: 83
+    description: Frigobar Philco 120 L
+    quantity: 1
+    unit: und
+    unit_price: 380
+    amount: 380
+    currency: BRL
+    category: Cozinha
+  - source_row: 84
+    description: Aquecedor de Água à Gás - Lorenzetti LZ750 BP GLP Vazão 7,0 l/min
+    quantity: 1
+    unit: und
+    unit_price: 287.91
+    shipping: 0
+    amount: 287.91
+    currency: BRL
+    category: Banheiro
+  - source_row: 85
+    description: Disco de corte
+    quantity: 3
+    unit: und
+    unit_price: 4.75
+    amount: 14.25
+    currency: BRL
+    category: Manutenção
+  - source_row: 86
+    description: Flexível freio dianteiro
+    quantity: 2
+    unit: und
+    unit_price: 35
+    amount: 70
+    currency: BRL
+    category: Manutenção
+  - source_row: 87
+    description: Flexível freio traseiro
+    quantity: 1
+    unit: und
+    unit_price: 15
+    amount: 15
+    currency: BRL
+    category: Manutenção
+  - source_row: 88
+    description: Parafuso roda traseira
+    quantity: 2
+    unit: und
+    unit_price: 20
+    amount: 40
+    currency: BRL
+    category: Manutenção
+  - source_row: 89
+    description: Rolamento volante do motor
+    quantity: 1
+    unit: und
+    unit_price: 9
+    amount: 9
+    currency: BRL
+    category: Manutenção
+  - source_row: 90
+    description: Desengripante
+    quantity: 1
+    unit: und
+    unit_price: 11
+    amount: 11
+    currency: BRL
+    detail: White Lub
+    category: Manutenção
+  - source_row: 91
+    description: Mangueira freio
+    quantity: 1
+    unit: und
+    unit_price: 62
+    amount: 62
+    currency: BRL
+    category: Manutenção
+  - source_row: 92
+    description: Oléo do motor
+    quantity: 2
+    unit: 5 litros
+    unit_price: 50
+    amount: 100
+    currency: BRL
+    category: Manutenção
+  - source_row: 93
+    description: Fluido hidráulico
+    quantity: 3
+    unit: 500 ml
+    unit_price: 14
+    amount: 42
+    currency: BRL
+    category: Manutenção
+  - source_row: 94
+    description: Mão de obra
+    quantity: 1
+    unit: und
+    unit_price: 1850
+    amount: 1850
+    currency: BRL
+    detail: Todos os serviços feitos na oficina
+    category: Manutenção
+  - source_row: 95
+    description: Compensado virola naval 10 mm
+    quantity: 1
+    unit: chapa
+    unit_price: 90.03
+    amount: 90.03
+    currency: BRL
+    category: Piso
+  - source_row: 96
+    description: Compensado virola naval 18 mm
+    quantity: 2
+    unit: chapa
+    unit_price: 150.57
+    amount: 301.14
+    currency: BRL
+    category: Piso
+  - source_row: 97
+    description: Manta aluminizada 3TC
+    quantity: 4
+    unit: 10 m²
+    unit_price: 100
+    amount: 400
+    currency: BRL
+    detail: Produto usado vendido mais barato por um amigo
+    category: Isolamento
+  - source_row: 98
+    description: Selador Poliuretano
+    quantity: 2
+    unit: und
+    unit_price: 28.9
+    amount: 57.8
+    currency: BRL
+    category: Manutenção
+  - source_row: 99
+    description: Lã de rocha
+    quantity: 1
+    unit: und
+    unit_price: 93.9
+    amount: 93.9
+    currency: BRL
+    category: Isolamento
+  - source_row: 100
+    description: Verniz marítmo
+    quantity: 1
+    unit: und
+    unit_price: 75.8
+    amount: 75.8
+    currency: BRL
+    detail: Sparlack
+    category: Piso
+  - source_row: 101
+    description: Espuma expansiva
+    quantity: 1
+    unit: und
+    unit_price: 47.9
+    amount: 47.9
+    currency: BRL
+    detail: Tytan
+    category: Manutenção
+  - source_row: 102
+    description: Pincel
+    quantity: 2
+    unit: und
+    unit_price: 2.99
+    amount: 5.98
+    currency: BRL
+    category: Manutenção
+  - source_row: 103
+    description: Rolo de espuma
+    quantity: 1
+    unit: und
+    unit_price: 6.39
+    amount: 6.39
+    currency: BRL
+    category: Manutenção
+  - source_row: 104
+    description: Fita metalizada
+    quantity: 1
+    unit: und
+    unit_price: 18.99
+    amount: 18.99
+    currency: BRL
+    category: Manutenção
+  - source_row: 105
+    description: Placa de EVA
+    quantity: 1
+    unit: m²
+    unit_price: 32
+    amount: 32
+    currency: BRL
+    detail: Vedação da porta
+    category: Manutenção
+  - source_row: 106
+    description: Parafuso auto brocante
+    quantity: 30
+    unit: und
+    unit_price: 0.3
+    amount: 9
+    currency: BRL
+    category: Piso
+  - source_row: 107
+    description: Solda em tubo
+    quantity: 1
+    unit: und
+    unit_price: 5.4
+    amount: 5.4
+    currency: BRL
+    category: Manutenção
+  - source_row: 108
+    description: Braçadeira de nylon
+    quantity: 32
+    unit: und
+    unit_price: 0.2
+    amount: 6.4
+    currency: BRL
+    detail: Tie rap
+    category: Manutenção
+  - source_row: 109
+    description: Selador Poliuretano
+    quantity: 1
+    unit: und
+    unit_price: 27
+    amount: 27
+    currency: BRL
+    category: Manutenção
+  - source_row: 110
+    description: Porca rebite
+    quantity: 1
+    unit: und
+    unit_price: 1.1
+    amount: 1.1
+    currency: BRL
+    category: Piso
+  - source_row: 111
+    description: Porca sextavada
+    quantity: 1
+    unit: und
+    unit_price: 0.12
+    amount: 0.12
+    currency: BRL
+    category: Piso
+  - source_row: 112
+    description: "Parafuso sextavado "
+    quantity: 1
+    unit: und
+    unit_price: 0.73
+    amount: 0.73
+    currency: BRL
+    category: Piso
+  - source_row: 113
+    description: Parafuso auto brocante
+    quantity: 50
+    unit: und
+    unit_price: 0.27
+    amount: 13.5
+    currency: BRL
+    category: Piso
+  - source_row: 114
+    description: Parafuso auto brocante
+    quantity: 50
+    unit: und
+    unit_price: 0.1
+    amount: 5
+    currency: BRL
+    category: Piso
+  - source_row: 115
+    description: Cantoneira de aço
+    quantity: 1
+    unit: und
+    unit_price: 33.9
+    amount: 33.9
+    currency: BRL
+    category: Móveis
+  - source_row: 116
+    description: Tirante de arame pequeno
+    quantity: 1
+    unit: und
+    unit_price: 1.19
+    amount: 1.19
+    currency: BRL
+    detail: Para trava da porta corrediça
+    category: Manutenção
+  - source_row: 117
+    description: Tirante de arame médio
+    quantity: 1
+    unit: und
+    unit_price: 1.58
+    amount: 1.58
+    currency: BRL
+    detail: Para trava da porta corrediça
+    category: Manutenção
+  - source_row: 118
+    description: Espelho retrovisor
+    quantity: 1
+    unit: und
+    unit_price: 20
+    amount: 20
+    currency: BRL
+    detail: Lente plana
+    category: Manutenção
+  - source_row: 119
+    description: Aplicador de silicone
+    quantity: 1
+    unit: und
+    unit_price: 23
+    amount: 23
+    currency: BRL
+    detail: Para aplicar PU
+    category: Manutenção
+  - source_row: 120
+    description: PU veda calha
+    quantity: 1
+    unit: und
+    unit_price: 18.5
+    amount: 18.5
+    currency: BRL
+    detail: Cor cinza ? Brascola
+    category: Manutenção
+  - source_row: 121
+    description: Cantoneira de alumínio
+    quantity: 1
+    unit: und
+    unit_price: 10.03
+    amount: 10.03
+    currency: BRL
+    detail: Acabamento do piso
+    category: Piso
+  - source_row: 122
+    description: Thinner
+    quantity: 1
+    unit: und
+    unit_price: 17.5
+    amount: 17.5
+    currency: BRL
+    detail: Limpeza ? Matrielli
+    category: Manutenção
+  - source_row: 123
+    description: Parafuso 3x16
+    quantity: 20
+    unit: und
+    unit_price: 0.06
+    amount: 1.2
+    currency: BRL
+    detail: Fixação cantoneira
+    category: Piso
+  - source_row: 124
+    description: Remendo pneu traseiro
+    quantity: 1
+    unit: und
+    unit_price: 30
+    amount: 30
+    currency: BRL
+    category: Manutenção
+  - source_row: 125
+    description: Tanques 50 % final
+    quantity: 1
+    unit: und
+    unit_price: 554
+    shipping: 62
+    amount: 616
+    currency: BRL
+    detail: 3 tanques
+    category: Hidráulica
+  - source_row: 126
+    description: Bomba Automática Pressurizada Água 3.0 Gpm 12V
+    quantity: 1
+    unit: und
+    unit_price: 317.17
+    amount: 317.17
+    currency: BRL
+    detail: Aprox 11,6 L/min ? Padrão Seaflo
+    category: Hidráulica
+  - source_row: 127
+    description: Compressor hermético 12V modelo Ve31fri
+    quantity: 1
+    unit: und
+    unit_price: 690
+    shipping: 105
+    amount: 795
+    currency: BRL
+    detail: Montagem do frigobar 12V ? Velca
+    category: Cozinha
+  - source_row: 128
+    description: Cooler para compressor 12V
+    quantity: 1
+    unit: und
+    unit_price: 30
+    amount: 30
+    currency: BRL
+    detail: Montagem do frigobar 12V
+    category: Cozinha
+  - source_row: 129
+    description: Oléo do motor
+    quantity: 1
+    unit: 5 litros
+    unit_price: 50
+    amount: 50
+    currency: BRL
+    category: Manutenção
+  - source_row: 130
+    description: Palhetas limpador de parabrisa
+    quantity: 1
+    unit: par
+    unit_price: 30
+    amount: 30
+    currency: BRL
+    category: Manutenção
+  - source_row: 131
+    description: Piso vinílico Decorflex Hazelnut Natural
+    quantity: 8
+    unit: m³
+    unit_price: 28.5
+    amount: 228
+    currency: BRL
+    detail: Tipo manta ? Tarkett
+    category: Piso
+  - source_row: 132
+    description: "Fita dupla face "
+    quantity: 1
+    unit: und
+    unit_price: 23.7
+    amount: 23.7
+    currency: BRL
+    detail: Para fixação do piso vinílico ? Rapifix
+    category: Piso
+  - source_row: 133
+    description: Caixa de fusíveis
+    quantity: 1
+    unit: und
+    unit_price: 450
+    amount: 450
+    currency: BRL
+    category: Manutenção
+  - source_row: 134
+    description: Maçaneta porta esquerda
+    quantity: 1
+    unit: und
+    unit_price: 48
+    amount: 48
+    currency: BRL
+    category: Manutenção
+  - source_row: 135
+    description: Fechadura externa direita
+    quantity: 1
+    unit: und
+    unit_price: 30
+    amount: 30
+    currency: BRL
+    category: Manutenção
+  - source_row: 136
+    description: Parafuso roda traseira
+    quantity: 1
+    unit: und
+    unit_price: 6
+    amount: 6
+    currency: BRL
+    category: Manutenção
+  - source_row: 137
+    description: Parafuso semi eixo
+    quantity: 5
+    unit: und
+    unit_price: 25
+    amount: 125
+    currency: BRL
+    category: Manutenção
+  - source_row: 138
+    description: Filtro de ar pequeno
+    quantity: 1
+    unit: und
+    unit_price: 45
+    amount: 45
+    currency: BRL
+    category: Manutenção
+  - source_row: 139
+    description: Fechadura interna esquerda
+    quantity: 1
+    unit: und
+    unit_price: 60
+    amount: 60
+    currency: BRL
+    category: Manutenção
+  - source_row: 140
+    description: Flexível roda
+    quantity: 2
+    unit: und
+    unit_price: 40
+    amount: 80
+    currency: BRL
+    category: Manutenção
+  - source_row: 141
+    description: Ponteira plástico fechadura
+    quantity: 1
+    unit: und
+    unit_price: 12
+    shipping: -340
+    amount: -328
+    currency: BRL
+    category: Manutenção
+  - source_row: 142
+    description: Selador Poliuretano
+    quantity: 2
+    unit: und
+    unit_price: 22
+    amount: 44
+    currency: BRL
+    category: Estrutura
+  - source_row: 143
+    description: Tubo galvanizado retangular 40x20x1,11mm
+    quantity: 2
+    unit: und
+    unit_price: 44.83
+    amount: 89.66
+    currency: BRL
+    detail: Estrutura da cama
+    category: Cama
+  - source_row: 144
+    description: Tubo galvanizado retangular 20x20x1,11mm
+    quantity: 1
+    unit: und
+    unit_price: 35
+    amount: 35
+    currency: BRL
+    detail: Acabei usando no teto e não na cama
+    category: Cama
+  - source_row: 145
+    description: Arame de solda MIG sem gás
+    quantity: 1
+    unit: und
+    unit_price: 88.32
+    amount: 88.32
+    currency: BRL
+    detail: Usei na cama e vários outros lugares ? Noll
+    category: Cama
+  - source_row: 146
+    description: Rebite pop nut M6
+    quantity: 8
+    unit: und
+    unit_price: 1.2
+    amount: 9.6
+    currency: BRL
+    detail: Porca rebite pra cama
+    category: Cama
+  - source_row: 147
+    description: Parafuso sextavado 8.8 6x65mm
+    quantity: 8
+    unit: und
+    unit_price: 1.22
+    amount: 9.76
+    currency: BRL
+    detail: Parafuso pra porca rebite da cama
+    category: Cama
+  - source_row: 148
+    description: Convertedor de ferrugem para base de pintura
+    quantity: 1
+    unit: und
+    unit_price: 18.6
+    amount: 18.6
+    currency: BRL
+    detail: Para cama e outros
+    category: Cama
+  - source_row: 149
+    description: Bateria estacionária
+    detail: Heliar Freedom DF4001 240 Ah
+    quantity: 1
+    unit: und
+    unit_price: 1179.89
+    shipping: 59.5
+    amount: 1239.39
+    currency: BRL
+    system_ids:
+      - solar-power
+    category: Elétrica
+  - source_row: 150
+    description: Mangueira freio traseiro
+    quantity: 1
+    unit: und
+    unit_price: 80
+    amount: 80
+    currency: BRL
+    detail: Para substituir válvula corretora de frenagem
+    category: Manutenção
+  - source_row: 151
+    description: Defletor de óleo
+    quantity: 1
+    unit: und
+    unit_price: 60
+    amount: 60
+    currency: BRL
+    detail: Caixa preta de respiro que estava vazando óleo
+    category: Manutenção
+  - source_row: 152
+    description: Adaptador interno 1" polietileno
+    quantity: 2
+    unit: und
+    unit_price: 2.06
+    amount: 4.12
+    currency: BRL
+    detail: Para tanques de água
+    category: Hidráulica
+  - source_row: 153
+    description: Adaptador interno 1.1/2" polietileno
+    quantity: 3
+    unit: und
+    unit_price: 6.05
+    amount: 18.15
+    currency: BRL
+    detail: Para tanques de água
+    category: Hidráulica
+  - source_row: 154
+    description: Adaptador interno 1/2" polietileno
+    quantity: 1
+    unit: und
+    unit_price: 1.16
+    amount: 1.16
+    currency: BRL
+    detail: Para tanques de água
+    category: Hidráulica
+  - source_row: 155
+    description: Adaptador interno 3/4" polietileno
+    quantity: 3
+    unit: und
+    unit_price: 1.28
+    amount: 3.84
+    currency: BRL
+    detail: Para tanques de água
+    category: Hidráulica
+  - source_row: 156
+    description: Plug Tigre 1/2"
+    quantity: 2
+    unit: und
+    unit_price: 0.77
+    amount: 1.54
+    currency: BRL
+    detail: Para tanques de água
+    category: Hidráulica
+  - source_row: 157
+    description: Limpeza do reservatório de água do radiador
+    quantity: 1
+    unit: und
+    unit_price: 15
+    amount: 15
+    currency: BRL
+    category: Manutenção
+  - source_row: 158
+    description: Parafusos, arruelas, abraçadeiras e chaves
+    quantity: 1
+    unit: pacote
+    unit_price: 127.8
+    amount: 127.8
+    currency: BRL
+    detail: Ferramentas recebidas de presente da minha irmã
+    category: Hidráulica
+  - source_row: 159
+    description: Barras roscadas, brocas discos de corte, trena
+    quantity: 1
+    unit: pacote
+    unit_price: 179.03
+    amount: 179.03
+    currency: BRL
+    detail: Ferramentas recebidas de presente da minha irmã
+    category: Hidráulica
+  - source_row: 160
+    description: Chapa de aço
+    detail: Chapa de 2 mm cortada para o defletor do suporte dos painéis
+    quantity: 1
+    unit: und
+    unit_price: 50
+    amount: 50
+    currency: BRL
+    system_ids:
+      - solar-power
+    category: Elétrica
+  - source_row: 161
+    description: Cantoneira metálica
+    detail: 1.1/2" × 1/8" para o suporte dos painéis
+    quantity: 1
+    unit: und
+    unit_price: 58
+    amount: 58
+    currency: BRL
+    system_ids:
+      - solar-power
+    category: Elétrica
+  - source_row: 162
+    description: Cotovelo interno 1.1/2" polietileno
+    quantity: 2
+    unit: und
+    unit_price: 10.45
+    amount: 20.9
+    currency: BRL
+    detail: Para tanques de água
+    category: Hidráulica
+  - source_row: 163
+    description: Niple Tigre 1.1/2" (conexão macho - macho )
+    quantity: 2
+    unit: und
+    unit_price: 9.27
+    amount: 18.54
+    currency: BRL
+    detail: Para tanques de água
+    category: Hidráulica
+  - source_row: 164
+    description: Cotovelo interno 1/2" polietileno
+    quantity: 1
+    unit: und
+    unit_price: 1.85
+    amount: 1.85
+    currency: BRL
+    detail: Para tanques de água
+    category: Hidráulica
+  - source_row: 165
+    description: Niple Tigre 1/2" (conexão macho - macho )
+    quantity: 1
+    unit: und
+    unit_price: 1.25
+    amount: 1.25
+    currency: BRL
+    detail: Para tanques de água
+    category: Hidráulica
+  - source_row: 166
+    description: Engate rápido Viqua sem válvula
+    quantity: 1
+    unit: und
+    unit_price: 5.76
+    amount: 5.76
+    currency: BRL
+    detail: Para entrada do tanque de água limpa
+    category: Hidráulica
+  - source_row: 167
+    description: Bico Viqua engate rápido 3/4"
+    quantity: 1
+    unit: und
+    unit_price: 5.5
+    amount: 5.5
+    currency: BRL
+    detail: Para entrada do tanque de água limpa
+    category: Hidráulica
+  - source_row: 168
+    description: Niple Tigre 3/4" (conexão macho - macho)
+    quantity: 1
+    unit: und
+    unit_price: 1.75
+    amount: 1.75
+    currency: BRL
+    detail: Para tanques de água
+    category: Hidráulica
+  - source_row: 169
+    description: Mangueira cristal 5/8x2 plastica
+    quantity: 12
+    unit: m
+    unit_price: 3.6
+    amount: 43.2
+    currency: BRL
+    detail: Para tubulação de gás
+    category: GLP
+  - source_row: 170
+    description: Mangueira uso geral plástica
+    quantity: 9
+    unit: m
+    unit_price: 5.97
+    amount: 53.73
+    currency: BRL
+    detail: Para tubulação de água
+    category: Hidráulica
+  - source_row: 171
+    description: Cabo PP
+    detail: 2 × 2,5 mm² preto para cablagens
+    quantity: 12
+    unit: m
+    unit_price: 3.91
+    amount: 46.92
+    currency: BRL
+    system_ids:
+      - solar-power
+    category: Elétrica
+  - source_row: 172
+    description: Pneu Aro 16” Bridgestone 205/75RR16
+    quantity: 4
+    unit: und
+    unit_price: 474.9
+    shipping: 32
+    amount: 1931.6
+    currency: BRL
+    detail: Bridgestone
+    category: Manutenção
+  - source_row: 173
+    description: Barras de aço para suporte dos tanques de água
+    quantity: 6
+    unit: und
+    unit_price: 13
+    amount: 78
+    currency: BRL
+    detail: Barras inferiores do suporte
+    category: Hidráulica
+  - source_row: 174
+    description: Troca do compressor 110V do frigobar para o 12V
+    quantity: 1
+    unit: und
+    unit_price: 150
+    amount: 150
+    currency: BRL
+    detail: Mão de obra (garantia 3 meses)
+    category: Cozinha
+  - source_row: 175
+    description: Oléo do motor
+    quantity: 5
+    unit: litros
+    unit_price: 10
+    amount: 50
+    currency: BRL
+    category: Manutenção
+  - source_row: 176
+    description: "Parafuso auto brocante 4,2x25 "
+    quantity: 60
+    unit: und
+    unit_price: 0.18
+    amount: 10.8
+    currency: BRL
+    detail: Revestimento das portas dianteiras
+    category: Revestimento
+  - source_row: 177
+    description: Tecido Napa
+    quantity: 4
+    unit: m²
+    unit_price: 10.9
+    amount: 43.6
+    currency: BRL
+    detail: Revestimento das portas dianteiras
+    category: Revestimento
+  - source_row: 178
+    description: Placa Duratex lisa
+    quantity: 1
+    unit: und
+    unit_price: 38.4
+    amount: 38.4
+    currency: BRL
+    detail: Revestimento das portas dianteiras
+    category: Revestimento
+  - source_row: 179
+    description: "Cola de contato "
+    quantity: 1
+    unit_price: 27
+    amount: 27
+    currency: BRL
+    detail: Revestimento das portas dianteiras ? Amazonas
+    category: Revestimento
+  - source_row: 180
+    description: Dobradiça 1.1/2"
+    quantity: 2
+    unit: und
+    unit_price: 1.1
+    amount: 2.2
+    currency: BRL
+    detail: Revestimento das portas dianteiras
+    category: Revestimento
+  - source_row: 181
+    description: Graxa Branca
+    quantity: 1
+    unit: und
+    unit_price: 5
+    amount: 5
+    currency: BRL
+    detail: Para portas e roletes
+    category: Manutenção
+  - source_row: 182
+    description: Porca 3/8"
+    quantity: 50
+    unit: und
+    unit_price: 0.28
+    amount: 14
+    currency: BRL
+    detail: Para tanques de água
+    category: Hidráulica
+  - source_row: 183
+    description: Selante PU branco
+    quantity: 1
+    unit: und
+    unit_price: 18
+    amount: 18
+    currency: BRL
+    detail: Para infiltrações
+    category: Manutenção
+  - source_row: 184
+    description: Cabo da extensão
+    detail: PP 2 × 2,5 mm² preto
+    quantity: 20
+    unit: m
+    unit_price: 3.91
+    amount: 78.2
+    currency: BRL
+    system_ids:
+      - solar-power
+    category: Elétrica
+  - source_row: 185
+    description: Plugue macho
+    detail: Fame 10 A para a extensão
+    quantity: 1
+    unit: und
+    unit_price: 4.7
+    amount: 4.7
+    currency: BRL
+    system_ids:
+      - solar-power
+    category: Elétrica
+  - source_row: 186
+    description: Envio turbina para análise na DNT Turbos
+    quantity: 1
+    unit: und
+    unit_price: 0
+    shipping: 43.6
+    amount: 43.6
+    currency: BRL
+    detail: Turbina entrou em pane
+    category: Manutenção
+  - source_row: 187
+    description: Climatizador Fusion Master Maxiclima
+    quantity: 1
+    unit: und
+    unit_price: 691.75
+    shipping: 27.3
+    amount: 719.05
+    currency: BRL
+    detail: Modelo para Volkswagen ? Maxiclima
+    category: Eletrodomésticos
+  - source_row: 188
+    description: Inversor Hayonik
+    detail: 500 W; entrada 12 V e saída 127 V; pico de 1.000 W
+    quantity: 1
+    unit: und
+    unit_price: 246
+    shipping: 0
+    amount: 246
+    currency: BRL
+    system_ids:
+      - solar-power
+    category: Elétrica
+  - source_row: 189
+    description: Radiador de água
+    quantity: 1
+    unit: und
+    unit_price: 600
+    amount: 600
+    currency: BRL
+    detail: garantia 12 meses ? Notus
+    category: Manutenção
+  - source_row: 190
+    description: Sensor de pressão do óleo
+    quantity: 1
+    unit: und
+    unit_price: 15
+    amount: 15
+    currency: BRL
+    detail: '"Cebolinha"'
+    category: Manutenção
+  - source_row: 191
+    description: Manivela janela
+    quantity: 1
+    unit: und
+    unit_price: 20
+    shipping: 50
+    amount: 70
+    currency: BRL
+    detail: Motorista
+    category: Manutenção
+  - source_row: 192
+    description: Painéis solares
+    detail: Canadian Solar policristalinos de 275 Wp cada
+    quantity: 2
+    unit: und
+    unit_price: 589
+    shipping: 51.85
+    amount: 1229.85
+    currency: BRL
+    system_ids:
+      - solar-power
+    category: Elétrica
+  - source_row: 193
+    description: Controlador MPPT
+    detail: Epever TRIRON 3210N 30 A 12/24 V
+    quantity: 1
+    unit: und
+    unit_price: 592.92
+    shipping: 28.24
+    amount: 621.16
+    currency: BRL
+    system_ids:
+      - solar-power
+    category: Elétrica
+  - source_row: 194
+    description: Montagem dos pneus
+    quantity: 1
+    unit: und
+    unit_price: 120
+    amount: 120
+    currency: BRL
+    detail: 4 pneus novos Bridgestone
+    category: Manutenção
+  - source_row: 195
+    description: Oléo do motor
+    quantity: 1
+    unit: und
+    unit_price: 42.5
+    amount: 42.5
+    currency: BRL
+    detail: 3 L ? Lubrax
+    category: Manutenção
+  - source_row: 196
+    description: Aditivo radiador
+    quantity: 1
+    unit: und
+    unit_price: 15.9
+    amount: 15.9
+    currency: BRL
+    category: Manutenção
+  - source_row: 197
+    description: Painel MDF
+    quantity: 1
+    unit: und
+    unit_price: 42.9
+    amount: 42.9
+    currency: BRL
+    detail: Revestimento portas traseiras
+    category: Revestimento
+  - source_row: 198
+    description: Tubo galvanizado quadrado 20x20x1,11
+    quantity: 1
+    unit: und
+    unit_price: 31.73
+    amount: 31.73
+    currency: BRL
+    detail: Reforço interno do teto
+    category: Estrutura
+  - source_row: 199
+    description: Cantoneira metálica
+    detail: 1.1/2" × 1/8" para o suporte dos painéis; outra compra
+    quantity: 1
+    unit: und
+    unit_price: 59.74
+    amount: 59.74
+    currency: BRL
+    system_ids:
+      - solar-power
+    category: Elétrica
+  - source_row: 200
+    description: Mangueira 1.1/2"
+    quantity: 1
+    unit: und
+    unit_price: 12.75
+    amount: 12.75
+    currency: BRL
+    detail: Para união dos tanques de água limpa
+    category: Hidráulica
+  - source_row: 201
+    description: Selante PU branco
+    quantity: 2
+    unit: und
+    unit_price: 18
+    amount: 36
+    currency: BRL
+    detail: Instalação clarabóia ? Sika
+    category: Estrutura
+  - source_row: 202
+    description: Parafusos Allen
+    detail: Cabeça chata M6 × 20 para os painéis no rack
+    quantity: 15
+    unit: und
+    unit_price: 0.64
+    amount: 9.6
+    currency: BRL
+    system_ids:
+      - solar-power
+    category: Elétrica
+  - source_row: 203
+    description: Parafusos sextavados
+    detail: Classe 8.8 M6 × 20 para os painéis no rack
+    quantity: 10
+    unit: und
+    unit_price: 0.2
+    amount: 2
+    currency: BRL
+    system_ids:
+      - solar-power
+    category: Elétrica
+  - source_row: 204
+    description: Parafusos sextavados
+    detail: Classe 8.8 M6 × 35
+    quantity: 8
+    unit: und
+    unit_price: 0.29
+    amount: 2.32
+    currency: BRL
+    system_ids:
+      - solar-power
+    category: Elétrica
+  - source_row: 205
+    description: Porcas Parlock
+    detail: M6
+    quantity: 8
+    unit: und
+    unit_price: 0.08
+    amount: 0.64
+    currency: BRL
+    system_ids:
+      - solar-power
+    category: Elétrica
+  - source_row: 206
+    description: Porcas sextavadas
+    detail: Classe 8.8 M6
+    quantity: 8
+    unit: und
+    unit_price: 0.06
+    amount: 0.48
+    currency: BRL
+    system_ids:
+      - solar-power
+    category: Elétrica
+  - source_row: 207
+    description: Rebite pop nut M6 com rosca
+    quantity: 10
+    unit: und
+    unit_price: 0.6
+    amount: 6
+    currency: BRL
+    detail: Fixação da bomba de água
+    category: Hidráulica
+  - source_row: 208
+    description: Parafuso Mitofix cara chata philips 4,5 x 60
+    quantity: 30
+    unit: und
+    unit_price: 0.18
+    amount: 5.4
+    currency: BRL
+    category: Móveis
+  - source_row: 209
+    description: Parafusos de fixação
+    detail: Classe 8.8 M8 × 100 para suporte dos painéis e bateria
+    quantity: 4
+    unit: und
+    unit_price: 1.05
+    amount: 4.2
+    currency: BRL
+    system_ids:
+      - solar-power
+    category: Elétrica
+  - source_row: 210
+    description: Arruela lanterneiro 5/16"
+    quantity: 8
+    unit: und
+    unit_price: 0.51
+    amount: 4.08
+    currency: BRL
+    detail: Fixação tanques de água
+    category: Hidráulica
+  - source_row: 211
+    description: Ripas de madeira Pinus
+    quantity: 1
+    unit: und
+    unit_price: 90
+    amount: 90
+    currency: BRL
+    detail: 8 ripas de madeira reaproveitada
+    category: Móveis
+  - source_row: 212
+    description: Parafuso M4 x 35
+    quantity: 10
+    unit: und
+    unit_price: 0.18
+    amount: 1.8
+    currency: BRL
+    category: Hidráulica
+  - source_row: 213
+    description: Rebite pop nut M4 com rosca
+    quantity: 10
+    unit: und
+    unit_price: 0.45
+    amount: 4.5
+    currency: BRL
+    category: Hidráulica
+  - source_row: 214
+    description: Arruela lisa zincada 1/4"
+    quantity: 10
+    unit: und
+    unit_price: 0.07
+    amount: 0.7
+    currency: BRL
+    category: Hidráulica
+  - source_row: 215
+    description: Arruela lisa zincada 5/32"
+    quantity: 10
+    unit: und
+    unit_price: 0.03
+    amount: 0.3
+    currency: BRL
+    category: Hidráulica
+  - source_row: 216
+    description: Parafuso sextavado 8.8 M6 x 45
+    quantity: 10
+    unit: und
+    unit_price: 0.35
+    amount: 3.5
+    currency: BRL
+    category: Estrutura
+  - source_row: 217
+    description: Selante PU branco
+    quantity: 2
+    unit: und
+    unit_price: 18
+    amount: 36
+    currency: BRL
+    detail: Instalação clarabóia ? Sika
+    category: Estrutura
+  - source_row: 218
+    description: Solda em tubo
+    quantity: 1
+    unit: und
+    unit_price: 5.42
+    amount: 5.42
+    currency: BRL
+    system_ids:
+      - solar-power
+    category: Elétrica
+  - source_row: 219
+    description: Conexões diversas pa tanques de água
+    quantity: 1
+    unit: und
+    unit_price: 67.41
+    amount: 67.41
+    currency: BRL
+    detail: "15 peças "
+    category: Hidráulica
+  - source_row: 220
+    description: Mangueiras de água
+    quantity: 1
+    unit: und
+    unit_price: 98
+    amount: 98
+    currency: BRL
+    detail: 7m de 1" e 3m 1 1/2"
+    category: Hidráulica
+  - source_row: 221
+    description: Conexões diversas pa tanques de água
+    quantity: 3
+    unit: und
+    unit_price: 1.4
+    amount: 4.2
+    currency: BRL
+    detail: Adaptadores 1/2"
+    category: Hidráulica
+  - source_row: 222
+    description: Porca olhal 3/8"
+    quantity: 1
+    unit: und
+    unit_price: 11.42
+    amount: 11.42
+    currency: BRL
+    detail: Para "tiedown" no piso do porta malas
+    category: Estrutura
+  - source_row: 223
+    description: Carpete sem resina preto
+    quantity: 1
+    unit: und
+    unit_price: 29.96
+    amount: 29.96
+    currency: BRL
+    detail: Revestimento móvel cabine
+    category: Revestimento
+  - source_row: 224
+    description: "Cola de contato "
+    quantity: 1
+    unit: und
+    unit_price: 18
+    amount: 18
+    currency: BRL
+    detail: FCC
+    category: Revestimento
+  - source_row: 225
+    description: MDF revestido Branco + fita de borda
+    quantity: 1
+    unit: und
+    unit_price: 678.45
+    amount: 678.45
+    currency: BRL
+    detail: Estrutura dos móveis
+    category: Móveis
+  - source_row: 226
+    description: "Tubo de exaustão 90mm "
+    quantity: 1
+    unit: und
+    unit_price: 41.9
+    amount: 41.9
+    currency: BRL
+    detail: Chaminé do aquecedor de água
+    category: Banheiro
+  - source_row: 227
+    description: Torneira com filtro
+    quantity: 1
+    unit: und
+    unit_price: 82.9
+    amount: 82.9
+    currency: BRL
+    detail: Equation
+    category: Cozinha
+  - source_row: 228
+    description: Sifão
+    quantity: 1
+    unit: und
+    unit_price: 9.49
+    amount: 9.49
+    currency: BRL
+    detail: Equation
+    category: Cozinha
+  - source_row: 229
+    description: Registro para botijão de gás
+    quantity: 1
+    unit: und
+    unit_price: 20.59
+    amount: 20.59
+    currency: BRL
+    category: GLP
+  - source_row: 230
+    description: Espumas para colchão e poltrona
+    quantity: 1
+    unit: und
+    unit_price: 335
+    amount: 335
+    currency: BRL
+    detail: D33 com 8cm de altura
+    category: Móveis
+  - source_row: 231
+    description: Espaguete termorretrátil
+    detail: Para emendas de fios
+    quantity: 1
+    unit: und
+    unit_price: 2.25
+    amount: 2.25
+    currency: BRL
+    system_ids:
+      - solar-power
+    category: Elétrica
+  - source_row: 232
+    description: Terminais de conexão
+    detail: Conexão na bateria e frigobar; incluímos algumas peças de sobra
+    quantity: 1
+    unit: und
+    unit_price: 4.2
+    amount: 4.2
+    currency: BRL
+    system_ids:
+      - solar-power
+    category: Elétrica
+  - source_row: 233
+    description: Conexão 1/2" - corrugado de 5/8"
+    quantity: 1
+    unit: und
+    unit_price: 1.4
+    amount: 1.4
+    currency: BRL
+    detail: Pra agua fria do aquecedor
+    category: Hidráulica
+  - source_row: 234
+    description: Luva roscada 1/2"
+    quantity: 1
+    unit: und
+    unit_price: 1.2
+    amount: 1.2
+    currency: BRL
+    detail: Pra agua fria do aquecedor
+    category: Hidráulica
+  - source_row: 235
+    description: Adaptador 1/2" - corrugado
+    quantity: 1
+    unit: und
+    unit_price: 21
+    amount: 21
+    currency: BRL
+    detail: Para entrada do gás no aquecedor
+    category: GLP
+  - source_row: 236
+    description: Conexão TEE
+    quantity: 1
+    unit: und
+    unit_price: 5.5
+    amount: 5.5
+    currency: BRL
+    detail: Para divisão do gás entre aquecedor e fogão
+    category: GLP
+  - source_row: 237
+    description: Pistões a gás
+    quantity: 13
+    unit: und
+    unit_price: 6.15
+    shipping: 39.84
+    amount: 119.79
+    currency: BRL
+    detail: para armários aéreos
+    category: Móveis
+  - source_row: 238
+    description: "Parafuso auto brocante 4,2x25 "
+    quantity: 100
+    unit: und
+    unit_price: 0.18
+    amount: 18
+    currency: BRL
+    detail: Cabeça flangeada (O cabeça cônica que coloquei no piso soltou com vibração)
+    category: Banheiro
+  - source_row: 239
+    description: Parafuso sextavado 6x50
+    quantity: 2
+    unit: und
+    unit_price: 0.37
+    amount: 0.74
+    currency: BRL
+    detail: Pra instalar porca rebite do aquecedor
+    category: Banheiro
+  - source_row: 240
+    description: Parafuso sextavado 6x30
+    quantity: 4
+    unit: und
+    unit_price: 0.26
+    amount: 1.04
+    currency: BRL
+    detail: Fixacão do aquecedor
+    category: Banheiro
+  - source_row: 241
+    description: Rebite pop nut M6 com rosca
+    quantity: 6
+    unit: und
+    unit_price: 0.6
+    amount: 3.6
+    currency: BRL
+    detail: Fixação do aquecedor
+    category: Banheiro
+  - source_row: 242
+    description: Conexão 1/2" - corrugado de 5/8"
+    quantity: 1
+    unit: und
+    unit_price: 1.37
+    amount: 1.37
+    currency: BRL
+    detail: Para entrada de água da torneira da cozinha
+    category: Cozinha
+  - source_row: 243
+    description: Luva roscada 1/2"
+    quantity: 1
+    unit: und
+    unit_price: 0.26
+    amount: 0.26
+    currency: BRL
+    detail: Para entrada de água da torneira da cozinha
+    category: Cozinha
+  - source_row: 244
+    description: Mangueira corrugada
+    detail: 1/2" para os fios no porta-malas
+    quantity: 6
+    unit: m
+    unit_price: 1.81
+    amount: 10.86
+    currency: BRL
+    system_ids:
+      - solar-power
+    category: Elétrica
+  - source_row: 245
+    description: Fio das luminárias
+    detail: Paralelo 2 × 1,5 mm² branco
+    quantity: 10
+    unit: m
+    unit_price: 1.95
+    amount: 19.5
+    currency: BRL
+    system_ids:
+      - solar-power
+    category: Elétrica
+  - source_row: 246
+    description: Tomadas duplas
+    detail: Tramontina 10 A 250 V
+    quantity: 3
+    unit: und
+    unit_price: 5.35
+    amount: 16.05
+    currency: BRL
+    system_ids:
+      - solar-power
+    category: Elétrica
+  - source_row: 247
+    description: Interruptores simples
+    detail: Tramontina
+    quantity: 3
+    unit: und
+    unit_price: 4.5
+    amount: 13.5
+    currency: BRL
+    system_ids:
+      - solar-power
+    category: Elétrica
+  - source_row: 248
+    description: Fita com catraca emborrachada 680kg 4,5m
+    quantity: 1
+    unit: und
+    unit_price: 45.72
+    shipping: 10.52
+    amount: 56.24
+    currency: BRL
+    detail: 2 unid. Uma pra fixar frigobar outra pra prender carga no porta malas
+    category: Estrutura
+  - source_row: 249
+    description: Par de puxadores de porta
+    quantity: 1
+    unit: und
+    unit_price: 19.99
+    shipping: 10.9
+    amount: 30.89
+    currency: BRL
+    detail: Para portas dianteiras
+    category: Manutenção
+  - source_row: 250
+    description: MDF cru 6mm
+    quantity: 2
+    unit: und
+    unit_price: 70.41
+    amount: 140.82
+    currency: BRL
+    detail: Revestimento interno do banheio
+    category: Banheiro
+  - source_row: 251
+    description: MDF revestido Branco 3mm
+    quantity: 2
+    unit: und
+    unit_price: 57
+    amount: 114
+    currency: BRL
+    detail: Revestimento externo do banheiro
+    category: Banheiro
+  - source_row: 252
+    description: Conjunto ponta PH2
+    quantity: 1
+    unit: und
+    unit_price: 12.9
+    amount: 12.9
+    currency: BRL
+    detail: Ponteira para parafusadeira - Uma veio torta a outra quebrou (ERA PROMOÇÃO SEM TROCA)
+    category: Banheiro
+  - source_row: 253
+    description: Formica branca para impermeabilização do banheiro
+    quantity: 4
+    unit: und
+    unit_price: 9.9
+    amount: 39.6
+    currency: BRL
+    detail: Sobra de material da loja, por isso foi barato
+    category: Banheiro
+  - source_row: 254
+    description: Tinta preta 225ml
+    quantity: 1
+    unit: und
+    unit_price: 10.7
+    amount: 10.7
+    currency: BRL
+    detail: Pintar PU da janela do banheiro
+    category: Banheiro
+  - source_row: 255
+    description: Spray branco
+    quantity: 1
+    unit: und
+    unit_price: 15
+    amount: 15
+    currency: BRL
+    detail: uso geral
+    category: Estrutura
+  - source_row: 256
+    description: Aguarrás
+    quantity: 1
+    unit: und
+    unit_price: 10
+    amount: 10
+    currency: BRL
+    detail: Limpeza
+    category: Banheiro
+  - source_row: 257
+    description: Parafusos, arruelas, porcas e uma tesoura
+    quantity: 1
+    unit: und
+    unit_price: 54.92
+    amount: 54.92
+    currency: BRL
+    detail: Montagem do banheiro
+    category: Banheiro
+  - source_row: 258
+    description: Dobradiça FGV 110 graus curva sem parafuso
+    quantity: 18
+    unit: und
+    unit_price: 2.1
+    amount: 37.8
+    currency: BRL
+    detail: Montagem dos móveis ? FGV
+    category: Móveis
+  - source_row: 259
+    description: Fio paralelo
+    detail: 2 × 1,0 mm² branco
+    quantity: 1
+    unit: und
+    unit_price: 6.65
+    amount: 6.65
+    currency: BRL
+    system_ids:
+      - solar-power
+    category: Elétrica
+  - source_row: 260
+    description: Carpete para forrar painel
+    quantity: 1
+    unit: und
+    unit_price: 10
+    amount: 10
+    currency: BRL
+    detail: Cinza
+    category: Móveis
+  - source_row: 261
+    description: Tecido para forrar volante
+    quantity: 1
+    unit: und
+    unit_price: 4
+    amount: 4
+    currency: BRL
+    category: Móveis
+  - source_row: 262
+    description: Parafusos e porcas rebites M6
+    quantity: 1
+    unit: und
+    unit_price: 6.09
+    amount: 6.09
+    currency: BRL
+    detail: Fixação do aquecedor na parede do banheiro
+    category: Banheiro
+  - source_row: 263
+    description: Capas para colchão e poltrona
+    quantity: 1
+    unit: und
+    unit_price: 343
+    amount: 343
+    currency: BRL
+    detail: Mão de obra de 3 capas + tecido
+    category: Móveis
+  - source_row: 264
+    description: Ponteira philips para parafusadeira
+    quantity: 1
+    unit: und
+    unit_price: 15.15
+    amount: 15.15
+    currency: BRL
+    category: Banheiro
+  - source_row: 265
+    description: "Cola de contato "
+    quantity: 4
+    unit: und
+    unit_price: 18
+    amount: 72
+    currency: BRL
+    detail: Colagem do plastico nas paredes do banheiro para impermeabilização
+    category: Banheiro
+  - source_row: 266
+    description: Espaguete corrugado
+    detail: Para os fios no porta-malas
+    quantity: 1
+    unit: und
+    unit_price: 15
+    amount: 15
+    currency: BRL
+    system_ids:
+      - solar-power
+    category: Elétrica
+  - source_row: 267
+    description: Selante PU branco
+    quantity: 3
+    unit: und
+    unit_price: 18
+    amount: 54
+    currency: BRL
+    detail: Para quinas do banheiro ? Sica
+    category: Banheiro
+  - source_row: 268
+    description: Parafusos diversos
+    quantity: 1
+    unit: und
+    unit_price: 10.91
+    amount: 10.91
+    currency: BRL
+    detail: Fixação das paredes do banheiro
+    category: Banheiro
+  - source_row: 269
+    description: Válvula para tanque
+    quantity: 1
+    unit: und
+    unit_price: 8.19
+    amount: 8.19
+    currency: BRL
+    detail: Ralo para banheiro
+    category: Hidráulica
+  - source_row: 270
+    description: Conexões para ralo do banheiro
+    quantity: 1
+    unit: und
+    unit_price: 14.2
+    amount: 14.2
+    currency: BRL
+    category: Hidráulica
+  - source_row: 271
+    description: Cotovelo para ralo do banheiro
+    quantity: 1
+    unit: und
+    unit_price: 11.6
+    amount: 11.6
+    currency: BRL
+    category: Hidráulica
+  - source_row: 272
+    description: Botijão de gás vazio
+    quantity: 1
+    unit: und
+    unit_price: 80
+    amount: 80
+    currency: BRL
+    detail: Botijão usado
+    category: GLP
+  - source_row: 273
+    description: Recarga de gás
+    quantity: 1
+    unit: und
+    unit_price: 65
+    amount: 65
+    currency: BRL
+    category: GLP
+  - source_row: 274
+    description: Painel MDF branco 3mm
+    quantity: 1
+    unit: und
+    unit_price: 42.9
+    amount: 42.9
+    currency: BRL
+    detail: revestimento das paredes
+    category: Revestimento
+  - source_row: 275
+    description: Fitas LED RGB
+    detail: Sanca 5050 de 5 m com controle e fonte
+    quantity: 2
+    unit: und
+    unit_price: 29.99
+    shipping: 15
+    amount: 74.98
+    currency: BRL
+    system_ids:
+      - solar-power
+    category: Elétrica
+  - source_row: 276
+    description: Spots LED
+    detail: De embutir no teto; 3 W e 12 V
+    quantity: 7
+    unit: und
+    unit_price: 19
+    amount: 133
+    currency: BRL
+    system_ids:
+      - solar-power
+    category: Elétrica
+  - source_row: 277
+    description: Desviador para ducha de mão
+    quantity: 1
+    unit: und
+    unit_price: 31.9
+    shipping: 7.79
+    amount: 39.69
+    currency: BRL
+    detail: Válvula pro chuveiro
+    category: Hidráulica
+  - source_row: 278
+    description: Parafusos e porcas rebites M6
+    quantity: 1
+    unit: und
+    unit_price: 14.45
+    amount: 14.45
+    currency: BRL
+    detail: Fixação dos móveis nas colunas da van
+    category: Móveis
+  - source_row: 279
+    description: Furadeira / Parafusadeira
+    quantity: 1
+    unit: und
+    unit_price: 169
+    amount: 169
+    currency: BRL
+    detail: Black & Decker
+    category: Ferramentas
+  - source_row: 280
+    description: Gazebo 3x3m Trixx
+    quantity: 1
+    unit: und
+    unit_price: 524.9
+    shipping: 19.25
+    amount: 544.15
+    currency: BRL
+    detail: Nautika
+    category: Acessórios
+  - source_row: 281
+    description: Formica branca para impermeabilização do banheiro
+    quantity: 1
+    unit: und
+    unit_price: 46
+    amount: 46
+    currency: BRL
+    detail: Repondo uma que rasgou
+    category: Banheiro
+  - source_row: 282
+    description: MDF 15mm Cor Nogal Terracota
+    quantity: 1
+    unit: u
+    unit_price: 385
+    amount: 385
+    currency: BRL
+    detail: Para portas, mesa e pia
+    category: Móveis
+  - source_row: 283
+    description: Puxador branco 64mm
+    quantity: 15
+    unit: und
+    unit_price: 2.3
+    amount: 34.5
+    currency: BRL
+    detail: Pauma
+    category: Móveis
+  - source_row: 284
+    description: Spray Branco
+    quantity: 1
+    unit: und
+    unit_price: 15
+    amount: 15
+    currency: BRL
+    detail: Pinturas de metais diversos
+    category: Estrutura
+  - source_row: 285
+    description: Cortina blackout cinza
+    quantity: 1
+    unit: und
+    unit_price: 42.99
+    amount: 42.99
+    currency: BRL
+    detail: Para isolar cabine da casa
+    category: Estrutura
+  - source_row: 286
+    description: Medidores de nível d'água dos tanques
+    quantity: 2
+    unit: um
+    unit_price: 75
+    shipping: 25
+    amount: 175
+    currency: BRL
+    category: Hidráulica
+  - source_row: 287
+    description: Cabo de bateria
+    detail: 500 A e 2,5 m
+    quantity: 1
+    unit: und
+    unit_price: 45.9
+    amount: 45.9
+    currency: BRL
+    system_ids:
+      - solar-power
+    category: Elétrica
+  - source_row: 288
+    description: Spray anti respingo de solda
+    quantity: 1
+    unit: und
+    unit_price: 13.9
+    amount: 13.9
+    currency: BRL
+    category: Estrutura
+  - source_row: 289
+    description: Disjuntores diversos
+    detail: Conjunto com seis disjuntores
+    quantity: 1
+    unit: und
+    unit_price: 30
+    amount: 30
+    currency: BRL
+    system_ids:
+      - solar-power
+    category: Elétrica
+  - source_row: 290
+    description: Alicate de pressão
+    quantity: 1
+    unit: und
+    unit_price: 24.99
+    amount: 24.99
+    currency: BRL
+    category: Ferramentas
+  - source_row: 291
+    description: Conexão TE para gás
+    quantity: 1
+    unit: und
+    unit_price: 4.5
+    amount: 4.5
+    currency: BRL
+    category: GLP
+  - source_row: 292
+    description: Tubos PVC, conexões, veda rosca, etc
+    quantity: 1
+    unit: und
+    unit_price: 45.23
+    amount: 45.23
+    currency: BRL
+    detail: Instalação do ralo da pia
+    category: Hidráulica
+  - source_row: 293
+    description: Conectores em barra
+    detail: 10 mm para os fios no armário e no porta-malas
+    quantity: 6
+    unit: und
+    unit_price: 2
+    amount: 12
+    currency: BRL
+    system_ids:
+      - solar-power
+    category: Elétrica
+  - source_row: 294
+    description: Torneira de PVC
+    quantity: 1
+    unit: und
+    unit_price: 10
+    amount: 10
+    currency: BRL
+    detail: Para porta malas
+    category: Hidráulica
+  - source_row: 295
+    description: Trinco para frigobar
+    quantity: 1
+    unit: und
+    unit_price: 8.5
+    amount: 8.5
+    currency: BRL
+    category: Eletrodomésticos
+  - source_row: 296
+    description: Trinco, parafusos, brocas
+    quantity: 1
+    unit: und
+    unit_price: 16.21
+    amount: 16.21
+    currency: BRL
+    category: Banheiro
+  - source_row: 297
+    description: Suportes para disjuntores
+    detail: Metálicos
+    quantity: 6
+    unit: und
+    unit_price: 0.71
+    amount: 4.26
+    currency: BRL
+    system_ids:
+      - solar-power
+    category: Elétrica
+  - source_row: 298
+    description: Perfil 20x20x1,1mm
+    quantity: 1
+    unit: und
+    unit_price: 31.17
+    amount: 31.17
+    currency: BRL
+    detail: Para estrutura dos bancos dianteiros
+    category: Estrutura
+  - source_row: 299
+    description: Espuma expansiva
+    quantity: 1
+    unit: und
+    unit_price: 19
+    amount: 19
+    currency: BRL
+    detail: Para gaps nas paredes
+    category: Estrutura
+  - source_row: 300
+    description: Painel MDF branco 3mm
+    quantity: 1
+    unit: und
+    unit_price: 42.9
+    amount: 42.9
+    currency: BRL
+    detail: Revestimento das paredes
+    category: Revestimento
+  - source_row: 301
+    description: Cabo de rede
+    quantity: 12
+    unit: m
+    unit_price: 1.96
+    amount: 23.52
+    currency: BRL
+    detail: Para instalação do medidor de nível dos tanques
+    category: Hidráulica
+  - source_row: 302
+    description: Arame de solda MIG sem gás
+    quantity: 1
+    unit: und
+    unit_price: 87.2
+    amount: 87.2
+    currency: BRL
+    detail: Para estrutura dos bancos
+    category: Estrutura
+  - source_row: 303
+    description: Espuma expansiva
+    quantity: 1
+    unit: und
+    unit_price: 20
+    amount: 20
+    currency: BRL
+    detail: Para gaps nas paredes
+    category: Estrutura
+  - source_row: 304
+    description: Parafusos, arruelas e porcas
+    quantity: 1
+    unit: und
+    unit_price: 30.94
+    amount: 30.94
+    currency: BRL
+    detail: Para suporte dos bancos e fixação das paredes
+    category: Estrutura
+  - source_row: 305
+    description: Caixa de esgoto chuveiro de barco e motorhome
+    quantity: 1
+    unit: und
+    unit_price: 269.9
+    amount: 269.9
+    currency: BRL
+    detail: Água do ralo não escoava por gravidade, então instalei essa caixa com bomba automática
+    category: Hidráulica
+  - source_row: 306
+    description: Cabo de embreagem
+    quantity: 1
+    unit: u
+    unit_price: 45
+    amount: 45
+    currency: BRL
+    category: Manutenção
+  - source_row: 307
+    description: Fechadura mecânismo interno porta corrediça
+    quantity: 1
+    unit: und
+    unit_price: 70
+    amount: 70
+    currency: BRL
+    category: Manutenção
+  - source_row: 308
+    description: Maçaneta porta corrediça
+    quantity: 1
+    unit: und
+    unit_price: 48
+    shipping: 50
+    amount: 98
+    currency: BRL
+    category: Manutenção
+  - source_row: 309
+    description: Borracha para cabine, chapas de aço e fita de aço
+    quantity: 1
+    unit: und
+    unit_price: 156
+    amount: 156
+    currency: BRL
+    detail: Para cabine, porta malas e chapas para proteção dos tanques
+    category: Piso
+  - source_row: 310
+    description: Fio de 6 mm²
+    detail: Compra de 3 m
+    quantity: 1
+    unit: und
+    unit_price: 7.38
+    amount: 7.38
+    currency: BRL
+    system_ids:
+      - solar-power
+    category: Elétrica
+  - source_row: 311
+    description: Fio de 2,5 mm²
+    detail: Compra de 6 m
+    quantity: 1
+    unit: und
+    unit_price: 8.04
+    amount: 8.04
+    currency: BRL
+    system_ids:
+      - solar-power
+    category: Elétrica
+  - source_row: 312
+    description: Suportes para disjuntores
+    detail: Metálicos; outra compra
+    quantity: 2
+    unit: und
+    unit_price: 0.71
+    amount: 1.42
+    currency: BRL
+    system_ids:
+      - solar-power
+    category: Elétrica
+  - source_row: 313
+    description: Parafusos e porcas M8
+    quantity: 1
+    unit: und
+    unit_price: 10.16
+    amount: 10.16
+    currency: BRL
+    detail: Para cinto de segurança
+    category: Estrutura
+  - source_row: 314
+    description: Travessa dianteira do chassi
+    quantity: 1
+    unit: und
+    unit_price: 350
+    amount: 350
+    currency: BRL
+    detail: Peça usada comprada no desmanche
+    category: Manutenção
+  - source_row: 315
+    description: Lanterna traseira esquerda
+    quantity: 1
+    unit: und
+    unit_price: 89
+    amount: 89
+    currency: BRL
+    detail: Lanterna completa
+    category: Manutenção
+  - source_row: 316
+    description: Lanterna traseira direita
+    quantity: 1
+    unit: und
+    unit_price: 89
+    amount: 89
+    currency: BRL
+    detail: Lanterna completa
+    category: Manutenção
+  - source_row: 317
+    description: Flexível do freio dianteiro esquerdo
+    quantity: 1
+    unit: und
+    unit_price: 25
+    amount: 25
+    currency: BRL
+    detail: O atual estava curto demais
+    category: Manutenção
+  - source_row: 318
+    description: Flexível do freio dianteiro direito
+    quantity: 1
+    unit: und
+    unit_price: 25
+    amount: 25
+    currency: BRL
+    detail: O atual estava curto demais
+    category: Manutenção
+  - source_row: 319
+    description: Extintor de incêndio ABC
+    quantity: 2
+    unit: und
+    unit_price: 18
+    shipping: 21.9
+    amount: 57.9
+    currency: BRL
+    detail: Um pra cabine outro pra casa
+    category: Manutenção
+  - source_row: 320
+    description: Troca do termostato do Frigobar
+    quantity: 1
+    unit: und
+    unit_price: 100
+    amount: 100
+    currency: BRL
+    category: Cozinha
+  - source_row: 321
+    description: Trava do cinto de segurança
+    quantity: 1
+    unit: und
+    amount: 0
+    currency: BRL
+    category: Acessórios
+  - source_row: 322
+    description: Capa protetora do cinto de segurança
+    quantity: 2
+    unit: und
+    unit_price: 12.9
+    shipping: 14.16
+    amount: 39.96
+    currency: BRL
+    category: Acessórios
+  - source_row: 323
+    description: "Trava de volante "
+    quantity: 1
+    unit: und
+    unit_price: 120
+    shipping: 0
+    amount: 120
+    currency: BRL
+    category: Acessórios
+  - source_row: 324
+    description: Tecido Brim Laranja
+    quantity: 5
+    unit: m²
+    unit_price: 6.9
+    amount: 34.5
+    currency: BRL
+    detail: Para cortinas das janelas
+    category: Decoração
+  - source_row: 325
+    description: Porta escova de dentes
+    quantity: 1
+    unit: und
+    unit_price: 4.99
+    amount: 4.99
+    currency: BRL
+    category: Decoração
+  - source_row: 326
+    description: Saco p/ limpeza xadrez
+    quantity: 2
+    unit: und
+    unit_price: 2.5
+    amount: 5
+    currency: BRL
+    detail: Pano de chão
+    category: Cozinha
+  - source_row: 327
+    description: Pano de copa buzios estampado
+    quantity: 1
+    unit: und
+    unit_price: 1.98
+    amount: 1.98
+    currency: BRL
+    detail: pano de louça
+    category: Cozinha
+  - source_row: 328
+    description: Pano de limpeza superflex rolo 15 x 0,33
+    quantity: 1
+    unit: und
+    unit_price: 19.9
+    amount: 19.9
+    currency: BRL
+    detail: Pano de microfibra
+    category: Cozinha
+  - source_row: 329
+    description: Suporte para celular com ventosa
+    quantity: 1
+    unit: und
+    unit_price: 15
+    amount: 15
+    currency: BRL
+    detail: Para uso na cabine
+    category: Acessórios
+  - source_row: 330
+    description: Pá de lixo
+    quantity: 1
+    unit: und
+    unit_price: 3.5
+    amount: 3.5
+    currency: BRL
+    category: Cozinha
+  - source_row: 331
+    description: "Lixeira 6L "
+    quantity: 1
+    unit: und
+    unit_price: 13.5
+    amount: 13.5
+    currency: BRL
+    category: Cozinha
+  - source_row: 332
+    description: Rodo para pia
+    quantity: 1
+    unit: und
+    unit_price: 2.9
+    amount: 2.9
+    currency: BRL
+    category: Cozinha
+  - source_row: 333
+    description: Pano de prato
+    quantity: 2
+    unit: und
+    unit_price: 3.6
+    amount: 7.2
+    currency: BRL
+    category: Cozinha
+  - source_row: 334
+    description: Varal c/ 8 prenderores
+    quantity: 1
+    unit: und
+    unit_price: 6.9
+    amount: 6.9
+    currency: BRL
+    category: Cozinha
+  - source_row: 335
+    description: Escorredor de louça opaco
+    quantity: 1
+    unit: und
+    unit_price: 19.9
+    amount: 19.9
+    currency: BRL
+    category: Cozinha
+  - source_row: 336
+    description: Caixa organizadora 5L baixa
+    quantity: 1
+    unit: und
+    unit_price: 7.9
+    amount: 7.9
+    currency: BRL
+    detail: Para talheres
+    category: Cozinha
+  - source_row: 337
+    description: Ganchos auto adesivos 8 unidades
+    quantity: 1
+    unit: und
+    unit_price: 5.99
+    amount: 5.99
+    currency: BRL
+    detail: Para banheiro e cozinha
+    category: Banheiro
+  - source_row: 338
+    description: Cesto multiuso
+    quantity: 2
+    unit: und
+    unit_price: 12.99
+    amount: 25.98
+    currency: BRL
+    detail: Porta shampoo
+    category: Banheiro
+  - source_row: 339
+    description: Revisão completa do eixo Cardan
+    quantity: 1
+    unit: und
+    unit_price: 1400
+    amount: 1400
+    currency: BRL
+    detail: Troca de cruzetas, rolamentos, ponteira e balanceamento
+    category: Manutenção
+  - source_row: 340
+    description: Jogo de juntas do motor
+    quantity: 1
+    unit: und
+    unit_price: 250
+    amount: 250
+    currency: BRL
+    category: Manutenção
+  - source_row: 341
+    description: Junta do cabeçote 1.40
+    quantity: 1
+    unit: und
+    unit_price: 89
+    amount: 89
+    currency: BRL
+    category: Manutenção
+  - source_row: 342
+    description: Jogo de anéis standard conico
+    quantity: 4
+    unit: und
+    unit_price: 75
+    amount: 300
+    currency: BRL
+    category: Manutenção
+  - source_row: 343
+    description: Respiro do motor 3 saídas
+    quantity: 1
+    unit: und
+    unit_price: 49
+    amount: 49
+    currency: BRL
+    category: Manutenção
+  - source_row: 344
+    description: Oléo do motor
+    quantity: 8
+    unit: und
+    unit_price: 17
+    amount: 136
+    currency: BRL
+    category: Manutenção
+  - source_row: 345
+    description: Filtro lubrificante
+    quantity: 1
+    unit: und
+    unit_price: 38
+    amount: 38
+    currency: BRL
+    category: Manutenção
+  - source_row: 346
+    description: Filtro Diesel
+    quantity: 1
+    unit: und
+    unit_price: 22
+    amount: 22
+    currency: BRL
+    category: Manutenção
+  - source_row: 347
+    description: CORREIA DENTADA (154 DENTES)
+    quantity: 1
+    unit: und
+    unit_price: 145
+    amount: 145
+    currency: BRL
+    category: Manutenção
+  - source_row: 348
+    description: Filtro de ar pequeno
+    quantity: 1
+    unit: und
+    unit_price: 45
+    amount: 45
+    currency: BRL
+    category: Manutenção
+  - source_row: 349
+    description: Retífica do bloco e virabrequim do motor
+    quantity: 1
+    unit: und
+    unit_price: 2120
+    amount: 2120
+    currency: BRL
+    category: Manutenção
+  - source_row: 350
+    description: Bronzina de mancal 0,75mm
+    quantity: 1
+    unit: und
+    unit_price: 370
+    amount: 370
+    currency: BRL
+    category: Manutenção
+  - source_row: 351
+    description: Bronzina de biela 0,75mm
+    quantity: 1
+    unit: und
+    unit_price: 160
+    amount: 160
+    currency: BRL
+    category: Manutenção
+  - source_row: 352
+    description: Espaguete termoretrátil
+    quantity: 1
+    unit: und
+    unit_price: 6.42
+    amount: 6.42
+    currency: BRL
+    category: Manutenção
+  - source_row: 353
+    description: Lâmpadas p/ lanternas traseiras
+    quantity: 1
+    unit: und
+    unit_price: 39.4
+    amount: 39.4
+    currency: BRL
+    category: Manutenção
+  - source_row: 354
+    description: Funilaria e pintura do capo, frente, para-choque e paralama
+    quantity: 1
+    unit: und
+    unit_price: 650
+    amount: 650
+    currency: BRL
+    category: Manutenção
+  - source_row: 355
+    description: Bomba injetora e bicos
+    quantity: 1
+    unit: und
+    unit_price: 900
+    amount: 900
+    currency: BRL
+    detail: "Revisão completa  "
+    category: Manutenção
+  - source_row: 356
+    description: Fio de aterramento
+    detail: 1 m de fio de 25 mm² e quatro conectores para o negativo na carcaça
+    quantity: 1
+    unit: und
+    unit_price: 24.93
+    amount: 24.93
+    currency: BRL
+    system_ids:
+      - solar-power
+    category: Manutenção
+  - source_row: 357
+    description: Adesivos para o Chivunk
+    quantity: 3
+    unit: m²
+    unit_price: 50
+    amount: 150
+    currency: BRL
+    detail: Diversos adesivos
+    category: Manutenção
+  - source_row: 358
+    description: Fio de 25 mm²
+    detail: Ligação entre alternador e bateria estacionária
+    quantity: 6
+    unit: m
+    unit_price: 13.72
+    amount: 82.32
+    currency: BRL
+    system_ids:
+      - solar-power
+    category: Elétrica
+  - source_row: 359
+    description: Chaves tipo gangorra
+    detail: Para segredo e LED
+    quantity: 1
+    unit: und
+    unit_price: 4.64
+    amount: 4.64
+    currency: BRL
+    system_ids:
+      - solar-power
+    category: Elétrica
+  - source_row: 360
+    description: Alarme
+    quantity: 1
+    unit: und
+    unit_price: 220
+    amount: 220
+    currency: BRL
+    detail: Simples com sensor de presença
+    category: Acessórios
+  - source_row: 361
+    description: Válvula termostática moderna
+    quantity: 1
+    unit: und
+    unit_price: 120
+    amount: 120
+    currency: BRL
+    category: Manutenção
+  - source_row: 362
+    description: Defletor do radiador
+    quantity: 1
+    unit: und
+    unit_price: 98
+    amount: 98
+    currency: BRL
+    detail: Para aumentar a eficiência do motoventilador
+    category: Manutenção
+  - source_row: 363
+    description: Carcaça da válvula termostática
+    quantity: 1
+    unit: und
+    unit_price: 160
+    amount: 160
+    currency: BRL
+    detail: Parafuso oxidou e travou na antiga
+    category: Manutenção
+  - source_row: 364
+    description: Mão de obra para serviços no motor
+    quantity: 1
+    unit: und
+    unit_price: 4400
+    amount: 4400
+    currency: BRL
+    detail: Estão inclusos outros serviços
+    category: Manutenção
+  - source_row: 365
+    description: Filtro da direção hidráulica
+    quantity: 1
+    unit: und
+    unit_price: 14
+    amount: 14
+    currency: BRL
+    category: Manutenção
+  - source_row: 366
+    description: Mangueira de combustível lonada
+    quantity: 1
+    unit: und
+    unit_price: 50
+    amount: 50
+    currency: BRL
+    detail: A mangueira de retorno do combustível estava ressecada e quebrou
+    category: Manutenção
+  - source_row: 367
+    description: "10m de manguerira, engate rápido e cabo de aço "
+    quantity: 1
+    unit: und
+    unit_price: 53.61
+    amount: 53.61
+    currency: BRL
+    category: Manutenção
+  - source_row: 368
+    description: 04 Puxadores e 10 cantoneiras pequenas
+    quantity: 1
+    unit: und
+    unit_price: 20
+    amount: 20
+    currency: BRL
+    detail: Para montagem do balcão da cozinha
+    category: Móveis
+  - source_row: 369
+    description: Tecido carpete e courvim
+    quantity: 1
+    unit: und
+    unit_price: 25.55
+    amount: 25.55
+    currency: BRL
+    detail: Para revestir parede da cabine e volante
+    category: Revestimento
+  - source_row: 370
+    description: Terminais isolados
+    detail: Olhal para ligação entre alternador e bateria estacionária
+    quantity: 2
+    unit: und
+    unit_price: 4.9
+    amount: 9.8
+    currency: BRL
+    system_ids:
+      - solar-power
+    category: Elétrica
+  - source_row: 371
+    description: Parafusos e fechos de rolete
+    quantity: 1
+    unit: und
+    unit_price: 26
+    amount: 26
+    currency: BRL
+    detail: Para portas dos armários
+    category: Móveis
+  - source_row: 372
+    description: Clips para fechamento de embalagens
+    quantity: 1
+    unit: und
+    unit_price: 9.99
+    amount: 9.99
+    currency: BRL
+    detail: 20 unidades
+    category: Cozinha
+  - source_row: 373
+    description: Tapete 36x50cm
+    quantity: 1
+    unit: und
+    unit_price: 7.9
+    amount: 7.9
+    currency: BRL
+    category: Banheiro
+  - source_row: 374
+    description: Cantoneira branca, barra de rosca e corda para cortina
+    quantity: 1
+    unit: und
+    unit_price: 30
+    amount: 30
+    currency: BRL
+    category: Estrutura
+  - source_row: 375
+    description: Buchas, vassoura e escova de limpeza
+    quantity: 1
+    unit: und
+    unit_price: 12.97
+    amount: 12.97
+    currency: BRL
+    category: Banheiro
+  - source_row: 376
+    description: Brocas 3mm e 2,5mm
+    quantity: 1
+    unit: und
+    unit_price: 10
+    amount: 10
+    currency: BRL
+    detail: Para furação de parafusos na lataria
+    category: Estrutura
+  - source_row: 377
+    description: Tampa do comando de válvulas
+    quantity: 1
+    unit: und
+    unit_price: 150
+    shipping: 35
+    amount: 185
+    currency: BRL
+    detail: Motor IVECO 2.8
+    category: Manutenção
+  - source_row: 378
+    description: Sulfato de cobre
+    quantity: 1
+    unit: und
+    unit_price: 23
+    shipping: 12.9
+    amount: 35.9
+    currency: BRL
+    detail: Para fazer líquido para o porta potti
+    category: Banheiro
+  - source_row: 379
+    description: Mini ventilador USB
+    quantity: 1
+    unit: und
+    unit_price: 24.99
+    shipping: 13.9
+    amount: 38.89
+    currency: BRL
+    detail: Para usar como exaustor no fogão
+    category: Cozinha
+  - source_row: 380
+    description: Arco de serra
+    quantity: 1
+    unit: und
+    unit_price: 42.32
+    amount: 42.32
+    currency: BRL
+    detail: Irwin
+    category: Ferramentas
+  - source_row: 381
+    description: "Arame de solda  "
+    quantity: 1
+    unit: und
+    unit_price: 6.35
+    amount: 6.35
+    currency: BRL
+    category: Ferramentas
+  - source_row: 382
+    description: Ferramenta para sacar filtros
+    quantity: 1
+    unit: und
+    unit_price: 44
+    amount: 44
+    currency: BRL
+    category: Ferramentas
+  - source_row: 383
+    description: Lavagem do tanque de combustível
+    quantity: 1
+    unit: und
+    unit_price: 100
+    amount: 100
+    currency: BRL
+    category: Manutenção
+videos:
+  - video_id: NFc-9WhVAIY
+    youtube_url: https://www.youtube.com/watch?v=NFc-9WhVAIY
+  - video_id: jWKbwh202hg
+    youtube_url: https://www.youtube.com/watch?v=jWKbwh202hg
+  - video_id: 1asypqExBhA
+    youtube_url: https://www.youtube.com/watch?v=1asypqExBhA
+  - video_id: pBVVlorqkBU
+    youtube_url: https://www.youtube.com/watch?v=pBVVlorqkBU
+  - video_id: WBOeLFDTGbo
+    youtube_url: https://www.youtube.com/watch?v=WBOeLFDTGbo
+  - video_id: lM10PvYTkGA
+    youtube_url: https://www.youtube.com/watch?v=lM10PvYTkGA
+  - video_id: yRH7NiOk9BQ
+    youtube_url: https://www.youtube.com/watch?v=yRH7NiOk9BQ
+  - video_id: gJeIieF7oiY
+    youtube_url: https://www.youtube.com/watch?v=gJeIieF7oiY
+  - video_id: 8Y2hkStLF14
+    youtube_url: https://www.youtube.com/watch?v=8Y2hkStLF14
+  - video_id: D4As-ZLi1wU
+    youtube_url: https://www.youtube.com/watch?v=D4As-ZLi1wU
+  - video_id: Sj5SnDLPo_A
+    youtube_url: https://www.youtube.com/watch?v=Sj5SnDLPo_A
+  - video_id: nEwzvhLczJ8
+    youtube_url: https://www.youtube.com/watch?v=nEwzvhLczJ8
+  - video_id: EYaOv9tWOps
+    youtube_url: https://www.youtube.com/watch?v=EYaOv9tWOps
+  - video_id: BC2eZ3QBvTU
+    youtube_url: https://www.youtube.com/watch?v=BC2eZ3QBvTU
+  - video_id: TMszKJB0tSI
+    youtube_url: https://www.youtube.com/watch?v=TMszKJB0tSI
+  - video_id: ReYewD_68hE
+    youtube_url: https://www.youtube.com/watch?v=ReYewD_68hE
+  - video_id: fYhPvrB5Fbs
+    youtube_url: https://www.youtube.com/watch?v=fYhPvrB5Fbs
+  - video_id: LcJMFLZUHP4
+    youtube_url: https://www.youtube.com/watch?v=LcJMFLZUHP4
+  - video_id: ZoLWq27xvR4
+    youtube_url: https://www.youtube.com/watch?v=ZoLWq27xvR4
+  - video_id: WgPm5eI12Ls
+    youtube_url: https://www.youtube.com/watch?v=WgPm5eI12Ls
+  - video_id: tq5C4Fi2Brg
+    youtube_url: https://www.youtube.com/watch?v=tq5C4Fi2Brg
+  - video_id: C28HvEzwIPk
+    youtube_url: https://www.youtube.com/watch?v=C28HvEzwIPk
+  - video_id: L-FMpSbwU3M
+    youtube_url: https://www.youtube.com/watch?v=L-FMpSbwU3M
+  - video_id: qHJbU6IYn1I
+    youtube_url: https://www.youtube.com/watch?v=qHJbU6IYn1I
+  - video_id: lcmL0jd1fT4
+    youtube_url: https://www.youtube.com/watch?v=lcmL0jd1fT4
+  - video_id: bEbICB_8g1Y
+    youtube_url: https://www.youtube.com/watch?v=bEbICB_8g1Y
+  - video_id: Egs9kjhoBcU
+    youtube_url: https://www.youtube.com/watch?v=Egs9kjhoBcU
+  - video_id: wuOiO7XYDgQ
+    youtube_url: https://www.youtube.com/watch?v=wuOiO7XYDgQ
+  - video_id: v7zynRLPtL4
+    youtube_url: https://www.youtube.com/watch?v=v7zynRLPtL4
+  - video_id: qukRFG4Uxmw
+    youtube_url: https://www.youtube.com/watch?v=qukRFG4Uxmw
+  - video_id: 9b_Pe5VWjAU
+    youtube_url: https://www.youtube.com/watch?v=9b_Pe5VWjAU
+  - video_id: bprzPgkzOi0
+    youtube_url: https://www.youtube.com/watch?v=bprzPgkzOi0
+  - video_id: CTWd2t3xvYA
+    youtube_url: https://www.youtube.com/watch?v=CTWd2t3xvYA
+  - video_id: WirltLUtCAs
+    youtube_url: https://www.youtube.com/watch?v=WirltLUtCAs
+  - video_id: v1AF-g1PZWc
+    youtube_url: https://www.youtube.com/watch?v=v1AF-g1PZWc
+  - video_id: j207oSW-lKM
+    youtube_url: https://www.youtube.com/watch?v=j207oSW-lKM
+  - video_id: aaZcWMbDNZo
+    youtube_url: https://www.youtube.com/watch?v=aaZcWMbDNZo
+  - video_id: -_VZvjJXmwc
+    youtube_url: https://www.youtube.com/watch?v=-_VZvjJXmwc
+  - video_id: MZ_rUN7TPPg
+    youtube_url: https://www.youtube.com/watch?v=MZ_rUN7TPPg
+  - video_id: Zjj-DIcmFCI
+    youtube_url: https://www.youtube.com/watch?v=Zjj-DIcmFCI
+  - video_id: cSBNfboaYD8
+    youtube_url: https://www.youtube.com/watch?v=cSBNfboaYD8
+  - video_id: h7ekFUxnFEY
+    youtube_url: https://www.youtube.com/watch?v=h7ekFUxnFEY
+  - video_id: sCi4pZ1-AC8
+    youtube_url: https://www.youtube.com/watch?v=sCi4pZ1-AC8
+  - video_id: V67NFlkzRfs
+    youtube_url: https://www.youtube.com/watch?v=V67NFlkzRfs
+  - video_id: ZUPpQwlqrsg
+    youtube_url: https://www.youtube.com/watch?v=ZUPpQwlqrsg
+playlist_id: PLA8vGdq_0fiMR3RYUXQ-0xKridLUsSf1f
+playlist_order:
+  - NFc-9WhVAIY
+  - jWKbwh202hg
+  - 1asypqExBhA
+  - pBVVlorqkBU
+  - WBOeLFDTGbo
+  - lM10PvYTkGA
+  - yRH7NiOk9BQ
+  - gJeIieF7oiY
+  - 8Y2hkStLF14
+  - D4As-ZLi1wU
+  - Sj5SnDLPo_A
+  - nEwzvhLczJ8
+  - EYaOv9tWOps
+  - BC2eZ3QBvTU
+  - TMszKJB0tSI
+  - ReYewD_68hE
+  - fYhPvrB5Fbs
+  - LcJMFLZUHP4
+  - ZoLWq27xvR4
+  - WgPm5eI12Ls
+  - tq5C4Fi2Brg
+  - C28HvEzwIPk
+  - L-FMpSbwU3M
+  - qHJbU6IYn1I
+  - lcmL0jd1fT4
+  - bEbICB_8g1Y
+  - Egs9kjhoBcU
+  - wuOiO7XYDgQ
+  - v7zynRLPtL4
+  - qukRFG4Uxmw
+  - 9b_Pe5VWjAU
+  - bprzPgkzOi0
+  - CTWd2t3xvYA
+  - WirltLUtCAs
+  - v1AF-g1PZWc
+  - j207oSW-lKM
+  - aaZcWMbDNZo
+  - -_VZvjJXmwc
+  - MZ_rUN7TPPg
+  - Zjj-DIcmFCI
+  - cSBNfboaYD8
+  - h7ekFUxnFEY
+  - sCi4pZ1-AC8
+  - V67NFlkzRfs
+  - ZUPpQwlqrsg
+systems:
+  - system_id: planning
+    title: Planejamento e projeto 3D
+    video_ids: [NFc-9WhVAIY, jWKbwh202hg, 1asypqExBhA, qukRFG4Uxmw, 9b_Pe5VWjAU, CTWd2t3xvYA]
+    technologies:
+      - SketchUp
+    processes:
+      - Desenho 3D da distribuição interna da van.
+      - Organização dos custos da construção em planilha.
+  - system_id: thermal-insulation
+    title: Isolamento térmico e acústico
+    video_ids: [pBVVlorqkBU]
+    materials:
+      - Material similar ao 3TC, sem marca confirmada.
+      - Lã de rocha nos locais de difícil acesso.
+  - system_id: flooring
+    title: Piso e assoalho
+    video_ids: [WBOeLFDTGbo]
+    materials:
+      - Madeira para o piso.
+      - Revestimento em piso vinílico.
+    processes:
+      - Recuperação do assoalho metálico, com retirada de ferrugem e soldagem.
+      - Preparação e montagem do piso de madeira, com corte, encaixe e verniz.
+      - Acabamento com piso vinílico.
+  - system_id: windows
+    title: Janelas
+    video_ids: [lM10PvYTkGA, yRH7NiOk9BQ, wuOiO7XYDgQ]
+    equipment:
+      - Janelas Finestra Car.
+    processes:
+      - Instalação das janelas na van.
+  - system_id: solar-power
+    title: Sistema elétrico fotovoltaico off-grid
+    video_ids: [gJeIieF7oiY, 8Y2hkStLF14, WgPm5eI12Ls, tq5C4Fi2Brg, C28HvEzwIPk, L-FMpSbwU3M, wuOiO7XYDgQ, ZUPpQwlqrsg]
+    equipment:
+      - Rack artesanal para os painéis solares.
+      - Uma bateria estacionária de chumbo-ácido Heliar Freedom DF4001 de 240 Ah.
+      - Dois painéis solares Canadian Solar de 275 Wp cada, policristalinos.
+      - Controlador de carga MPPT Epever TRIRON 3210N, 30 A, 12/24 V.
+      - Inversor Hayonik de 500 W, entrada 12 V e saída 127 V, com pico de 1.000 W.
+    materials:
+      - Cabos PP na instalação elétrica.
+      - Cantoneiras de aço galvanizado, parafusos, porcas e arruelas para o rack.
+      - Selante PU para vedação das fixações no teto.
+    tools:
+      - Máquina de solda.
+      - Esmerilhadeira.
+      - Furadeira de bancada.
+    technologies:
+      - Energia solar fotovoltaica off-grid.
+    processes:
+      - Construção do suporte para os painéis solares.
+      - Dimensionamento do consumo dos equipamentos em planilha.
+      - Instalação elétrica da van.
+    precautions:
+      - O relato do rack alerta para o uso de ferramentas perigosas e de equipamentos de proteção individual.
+      - A descrição da instalação elétrica desaconselha o uso frequente da ligação de emergência ao alternador.
+  - system_id: plumbing
+    title: Sistema hidráulico e água servida
+    video_ids: [8Y2hkStLF14, nEwzvhLczJ8, EYaOv9tWOps, BC2eZ3QBvTU, TMszKJB0tSI, wuOiO7XYDgQ, -_VZvjJXmwc]
+    equipment:
+      - Reservatórios de água PPVille.
+      - Reservatório de água com capacidade aproximada de 200 litros.
+      - Caixa de água servida Seaflo.
+      - Medidores de nível de água.
+      - Bomba pressurizada Matsuri.
+      - Reservatório de água servida de 70 litros.
+    materials:
+      - Mangueiras flexíveis.
+    processes:
+      - Instalação das mangueiras e dos medidores de nível.
+      - Instalação da caixa de água servida para auxiliar o escoamento.
+  - system_id: gas
+    title: Sistema de gás
+    video_ids: [8Y2hkStLF14, wuOiO7XYDgQ]
+    materials:
+      - Mangueiras para instalação de gás.
+    equipment:
+      - Válvula ou registro de gás.
+  - system_id: bed
+    title: Cama removível e colchões
+    video_ids: [D4As-ZLi1wU, wuOiO7XYDgQ, MZ_rUN7TPPg]
+    materials:
+      - Aproximadamente 7 metros de perfil retangular de 40 × 20 mm.
+      - Cantoneiras, porcas rebite e parafusos.
+      - Sobras de MDF dos móveis, utilizadas no estrado.
+      - Espuma D33 com 8 cm de espessura, escolhida após testes na loja.
+    processes:
+      - Construção de uma estrutura de cama removível.
+  - system_id: climate-control
+    title: Climatizador Maxiclima Fusion
+    video_ids: [Sj5SnDLPo_A, wuOiO7XYDgQ, aaZcWMbDNZo]
+    equipment:
+      - Climatizador Maxiclima Fusion.
+    processes:
+      - Instalação do climatizador e da bomba de água.
+    precautions:
+      - O relato de uso não descreve o equipamento como capaz de refrigerar toda a van fechada.
+  - system_id: bathroom
+    title: Banheiro
+    video_ids: [ReYewD_68hE, fYhPvrB5Fbs, LcJMFLZUHP4, wuOiO7XYDgQ]
+    materials:
+      - Madeira pinus reaproveitada para a estrutura.
+      - MDF de 6 mm no revestimento interno e de 3 mm no externo.
+      - Plástico reaproveitado e selante PU.
+    equipment:
+      - Banheiro portátil Porta Potti.
+    processes:
+      - Construção da estrutura, revestimento e impermeabilização do banheiro.
+    precautions:
+      - A descrição informa que a especificação técnica do plástico reaproveitado não era conhecida.
+  - system_id: furniture-interiors
+    title: Móveis e revestimento interno
+    video_ids: [qHJbU6IYn1I, lcmL0jd1fT4, bEbICB_8g1Y, wuOiO7XYDgQ]
+    materials:
+      - MDF de 15 mm nos móveis.
+      - MDF branco de 3 mm no revestimento das paredes e do teto.
+    equipment:
+      - Pistões a gás de 100 N nas portas dos armários.
+    tools:
+      - Gabarito para furos em ângulo.
+    processes:
+      - Planejamento dos móveis a partir das dimensões dos equipamentos e do espaço da cama.
+      - Montagem dos armários e instalação dos pistões a gás.
+      - Revestimento das paredes e do teto.
+  - system_id: kitchen
+    title: Cozinha
+    video_ids: [qHJbU6IYn1I, wuOiO7XYDgQ, Zjj-DIcmFCI]
+    equipment:
+      - Pia de inox.
+      - Cooktop de duas bocas.
+      - Frigobar convertido para 12 V.
+  - system_id: cabin
+    title: Reforma da cabine
+    video_ids: [Egs9kjhoBcU]
+    processes:
+      - Reforma da cabine e instalação de bancos de couro, conforme o título e a abertura da descrição.
+decisions:
+  - solution: Construção artesanal da motorcasa.
+    reason: Os preços dos motorhomes no Brasil motivaram a escolha pela montagem própria.
+    system_id: planning
+    video_ids: [qukRFG4Uxmw]
+  - solution: Uso de mangueiras flexíveis na hidráulica.
+    reason: Facilitar as curvas e evitar as quebras que preocupavam no uso de tubos rígidos.
+    system_id: plumbing
+    video_ids: [8Y2hkStLF14]
+  - solution: Instalação de caixa de água servida Seaflo.
+    reason: Após a construção da pia e do banheiro, a água servida não escoaria sozinha para o reservatório.
+    system_id: plumbing
+    video_ids: [nEwzvhLczJ8]
+  - solution: Estrutura removível para a cama.
+    reason: Permitir sua retirada durante a construção e em manutenções que exigissem mais espaço.
+    system_id: bed
+    video_ids: [D4As-ZLi1wU]
+  - solution: Compra da pia, do frigobar e do cooktop antes do planejamento do armário da cozinha.
+    reason: Usar as dimensões reais dos equipamentos no projeto dos móveis.
+    system_id: furniture-interiors
+    video_ids: [qHJbU6IYn1I]
+  - solution: Uso de MDF branco de 3 mm nas paredes e no teto.
+    reason: Esperávamos uma montagem mais rápida e prática com placas grandes.
+    system_id: furniture-interiors
+    video_ids: [bEbICB_8g1Y]
+  - solution: Instalação do climatizador Maxiclima Fusion.
+    reason: Buscávamos conforto para dormir com um investimento menor do que em ar-condicionado e sistema elétrico mais robusto.
+    system_id: climate-control
+    video_ids: [aaZcWMbDNZo]
+tips:
+  - description: Planejar os móveis considerando as dimensões dos equipamentos que ficarão embutidos.
+    system_id: furniture-interiors
+    video_ids: [qHJbU6IYn1I]
+  - description: Testar as opções de espuma na loja, nas posições de uso, em vez de tratar uma densidade como ideal para todas as pessoas.
+    system_id: bed
+    video_ids: [MZ_rUN7TPPg]
+  - description: Avaliar o custo e o tempo de manutenção do veículo-base, não somente seu preço de compra.
+    system_id: planning
+    video_ids: [CTWd2t3xvYA]
+duration:
+  - description: Período total aproximado da construção, incluindo pausas distribuídas.
+    value: 8
+    unit: months
+    approximate: true
+  - description: Trabalho efetivo aproximado na construção.
+    value: 6
+    unit: months
+    approximate: true
+  - description: Pausas distribuídas por períodos na oficina mecânica e espera de materiais, incluindo atraso das madeiras dos móveis.
+    value: 2
+    unit: months
+    approximate: true
+  - description: Construção do rack dos painéis solares, em duas pessoas, conforme a descrição do vídeo.
+    value: 2
+    unit: days
+    system_id: solar-power
+    video_ids: [gJeIieF7oiY]
+notes: >
+  Consolidação preliminar dos títulos e descrições dos 45 vídeos e da única
+  transcrição local disponível. A sequência completa inclui conteúdos
+  complementares e outros veículos, discriminados no registro de revisão;
+  sua presença na playlist não os torna etapas da construção da Iveco.
+  A planilha original fornecida pelo proprietário registra 380 itens, com
+  total histórico de 64.564,62 BRL, incluindo veículo, manutenção e demais
+  categorias. Os três subtotais em main_costs são disjuntos e somam esse total;
+  não representam apenas a conversão. Há lançamentos posteriores a julho de
+  2019 e uma data aparentemente incorreta, preservados no original e
+  discriminados na revisão. Não são preços atuais. Fotos de detalhes e
+  comparações antes/depois permanecem ausentes por falta de evidência
+  suficiente nesta etapa. A página principal foi aprovada para publicação pelo
+  proprietário em 15/11/2026. Essa aprovação não constitui validação técnica
+  das instalações. O ponto do mapa representa a cidade, não o endereço da garagem.
+provenance:
+  - source_type: manual
+    verification_status: confirmed
+    source_id: owner-solar-costs-interview-2026-11-15
+    fields: ["cost_items[352].system_ids"]
+  - source_type: external_source
+    verification_status: reviewed
+    source_id: "public/downloads/motorhome-projects/iveco-daily-3510/custos-motorhome-odisseia-mundana.xlsx:Sheet1"
+    fields: [cost_items]
+  - source_type: transcript
+    verification_status: reviewed
+    source_id: "transcripts/motorhome-projects/iveco-daily-3510/gJeIieF7oiY.raw.pt-orig.vtt:00:03-00:06"
+    fields: ["systems[4].materials", "systems[4].tools"]
+  - source_type: external_source
+    verification_status: reviewed
+    source_id: https://pt.wikipedia.org/wiki/S%C3%A3o_Jos%C3%A9_dos_Campos
+    fields: [representative_point]
+  - source_type: manual
+    verification_status: confirmed
+    source_id: owner-motorhome-model-instructions-2026-11-15
+    fields:
+      - title
+      - vehicle_model
+  - source_type: manual
+    verification_status: confirmed
+    source_id: owner-motorhome-build-interview-2026-11-15
+    fields: [chassis, build_location, build_period, "duration[0]", "duration[1]", "duration[2]"]
+  - source_type: external_source
+    verification_status: reviewed
+    source_id: https://www.youtube.com/playlist?list=PLA8vGdq_0fiMR3RYUXQ-0xKridLUsSf1f
+    fields: [playlist_id, playlist_order]
+  - source_type: youtube_metadata
+    verification_status: reviewed
+    source_id: imports/youtube/channel/playlists_videos_mapa.csv
+    fields: [videos]
+  - source_type: youtube_metadata
+    verification_status: reviewed
+    source_id: "youtube:NFc-9WhVAIY:description; youtube:jWKbwh202hg:description"
+    fields: ["systems[0]"]
+  - source_type: youtube_metadata
+    verification_status: reviewed
+    source_id: "youtube:pBVVlorqkBU:description"
+    fields: ["systems[1]"]
+  - source_type: youtube_metadata
+    verification_status: reviewed
+    source_id: "youtube:WBOeLFDTGbo:description"
+    fields: ["systems[2]"]
+  - source_type: youtube_metadata
+    verification_status: reviewed
+    source_id: "youtube:lM10PvYTkGA:description"
+    fields: ["systems[3]"]
+  - source_type: youtube_metadata
+    verification_status: reviewed
+    source_id: "youtube:gJeIieF7oiY:description; youtube:8Y2hkStLF14:description; youtube:WgPm5eI12Ls:description; youtube:tq5C4Fi2Brg:description; youtube:L-FMpSbwU3M:description"
+    fields: ["systems[4]", "duration[3]"]
+  - source_type: transcript
+    verification_status: reviewed
+    source_id: "youtube:ZUPpQwlqrsg:pt.srt:07:58-08:28"
+    fields: ["systems[4].equipment[1]"]
+  - source_type: youtube_metadata
+    verification_status: reviewed
+    source_id: "youtube:8Y2hkStLF14:description; youtube:nEwzvhLczJ8:description; youtube:EYaOv9tWOps:description; youtube:TMszKJB0tSI:description"
+    fields: ["systems[5]"]
+  - source_type: youtube_metadata
+    verification_status: reviewed
+    source_id: "youtube:8Y2hkStLF14:description"
+    fields: ["systems[6]", "decisions[1]"]
+  - source_type: youtube_metadata
+    verification_status: reviewed
+    source_id: "youtube:D4As-ZLi1wU:description; youtube:MZ_rUN7TPPg:description"
+    fields: ["systems[7]", "decisions[3]", "tips[1]"]
+  - source_type: youtube_metadata
+    verification_status: reviewed
+    source_id: "youtube:Sj5SnDLPo_A:description; youtube:aaZcWMbDNZo:description"
+    fields: ["systems[8]", "decisions[6]"]
+  - source_type: youtube_metadata
+    verification_status: reviewed
+    source_id: "youtube:ReYewD_68hE:description; youtube:fYhPvrB5Fbs:description; youtube:LcJMFLZUHP4:title"
+    fields: ["systems[9]"]
+  - source_type: youtube_metadata
+    verification_status: reviewed
+    source_id: "youtube:qHJbU6IYn1I:description; youtube:lcmL0jd1fT4:description; youtube:bEbICB_8g1Y:description"
+    fields: ["systems[10]", "decisions[4]", "decisions[5]", "tips[0]"]
+  - source_type: youtube_metadata
+    verification_status: reviewed
+    source_id: "youtube:Zjj-DIcmFCI:description"
+    fields: ["systems[11]"]
+  - source_type: youtube_metadata
+    verification_status: reviewed
+    source_id: "youtube:Egs9kjhoBcU:title-and-description-introduction"
+    fields: ["systems[12]"]
+  - source_type: youtube_metadata
+    verification_status: reviewed
+    source_id: "youtube:qukRFG4Uxmw:description"
+    fields: ["decisions[0]"]
+  - source_type: youtube_metadata
+    verification_status: reviewed
+    source_id: "youtube:nEwzvhLczJ8:description"
+    fields: ["decisions[2]"]
+  - source_type: youtube_metadata
+    verification_status: reviewed
+    source_id: "youtube:CTWd2t3xvYA:description"
+    fields: ["tips[2]"]
+  - source_type: ai_inference
+    verification_status: unverified
+    source_id: motorhome-local-editorial-synthesis-2026-11-15
+    fields: [summary]
+  - source_type: external_source
+    verification_status: reviewed
+    source_id: "public/downloads/motorhome-projects/iveco-daily-3510/custos-motorhome-odisseia-mundana.xlsx#Sheet1!B4:O387"
+    fields: [main_costs]
+  - source_type: manual
+    verification_status: confirmed
+    source_id: owner-motorhome-spreadsheet-download-approval-2026-11-15
+    fields: [downloads]
+  - source_type: manual
+    verification_status: confirmed
+    source_id: owner-motorhome-solar-configuration-interview-2026-11-15
+    fields: ["systems[4].equipment[1]", "systems[4].equipment[2]", "systems[4].equipment[3]", "systems[4].equipment[4]"]
+  - source_type: manual
+    verification_status: confirmed
+    source_id: owner-motorhome-insulation-interview-2026-11-15
+    fields: ["systems[1].materials[0]"]
+  - source_type: manual
+    verification_status: confirmed
+    source_id: owner-motorhome-plumbing-interview-2026-11-15
+    fields: ["systems[5].equipment[4]", "systems[5].equipment[5]"]

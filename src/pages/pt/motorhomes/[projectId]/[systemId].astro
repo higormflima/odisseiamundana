@@ -1,0 +1,85 @@
+---
+import { getCollection, getEntry, render } from 'astro:content';
+import { resolve } from 'node:path';
+import SiteLayout from '../../../../layouts/SiteLayout.astro';
+import CostTable from '../../../../components/CostTable.astro';
+import CostTableFrame from '../../../../components/CostTableFrame.astro';
+import VideoCarousel from '../../../../components/VideoCarousel.astro';
+import { loadMotorhomePlaylist } from '../../../../lib/motorhomePlaylist.mjs';
+import { buildSystemCostRows } from '../../../../lib/motorhomeCosts.mjs';
+
+export async function getStaticPaths() {
+  const pages = await getCollection('motorhomeSystemPages');
+  return Promise.all(pages.filter((page) => page.data.status === 'published' || import.meta.env.DEV).map(async (entry) => {
+    const metadata = await getEntry(entry.data.project_id);
+    const system = metadata?.data.systems?.find((item) => item.system_id === entry.data.system_id);
+    if (!metadata || !system) throw new Error(`Projeto ou etapa inexistente: ${entry.id}`);
+    const playlist = await loadMotorhomePlaylist(metadata.data, resolve('imports', 'youtube', 'channel'));
+    const videos = playlist.filter((video) => system.video_ids?.includes(video.videoId));
+    if (videos.length !== (system.video_ids ?? []).length) {
+      throw new Error(`Vídeos da etapa ausentes da playlist: ${entry.id}`);
+    }
+    return { params: { projectId: metadata.id, systemId: system.system_id }, props: { entry, project: metadata.data, system, videos } };
+  }));
+}
+
+const { entry, project, system, videos } = Astro.props;
+const { Content } = await render(entry);
+const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+const isDraft = entry.data.status !== 'published';
+const groups = [
+  { field: 'equipment', title: 'Equipamentos' },
+  { field: 'materials', title: 'Materiais' },
+  { field: 'tools', title: 'Ferramentas' },
+  { field: 'technologies', title: 'Tecnologias' },
+];
+const rows = buildSystemCostRows(project.cost_items ?? [], system.system_id);
+---
+
+<SiteLayout title={entry.data.title}>
+  {isDraft && <meta slot="head" name="robots" content="noindex, nofollow" />}
+  <article class="story-page system-page">
+    <a class="back-link" href={`${base}pt/motorhomes/${project.project_id}/`}>← Nossa construção do motorhome</a>
+    {isDraft && <p class="eyebrow draft-label">Prévia local · não publicada</p>}
+    <header class="story-header"><h1>{entry.data.title}</h1></header>
+    <div class="story-body"><Content /></div>
+
+    <section class="system-attributes" aria-label="O que usamos nesta etapa">
+      {groups.map(({ field, title }) => system[field]?.length > 0 && (
+        <div>
+          <h2>{title}</h2>
+          <ul>{system[field].map((item: string) => <li>{item}</li>)}</ul>
+        </div>
+      ))}
+    </section>
+
+    {rows.length > 0 && (
+      <section class="system-costs" aria-labelledby="costs-title">
+        <h2 id="costs-title">O que compramos para esta etapa</h2>
+        <CostTableFrame id="system-cost-ledger" label={`Compras desta etapa: ${rows.length} itens. Role para ver todos.`}>
+          <CostTable
+            caption="Valores históricos registrados na nossa construção de 2018/2019, em reais — não são preços atuais. Itens compartilhados podem aparecer em outras etapas."
+            amountLabel="Valor pago"
+            rows={rows}
+          />
+        </CostTableFrame>
+        {project.downloads?.map((file) => (
+          <p><a class="text-link" href={`${base}${file.path}`} download>Baixar a planilha completa de custos (.xlsx) ↗</a></p>
+        ))}
+      </section>
+    )}
+
+    <VideoCarousel title="Esta etapa em vídeo" description="Reunimos os vídeos desta etapa na sequência da nossa playlist." videos={videos} playlistId={project.playlist_id} />
+  </article>
+</SiteLayout>
+
+<style>
+  .system-page { padding-top: var(--space-5); }
+  .back-link { display: inline-block; margin-bottom: var(--space-5); }
+  .draft-label { margin-bottom: var(--space-4); }
+  .system-attributes, .system-costs { max-width: var(--content-reading); margin: var(--space-section) auto 0; }
+  .system-attributes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-5); }
+  h2 { margin: 0 0 var(--space-3); font: 400 clamp(28px, 4vw, 36px)/1.2 var(--font-display); }
+  .system-attributes ul { padding-left: 1.2em; color: var(--muted); line-height: 1.8; }
+  @media (max-width: 700px) { .system-attributes { grid-template-columns: 1fr; } }
+</style>

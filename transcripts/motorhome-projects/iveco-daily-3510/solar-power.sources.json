@@ -1,0 +1,73 @@
+[
+  {
+    "video_id": "gJeIieF7oiY",
+    "path": "transcripts/motorhome-projects/iveco-daily-3510/gJeIieF7oiY.raw.pt-orig.vtt",
+    "source_url": "https://www.youtube.com/watch?v=gJeIieF7oiY",
+    "language": "pt",
+    "kind": "automatic",
+    "retrieved_at": "2026-11-15T20:41:39.538Z",
+    "raw_sha256": "9452bec1b4ffb3562da68867e8b885d5ec163810185770b7eb888e192e72b864"
+  },
+  {
+    "video_id": "8Y2hkStLF14",
+    "path": "transcripts/motorhome-projects/iveco-daily-3510/8Y2hkStLF14.raw.pt-orig.vtt",
+    "source_url": "https://www.youtube.com/watch?v=8Y2hkStLF14",
+    "language": "pt",
+    "kind": "automatic",
+    "retrieved_at": "2026-11-15T20:41:39.545Z",
+    "raw_sha256": "437e490eae48fda367abe9fd56811fd5de0d0e4aa2392d728ec0d2182a7a7b22"
+  },
+  {
+    "video_id": "WgPm5eI12Ls",
+    "path": "transcripts/motorhome-projects/iveco-daily-3510/WgPm5eI12Ls.raw.pt-orig.vtt",
+    "source_url": "https://www.youtube.com/watch?v=WgPm5eI12Ls",
+    "language": "pt",
+    "kind": "automatic",
+    "retrieved_at": "2026-11-15T20:41:39.552Z",
+    "raw_sha256": "a2a3ac0ab3fb2fe0db52671f4d31aa8091d43977be616829ad718034addc409a"
+  },
+  {
+    "video_id": "tq5C4Fi2Brg",
+    "path": "transcripts/motorhome-projects/iveco-daily-3510/tq5C4Fi2Brg.raw.pt-orig.vtt",
+    "source_url": "https://www.youtube.com/watch?v=tq5C4Fi2Brg",
+    "language": "pt",
+    "kind": "automatic",
+    "retrieved_at": "2026-11-15T20:41:39.558Z",
+    "raw_sha256": "1073db04e6329245da997ace60fbb3835ba6cfd956229c75c073cf4dbff1c5a9"
+  },
+  {
+    "video_id": "C28HvEzwIPk",
+    "path": "transcripts/motorhome-projects/iveco-daily-3510/C28HvEzwIPk.raw.pt-orig.vtt",
+    "source_url": "https://www.youtube.com/watch?v=C28HvEzwIPk",
+    "language": "pt",
+    "kind": "automatic",
+    "retrieved_at": "2026-11-15T20:41:39.564Z",
+    "raw_sha256": "a226d2faff35c5c857b10a96abe9ec8482b2e21b35ddaa411f72904adb105bfc"
+  },
+  {
+    "video_id": "L-FMpSbwU3M",
+    "path": "transcripts/motorhome-projects/iveco-daily-3510/L-FMpSbwU3M.raw.pt-orig.vtt",
+    "source_url": "https://www.youtube.com/watch?v=L-FMpSbwU3M",
+    "language": "pt",
+    "kind": "automatic",
+    "retrieved_at": "2026-11-15T20:41:39.569Z",
+    "raw_sha256": "f8b16f2149f87832e7b3792ff9290a672e613363c528c6e7f30931ef695d55ad"
+  },
+  {
+    "video_id": "wuOiO7XYDgQ",
+    "path": "transcripts/motorhome-projects/iveco-daily-3510/wuOiO7XYDgQ.raw.pt-orig.vtt",
+    "source_url": "https://www.youtube.com/watch?v=wuOiO7XYDgQ",
+    "language": "pt",
+    "kind": "automatic",
+    "retrieved_at": "2026-11-15T20:41:39.578Z",
+    "raw_sha256": "7ff26ef3d7e0ccda3c40b3d32a935ceba2491d1999f7bf1e945b1192ffcd87bc"
+  },
+  {
+    "video_id": "ZUPpQwlqrsg",
+    "path": "imports/youtube/channel/20241120 - Baterías de Lítio vs Chumbo-ácido - Qual a melhor para seu motorhome？ [ZUPpQwlqrsg].pt.srt",
+    "source_url": "https://www.youtube.com/watch?v=ZUPpQwlqrsg",
+    "language": "pt",
+    "kind": "automatic",
+    "raw_sha256": "6314901f120cfadeb9b3917a605ea4df5de5776c7555c956b662fbebaed27378"
+  }
+]

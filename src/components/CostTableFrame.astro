@@ -1,0 +1,34 @@
+---
+interface Props {
+  id: string;
+  label: string;
+}
+const { id, label } = Astro.props;
+---
+
+<div id={id} class="cost-table-frame" data-cost-table-frame tabindex="0" role="region" aria-label={label}>
+  <slot />
+</div>
+
+<script>
+  for (const frame of document.querySelectorAll<HTMLElement>('[data-cost-table-frame]')) {
+    const table = frame.querySelector('table');
+    const rows = table?.querySelectorAll('tbody tr');
+    const lastVisibleRow = rows?.[Math.min(10, rows.length) - 1];
+    if (!table || !lastVisibleRow) throw new Error('Tabela de custos sem itens para exibir.');
+
+    const updateHeight = () => {
+      const height = lastVisibleRow.getBoundingClientRect().bottom
+        - frame.getBoundingClientRect().top + frame.scrollTop + frame.clientTop;
+      frame.style.maxHeight = `${height}px`;
+    };
+    new ResizeObserver(updateHeight).observe(table);
+    updateHeight();
+  }
+</script>
+
+<style>
+  .cost-table-frame { padding: var(--space-3); border: 1px solid var(--line); overflow-y: auto; scrollbar-gutter: stable; }
+  .cost-table-frame:focus-visible { outline: var(--focus-outline); outline-offset: 3px; }
+  .cost-table-frame :global(.cost-table) { margin: 0; }
+</style>

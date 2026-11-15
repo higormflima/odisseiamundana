@@ -8,6 +8,7 @@ const metadataCollections = [
   { kind: 'journey', directory: path.join(projectRoot, 'metadata', 'journeys') },
   { kind: 'video', directory: path.join(projectRoot, 'metadata', 'videos') },
   { kind: 'collaboration', directory: path.join(projectRoot, 'metadata', 'collaborations') },
+  { kind: 'motorhome-project', directory: path.join(projectRoot, 'metadata', 'motorhome-projects') },
 ];
 
 async function listYamlFiles(directory) {

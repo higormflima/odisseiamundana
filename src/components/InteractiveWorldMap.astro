@@ -25,8 +25,8 @@ const markersJson = JSON.stringify(markers).replace(/</g, '\\u003c');
       <noscript><p class="world-map-fallback">O mapa interativo precisa de JavaScript. As viagens estão listadas logo abaixo.</p></noscript>
     </div>
     <p class="world-map-error">Não foi possível carregar o mapa agora. As viagens estão listadas logo abaixo.</p>
-    <aside class="world-map-panel" data-world-map-panel tabindex="-1" aria-label="Viagem selecionada" hidden>
-      <button class="world-map-close" type="button" data-world-map-close aria-label="Fechar card da viagem">
+    <aside class="world-map-panel" data-world-map-panel tabindex="-1" aria-label="Conteúdo selecionado" hidden>
+      <button class="world-map-close" type="button" data-world-map-close aria-label="Fechar card">
         <span aria-hidden="true">×</span>
       </button>
       {entries.map((entry) => (

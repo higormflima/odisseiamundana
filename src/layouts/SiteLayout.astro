@@ -3,6 +3,7 @@ import '../styles/global.css';
 import SocialLinks from '../components/SocialLinks.astro';
 import CookieConsent from '../components/CookieConsent.astro';
 import SearchModal from '../components/SearchModal.astro';
+import { getCollection } from 'astro:content';
 
 interface Props {
   title: string;
@@ -13,9 +14,19 @@ interface Props {
 
 const { title, fullTitle, description = 'Histórias, roteiros e experiências de viagem.', lang = 'pt-BR' } = Astro.props;
 const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+const systemPages = await getCollection('motorhomeSystemPages', (page) =>
+  page.data.project_id.id === 'iveco-daily-3510' && (page.data.status === 'published' || import.meta.env.DEV));
+const motorhomeChildren = [
+  ...systemPages.sort((left, right) => left.data.sort_order - right.data.sort_order).map((page) => ({
+    label: page.data.title,
+    href: `${base}pt/motorhomes/${page.data.project_id.id}/${page.data.system_id}/`,
+  })),
+  { label: 'Custos da construção', href: `${base}pt/motorhomes/iveco-daily-3510/#construction-costs` },
+];
 const navigationLinks = [
   { label: 'Início', href: `${base}pt/` },
   { label: 'Viagens', href: `${base}pt/viagens/` },
+  { label: 'Motorhome', href: `${base}pt/motorhomes/iveco-daily-3510/`, children: motorhomeChildren },
   { label: 'Galeria', href: `${base}pt/galeria/` },
   { label: 'Colaborações', href: `${base}pt/colaboracoes/` },
   { label: 'Sobre nós', href: `${base}pt/sobre-nos/` },
@@ -58,7 +69,15 @@ const navigationLinks = [
       </div>
       <div class="header-actions">
         <nav class="desktop-navigation" aria-label="Navegação principal">
-          {navigationLinks.map(({ label, href }) => <a href={href}>{label}</a>)}
+          {navigationLinks.map(({ label, href, children }) => children?.length ? (
+            <details class="motorhome-navigation">
+              <summary>{label} <span aria-hidden="true">▾</span></summary>
+              <div class="motorhome-submenu">
+                <a href={href}>Construção do Motorhome</a>
+                {children.map((child) => <a href={child.href}>{child.label}</a>)}
+              </div>
+            </details>
+          ) : <a href={href}>{label}</a>)}
           <span class="language-note">PT</span>
         </nav>
         <SearchModal base={base} />
@@ -69,7 +88,15 @@ const navigationLinks = [
             </svg>
           </summary>
           <nav aria-label="Navegação principal">
-            {navigationLinks.map(({ label, href }) => <a href={href}>{label}</a>)}
+            {navigationLinks.map(({ label, href, children }) => children?.length ? (
+              <details class="motorhome-navigation">
+                <summary>{label} <span aria-hidden="true">▾</span></summary>
+                <div class="motorhome-submenu">
+                  <a href={href}>Construção do Motorhome</a>
+                  {children.map((child) => <a href={child.href}>{child.label}</a>)}
+                </div>
+              </details>
+            ) : <a href={href}>{label}</a>)}
             <span class="language-note">PT</span>
           </nav>
         </details>
@@ -93,6 +120,21 @@ const navigationLinks = [
 </html>
 
 <script>
+  for (const dropdown of document.querySelectorAll<HTMLDetailsElement>('.motorhome-navigation')) {
+    dropdown.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && dropdown.open) {
+        dropdown.open = false;
+        dropdown.querySelector('summary')?.focus();
+        event.stopPropagation();
+      }
+    });
+    dropdown.addEventListener('click', (event) => {
+      if (event.target instanceof Element && event.target.closest('a')) dropdown.open = false;
+    });
+    document.addEventListener('click', (event) => {
+      if (event.target instanceof Node && !dropdown.contains(event.target)) dropdown.open = false;
+    });
+  }
   const menu = document.querySelector<HTMLDetailsElement>('[data-mobile-navigation]');
   if (menu) {
     const summary = menu.querySelector<HTMLElement>('summary');
@@ -113,3 +155,17 @@ const navigationLinks = [
     });
   }
 </script>
+
+<style>
+  .motorhome-navigation { position: relative; }
+  .motorhome-navigation > summary { display: flex; align-items: center; gap: 6px; cursor: pointer; list-style: none; }
+  .motorhome-navigation > summary::-webkit-details-marker { display: none; }
+  .motorhome-navigation > summary:focus-visible { outline: var(--focus-outline); outline-offset: 5px; }
+  .motorhome-submenu { position: absolute; top: 100%; left: 0; z-index: 20; display: flex; flex-direction: column; width: min(320px, calc(100vw - 48px)); max-height: 65vh; overflow-y: auto; padding: 8px; border: 1px solid var(--line); background: var(--paper); box-shadow: var(--shadow-soft); }
+  .motorhome-submenu a { display: block; padding: 12px; font-size: 14px; line-height: 1.5; }
+  @media (max-width: 1350px) {
+    .site-header .mobile-navigation nav { max-width: calc(100vw - 24px); max-height: calc(100dvh - 112px); overflow-y: auto; }
+    .site-header .mobile-navigation .motorhome-navigation > summary { display: flex; width: auto; height: auto; padding: 12px; border: 0; border-radius: 0; }
+    .motorhome-submenu { position: static; width: auto; max-width: 260px; max-height: none; margin: 0 12px; padding: 0 0 0 8px; border: 0; border-left: 1px solid var(--line); box-shadow: none; }
+  }
+</style>

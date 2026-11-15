@@ -58,6 +58,10 @@ Os arquivos em `metadata/journeys/` são processados por `yaml` e validados com 
 
 Para cadastrar projetos de parceria, imagens e vídeos na seção de colaborações, consulte [Colaborações](docs/collaborations.md).
 
+Para documentar construções, conversões e melhorias de veículos, consulte
+[Projetos de motorhome](docs/motorhome-projects.md). O modelo é independente das
+viagens e seu cadastro não cria páginas no site.
+
 ## Preparação de fotografias
 
 A primeira etapa do novo fluxo prepara e valida imagens, mas **ainda não as adiciona à galeria pública**. As galerias existentes permanecem independentes.

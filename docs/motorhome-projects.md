@@ -1,0 +1,298 @@
+# Projetos de motorhome
+
+O contrato independente [motorhome-project.schema.json](../schemas/motorhome-project.schema.json)
+documenta construções, conversões e melhorias, sem tratar o projeto como viagem.
+É um rascunho 0.5. Os arquivos ficam em
+`metadata/motorhome-projects/<project_id>.yaml`, com identificadores em inglês e
+valores em português brasileiro. Apenas `project_id` é obrigatório.
+
+O [registro inicial da Iveco Daily](../metadata/motorhome-projects/iveco-daily-3510.yaml)
+consolida títulos e descrições dos 45 vídeos, oito transcrições do piloto elétrico e as
+confirmações iniciais do proprietário. A sequência foi conferida na playlist
+pública em 15/11/2026. A [revisão e as lacunas](../transcripts/motorhome-projects/iveco-daily-3510/editorial-review.md)
+ficam separadas do conteúdo editorial. Após validar o rascunho, o proprietário
+aprovou a página principal para publicação em 15/11/2026.
+
+## Página, navegação e mapa
+
+O conteúdo editorial fica em
+`content/motorhome-projects/iveco-daily-3510/overview.mdx`, com `status: published`.
+As coleções `motorhomeProjectPages` e `motorhomeProjectMetadata` mantêm MDX e
+YAML separados. A rota `src/pages/pt/motorhomes/[projectId].astro` carrega os
+títulos dos vídeos diretamente dos arquivos originais `.info.json`, na ordem
+de `playlist_order`, sem duplicar registros ou incorporar players.
+
+Com `pnpm dev`, acesse `/pt/motorhomes/iveco-daily-3510/`. Rascunhos só são
+gerados em desenvolvimento, com aviso de prévia e `noindex, nofollow`; em
+produção a rota aceita apenas páginas com `status: published`.
+
+O item **Motorhome**, após **Viagens**, abre um submenu com **Construção do Motorhome**,
+as etapas disponíveis e **Custos da construção** sempre na última posição.
+O último link abre a visão geral na âncora `#construction-costs`, incluindo
+“Nossas contas” e “Planilha de custos completa”, mesmo quando usado de outra página.
+Desktop e mobile usam o mesmo filtro de publicação das etapas. O mapa também inclui o projeto,
+em São José dos Campos, São Paulo. O campo opcional `representative_point`
+armazena nome e coordenadas no YAML, sem acoplar o dado ao Astro.
+O ponto representa a cidade, não o endereço da garagem. A fonte das coordenadas
+fica na proveniência e no registro de revisão.
+
+`buildMotorhomeMapEntries` inclui somente projetos com ponto e página publicada,
+sem criar viagens ou alterar seus contratos. O identificador interno do mapa
+recebe o prefixo `motorhome-` para evitar colisões com IDs de viagens. O card
+reutiliza a apresentação existente, com o link **Conhecer o motorhome**; os cards
+de viagem mantêm **Explorar viagem**.
+
+A página inclui contexto editorial, carrossel dos 45 vídeos, sistemas expansíveis,
+tabela dos 380 lançamentos, gráfico de pizza dos custos e download da planilha.
+A tabela usa `CostTable` dentro de `CostTableFrame`, também reutilizado nas etapas.
+O HTML inicial contém dez itens. O botão **Ver mais** busca `costs.json` apenas
+no primeiro clique, mantém os dados em memória e acrescenta dez linhas por clique,
+sem aumentar a altura do quadro. Falhas deixam os itens já carregados disponíveis,
+mostram mensagem e permitem tentar novamente. Sem JavaScript, o download integral
+continua disponível. O JSON é gerado estaticamente a partir do mesmo YAML e segue
+o filtro de publicação da página principal e `BASE_URL`.
+O gráfico usa CSS, sem
+dependências ou JavaScript, com os três subtotais de `main_costs`, proporções
+calculadas em centavos, legenda textual com valores/percentuais e total histórico.
+Preserva o contexto de 2018/2019 e não apresenta o total como custo apenas da conversão.
+As tabelas das etapas continuam usando `CostTable`. O carrossel mantém uma única linha
+de miniaturas 16:9 na ordem original, com rolagem horizontal nativa, setas no
+desktop e navegação por teclado. As imagens de 320 × 180 pixels são carregadas
+sob demanda do YouTube, sem players nem reprodução automática. Os títulos ficam
+nos nomes acessíveis e nas dicas ao passar o mouse, sem legendas visíveis.
+O componente compartilhado `VideoCarousel.astro` atende a visão geral e as etapas.
+As setas respeitam a preferência por movimento reduzido e ficam desativadas
+nos limites; sem JavaScript, a rolagem nativa continua disponível. Os links dos
+sistemas continuam apontando para a miniatura correspondente.
+Notas e proveniência permanecem fora da apresentação. A aprovação libera a
+página no build; o site remoto só muda após commit, push e deploy.
+
+### Páginas por sistema
+
+A coleção separada `motorhomeSystemPages` carrega
+`content/motorhome-systems/<project_id>/<system_id>.mdx`. Não colocar esses arquivos
+na coleção da visão geral: ela gera uma rota por projeto e alimenta o mapa.
+O frontmatter contém `project_id` como referência, `system_id`, `title`,
+`language`, `status` e `sort_order` para a ordem do submenu.
+
+A rota `/pt/motorhomes/<project_id>/<system_id>/` verifica a existência do sistema
+e de todos os seus vídeos na playlist. Exibe primeiro o resumo editorial, depois
+atributos do YAML, custos e miniaturas na ordem original da playlist.
+Nas etapas, a tabela fica em um quadro com altura calculada para dez itens,
+ajustada às quebras de linha de cada tela. A rolagem vertical permite acessar
+as demais compras, também pelo teclado; o download permanece fora do quadro.
+O piloto `/pt/motorhomes/iveco-daily-3510/solar-power/` foi aprovado para publicação
+em 15/11/2026 e está em `published`, incluindo submenus e link na visão geral.
+A aprovação da página principal não publica automaticamente outras etapas.
+Com a estrutura do piloto validada, as outras 12 páginas ficam para a próxima etapa.
+
+## Campos e tipos
+
+| Campo | Tipo e estrutura |
+| --- | --- |
+| `project_id` | Identificador estável em kebab-case; coincide com o nome do arquivo. |
+| `title` | Texto com o nome do projeto. |
+| `summary` | Resumo introdutório curto, separado do futuro corpo MDX. |
+| `vehicle_model` | Texto com fabricante/modelo do veículo-base. |
+| `chassis` | Texto com configuração, versão ou características relevantes. |
+| `build_location` | Texto com o local comprovado da construção ou intervenção. |
+| `representative_point` | Objeto opcional com `name` e `coordinates`, contendo `lat` entre -90 e 90 e `lng` entre -180 e 180. Ponto público representativo, não endereço particular. |
+| `build_period` | Objeto com `start` e/ou `end`: strings `AAAA`, `AAAA-MM` ou `AAAA-MM-DD`. |
+| `main_costs` | Lista de objetos com `description`, `amount` numérico não negativo, `currency` ISO de três letras e `unit` descrevendo a base do valor; opcionais `approximate`, `system_id` e `video_ids`. |
+| `cost_items` | Lançamentos por linha da planilha: `source_row` único, `description`, `quantity` positiva, `amount` e `currency`; opcionais `category`, `detail`, `unit`, `unit_price`, `shipping` e `system_ids`. Preserva valores negativos do original; quando há unitário, o total confere com quantidade × unitário + frete discriminado. |
+| `photos` | Lista com `photo_id`, `src`, `alt`; opcionais `thumbnail`, `caption`, `stage`, `detail`, `system_id`. Caminhos relativos ao repositório, para imagens otimizadas em `media/`. |
+| `videos` | Lista de referências com `video_id` original e `youtube_url` canônica, nos formatos já usados pelo contrato de vídeos. |
+| `playlist_id` | Identificador original da playlist do YouTube. |
+| `playlist_order` | Lista de IDs presentes em `videos`, sem repetição, na ordem da playlist; o primeiro ID ocupa a posição 1. |
+| `systems` | Lista com `system_id`, `title`; opcionais `summary`, `video_ids` e listas textuais `materials`, `equipment`, `tools`, `technologies`, `processes`, `precautions`. |
+| `decisions` | Lista com `solution`; opcionais `reason`, `system_id`, `video_ids`. Omitir a justificativa quando não informada. |
+| `tips` | Lista com `description`; opcionais `system_id`, `video_ids`. Somente recomendações efetivamente compartilhadas. |
+| `duration` | Lista com `description` contextual, `value` numérico positivo, `unit` (`minutes`, `hours`, `days`, `weeks`, `months`, `years`); opcionais `approximate`, `system_id`, `video_ids`. Não confundir duração da instalação com duração do vídeo. |
+| `before_after` | Lista com `title`, `before`, `after`; cada estado contém `description` e/ou `photo_ids`. Opcionais `system_id`, `video_ids`. As fotos são referenciadas, não duplicadas. |
+| `notes` | Texto usado com moderação para observações que não cabem nos demais campos. |
+| `downloads` | Lista opcional com `title` e `path` de planilhas `.xlsx` autorizadas; caminho relativo a `public/`, em `downloads/motorhome-projects/<project_id>/`. Não cria link público em página automaticamente. |
+| `provenance` | Lista com `source_type`, `verification_status`, `source_id`, `fields`, seguindo o vocabulário de proveniência existente. |
+
+`system_id` liga custos, fotografias, decisões, dicas, durações e comparações a um
+item de `systems`. `video_ids` liga cada assunto às referências únicas em `videos`.
+Um vídeo pode participar de vários sistemas sem duplicar seu registro. Os
+processos de um sistema seguem a lógica do tema; não alteram a playlist.
+
+Cada `cost_items` representa uma compra, não um subtotal adicional de `main_costs`.
+`system_ids` permite reutilizar a compra em várias etapas sem duplicar o registro.
+Omitir `system_ids` quando a relação ainda não foi verificada; não atribuir
+automaticamente todas as compras de uma categoria a uma etapa.
+`source_row` aponta para a linha da aba/planilha indicada na proveniência.
+Nas tabelas das etapas, quantidade, unitário e frete vão em `detail`, mantendo as
+duas colunas de `CostTable`. Frete ausente não significa frete gratuito.
+Unidade e preço unitário ausentes também não são preenchidos automaticamente.
+Valores negativos da coluna Frete são preservados sob o rótulo original, sem
+interpretá-los como descontos ou estornos não confirmados.
+Lotes lançados como uma unidade preservam essa quantidade, mesmo quando o
+detalhe informa vários metros ou peças. Por decisão do proprietário, não há
+total nessas tabelas, e há link para a planilha integral.
+
+Projetos futuros podem registrar apenas melhorias: não é obrigatório ter período
+completo, custos, comparação ou todos os sistemas. Uma intervenção pode ser
+contextualizada em `systems[].processes`, `photos[].stage` e nas descrições dos
+custos e durações, sem criar agora outra hierarquia de entidades.
+
+### Exemplo de estrutura preenchida — dados inteiramente fictícios
+
+Este bloco serve apenas para demonstrar tipos e relações. **Não descreve a Iveco
+nem recomenda materiais, procedimentos ou custos.** IDs, caminhos e valores são
+demonstrativos; não devem ser copiados como fatos.
+
+```yaml
+project_id: demonstration-project
+title: Projeto demonstrativo
+summary: Exemplo estrutural sem correspondência com uma construção real.
+vehicle_model: Veículo demonstrativo
+chassis: Configuração demonstrativa
+build_location: Local demonstrativo
+build_period:
+  start: "2000"
+  end: "2001-02"
+main_costs:
+  - description: Item fictício
+    amount: 100
+    currency: BRL
+    unit: total de uma unidade, sem frete
+    approximate: true
+    system_id: example-system
+    video_ids: [AAAAAAAAAAA]
+photos:
+  - photo_id: example-before
+    src: media/motorhome-projects/demonstration-project/before.webp
+    alt: Imagem demonstrativa anterior
+    stage: Antes da intervenção fictícia
+    detail: Detalhe demonstrativo
+    system_id: example-system
+videos:
+  - video_id: AAAAAAAAAAA
+    youtube_url: https://www.youtube.com/watch?v=AAAAAAAAAAA
+playlist_id: PL_DEMONSTRATION
+playlist_order: [AAAAAAAAAAA]
+systems:
+  - system_id: example-system
+    title: Sistema demonstrativo
+    summary: Descrição fictícia do sistema.
+    video_ids: [AAAAAAAAAAA]
+    materials: [Material demonstrativo]
+    equipment: [Equipamento demonstrativo]
+    tools: [Ferramenta demonstrativa]
+    technologies: [Tecnologia demonstrativa]
+    processes: [Etapa demonstrativa]
+    precautions: [Limitação demonstrativa]
+decisions:
+  - solution: Solução fictícia
+    reason: Justificativa fictícia
+    system_id: example-system
+    video_ids: [AAAAAAAAAAA]
+tips:
+  - description: Recomendação fictícia, não aplicável a uma instalação real.
+    system_id: example-system
+    video_ids: [AAAAAAAAAAA]
+duration:
+  - description: Duração fictícia da intervenção
+    value: 2
+    unit: hours
+    approximate: true
+    system_id: example-system
+    video_ids: [AAAAAAAAAAA]
+before_after:
+  - title: Comparação fictícia
+    before:
+      photo_ids: [example-before]
+    after:
+      description: Estado posterior demonstrativo, sem imagem.
+    system_id: example-system
+    video_ids: [AAAAAAAAAAA]
+notes: Dados demonstrativos; não utilizar como informações da construção.
+provenance:
+  - source_type: manual
+    verification_status: unverified
+    source_id: demonstration-only
+    fields: [main_costs, systems, decisions, tips, duration, before_after]
+```
+
+## Planilha para download
+
+O proprietário autorizou uma cópia integral de sua planilha original em
+`public/downloads/motorhome-projects/iveco-daily-3510/custos-motorhome-odisseia-mundana.xlsx`.
+O nome técnico foi simplificado, mas os bytes do arquivo foram preservados.
+O arquivo recebido fora do repositório não foi alterado.
+
+O campo `downloads` registra o rótulo e o caminho do arquivo sem acoplar os
+metadados ao Astro. A prévia usa um link HTML com
+o atributo `download` e prefixa `path` com `import.meta.env.BASE_URL`, seguindo o
+padrão de URLs do site. Texto aprovado: **Baixar planilha original de custos (.xlsx)**.
+
+A planilha contém preços históricos e inclui compra/despesas do veículo,
+manutenção e outras categorias. Não apresentar seu total como custo isolado da
+conversão, nem como orçamento atual. Há datas inconsistentes e despesas posteriores
+ao período da construção, documentadas na revisão. O download preserva esses
+registros originais, sem correções silenciosas.
+
+## Fontes, ausências e ordem
+
+- Omitir informações desconhecidas, sem `null`, strings vazias ou datas fabricadas.
+  Uma lista vazia não comprova que não houve itens; preferir omitir o campo.
+- Não usar datas de publicação dos vídeos como período da obra.
+- Registrar custos somente com moeda, contexto, unidade e fonte. Não converter
+  moedas, calcular totais ou extrapolar valores sem informação suficiente.
+- `source_type`: `manual`, `transcript`, `youtube_metadata`, `external_source` ou
+  `ai_inference`. `verification_status`: `unverified`, `reviewed` ou `confirmed`.
+  Uma inferência não é fato confirmado por ter passado na validação técnica.
+- `source_id` identifica a confirmação do proprietário ou o arquivo/vídeo de
+  origem; para transcrições, incluir o intervalo de tempo. `fields` identifica os
+  campos abrangidos, por exemplo `systems[0].equipment`.
+- Uma informação não encontrada permanece ausente; registrar a lacuna no registro
+  de revisão. Preservar transcrições e metadados importados exatamente como recebidos.
+  As legendas brutas do piloto têm normalização de linhas desativada em
+  `.gitattributes`, preservando seus hashes também em outros sistemas operacionais.
+- `videos` não armazena cópias de títulos ou descrições. O contrato atual de vídeos,
+  que exige `journey_id`, permanece intacto. A integração compartilhada será decidida
+  depois, sem inventar uma viagem ou duplicar o registro original.
+- `playlist_order` deve reproduzir a playlist completa na data da conferência.
+  Enquanto a sequência não for verificada, omitir o campo. Vídeos complementares
+  podem existir em `videos` fora dessa sequência. Não ordenar por título, data de
+  publicação ou sistema; registrar a fonte e a data da conferência em `provenance`.
+
+## Validação
+
+```powershell
+pnpm validate:metadata
+node --test tests\metadata-validation.test.mjs tests\motorhome-project-validation.test.mjs
+node --test tests\motorhome-playlist.test.mjs tests\motorhome-costs.test.mjs
+node --test tests\motorhome-map-data.test.mjs tests\journey-map-data.test.mjs
+```
+
+O mecanismo existente interpreta YAML com `yaml` e usa Ajv / JSON Schema Draft
+2020-12, sem dependências novas nem regras de viagens aplicadas aos projetos.
+Também verifica IDs duplicados, referências internas de sistemas, vídeos e fotos,
+correspondência entre ID e URL do vídeo e datas completas existentes no calendário.
+Uma ordem não vazia exige `playlist_id`. A validação não consulta o YouTube, não
+atesta fatos, não verifica arquivos de mídia e não confirma a ordem atual remota.
+
+O build já executa `validate:metadata`; cadastrar somente um YAML não cria uma
+página. O marcador exige também MDX publicado e ponto representativo. A validação das referências de vídeos é interna
+ao projeto nesta etapa, não uma exigência de registro em `metadata/videos/`.
+
+## Etapas posteriores — dependem de confirmação
+
+1. Revalidar a ordem da playlist quando a série for atualizada; a sequência de 45
+   vídeos foi conferida em 15/11/2026, mas pode mudar.
+2. Após validar o piloto elétrico, completar as outras 12 páginas. A obtenção das
+   legendas disponíveis foi autorizada; lacunas e dúvidas exigem entrevista.
+3. Completar a entrevista sobre equipamentos e interpretação das fontes.
+   O período, local e configuração foram confirmados; a planilha original
+   foi fornecida e seus totais foram conferidos. Consultar o registro de revisão.
+4. Definir eventual integração compartilhada dos registros de vídeos; a prévia
+   já carrega os títulos originais no Astro, sem modificar o contrato de viagens.
+5. Aprovar os nomes dos temas com base no vocabulário efetivo dos vídeos.
+   Futuras subpáginas terão resumo, conteúdo temático e
+   vídeos referenciados, mediante autorização própria.
+
+Análise audiovisual completa da série, subpáginas e sincronização de mídias
+permanecem fora do escopo. A aprovação da página não autoriza commit ou push.
