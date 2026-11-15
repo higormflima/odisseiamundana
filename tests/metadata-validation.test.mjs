@@ -58,6 +58,25 @@ function validateTripCard(tripCardYaml) {
   return validateMetadataText(`journey_id: sample-trip\ntrip_card:\n${tripCardYaml}`);
 }
 
+test('valida ponto focal completo e limitado a percentuais de 0 a 100', () => {
+  const validate = (point) => validateMetadataText(`journey_id: sample-trip
+gallery:
+  title: Galeria
+  photos:
+    - src: photo.jpg
+      thumbnail: thumbnail.jpg
+      alt: Fotografia
+      focal_point: ${point}
+`);
+  assert.equal(validate('{ x: 32, y: 40 }').valid, true);
+  assert.equal(validate('{ x: 0, y: 100 }').valid, true);
+  for (const point of ['{ x: -1, y: 40 }', '{ x: 32, y: 101 }', '{ x: 32 }']) {
+    const result = validate(point);
+    assert.equal(result.valid, false);
+    assert.ok(result.errors.some((error) => error.instancePath.startsWith('/gallery/photos/0/focal_point')));
+  }
+});
+
 test('aceita viagem sem trip_card', async () => {
   const result = await validateFixture('valid.yaml');
 

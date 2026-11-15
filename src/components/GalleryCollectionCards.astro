@@ -6,7 +6,7 @@ interface Collection {
   summary?: string;
   period?: string;
   photos: unknown[];
-  cover: { thumbnail: string; alt: string; thumbnailSize?: { width: number; height: number } | null };
+  cover: { thumbnail: string; alt: string; thumbnailSize?: { width: number; height: number } | null; focalPoint?: { x: number; y: number } };
 }
 interface Props { collections: Collection[] }
 const { collections } = Astro.props;
@@ -15,7 +15,7 @@ const { collections } = Astro.props;
 <div class="gallery-collection-grid">
   {collections.map((collection) => (
     <a class="gallery-collection-card" data-collection-id={collection.id} href={collection.href}>
-      <img src={collection.cover.thumbnail} alt="" width={collection.cover.thumbnailSize?.width} height={collection.cover.thumbnailSize?.height} loading="lazy" decoding="async" />
+      <img src={collection.cover.thumbnail} alt="" width={collection.cover.thumbnailSize?.width} height={collection.cover.thumbnailSize?.height} style={collection.cover.focalPoint ? `object-position: ${collection.cover.focalPoint.x}% ${collection.cover.focalPoint.y}%` : undefined} loading="lazy" decoding="async" />
       <div>
         <p class="gallery-collection-meta">
           {collection.period && <span>{collection.period} · </span>}

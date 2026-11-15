@@ -6,7 +6,7 @@ import { readImageSizeFromSrc } from './imageSize.mjs';
  * @param {{journeys: Array<{id: string, data: any}>, pages: Array<{data: any}>, base: string}} input
  */
 export function buildGalleryCollections({ journeys, pages, base }) {
-  const path = (src) => `${base}${src.replace(/^\/+/, '')}`;
+  const path = (src) => `${base}${encodeURI(src.replace(/^\/+/, ''))}`;
   return journeys.flatMap(({ id, data }) => {
     const page = pages.find(({ data: entry }) =>
       entry.journey_id.id === id && entry.episode_id === JOURNEY_SUMMARY_EPISODE_ID && entry.status === 'published');
@@ -26,6 +26,7 @@ export function buildGalleryCollections({ journeys, pages, base }) {
       alt: photo.alt,
       featured: photo.featured === true,
       cover: photo.cover === true,
+      focalPoint: photo.focal_point,
       collectionId: id,
       collectionTitle: title,
       geography,

@@ -4,6 +4,8 @@ import { fileURLToPath } from 'node:url';
 
 const projectRoot = fileURLToPath(new URL('../', import.meta.url));
 const publicMediaDirectories = [
+  'journeys/20240208-mexico/optimized',
+  'journeys/20240208-mexico/thumbnails',
   'journeys/about-us/photos',
   'journeys/about-us/thumbnails',
   'journeys/amazonia-brasil/thumbnails',

@@ -49,16 +49,16 @@ gallery:
   photos:
     - { src: media/journeys/amazonia-brasil/optimized/photos/amazonia-001.jpg, thumbnail: media/journeys/amazonia-brasil/optimized/thumbnails/amazonia-001.jpg, alt: "Pessoas em um barco navegando entre árvores." }
     - { src: media/journeys/amazonia-brasil/optimized/photos/amazonia-002.jpg, thumbnail: media/journeys/amazonia-brasil/optimized/thumbnails/amazonia-002.jpg, alt: "Grupo em lancha sobre um rio cercado por vegetação." }
-    - { src: media/journeys/amazonia-brasil/optimized/photos/amazonia-003.jpg, thumbnail: media/journeys/amazonia-brasil/optimized/thumbnails/amazonia-003.jpg, alt: "Lancha com passageiros navega por um rio sob céu azul.", cover: true }
+    - { src: media/journeys/amazonia-brasil/optimized/photos/amazonia-003.jpg, thumbnail: media/journeys/amazonia-brasil/optimized/thumbnails/amazonia-003.jpg, alt: "Lancha com passageiros navega por um rio sob céu azul.", featured: true }
     - { src: media/journeys/amazonia-brasil/optimized/photos/amazonia-004.jpg, thumbnail: media/journeys/amazonia-brasil/optimized/thumbnails/amazonia-004.jpg, alt: "Pessoas em uma embarcação sobre o rio sob céu nublado." }
     - { src: media/journeys/amazonia-brasil/optimized/photos/amazonia-005.jpg, thumbnail: media/journeys/amazonia-brasil/optimized/thumbnails/amazonia-005.jpg, alt: "Casal sobre uma rocha diante de uma queda-d'água." }
     - { src: media/journeys/amazonia-brasil/optimized/photos/amazonia-006.jpg, thumbnail: media/journeys/amazonia-brasil/optimized/thumbnails/amazonia-006.jpg, alt: "Pessoas em barco diante da água iluminada pelo sol." }
     - { src: media/journeys/amazonia-brasil/optimized/photos/amazonia-007.jpg, thumbnail: media/journeys/amazonia-brasil/optimized/thumbnails/amazonia-007.jpg, alt: "Casal em selfie diante do encontro de águas de cores diferentes." }
     - { src: media/journeys/amazonia-brasil/optimized/photos/amazonia-008.jpg, thumbnail: media/journeys/amazonia-brasil/optimized/thumbnails/amazonia-008.jpg, alt: "Peixe suspenso diante de vegetação e água." }
     - { src: media/journeys/amazonia-brasil/optimized/photos/amazonia-009.jpg, thumbnail: media/journeys/amazonia-brasil/optimized/thumbnails/amazonia-009.jpg, alt: "Casal segura um pequeno jacaré durante uma atividade noturna." }
-    - { src: media/journeys/amazonia-brasil/optimized/photos/amazonia-010.jpg, thumbnail: media/journeys/amazonia-brasil/optimized/thumbnails/amazonia-010.jpg, alt: "Mulher com um papagaio pousado no braço junto a um rio." }
+    - { src: media/journeys/amazonia-brasil/optimized/photos/amazonia-010.jpg, thumbnail: media/journeys/amazonia-brasil/optimized/thumbnails/amazonia-010.jpg, alt: "Mulher com um papagaio pousado no braço junto a um rio.", cover: true, focal_point: { x: 32, y: 40 } }
     - { src: media/journeys/amazonia-brasil/optimized/photos/amazonia-011.jpg, thumbnail: media/journeys/amazonia-brasil/optimized/thumbnails/amazonia-011.jpg, alt: "Pequeno anfíbio sobre a mão de uma pessoa, com a floresta ao fundo." }
-    - { src: media/journeys/amazonia-brasil/optimized/photos/amazonia-012.jpg, thumbnail: media/journeys/amazonia-brasil/optimized/thumbnails/amazonia-012.jpg, alt: "Mulher diante do tronco de uma árvore alta na floresta.", featured: true }
+    - { src: media/journeys/amazonia-brasil/optimized/photos/amazonia-012.jpg, thumbnail: media/journeys/amazonia-brasil/optimized/thumbnails/amazonia-012.jpg, alt: "Mulher diante do tronco de uma árvore alta na floresta." }
     - { src: media/journeys/amazonia-brasil/optimized/photos/amazonia-013.jpg, thumbnail: media/journeys/amazonia-brasil/optimized/thumbnails/amazonia-013.jpg, alt: "Casal diante de abrigos de palha e uma fogueira na floresta." }
 provenance:
   - source_type: youtube_metadata

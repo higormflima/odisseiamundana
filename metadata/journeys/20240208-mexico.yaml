@@ -1,0 +1,157 @@
+journey_id: 20240208-mexico
+title: México — Península de Yucatán e Caribe
+summary: >
+  Nossa viagem de carro pela Península de Yucatán, entre cenotes, ruínas
+  maias, manguezais e as praias do Caribe mexicano.
+dates:
+  year: 2024
+  month: 2
+  start_date: 2024-02-09
+  end_date: 2024-02-23
+duration_days: 15
+trip_card:
+  overall_rating: 8
+  ratings:
+    nature: 10
+    experiences: 8
+    food: 6
+    prices: 6
+    infrastructure: 8
+    accessibility: 9
+    culture: 10
+    safety: 7
+geography:
+  continents:
+    - América do Norte
+  countries:
+    - México
+  regions:
+    - Península de Yucatán
+    - Caribe mexicano
+  destinations:
+    - Cancún
+    - Holbox
+    - Valladolid
+    - Suytun
+    - Chichén Itzá
+    - Río Lagartos
+    - Las Coloradas
+    - Bacalar
+    - Mahahual
+    - Tulum
+    - Playa del Carmen
+    - Punta Esmeralda
+  representative_point:
+    name: Cancún
+    coordinates:
+      lat: 21.17429
+      lng: -86.84656
+transport:
+  car_rental:
+    days: 14
+    notes: >
+      Alugamos o carro em Cancún. O resumo da viagem relata 9.800 pesos
+      mexicanos por 14 dias, com taxas e seguro, e cerca de 1.300 km percorridos.
+accommodation:
+  - name: Hostel La Candelaria
+    type: other
+    notes: >
+      Nossa base em Valladolid. Participamos de noites de comida típica
+      e aproveitamos o café da manhã.
+activities:
+  - activity_id: cenotes
+    name: Visitas a cenotes na região de Valladolid
+    notes: Visitamos Suytun e outro cenote cujo nome não foi confirmado na transcrição.
+  - activity_id: chichen-itza
+    name: Visita a Chichén Itzá
+  - activity_id: rio-lagartos
+    name: Passeio de barco em Río Lagartos e Las Coloradas
+    notes: Observamos crocodilos, aves e flamingos.
+  - activity_id: bacalar
+    name: Descanso à beira da Laguna Bacalar
+    notes: >
+      Ficamos na hospedagem junto à lagoa. Não fizemos os passeios
+      ao Canal dos Piratas nem aos cenotes de Bacalar.
+  - activity_id: mahahual-snorkeling
+    name: Snorkel em Mahahual
+    notes: >
+      Observamos duas tartarugas durante o passeio. O encontro com
+      animais não é garantido.
+  - activity_id: caribbean-beaches
+    name: Praias de Holbox, Mahahual, Tulum e Playa del Carmen
+gallery:
+  title: Nossa viagem pelo México em imagens
+  collection_title: México
+  photos:
+    - { src: "media/journeys/20240208-mexico/optimized/photos/Mexico-1.jpg", thumbnail: "media/journeys/20240208-mexico/optimized/thumbnails/Mexico-1.jpg", alt: "Casal sentado à mesa em um estabelecimento." }
+    - { src: "media/journeys/20240208-mexico/optimized/photos/Mexico-4.jpg", thumbnail: "media/journeys/20240208-mexico/optimized/thumbnails/Mexico-4.jpg", alt: "Cenote com água azul e uma plataforma de pedra sob a abertura de uma caverna." }
+    - { src: "media/journeys/20240208-mexico/optimized/photos/Mexico-12.jpg", thumbnail: "media/journeys/20240208-mexico/optimized/thumbnails/Mexico-12.jpg", alt: "Pessoa sobre uma plataforma circular dentro de um cenote." }
+    - { src: "media/journeys/20240208-mexico/optimized/photos/Mexico-13.jpg", thumbnail: "media/journeys/20240208-mexico/optimized/thumbnails/Mexico-13.jpg", alt: "Pessoa em uma plataforma cercada pela água azul de um cenote." }
+    - { src: "media/journeys/20240208-mexico/optimized/photos/Mexico-26.jpg", thumbnail: "media/journeys/20240208-mexico/optimized/thumbnails/Mexico-26.jpg", alt: "Passarela de pedra leva a uma plataforma circular no interior de um cenote." }
+    - { src: "media/journeys/20240208-mexico/optimized/photos/Mexico-30.jpg", thumbnail: "media/journeys/20240208-mexico/optimized/thumbnails/Mexico-30.jpg", alt: "Vista da plataforma e da água de um cenote dentro de uma caverna." }
+    - { src: "media/journeys/20240208-mexico/optimized/photos/Mexico-33.jpg", thumbnail: "media/journeys/20240208-mexico/optimized/thumbnails/Mexico-33.jpg", alt: "Pirâmide de pedra diante de um gramado e céu azul." }
+    - { src: "media/journeys/20240208-mexico/optimized/photos/Mexico-39.jpg", thumbnail: "media/journeys/20240208-mexico/optimized/thumbnails/Mexico-39.jpg", alt: "Mulher diante de uma pirâmide de pedra." }
+    - { src: "media/journeys/20240208-mexico/optimized/photos/Mexico-45.jpg", thumbnail: "media/journeys/20240208-mexico/optimized/thumbnails/Mexico-45.jpg", alt: "Homem aponta para uma pirâmide de pedra ao fundo." }
+    - { src: "media/journeys/20240208-mexico/optimized/photos/Mexico-49.jpg", thumbnail: "media/journeys/20240208-mexico/optimized/thumbnails/Mexico-49.jpg", alt: "Homem em um gramado diante de uma pirâmide de pedra." }
+    - { src: "media/journeys/20240208-mexico/optimized/photos/Mexico-56.jpg", thumbnail: "media/journeys/20240208-mexico/optimized/thumbnails/Mexico-56.jpg", alt: "Pirâmide de pedra com escadaria vista de lado sob céu azul.", cover: true }
+    - { src: "media/journeys/20240208-mexico/optimized/photos/Mexico-59.jpg", thumbnail: "media/journeys/20240208-mexico/optimized/thumbnails/Mexico-59.jpg", alt: "Ave escura pousada em um galho sob céu azul." }
+    - { src: "media/journeys/20240208-mexico/optimized/photos/Mexico-61.jpg", thumbnail: "media/journeys/20240208-mexico/optimized/thumbnails/Mexico-61.jpg", alt: "Pelicano pousado em um tronco diante da vegetação." }
+    - { src: "media/journeys/20240208-mexico/optimized/photos/Mexico-64.jpg", thumbnail: "media/journeys/20240208-mexico/optimized/thumbnails/Mexico-64.jpg", alt: "Cabeça de um crocodilo na superfície da água." }
+    - { src: "media/journeys/20240208-mexico/optimized/photos/Mexico-66.jpg", thumbnail: "media/journeys/20240208-mexico/optimized/thumbnails/Mexico-66.jpg", alt: "Flamingos rosados em águas rasas." }
+    - { src: "media/journeys/20240208-mexico/optimized/photos/Mexico-82.jpg", thumbnail: "media/journeys/20240208-mexico/optimized/thumbnails/Mexico-82.jpg", alt: "Mulher com chapéu diante de coqueiros junto à praia." }
+    - { src: "media/journeys/20240208-mexico/optimized/photos/Mexico-92.jpg", thumbnail: "media/journeys/20240208-mexico/optimized/thumbnails/Mexico-92.jpg", alt: "Homem em uma rua ladeada por coqueiros." }
+    - { src: "media/journeys/20240208-mexico/optimized/photos/Mexico-99.jpg", thumbnail: "media/journeys/20240208-mexico/optimized/thumbnails/Mexico-99.jpg", alt: "Sol baixo sobre o mar com coqueiros em primeiro plano." }
+    - { src: "media/journeys/20240208-mexico/optimized/photos/Mexico-100.jpg", thumbnail: "media/journeys/20240208-mexico/optimized/thumbnails/Mexico-100.jpg", alt: "Sol refletido no mar sob um céu dourado." }
+    - { src: "media/journeys/20240208-mexico/optimized/photos/Mexico-104.jpg", thumbnail: "media/journeys/20240208-mexico/optimized/thumbnails/Mexico-104.jpg", alt: "Mulher junto a coqueiros e placas perto de uma praia." }
+    - { src: "media/journeys/20240208-mexico/optimized/photos/Mexico-107.jpg", thumbnail: "media/journeys/20240208-mexico/optimized/thumbnails/Mexico-107.jpg", alt: "Casal diante de uma área de água cercada por vegetação e abrigos de palha." }
+    - { src: "media/journeys/20240208-mexico/optimized/photos/Mexico2-4.jpg", thumbnail: "media/journeys/20240208-mexico/optimized/thumbnails/Mexico2-4.jpg", alt: "Deck com espreguiçadeiras junto a uma lagoa de água turquesa.", featured: true }
+provenance:
+  - source_type: transcript
+    verification_status: reviewed
+    source_id: transcripts/journeys/20240208-mexico/editorial-review.md
+    fields:
+      - title
+      - summary
+      - geography.destinations
+      - transport
+      - accommodation
+      - activities
+  - source_type: youtube_metadata
+    verification_status: confirmed
+    source_id: PLA8vGdq_0fiOjNfQ5nGNKCM7q6ZcUR_WD
+    fields:
+      - geography.countries
+      - geography.regions
+  - source_type: manual
+    verification_status: confirmed
+    source_id: owner-mexico-dates-2026-11-15
+    fields:
+      - dates
+      - duration_days
+  - source_type: manual
+    verification_status: confirmed
+    source_id: owner-mexico-editorial-approval-2026-11-15
+    fields:
+      - title
+      - summary
+  - source_type: manual
+    verification_status: confirmed
+    source_id: owner-mexico-map-cancun-2026-11-15
+    fields:
+      - geography.representative_point.name
+  - source_type: external_source
+    verification_status: confirmed
+    source_id: https://www.geonames.org/3531673/cancun.html
+    fields:
+      - geography.continents
+      - geography.representative_point.coordinates
+  - source_type: manual
+    verification_status: reviewed
+    source_id: visual-review-mexico-photos-2026-11-15
+    fields:
+      - gallery
+  - source_type: manual
+    verification_status: confirmed
+    source_id: owner-mexico-trip-score-2026-11-15
+    fields:
+      - trip_card

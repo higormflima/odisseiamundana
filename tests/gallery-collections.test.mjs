@@ -25,12 +25,29 @@ test('inclui apenas coleções com resumo publicado e fotos, ordenadas por data'
 });
 
 test('separa título e capa da coleção do destaque fotográfico', () => {
-  const cover = { ...photo, cover: true };
+  const cover = { ...photo, cover: true, focal_point: { x: 32, y: 40 } };
   const featured = { ...photo, src: 'media/journeys/finland-2026/photos/finland-002.jpg', featured: true };
   const journeys = [{ id: 'trip', data: { title: 'Título da viagem', gallery: { collection_title: 'Título da coleção', photos: [cover, featured] } } }];
   const [collection] = buildGalleryCollections({ journeys, pages: [published('trip')], base: '/' });
   assert.equal(collection.title, 'Título da coleção');
   assert.equal(collection.cover.src, `/${cover.src}`);
+  assert.deepEqual(collection.cover.focalPoint, { x: 32, y: 40 });
+  assert.equal(collection.photos[1].focalPoint, undefined);
   assert.equal(collection.photos.filter((item) => item.featured)[0].src, `/${featured.src}`);
   assert.equal(journeys[0].data.title, 'Título da viagem');
+});
+
+test('codifica espaços nas URLs públicas sem alterar os caminhos de origem', () => {
+  const source = {
+    src: '/media/journeys/a trip/photos/beach photo.jpg',
+    thumbnail: 'media/journeys/a trip/thumbnails/beach photo.jpg',
+    alt: 'Fotografia da praia',
+    cover: true,
+  };
+  const journeys = [{ id: 'trip', data: { gallery: { photos: [source] } } }];
+  const [collection] = buildGalleryCollections({ journeys, pages: [published('trip')], base: '/site/' });
+
+  assert.equal(collection.cover.src, '/site/media/journeys/a%20trip/photos/beach%20photo.jpg');
+  assert.equal(collection.cover.thumbnail, '/site/media/journeys/a%20trip/thumbnails/beach%20photo.jpg');
+  assert.equal(source.src, '/media/journeys/a trip/photos/beach photo.jpg');
 });

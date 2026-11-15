@@ -200,6 +200,16 @@
               "alt": { "type": "string", "minLength": 1 },
               "featured": { "type": "boolean" },
               "cover": { "type": "boolean" },
+              "focal_point": {
+                "type": "object",
+                "description": "Posição focal do recorte nos cards de coleção, em percentuais horizontais e verticais de 0 a 100.",
+                "required": ["x", "y"],
+                "additionalProperties": false,
+                "properties": {
+                  "x": { "type": "number", "minimum": 0, "maximum": 100 },
+                  "y": { "type": "number", "minimum": 0, "maximum": 100 }
+                }
+              },
               "caption": { "type": "string" }
             }
           }
