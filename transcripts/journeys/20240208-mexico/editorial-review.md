@@ -45,7 +45,7 @@
 - Refeições: aproximadamente 100–300 MXN por pessoa (resumo, 05:42–05:54). Gasolina: cerca de 24 MXN/litro e gasto médio de aproximadamente 185 MXN/dia (06:09–06:22). Essas médias não entram no subtotal.
 - A tabela parcial usa `CostTable` e valores do casal. Soma: 9.800 + 1.742 + 800 + 100 + 2.718 + 1.200 + 80 + 900 + 2.700 + 800 + 562 + 100 + 120 = 21.622 MXN. Subtotal aproximado, pois o ingresso de Chichén Itzá é aproximado.
 - O subtotal exclui passagens aéreas, alimentação, combustível, hospedagens em Mahahual e Playa del Carmen, entradas dos cenotes e balsa de volta de Holbox. Preços de Mahahual e Playa del Carmen continuam truncados ou ausentes.
-- A média narrada de 1.430 MXN por pessoa/dia (resumo, 06:28–06:35) foi destacada após a tabela por solicitação do proprietário em 15/11/2026, separadamente do subtotal parcial. Não foi transformada em orçamento total: faltam o escopo completo das despesas e a confirmação do denominador entre os 14 dias mencionados e os 15 dias das datas confirmadas.
+- A média narrada de 1.430 MXN por pessoa/dia (resumo, 06:28–06:35) foi destacada como “Média diária aproximada”, após o parágrafo de alimentação e combustível, por solicitação do proprietário em 15/11/2026. O proprietário confirmou que a média inclui essas despesas. Permanece separada do subtotal parcial e não foi transformada em orçamento total: faltam o escopo completo das despesas e a confirmação do denominador entre os 14 dias mencionados e os 15 dias das datas confirmadas.
 - A opinião sobre custo e acesso às praias não foi transformada em informação tarifária atual.
 
 ## Fotografias
