@@ -57,16 +57,22 @@ accommodation:
     type: other
     notes: >
       Nossa base em Valladolid. Participamos de noites de comida típica
-      e aproveitamos o café da manhã.
+      e aproveitamos o café da manhã. Pagamos 2.718 MXN pelo período de quatro dias.
 activities:
   - activity_id: cenotes
     name: Visitas a cenotes na região de Valladolid
     notes: Visitamos Suytun e outro cenote cujo nome não foi confirmado na transcrição.
   - activity_id: chichen-itza
     name: Visita a Chichén Itzá
+    notes: >
+      Ingressos de aproximadamente 600 MXN por pessoa, cerca de 1.200 MXN
+      para nós dois, e estacionamento de 80 MXN.
   - activity_id: rio-lagartos
     name: Passeio de barco em Río Lagartos e Las Coloradas
-    notes: Observamos crocodilos, aves e flamingos.
+    duration_minutes: 120
+    notes: >
+      Observamos crocodilos, aves e flamingos. Pagamos 900 MXN pelo barco
+      para nós dois; a duração foi de aproximadamente duas horas.
   - activity_id: bacalar
     name: Descanso à beira da Laguna Bacalar
     notes: >
@@ -76,9 +82,30 @@ activities:
     name: Snorkel em Mahahual
     notes: >
       Observamos duas tartarugas durante o passeio. O encontro com
-      animais não é garantido.
+      animais não é garantido. Pagamos 400 MXN por pessoa, 800 MXN para nós dois,
+      incluindo caiaque e cadeiras de praia.
   - activity_id: caribbean-beaches
     name: Praias de Holbox, Mahahual, Tulum e Playa del Carmen
+budget:
+  currency: MXN
+  party_size: 2
+  notes: >
+    Subtotal parcial de aproximadamente 21.622 MXN para nós dois pelos 13 itens
+    do relato, sem passagens aéreas, alimentação, combustível, hospedagens em
+    Mahahual e Playa del Carmen, entradas dos cenotes ou balsa de volta de Holbox.
+    Hospedagem em Holbox: 1.742 MXN por duas noites. Balsa de Holbox:
+    400 MXN por pessoa somente ida, 800 MXN para nós dois. Estacionamento de
+    Holbox: 50 MXN por dia, dois dias cobrados, total de 100 MXN.
+    Hospedagem em Bacalar: 2.700 MXN pelo período de dois dias. Hotel em Tulum:
+    562 MXN pelo quarto para nós dois por uma noite. Estacionamento em Tulum:
+    100 MXN. Acesso à reserva de Tulum: 60 MXN por pessoa, 120 MXN para nós dois;
+    não compramos os ingressos das ruínas. Refeições em restaurantes:
+    aproximadamente 100 a 300 MXN por pessoa. Gasolina: cerca de 24 MXN por litro
+    e gasto médio de aproximadamente 185 MXN por dia. Valores de fevereiro de 2024,
+    mantidos na moeda original, sem conversão para os campos em euros.
+    Média diária informada no resumo: aproximadamente 1.430 MXN por pessoa
+    por dia, apresentada separadamente do subtotal parcial e sem extrapolar
+    um orçamento total.
 gallery:
   title: Nossa viagem pelo México em imagens
   collection_title: México
@@ -116,6 +143,7 @@ provenance:
       - transport
       - accommodation
       - activities
+      - budget
   - source_type: youtube_metadata
     verification_status: confirmed
     source_id: PLA8vGdq_0fiOjNfQ5nGNKCM7q6ZcUR_WD
@@ -155,3 +183,9 @@ provenance:
     source_id: owner-mexico-trip-score-2026-11-15
     fields:
       - trip_card
+  - source_type: manual
+    verification_status: confirmed
+    source_id: owner-mexico-costs-2026-11-15
+    fields:
+      - budget
+      - activities

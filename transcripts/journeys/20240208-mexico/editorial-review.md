@@ -36,8 +36,16 @@
 ## Custos
 
 - O resumo relata 9.800 MXN por 14 dias de aluguel com taxas e seguro e cerca de 1.300 km percorridos; esses dados foram registrados sem conversão cambial.
-- Trechos de preços do passeio em Río Lagartos, hospedagem em Mahahual e apartamento em Playa del Carmen estão truncados ou incompletos no resumo.
-- Não foi criada tabela de gastos nem orçamento total: escopo do total, inclusão de passagens e reconciliação de parcelas exigem confirmação.
+- Río Lagartos: o resumo tem o valor truncado, mas o episódio `Px5T_YZcCfs`, em 08:55–09:13, informa 900 MXN pelo barco para nós dois e duração aproximada de duas horas.
+- Hospedagens: o resumo informa Holbox 1.742 MXN por duas noites (01:24–01:35), Valladolid 2.718 MXN por quatro dias (02:15–02:26) e Bacalar 2.700 MXN pelo período de dois dias (03:45–03:56). Não foram convertidos dias em noites quando a narração não informa a quantidade de noites.
+- Confirmações do proprietário em 15/11/2026: balsa de Holbox 400 MXN por pessoa somente ida; estacionamento de Holbox 50 MXN por dia, com dois dias cobrados; Chichén Itzá aproximadamente 600 MXN por pessoa, com estacionamento de 80 MXN; hotel em Tulum 562 MXN pelo quarto do casal por uma noite; reserva de Tulum 60 MXN por pessoa.
+- O valor do hotel em Tulum aparece em 04:43 do resumo, entre a descrição do quarto e o assunto seguinte. A confirmação do proprietário resolve a base de cobrança.
+- Snorkel em Mahahual: 400 MXN por pessoa, confirmado tanto no resumo (04:19–04:29) quanto no episódio `iSvqT_cUo9Q` (03:24–03:36). Para duas pessoas, 800 MXN; caiaque e cadeiras de praia incluídos. O passeio alternativo de cerca de 900 MXN foi apenas mencionado, não comprado.
+- Estacionamento em Tulum: 100 MXN no resumo (04:49–04:55) e no episódio `BUEgFH8FTIk` (00:54–01:01). Reserva: 60 MXN também aparece nesse episódio em 06:44. Os 90 MXN das ruínas não foram incluídos porque não as visitamos.
+- Refeições: aproximadamente 100–300 MXN por pessoa (resumo, 05:42–05:54). Gasolina: cerca de 24 MXN/litro e gasto médio de aproximadamente 185 MXN/dia (06:09–06:22). Essas médias não entram no subtotal.
+- A tabela parcial usa `CostTable` e valores do casal. Soma: 9.800 + 1.742 + 800 + 100 + 2.718 + 1.200 + 80 + 900 + 2.700 + 800 + 562 + 100 + 120 = 21.622 MXN. Subtotal aproximado, pois o ingresso de Chichén Itzá é aproximado.
+- O subtotal exclui passagens aéreas, alimentação, combustível, hospedagens em Mahahual e Playa del Carmen, entradas dos cenotes e balsa de volta de Holbox. Preços de Mahahual e Playa del Carmen continuam truncados ou ausentes.
+- A média narrada de 1.430 MXN por pessoa/dia (resumo, 06:28–06:35) foi destacada após a tabela por solicitação do proprietário em 15/11/2026, separadamente do subtotal parcial. Não foi transformada em orçamento total: faltam o escopo completo das despesas e a confirmação do denominador entre os 14 dias mencionados e os 15 dias das datas confirmadas.
 - A opinião sobre custo e acesso às praias não foi transformada em informação tarifária atual.
 
 ## Fotografias
