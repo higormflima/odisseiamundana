@@ -1,4 +1,6 @@
 ---
+import PhotoViewerFrame from './PhotoViewerFrame.astro';
+
 interface Photo {
   src: string;
   thumbnail: string;
@@ -7,6 +9,7 @@ interface Photo {
   height?: number;
   featured?: boolean;
   caption?: string;
+  journeyContext?: string;
   galleryIndex?: number;
 }
 
@@ -34,7 +37,7 @@ const photoCount = lightboxPhotos.length;
   <section
     class:list={['photo-gallery', 'photo-gallery--editorial', { 'photo-gallery--featured': variant === 'featured' }]}
     aria-label={title}
-    data-photos={JSON.stringify(lightboxPhotos.map((photo) => ({ src: photo.src, alt: photo.alt, caption: photo.caption || '' })))}
+    data-photos={JSON.stringify(lightboxPhotos.map((photo) => ({ src: photo.src, alt: photo.alt, caption: photo.caption || '', journeyContext: photo.journeyContext || '' })))}
   >
     <header class="photo-gallery-heading">
       <h2>{title}</h2>
@@ -76,7 +79,9 @@ const photoCount = lightboxPhotos.length;
         <button class="photo-lightbox-nav" type="button" aria-label="Foto anterior" data-previous>
           <span aria-hidden="true">‹</span>
         </button>
-        <img class="photo-lightbox-image" alt="" decoding="async" data-lightbox-image />
+        <PhotoViewerFrame>
+          <img class="photo-lightbox-image" alt="" decoding="async" data-lightbox-image />
+        </PhotoViewerFrame>
         <button class="photo-lightbox-nav" type="button" aria-label="Próxima foto" data-next>
           <span aria-hidden="true">›</span>
         </button>
@@ -201,6 +206,8 @@ const photoCount = lightboxPhotos.length;
       const dialog = gallery.querySelector('dialog.photo-lightbox');
       const image = gallery.querySelector('img.photo-lightbox-image');
       const caption = gallery.querySelector('p[data-caption]');
+      const context = gallery.querySelector<HTMLElement>('[data-photo-context]');
+      if (!context) throw new Error('Identificação da viagem ausente no visualizador.');
       const counter = gallery.querySelector('p[data-counter]');
       const closeButton = gallery.querySelector('button[data-close]');
       let currentIndex = 0;
@@ -214,6 +221,8 @@ const photoCount = lightboxPhotos.length;
         const photo = photos[currentIndex];
         image.src = photo.src;
         image.alt = photo.alt;
+        context.textContent = photo.journeyContext || '';
+        context.hidden = !photo.journeyContext;
         counter.textContent = `${currentIndex + 1} / ${photos.length}`;
         if (caption) {
           caption.textContent = photo.caption || '';

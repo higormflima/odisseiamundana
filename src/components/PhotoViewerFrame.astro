@@ -1,0 +1,50 @@
+<div class="photo-viewer-frame" data-photo-viewer-frame>
+  <slot />
+  <p class="photo-viewer-context" data-photo-context title="Local e período da viagem" hidden></p>
+</div>
+
+<script>
+  for (const frame of document.querySelectorAll<HTMLElement>('[data-photo-viewer-frame]')) {
+    const image = frame.querySelector('img');
+    const context = frame.querySelector<HTMLElement>('[data-photo-context]');
+    if (!image || !context) throw new Error('Foto ou identificação ausente no visualizador.');
+
+    const positionContext = () => {
+      if (!image.naturalWidth || !image.naturalHeight || !frame.clientWidth || !frame.clientHeight) {
+        context.style.visibility = 'hidden';
+        return;
+      }
+      const bounds = frame.getBoundingClientRect();
+      const photo = image.getBoundingClientRect();
+      const scale = Math.min(photo.width / image.naturalWidth, photo.height / image.naturalHeight);
+      const gapX = (photo.width - image.naturalWidth * scale) / 2;
+      const gapY = (photo.height - image.naturalHeight * scale) / 2;
+      const left = Math.max(bounds.left, photo.left + gapX);
+      const right = Math.min(bounds.right, photo.right - gapX);
+      const top = Math.max(bounds.top, photo.top + gapY);
+      const bottom = Math.min(bounds.bottom, photo.bottom - gapY);
+      context.style.right = `${bounds.right - right + 8}px`;
+      context.style.bottom = `${bounds.bottom - bottom + 8}px`;
+      context.style.maxWidth = `${Math.max(0, right - left - 16)}px`;
+      context.style.visibility = right > left && bottom > top ? '' : 'hidden';
+    };
+
+    image.addEventListener('load', positionContext);
+    frame.addEventListener('scroll', positionContext, { capture: true, passive: true });
+    frame.closest('dialog')?.addEventListener('toggle', positionContext);
+    frame.closest('dialog')?.addEventListener('click', positionContext);
+    const observer = new ResizeObserver(positionContext);
+    observer.observe(frame);
+    observer.observe(image);
+    positionContext();
+  }
+</script>
+
+<style>
+  .photo-viewer-frame { position: relative; width: 100%; height: 100%; min-width: 0; min-height: 0; }
+  .photo-viewer-context { position: absolute; right: 12px; bottom: 12px; max-width: calc(100% - 24px); margin: 0; padding: 4px 8px; border-radius: 3px; background: rgb(0 0 0 / 65%); color: white; font: 400 12px/1.4 var(--font-body); text-align: right; overflow-wrap: anywhere; pointer-events: none; }
+  .photo-viewer-context[hidden] { display: none; }
+  @media (max-width: 700px) {
+    .photo-viewer-context { font-size: 14px; }
+  }
+</style>

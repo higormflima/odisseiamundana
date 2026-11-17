@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { buildGalleryCollections } from '../src/lib/galleryCollections.mjs';
+import { buildGalleryCollections, formatGalleryJourneyContext } from '../src/lib/galleryCollections.mjs';
 
 const photo = { src: 'media/journeys/finland-2026/photos/finland-001.jpg', thumbnail: 'media/journeys/finland-2026/thumbnails/finland-001.jpg', alt: 'Fotografia da viagem' };
 const published = (id) => ({ data: { journey_id: { id }, episode_id: 'journey-summary', status: 'published', title: id } });
@@ -16,12 +16,23 @@ test('inclui apenas coleções com resumo publicado e fotos, ordenadas por data'
   assert.deepEqual(collections.map((item) => item.id), ['new', 'old']);
   assert.equal(collections[0].cover.featured, true);
   assert.equal(collections[0].period, 'Fevereiro de 2025');
+  assert.equal(collections[0].photos[0].journeyContext, 'Viagem recente · Fev 2025');
   assert.equal(collections[0].href, '/site/pt/galeria/new/');
   assert.equal(collections[1].cover, collections[1].photos[0]);
   assert.equal(collections[1].storyHref, '/site/pt/viagens/old/journey-summary/');
   assert.ok(collections[0].cover.src.startsWith('/site/'));
   assert.ok(collections[0].cover.thumbnailSize.width > 0);
   assert.ok(collections[0].cover.thumbnailSize.width < collections[0].cover.width);
+});
+
+test('identifica o contexto da viagem pelo título da coleção e mês inicial sem inventar dados por foto', () => {
+  assert.equal(formatGalleryJourneyContext({
+    title: 'Relato da viagem',
+    gallery: { collection_title: 'Omã' },
+    dates: { year: 2024, month: 4, start_date: '2024-04-28', end_date: '2024-05-07' },
+  }), 'Omã · Abr 2024');
+  assert.equal(formatGalleryJourneyContext({ title: 'Viagem sem mês', dates: { year: 2024 } }), 'Viagem sem mês');
+  assert.equal(formatGalleryJourneyContext({}), '');
 });
 
 test('separa título e capa da coleção do destaque fotográfico', () => {

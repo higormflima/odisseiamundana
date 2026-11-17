@@ -1,4 +1,6 @@
 ---
+import PhotoViewerFrame from './PhotoViewerFrame.astro';
+
 interface Photo {
   src: string;
   thumbnail: string;
@@ -9,6 +11,7 @@ interface Photo {
   collectionId: string;
   collectionTitle: string;
   journeyDate: string;
+  journeyContext?: string;
   geography: { continents: string[]; countries: string[]; regions: string[]; destinations: string[] };
 }
 
@@ -59,13 +62,15 @@ const continents = [...new Set(photos.flatMap((photo) => photo.geography.contine
       </div>
       <div class="gallery-viewer-stage">
         <button type="button" class="gallery-viewer-nav" data-previous aria-label="Foto anterior">‹</button>
-        <div class="gallery-viewer-image-wrap" data-image-wrap>
-          <img class="gallery-viewer-image" alt="" data-image decoding="async" />
-        </div>
+        <PhotoViewerFrame>
+          <div class="gallery-viewer-image-wrap" data-image-wrap>
+            <img class="gallery-viewer-image" alt="" data-image decoding="async" />
+          </div>
+        </PhotoViewerFrame>
         <button type="button" class="gallery-viewer-nav" data-next aria-label="Próxima foto">›</button>
       </div>
     </dialog>
-    <script type="application/json" data-photos set:html={JSON.stringify(photos.map(({ src, alt, collectionId, collectionTitle, geography, journeyDate }) => ({ src, alt, collectionId, collectionTitle, geography, journeyDate }))).replace(/</g, '\\u003c')} />
+    <script type="application/json" data-photos set:html={JSON.stringify(photos.map(({ src, alt, collectionId, collectionTitle, geography, journeyDate, journeyContext }) => ({ src, alt, collectionId, collectionTitle, geography, journeyDate, journeyContext }))).replace(/</g, '\\u003c')} />
   </section>
 )}
 
@@ -82,6 +87,7 @@ const continents = [...new Set(photos.flatMap((photo) => photo.geography.contine
     const image = gallery.querySelector<HTMLImageElement>('[data-image]');
     const imageWrap = gallery.querySelector<HTMLElement>('[data-image-wrap]');
     const counter = gallery.querySelector<HTMLElement>('[data-counter]');
+    const context = gallery.querySelector<HTMLElement>('[data-photo-context]');
     const close = gallery.querySelector<HTMLButtonElement>('[data-close]');
     const zoom = gallery.querySelector<HTMLButtonElement>('[data-zoom]');
     const photoData = gallery.querySelector<HTMLScriptElement>('[data-photos]');
@@ -93,11 +99,11 @@ const continents = [...new Set(photos.flatMap((photo) => photo.geography.contine
     const clear = gallery.querySelector<HTMLButtonElement>('[data-clear]');
     const empty = gallery.querySelector<HTMLElement>('[data-empty]');
     const filterPanel = gallery.querySelector<HTMLDetailsElement>('.gallery-filter-panel');
-    if (!grid || !loadMore || !count || !dialog || !image || !imageWrap || !counter || !close || !zoom || !photoData || !controls || !search || !continent || !country || !sort || !clear || !empty || !filterPanel) {
+    if (!grid || !loadMore || !count || !dialog || !image || !imageWrap || !counter || !context || !close || !zoom || !photoData || !controls || !search || !continent || !country || !sort || !clear || !empty || !filterPanel) {
       throw new Error('A galeria não possui todos os controles necessários.');
     }
 
-    const photos: { src: string; alt: string; collectionId: string; collectionTitle: string; journeyDate: string; geography: { continents: string[]; countries: string[]; regions: string[]; destinations: string[] } }[] = JSON.parse(photoData.textContent || '[]');
+    const photos: { src: string; alt: string; collectionId: string; collectionTitle: string; journeyDate: string; journeyContext?: string; geography: { continents: string[]; countries: string[]; regions: string[]; destinations: string[] } }[] = JSON.parse(photoData.textContent || '[]');
     const randomRanks = photos.map(() => Math.random());
     let activeIndexes = photos.map((_, index) => index);
     let visible = 0;
@@ -144,6 +150,8 @@ const continents = [...new Set(photos.flatMap((photo) => photo.geography.contine
       const photo = photos[activeIndexes[currentIndex]];
       image.src = photo.src;
       image.alt = photo.alt;
+      context.textContent = photo.journeyContext || '';
+      context.hidden = !photo.journeyContext;
       counter.textContent = `${currentIndex + 1} / ${activeIndexes.length}`;
       setZoom(false);
     };

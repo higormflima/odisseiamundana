@@ -4,6 +4,7 @@ import { readColorSignatureFromSrc } from '../lib/imageSignature.mjs';
 import { readImageSizeFromSrc } from '../lib/imageSize.mjs';
 import { orderPhotosByVariety } from '../lib/photoVariety.mjs';
 import { selectJourneyPhotos } from '../lib/journeyPhotoSelection.mjs';
+import { formatGalleryJourneyContext } from '../lib/galleryCollections.mjs';
 import PhotoGallery from './PhotoGallery.astro';
 
 interface Props {
@@ -28,6 +29,7 @@ const annotatedPhotos = await Promise.all(sourcePhotos.map(async (photo, gallery
 })));
 const photos = orderPhotosByVariety(annotatedPhotos).map(({ signature, ...photo }) => ({
   ...photo,
+  journeyContext: journey ? formatGalleryJourneyContext(journey.data) : '',
   src: publicPath(photo.src),
   thumbnail: publicPath(photo.thumbnail),
 }));

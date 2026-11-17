@@ -1,5 +1,13 @@
-import { compareJourneysByRecency, formatJourneyPeriod, JOURNEY_SUMMARY_EPISODE_ID } from './journeyMapData.mjs';
+import { compareJourneysByRecency, formatJourneyListDate, formatJourneyPeriod, JOURNEY_SUMMARY_EPISODE_ID } from './journeyMapData.mjs';
 import { readImageSizeFromSrc } from './imageSize.mjs';
+
+/**
+ * @param {{ title?: string, gallery?: { collection_title?: string }, dates?: { year?: number, month?: number } }} journey
+ */
+export function formatGalleryJourneyContext(journey) {
+  return [journey.gallery?.collection_title ?? journey.title, formatJourneyListDate(journey.dates)]
+    .filter(Boolean).join(' · ');
+}
 
 /**
  * Adapta as galerias editoriais existentes para a galeria.
@@ -29,6 +37,7 @@ export function buildGalleryCollections({ journeys, pages, base }) {
       focalPoint: photo.focal_point,
       collectionId: id,
       collectionTitle: title,
+      journeyContext: formatGalleryJourneyContext(data),
       geography,
       journeyDate: dates?.start_date ?? (dates?.year ? `${dates.year}${dates.month ? `-${String(dates.month).padStart(2, '0')}` : ''}` : ''),
       ...readImageSizeFromSrc(photo.src),
