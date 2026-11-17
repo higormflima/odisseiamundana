@@ -13,3 +13,5 @@
 - Prefira implementações simples e incrementais. Explique decisões técnicas em português.
 - Antes de qualquer alteração visual, consulte `media/branding/BRAND_GUIDELINES.md`.
 - Tabelas de preços ou custos usam o componente `CostTable` e seguem as regras de `docs/cost-tables.md`.
+- Fotos recebidas em `imports/photos/` aguardam autorização explícita do proprietário para o lote: não abra, analise, extraia EXIF, converta, otimize, gere miniaturas, crie metadados nem publique essas fotos apenas porque foram carregadas ou sincronizadas. Consulte `imports/photos/README.md` antes de trabalhar nesse fluxo.
+- Preserve os nomes e o conteúdo dos arquivos recebidos. Não sobrescreva nem exclua lotes sem autorização explícita; o envio de originais nessa pasta é uma exceção autorizada à recomendação geral de mantê-los fora do Git.

@@ -64,6 +64,8 @@ viagens e seu cadastro não cria páginas no site.
 
 ## Preparação de fotografias
 
+Para transferir fotos de outro computador sem processamento, use o [recebimento pelo GitHub](imports/photos/README.md), em `imports/photos/<journey-id>/<batch-id>/`. Esse é um fluxo autorizado de entrada, separado da preparação abaixo: os lotes aguardam pedido explícito do proprietário e não são publicados automaticamente. Como os arquivos são versionados, continuam no histórico mesmo após exclusão.
+
 A primeira etapa do novo fluxo prepara e valida imagens, mas **ainda não as adiciona à galeria pública**. As galerias existentes permanecem independentes.
 
 1. Crie uma pasta local como `.gallery-input/finland-2026/` e coloque nela cópias das fotos editadas. Essa pasta é ignorada pelo Git; mantenha os originais em seu armazenamento pessoal.
@@ -73,7 +75,7 @@ A primeira etapa do novo fluxo prepara e valida imagens, mas **ainda não as adi
    pnpm gallery:process --collection finland-2026 --file ".gallery-input/finland-2026/foto.jpg" --new
    ```
 
-3. O comando informa o ID permanente e gera variantes JPEG e WebP em `media/gallery/` e um registro YAML em `metadata/gallery/`. Não envie a pasta de entrada nem fotos originais ao Git.
+3. O comando informa o ID permanente e gera variantes JPEG e WebP em `media/gallery/` e um registro YAML em `metadata/gallery/`. Não envie a pasta `.gallery-input/` nem fotos originais ao Git, exceto nos lotes de transferência autorizados em `imports/photos/`.
 4. Uma foto idêntica é reconhecida mesmo após renomeação. Se uma foto já registrada for editada ou convertida, use o ID informado no registro para conservar sua identidade:
 
    ```powershell
