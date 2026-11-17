@@ -19,9 +19,9 @@ const systemPages = await getCollection('motorhomeSystemPages', (page) =>
 const motorhomeChildren = [
   ...systemPages.sort((left, right) => left.data.sort_order - right.data.sort_order).map((page) => ({
     label: page.data.title,
-    href: `${base}pt/motorhomes/${page.data.project_id.id}/${page.data.system_id}/`,
+    href: `${base}pt/motorhomes/${page.data.project_id.id}/${page.data.page_id}/`,
   })),
-  { label: 'Custos da construção', href: `${base}pt/motorhomes/iveco-daily-3510/#construction-costs` },
+  { label: 'Custos do Projeto', href: `${base}pt/motorhomes/iveco-daily-3510/#construction-costs` },
 ];
 const navigationLinks = [
   { label: 'Início', href: `${base}pt/` },
@@ -29,7 +29,7 @@ const navigationLinks = [
   { label: 'Motorhome', href: `${base}pt/motorhomes/iveco-daily-3510/`, children: motorhomeChildren },
   { label: 'Galeria', href: `${base}pt/galeria/` },
   { label: 'Colaborações', href: `${base}pt/colaboracoes/` },
-  { label: 'Sobre nós', href: `${base}pt/sobre-nos/` },
+  { label: 'Sobre Nós', href: `${base}pt/sobre-nos/` },
   { label: 'Contato', href: 'mailto:contato@odisseiamundana.com' },
 ];
 ---
@@ -73,7 +73,7 @@ const navigationLinks = [
             <details class="motorhome-navigation">
               <summary>{label} <span aria-hidden="true">▾</span></summary>
               <div class="motorhome-submenu">
-                <a href={href}>Construção do Motorhome</a>
+                <a href={href}>Construção Iveco Daily</a>
                 {children.map((child) => <a href={child.href}>{child.label}</a>)}
               </div>
             </details>
@@ -92,7 +92,7 @@ const navigationLinks = [
               <details class="motorhome-navigation">
                 <summary>{label} <span aria-hidden="true">▾</span></summary>
                 <div class="motorhome-submenu">
-                  <a href={href}>Construção do Motorhome</a>
+                  <a href={href}>Construção Iveco Daily</a>
                   {children.map((child) => <a href={child.href}>{child.label}</a>)}
                 </div>
               </details>
@@ -111,7 +111,7 @@ const navigationLinks = [
         <CookieConsent />
       </div>
       <section class="footer-contact" id="contato" aria-label="Redes sociais e contato">
-        <a class="footer-about-link" href={`${base}pt/sobre-nos/`}>Sobre nós</a>
+        <a class="footer-about-link" href={`${base}pt/sobre-nos/`}>Sobre Nós</a>
         <a class="footer-about-link" href={`${base}pt/colaboracoes/`}>Colaborações</a>
         <SocialLinks variant="footer" />
       </section>

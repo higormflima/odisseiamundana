@@ -1,0 +1,56 @@
+[
+  {
+    "video_id": "NFc-9WhVAIY",
+    "path": "transcripts/motorhome-projects/iveco-daily-3510/NFc-9WhVAIY.raw.pt-orig.vtt",
+    "source_url": "https://www.youtube.com/watch?v=NFc-9WhVAIY",
+    "language": "pt",
+    "kind": "automatic",
+    "retrieved_at": "2026-11-17T11:56:59.482Z",
+    "raw_sha256": "f45cb18f7d61255bf4b5b65af165699ed0ba705d6d0e3de3c412ec3ac7e059be"
+  },
+  {
+    "video_id": "jWKbwh202hg",
+    "path": "transcripts/motorhome-projects/iveco-daily-3510/jWKbwh202hg.raw.pt-orig.vtt",
+    "source_url": "https://www.youtube.com/watch?v=jWKbwh202hg",
+    "language": "pt",
+    "kind": "automatic",
+    "retrieved_at": "2026-11-17T11:57:09.912Z",
+    "raw_sha256": "0f4289e63a2b990786f87e19f0bd7a305a07de3af61b5ba3b822803f3a4eb576"
+  },
+  {
+    "video_id": "1asypqExBhA",
+    "path": "transcripts/motorhome-projects/iveco-daily-3510/1asypqExBhA.raw.pt-orig.vtt",
+    "source_url": "https://www.youtube.com/watch?v=1asypqExBhA",
+    "language": "pt",
+    "kind": "automatic",
+    "retrieved_at": "2026-11-17T11:57:21.008Z",
+    "raw_sha256": "6f1a6060e8ed098b0f369f8deecbe8ec7efe8686f8bbb416004278032a84e839"
+  },
+  {
+    "video_id": "qukRFG4Uxmw",
+    "path": "transcripts/motorhome-projects/iveco-daily-3510/qukRFG4Uxmw.raw.pt-orig.vtt",
+    "source_url": "https://www.youtube.com/watch?v=qukRFG4Uxmw",
+    "language": "pt",
+    "kind": "automatic",
+    "retrieved_at": "2026-11-17T11:57:32.128Z",
+    "raw_sha256": "5507f97340a0c78983724b5dde019335ef980890a007c1f3d7c49da173ca84f2"
+  },
+  {
+    "video_id": "9b_Pe5VWjAU",
+    "path": "transcripts/motorhome-projects/iveco-daily-3510/9b_Pe5VWjAU.raw.pt-orig.vtt",
+    "source_url": "https://www.youtube.com/watch?v=9b_Pe5VWjAU",
+    "language": "pt",
+    "kind": "automatic",
+    "retrieved_at": "2026-11-17T11:57:42.760Z",
+    "raw_sha256": "99f8b4c3372c107c8aba4408fbba3f584d83eea3ec442642396197b7a53bf76a"
+  },
+  {
+    "video_id": "CTWd2t3xvYA",
+    "path": "transcripts/motorhome-projects/iveco-daily-3510/CTWd2t3xvYA.raw.pt-orig.vtt",
+    "source_url": "https://www.youtube.com/watch?v=CTWd2t3xvYA",
+    "language": "pt",
+    "kind": "automatic",
+    "retrieved_at": "2026-11-17T11:57:54.490Z",
+    "raw_sha256": "75b5f2d7b008c6397a4147e245867baff552abc831ca03d6b53677b9099c3779"
+  }
+]

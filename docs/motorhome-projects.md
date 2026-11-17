@@ -2,12 +2,13 @@
 
 O contrato independente [motorhome-project.schema.json](../schemas/motorhome-project.schema.json)
 documenta construções, conversões e melhorias, sem tratar o projeto como viagem.
-É um rascunho 0.5. Os arquivos ficam em
+É um rascunho 0.6. Os arquivos ficam em
 `metadata/motorhome-projects/<project_id>.yaml`, com identificadores em inglês e
 valores em português brasileiro. Apenas `project_id` é obrigatório.
 
 O [registro inicial da Iveco Daily](../metadata/motorhome-projects/iveco-daily-3510.yaml)
-consolida títulos e descrições dos 45 vídeos, oito transcrições do piloto elétrico e as
+consolida títulos e descrições dos 45 vídeos, 35 transcrições únicas para as seis
+páginas temáticas e as
 confirmações iniciais do proprietário. A sequência foi conferida na playlist
 pública em 15/11/2026. A [revisão e as lacunas](../transcripts/motorhome-projects/iveco-daily-3510/editorial-review.md)
 ficam separadas do conteúdo editorial. Após validar o rascunho, o proprietário
@@ -26,8 +27,8 @@ Com `pnpm dev`, acesse `/pt/motorhomes/iveco-daily-3510/`. Rascunhos só são
 gerados em desenvolvimento, com aviso de prévia e `noindex, nofollow`; em
 produção a rota aceita apenas páginas com `status: published`.
 
-O item **Motorhome**, após **Viagens**, abre um submenu com **Construção do Motorhome**,
-as etapas disponíveis e **Custos da construção** sempre na última posição.
+O item **Motorhome**, após **Viagens**, abre um submenu com **Construção Iveco Daily**,
+as etapas disponíveis e **Custos do Projeto** sempre na última posição.
 O último link abre a visão geral na âncora `#construction-costs`, incluindo
 “Nossas contas” e “Planilha de custos completa”, mesmo quando usado de outra página.
 Desktop e mobile usam o mesmo filtro de publicação das etapas. O mapa também inclui o projeto,
@@ -67,24 +68,79 @@ sistemas continuam apontando para a miniatura correspondente.
 Notas e proveniência permanecem fora da apresentação. A aprovação libera a
 página no build; o site remoto só muda após commit, push e deploy.
 
-### Páginas por sistema
+### Páginas temáticas e agrupamento de sistemas
 
 A coleção separada `motorhomeSystemPages` carrega
-`content/motorhome-systems/<project_id>/<system_id>.mdx`. Não colocar esses arquivos
+`content/motorhome-systems/<project_id>/<page_id>.mdx`. Não colocar esses arquivos
 na coleção da visão geral: ela gera uma rota por projeto e alimenta o mapa.
-O frontmatter contém `project_id` como referência, `system_id`, `title`,
-`language`, `status` e `sort_order` para a ordem do submenu.
+O frontmatter contém `project_id` como referência, `page_id` para a URL estável,
+`system_ids` com uma ou mais etapas distintas, `title`, `language`, `status`
+e `sort_order` para a ordem do submenu. Os sistemas continuam no YAML, separados
+do texto editorial; o frontmatter apenas seleciona quais entram em cada página.
 
-A rota `/pt/motorhomes/<project_id>/<system_id>/` verifica a existência do sistema
+A rota `/pt/motorhomes/<project_id>/<page_id>/` verifica a existência das etapas
 e de todos os seus vídeos na playlist. Exibe primeiro o resumo editorial, depois
 atributos do YAML, custos e miniaturas na ordem original da playlist.
+O frontmatter opcional `featured_video_id` destaca um vídeo das etapas da página
+na primeira posição, sem repeti-lo nem alterar a ordem relativa dos demais ou a
+playlist original. Em Água e Banheiro, `BC2eZ3QBvTU` é o vídeo principal.
+Ele e `-_VZvjJXmwc` usam a mesma miniatura, mas são vídeos diferentes:
+montagem completa e tour posterior da instalação, respectivamente.
+`buildMotorhomeSystemPage` une atributos textuais idênticos e referências de vídeo,
+sem repetir itens. `buildSystemCostRows` seleciona cada compra uma vez se qualquer
+etapa da página constar em `system_ids`; compras distintas com descrições iguais
+continuam separadas. Não somar subtotais por etapa nem inferir associações ausentes.
+As tabelas das etapas são ordenadas por `amount` decrescente. Compras com
+`allocation_uncertain: true` ficam no final, também por valor, com o detalhe
+“Uso não individualizado na planilha”. Isso não altera a ordem original dos
+380 lançamentos na planilha completa nem seus valores.
+Os links dos sistemas na visão geral apontam à página que os reúne.
 Nas etapas, a tabela fica em um quadro com altura calculada para dez itens,
 ajustada às quebras de linha de cada tela. A rolagem vertical permite acessar
 as demais compras, também pelo teclado; o download permanece fora do quadro.
+Descrições longas podem quebrar palavras dentro do quadro para não criar
+rolagem horizontal nem reduzir a área das dez linhas em telas estreitas.
 O piloto `/pt/motorhomes/iveco-daily-3510/solar-power/` foi aprovado para publicação
 em 15/11/2026 e está em `published`, incluindo submenus e link na visão geral.
 A aprovação da página principal não publica automaticamente outras etapas.
-Com a estrutura do piloto validada, as outras 12 páginas ficam para a próxima etapa.
+A URL e o conteúdo do piloto elétrico foram preservados.
+
+Em 17/11/2026, foi aprovado reunir as 13 etapas originais em seis páginas:
+
+| Página | `page_id` | Etapas em `system_ids` |
+| --- | --- | --- |
+| Planejamento e Projeto | `planning` | `planning` |
+| Estrutura e Conforto Térmico | `structure-thermal-comfort` | `thermal-insulation`, `flooring`, `windows`, `climate-control` |
+| Sistema Elétrico Fotovoltaico | `solar-power` | `solar-power` |
+| Água e Banheiro | `water-bathroom` | `plumbing`, `bathroom` |
+| Móveis e Conforto Interno | `furniture-interior-comfort` | `furniture-interiors`, `bed`, `cabin` |
+| Cozinha e Gás | `kitchen-gas` | `kitchen`, `gas` |
+
+Os rótulos dos menus usam maiúscula inicial nas palavras principais, mantendo
+artigos, preposições e conjunções em minúsculas.
+
+Em 17/11/2026, o proprietário revisou e aprovou as cinco páginas restantes,
+autorizando a mudança para `published`, o commit e o push. Os seis temas agora
+entram no build de produção, nos submenus e nos links da visão geral.
+
+`planning` tem seis vídeos. Por decisão do
+proprietário, não tem tabela própria: inclui um link à seção de custos completos,
+sem apresentar aquisição/documentação do veículo como despesas de planejamento.
+As outras quatro páginas publicadas reúnem:
+
+| Página | Vídeos únicos | Compras | Compras com uso não individualizado |
+| --- | ---: | ---: | ---: |
+| Estrutura e Conforto Térmico | 8 | 36 | 15 |
+| Água e Banheiro | 10 | 74 | 9 |
+| Móveis e Conforto Interno | 7 | 43 | 10 |
+| Cozinha e Gás | 5 | 38 | 6 |
+
+As contagens não devem ser somadas como totais do projeto: vídeos e compras
+podem aparecer em mais de uma página. As páginas compartilham a rota, o carrossel
+e a tabela do piloto; os 13 sistemas originais permanecem no YAML. As correções,
+os limites das transcrições e os critérios de associação dos custos ficam no
+registro editorial, não no corpo MDX. Novos rascunhos continuam exigindo aprovação
+antes da publicação.
 
 ## Campos e tipos
 
@@ -99,7 +155,7 @@ Com a estrutura do piloto validada, as outras 12 páginas ficam para a próxima 
 | `representative_point` | Objeto opcional com `name` e `coordinates`, contendo `lat` entre -90 e 90 e `lng` entre -180 e 180. Ponto público representativo, não endereço particular. |
 | `build_period` | Objeto com `start` e/ou `end`: strings `AAAA`, `AAAA-MM` ou `AAAA-MM-DD`. |
 | `main_costs` | Lista de objetos com `description`, `amount` numérico não negativo, `currency` ISO de três letras e `unit` descrevendo a base do valor; opcionais `approximate`, `system_id` e `video_ids`. |
-| `cost_items` | Lançamentos por linha da planilha: `source_row` único, `description`, `quantity` positiva, `amount` e `currency`; opcionais `category`, `detail`, `unit`, `unit_price`, `shipping` e `system_ids`. Preserva valores negativos do original; quando há unitário, o total confere com quantidade × unitário + frete discriminado. |
+| `cost_items` | Lançamentos por linha da planilha: `source_row` único, `description`, `quantity` positiva, `amount` e `currency`; opcionais `category`, `detail`, `unit`, `unit_price`, `shipping`, `system_ids` e `allocation_uncertain`. Preserva valores negativos do original; quando há unitário, o total confere com quantidade × unitário + frete discriminado. |
 | `photos` | Lista com `photo_id`, `src`, `alt`; opcionais `thumbnail`, `caption`, `stage`, `detail`, `system_id`. Caminhos relativos ao repositório, para imagens otimizadas em `media/`. |
 | `videos` | Lista de referências com `video_id` original e `youtube_url` canônica, nos formatos já usados pelo contrato de vídeos. |
 | `playlist_id` | Identificador original da playlist do YouTube. |
@@ -120,8 +176,14 @@ processos de um sistema seguem a lógica do tema; não alteram a playlist.
 
 Cada `cost_items` representa uma compra, não um subtotal adicional de `main_costs`.
 `system_ids` permite reutilizar a compra em várias etapas sem duplicar o registro.
-Omitir `system_ids` quando a relação ainda não foi verificada; não atribuir
-automaticamente todas as compras de uma categoria a uma etapa.
+Omitir `system_ids` quando não houver evidência de aplicação. Na entrevista de
+17/11/2026, o proprietário autorizou uma exceção para compras classificáveis
+pelo contexto da categoria, mas sem aplicação individualizada: registrar
+`allocation_uncertain: true`, sempre junto de `system_ids`, e colocá-las no
+final da tabela com indicação explícita. A autorização é editorial, não
+confirmação de instalação. O detalhe de uso prevalece sobre a categoria.
+Ferramentas e conjuntos de uso geral sem aplicação documentada permanecem
+somente na planilha completa.
 `source_row` aponta para a linha da aba/planilha indicada na proveniência.
 Nas tabelas das etapas, quantidade, unitário e frete vão em `detail`, mantendo as
 duas colunas de `CostTable`. Frete ausente não significa frete gratuito.
@@ -264,7 +326,7 @@ registros originais, sem correções silenciosas.
 ```powershell
 pnpm validate:metadata
 node --test tests\metadata-validation.test.mjs tests\motorhome-project-validation.test.mjs
-node --test tests\motorhome-playlist.test.mjs tests\motorhome-costs.test.mjs
+node --test tests\motorhome-playlist.test.mjs tests\motorhome-costs.test.mjs tests\motorhome-system-pages.test.mjs
 node --test tests\motorhome-map-data.test.mjs tests\journey-map-data.test.mjs
 ```
 
@@ -283,16 +345,11 @@ ao projeto nesta etapa, não uma exigência de registro em `metadata/videos/`.
 
 1. Revalidar a ordem da playlist quando a série for atualizada; a sequência de 45
    vídeos foi conferida em 15/11/2026, mas pode mudar.
-2. Após validar o piloto elétrico, completar as outras 12 páginas. A obtenção das
-   legendas disponíveis foi autorizada; lacunas e dúvidas exigem entrevista.
-3. Completar a entrevista sobre equipamentos e interpretação das fontes.
+2. Completar a entrevista sobre equipamentos e interpretação das fontes.
    O período, local e configuração foram confirmados; a planilha original
    foi fornecida e seus totais foram conferidos. Consultar o registro de revisão.
-4. Definir eventual integração compartilhada dos registros de vídeos; a prévia
+3. Definir eventual integração compartilhada dos registros de vídeos; a prévia
    já carrega os títulos originais no Astro, sem modificar o contrato de viagens.
-5. Aprovar os nomes dos temas com base no vocabulário efetivo dos vídeos.
-   Futuras subpáginas terão resumo, conteúdo temático e
-   vídeos referenciados, mediante autorização própria.
 
-Análise audiovisual completa da série, subpáginas e sincronização de mídias
-permanecem fora do escopo. A aprovação da página não autoriza commit ou push.
+Análise audiovisual completa da série e sincronização de mídias permanecem fora
+do escopo. A aprovação da página não autoriza commit ou push.

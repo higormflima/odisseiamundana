@@ -10,12 +10,34 @@ test('seleciona custos compartilhados e mantém quantidade do lançamento, frete
     { description: 'Outro', quantity: 1, unit: 'und', unit_price: 20, amount: 20, currency: 'BRL', system_ids: ['water'] },
   ];
   assert.deepEqual(buildSystemCostRows(items, 'solar'), [
-    { item: 'Fio', detail: 'Compra de 3 m · 1 und × R$7,38', amount: 'R$7,38' },
-    { item: 'Inversor', detail: '1 und × R$246,00 · Frete: R$0,00', amount: 'R$246,00' },
     { item: 'Painéis', detail: '2 und × R$589,00 · Frete: R$51,85', amount: 'R$1.229,85' },
+    { item: 'Inversor', detail: '1 und × R$246,00 · Frete: R$0,00', amount: 'R$246,00' },
+    { item: 'Fio', detail: 'Compra de 3 m · 1 und × R$7,38', amount: 'R$7,38' },
   ]);
-  assert.deepEqual(buildSystemCostRows(items, 'lighting'), [buildSystemCostRows(items, 'solar')[0]]);
+  assert.deepEqual(buildSystemCostRows(items, 'lighting'), [buildSystemCostRows(items, 'solar')[2]]);
   assert.deepEqual(buildSystemCostRows(items, 'unknown'), []);
+});
+
+test('ordena etapas pelo valor pago, deixa aplicações incertas no final e não muda a ordem do livro completo', () => {
+  const base = { quantity: 1, currency: 'BRL', system_ids: ['floor', 'walls'] };
+  const items = [
+    { ...base, description: 'Incerto maior', amount: 1000, allocation_uncertain: true },
+    { ...base, description: 'Específico menor', amount: 10 },
+    { ...base, description: 'Específico maior', amount: 100 },
+    { ...base, description: 'Mesmo valor', amount: 100 },
+    { ...base, description: 'Incerto menor', amount: 20, allocation_uncertain: true },
+    { ...base, description: 'Valor negativo original', amount: -5 },
+  ];
+  const original = structuredClone(items);
+  const rows = buildSystemCostRows(items, ['floor', 'walls']);
+  assert.deepEqual(rows.map((row) => row.item), [
+    'Específico maior', 'Mesmo valor', 'Específico menor', 'Valor negativo original', 'Incerto maior', 'Incerto menor',
+  ]);
+  assert.match(rows[4].detail, /Uso não individualizado na planilha$/);
+  assert.ok(!rows[0].detail.includes('Uso não individualizado'));
+  assert.deepEqual(buildProjectCostRows(items).map((row) => row.item), original.map((item) => item.description));
+  assert.ok(!buildProjectCostRows(items)[0].detail.includes('Uso não individualizado'));
+  assert.deepEqual(items, original);
 });
 
 test('mostra o livro completo sem atribuir etapas e preserva valores negativos e dados ausentes', () => {

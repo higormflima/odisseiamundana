@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://odisseiamundana.com/schemas/motorhome-project.schema.json",
-  "title": "Metadados de projeto de motorhome — rascunho 0.5",
+  "title": "Metadados de projeto de motorhome — rascunho 0.6",
   "description": "Contrato independente para construção, conversão ou melhorias de motorhomes. Não controla publicação.",
   "type": "object",
   "required": ["project_id"],
@@ -62,6 +62,7 @@
       "items": {
         "type": "object",
         "required": ["source_row", "description", "quantity", "amount", "currency"],
+        "dependentRequired": { "allocation_uncertain": ["system_ids"] },
         "additionalProperties": false,
         "properties": {
           "source_row": { "type": "integer", "minimum": 1 },
@@ -74,6 +75,10 @@
           "shipping": { "type": "number" },
           "amount": { "type": "number" },
           "currency": { "type": "string", "pattern": "^[A-Z]{3}$" },
+          "allocation_uncertain": {
+            "type": "boolean",
+            "description": "A aplicação da compra não está individualizada na fonte. Associação temática provisória autorizada pelo proprietário; exibir no final da tabela da etapa."
+          },
           "system_ids": {
             "type": "array",
             "minItems": 1,

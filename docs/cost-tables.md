@@ -27,6 +27,7 @@ import CostTable from '../../../src/components/CostTable.astro';
 - **Valores aproximados com `~`.** Use `~` quando o valor for estimado ("cerca de 50€ de combustível") e no total, se ele for aproximado.
 - **Linha de total quando os valores somam.** Ela fecha a tabela e confere com a soma das linhas. Se não conferir, verifique antes de publicar. Omita `total` quando os valores forem médias, diárias ou preços avulsos que não podem ser somados.
 - **Etapas do motorhome.** Por decisão do proprietário, as tabelas podem repetir compras compartilhadas entre etapas e não mostram total. Incluem materiais, equipamentos e serviços diretamente relacionados, com quantidade, unitário e frete em `detail`, além do link para a planilha completa após a tabela. Isso não altera o total histórico da visão geral.
+- **Ordem nas etapas do motorhome.** Ordenar pelo valor pago, do maior para o menor. Compras com `allocation_uncertain: true` aparecem no final, também em ordem decrescente, com “Uso não individualizado na planilha” no detalhe, conforme autorização do proprietário. Ferramentas de uso geral sem aplicação comprovada ficam só na planilha completa. A planilha completa mantém a ordem original.
 - **Legenda com o contexto.** `caption` diz quando os valores foram pagos e que não são preços atuais. Ela substitui o parágrafo de aviso antes da tabela.
 - **Formato dos números.** Padrão brasileiro: vírgula decimal e ponto de milhar (`26,50€`, `2.537€`), com o símbolo da moeda colado ao número.
 

@@ -66,6 +66,7 @@ cost_items:
     currency: BRL
     detail: Modelo Filo 40 FX - EX ? Tramontina
     category: Cozinha
+    system_ids: [kitchen]
   - source_row: 7
     description: IPVA 2018
     quantity: 1
@@ -95,6 +96,7 @@ cost_items:
     currency: BRL
     detail: Com parafusos para medição de nível
     category: Hidráulica
+    system_ids: [plumbing]
   - source_row: 10
     description: Tanque B (Potável) - 150 L
     quantity: 1
@@ -103,6 +105,7 @@ cost_items:
     amount: 430
     currency: BRL
     category: Hidráulica
+    system_ids: [plumbing]
   - source_row: 11
     description: Tanque C (Servida) - 70 L
     quantity: 1
@@ -113,6 +116,7 @@ cost_items:
     currency: BRL
     detail: Com parafusos para medição de nível
     category: Hidráulica
+    system_ids: [plumbing]
   - source_row: 12
     description: Janela corredica 400x1000mm
     quantity: 1
@@ -122,6 +126,7 @@ cost_items:
     currency: BRL
     detail: Mesa ? Finestracar
     category: Estrutura
+    system_ids: [windows]
   - source_row: 13
     description: Janela corredica 300x900mm
     quantity: 1
@@ -131,6 +136,7 @@ cost_items:
     currency: BRL
     detail: Porta corrediça ? Finestracar
     category: Estrutura
+    system_ids: [windows]
   - source_row: 14
     description: Janela maxiar 300x400
     quantity: 1
@@ -140,6 +146,7 @@ cost_items:
     currency: BRL
     detail: Banheiro ? Finestracar
     category: Estrutura
+    system_ids: [windows, bathroom]
   - source_row: 15
     description: Clarabóia 350x350mm
     quantity: 1
@@ -149,6 +156,7 @@ cost_items:
     currency: BRL
     detail: Teto ? Finestracar
     category: Estrutura
+    system_ids: [windows]
   - source_row: 16
     description: Gatilho Porta Interno
     quantity: 1
@@ -303,6 +311,7 @@ cost_items:
     currency: BRL
     detail: 2 Vintens
     category: Banheiro
+    system_ids: [bathroom]
   - source_row: 33
     description: FOGAO COOKTOP ASKOI 2 BOCAS PRETO
     quantity: 1
@@ -313,6 +322,7 @@ cost_items:
     currency: BRL
     detail: Askoi
     category: Cozinha
+    system_ids: [kitchen]
   - source_row: 34
     description: Turbina Iveco
     quantity: 1
@@ -724,6 +734,7 @@ cost_items:
     amount: 380
     currency: BRL
     category: Cozinha
+    system_ids: [kitchen]
   - source_row: 84
     description: Aquecedor de Água à Gás - Lorenzetti LZ750 BP GLP Vazão 7,0 l/min
     quantity: 1
@@ -733,6 +744,7 @@ cost_items:
     amount: 287.91
     currency: BRL
     category: Banheiro
+    system_ids: [bathroom, gas]
   - source_row: 85
     description: Disco de corte
     quantity: 3
@@ -823,6 +835,7 @@ cost_items:
     amount: 90.03
     currency: BRL
     category: Piso
+    system_ids: [flooring]
   - source_row: 96
     description: Compensado virola naval 18 mm
     quantity: 2
@@ -831,6 +844,7 @@ cost_items:
     amount: 301.14
     currency: BRL
     category: Piso
+    system_ids: [flooring]
   - source_row: 97
     description: Manta aluminizada 3TC
     quantity: 4
@@ -840,6 +854,7 @@ cost_items:
     currency: BRL
     detail: Produto usado vendido mais barato por um amigo
     category: Isolamento
+    system_ids: [thermal-insulation]
   - source_row: 98
     description: Selador Poliuretano
     quantity: 2
@@ -856,6 +871,7 @@ cost_items:
     amount: 93.9
     currency: BRL
     category: Isolamento
+    system_ids: [thermal-insulation]
   - source_row: 100
     description: Verniz marítmo
     quantity: 1
@@ -865,6 +881,7 @@ cost_items:
     currency: BRL
     detail: Sparlack
     category: Piso
+    system_ids: [flooring]
   - source_row: 101
     description: Espuma expansiva
     quantity: 1
@@ -915,6 +932,8 @@ cost_items:
     amount: 9
     currency: BRL
     category: Piso
+    system_ids: [flooring]
+    allocation_uncertain: true
   - source_row: 107
     description: Solda em tubo
     quantity: 1
@@ -948,6 +967,8 @@ cost_items:
     amount: 1.1
     currency: BRL
     category: Piso
+    system_ids: [flooring]
+    allocation_uncertain: true
   - source_row: 111
     description: Porca sextavada
     quantity: 1
@@ -956,6 +977,8 @@ cost_items:
     amount: 0.12
     currency: BRL
     category: Piso
+    system_ids: [flooring]
+    allocation_uncertain: true
   - source_row: 112
     description: "Parafuso sextavado "
     quantity: 1
@@ -964,6 +987,8 @@ cost_items:
     amount: 0.73
     currency: BRL
     category: Piso
+    system_ids: [flooring]
+    allocation_uncertain: true
   - source_row: 113
     description: Parafuso auto brocante
     quantity: 50
@@ -972,6 +997,8 @@ cost_items:
     amount: 13.5
     currency: BRL
     category: Piso
+    system_ids: [flooring]
+    allocation_uncertain: true
   - source_row: 114
     description: Parafuso auto brocante
     quantity: 50
@@ -980,6 +1007,8 @@ cost_items:
     amount: 5
     currency: BRL
     category: Piso
+    system_ids: [flooring]
+    allocation_uncertain: true
   - source_row: 115
     description: Cantoneira de aço
     quantity: 1
@@ -988,6 +1017,7 @@ cost_items:
     amount: 33.9
     currency: BRL
     category: Móveis
+    system_ids: [furniture-interiors]
   - source_row: 116
     description: Tirante de arame pequeno
     quantity: 1
@@ -1042,6 +1072,7 @@ cost_items:
     currency: BRL
     detail: Acabamento do piso
     category: Piso
+    system_ids: [flooring]
   - source_row: 122
     description: Thinner
     quantity: 1
@@ -1060,6 +1091,7 @@ cost_items:
     currency: BRL
     detail: Fixação cantoneira
     category: Piso
+    system_ids: [flooring]
   - source_row: 124
     description: Remendo pneu traseiro
     quantity: 1
@@ -1078,6 +1110,7 @@ cost_items:
     currency: BRL
     detail: 3 tanques
     category: Hidráulica
+    system_ids: [plumbing]
   - source_row: 126
     description: Bomba Automática Pressurizada Água 3.0 Gpm 12V
     quantity: 1
@@ -1087,6 +1120,7 @@ cost_items:
     currency: BRL
     detail: Aprox 11,6 L/min ? Padrão Seaflo
     category: Hidráulica
+    system_ids: [plumbing]
   - source_row: 127
     description: Compressor hermético 12V modelo Ve31fri
     quantity: 1
@@ -1097,6 +1131,7 @@ cost_items:
     currency: BRL
     detail: Montagem do frigobar 12V ? Velca
     category: Cozinha
+    system_ids: [kitchen]
   - source_row: 128
     description: Cooler para compressor 12V
     quantity: 1
@@ -1106,6 +1141,7 @@ cost_items:
     currency: BRL
     detail: Montagem do frigobar 12V
     category: Cozinha
+    system_ids: [kitchen]
   - source_row: 129
     description: Oléo do motor
     quantity: 1
@@ -1131,6 +1167,7 @@ cost_items:
     currency: BRL
     detail: Tipo manta ? Tarkett
     category: Piso
+    system_ids: [flooring]
   - source_row: 132
     description: "Fita dupla face "
     quantity: 1
@@ -1140,6 +1177,7 @@ cost_items:
     currency: BRL
     detail: Para fixação do piso vinílico ? Rapifix
     category: Piso
+    system_ids: [flooring]
   - source_row: 133
     description: Caixa de fusíveis
     quantity: 1
@@ -1221,6 +1259,8 @@ cost_items:
     amount: 44
     currency: BRL
     category: Estrutura
+    system_ids: [windows]
+    allocation_uncertain: true
   - source_row: 143
     description: Tubo galvanizado retangular 40x20x1,11mm
     quantity: 2
@@ -1230,6 +1270,7 @@ cost_items:
     currency: BRL
     detail: Estrutura da cama
     category: Cama
+    system_ids: [bed]
   - source_row: 144
     description: Tubo galvanizado retangular 20x20x1,11mm
     quantity: 1
@@ -1239,6 +1280,8 @@ cost_items:
     currency: BRL
     detail: Acabei usando no teto e não na cama
     category: Cama
+    system_ids: [thermal-insulation]
+    allocation_uncertain: true
   - source_row: 145
     description: Arame de solda MIG sem gás
     quantity: 1
@@ -1248,6 +1291,8 @@ cost_items:
     currency: BRL
     detail: Usei na cama e vários outros lugares ? Noll
     category: Cama
+    system_ids: [bed]
+    allocation_uncertain: true
   - source_row: 146
     description: Rebite pop nut M6
     quantity: 8
@@ -1257,6 +1302,7 @@ cost_items:
     currency: BRL
     detail: Porca rebite pra cama
     category: Cama
+    system_ids: [bed]
   - source_row: 147
     description: Parafuso sextavado 8.8 6x65mm
     quantity: 8
@@ -1266,6 +1312,7 @@ cost_items:
     currency: BRL
     detail: Parafuso pra porca rebite da cama
     category: Cama
+    system_ids: [bed]
   - source_row: 148
     description: Convertedor de ferrugem para base de pintura
     quantity: 1
@@ -1275,6 +1322,8 @@ cost_items:
     currency: BRL
     detail: Para cama e outros
     category: Cama
+    system_ids: [bed]
+    allocation_uncertain: true
   - source_row: 149
     description: Bateria estacionária
     detail: Heliar Freedom DF4001 240 Ah
@@ -1314,6 +1363,7 @@ cost_items:
     currency: BRL
     detail: Para tanques de água
     category: Hidráulica
+    system_ids: [plumbing]
   - source_row: 153
     description: Adaptador interno 1.1/2" polietileno
     quantity: 3
@@ -1323,6 +1373,7 @@ cost_items:
     currency: BRL
     detail: Para tanques de água
     category: Hidráulica
+    system_ids: [plumbing]
   - source_row: 154
     description: Adaptador interno 1/2" polietileno
     quantity: 1
@@ -1332,6 +1383,7 @@ cost_items:
     currency: BRL
     detail: Para tanques de água
     category: Hidráulica
+    system_ids: [plumbing]
   - source_row: 155
     description: Adaptador interno 3/4" polietileno
     quantity: 3
@@ -1341,6 +1393,7 @@ cost_items:
     currency: BRL
     detail: Para tanques de água
     category: Hidráulica
+    system_ids: [plumbing]
   - source_row: 156
     description: Plug Tigre 1/2"
     quantity: 2
@@ -1350,6 +1403,7 @@ cost_items:
     currency: BRL
     detail: Para tanques de água
     category: Hidráulica
+    system_ids: [plumbing]
   - source_row: 157
     description: Limpeza do reservatório de água do radiador
     quantity: 1
@@ -1407,6 +1461,7 @@ cost_items:
     currency: BRL
     detail: Para tanques de água
     category: Hidráulica
+    system_ids: [plumbing]
   - source_row: 163
     description: Niple Tigre 1.1/2" (conexão macho - macho )
     quantity: 2
@@ -1416,6 +1471,7 @@ cost_items:
     currency: BRL
     detail: Para tanques de água
     category: Hidráulica
+    system_ids: [plumbing]
   - source_row: 164
     description: Cotovelo interno 1/2" polietileno
     quantity: 1
@@ -1425,6 +1481,7 @@ cost_items:
     currency: BRL
     detail: Para tanques de água
     category: Hidráulica
+    system_ids: [plumbing]
   - source_row: 165
     description: Niple Tigre 1/2" (conexão macho - macho )
     quantity: 1
@@ -1434,6 +1491,7 @@ cost_items:
     currency: BRL
     detail: Para tanques de água
     category: Hidráulica
+    system_ids: [plumbing]
   - source_row: 166
     description: Engate rápido Viqua sem válvula
     quantity: 1
@@ -1443,6 +1501,7 @@ cost_items:
     currency: BRL
     detail: Para entrada do tanque de água limpa
     category: Hidráulica
+    system_ids: [plumbing]
   - source_row: 167
     description: Bico Viqua engate rápido 3/4"
     quantity: 1
@@ -1452,6 +1511,7 @@ cost_items:
     currency: BRL
     detail: Para entrada do tanque de água limpa
     category: Hidráulica
+    system_ids: [plumbing]
   - source_row: 168
     description: Niple Tigre 3/4" (conexão macho - macho)
     quantity: 1
@@ -1461,6 +1521,7 @@ cost_items:
     currency: BRL
     detail: Para tanques de água
     category: Hidráulica
+    system_ids: [plumbing]
   - source_row: 169
     description: Mangueira cristal 5/8x2 plastica
     quantity: 12
@@ -1470,6 +1531,7 @@ cost_items:
     currency: BRL
     detail: Para tubulação de gás
     category: GLP
+    system_ids: [gas]
   - source_row: 170
     description: Mangueira uso geral plástica
     quantity: 9
@@ -1479,6 +1541,7 @@ cost_items:
     currency: BRL
     detail: Para tubulação de água
     category: Hidráulica
+    system_ids: [plumbing]
   - source_row: 171
     description: Cabo PP
     detail: 2 × 2,5 mm² preto para cablagens
@@ -1509,6 +1572,7 @@ cost_items:
     currency: BRL
     detail: Barras inferiores do suporte
     category: Hidráulica
+    system_ids: [plumbing]
   - source_row: 174
     description: Troca do compressor 110V do frigobar para o 12V
     quantity: 1
@@ -1518,6 +1582,7 @@ cost_items:
     currency: BRL
     detail: Mão de obra (garantia 3 meses)
     category: Cozinha
+    system_ids: [kitchen]
   - source_row: 175
     description: Oléo do motor
     quantity: 5
@@ -1535,6 +1600,7 @@ cost_items:
     currency: BRL
     detail: Revestimento das portas dianteiras
     category: Revestimento
+    system_ids: [cabin]
   - source_row: 177
     description: Tecido Napa
     quantity: 4
@@ -1544,6 +1610,7 @@ cost_items:
     currency: BRL
     detail: Revestimento das portas dianteiras
     category: Revestimento
+    system_ids: [cabin]
   - source_row: 178
     description: Placa Duratex lisa
     quantity: 1
@@ -1553,6 +1620,7 @@ cost_items:
     currency: BRL
     detail: Revestimento das portas dianteiras
     category: Revestimento
+    system_ids: [cabin]
   - source_row: 179
     description: "Cola de contato "
     quantity: 1
@@ -1561,6 +1629,7 @@ cost_items:
     currency: BRL
     detail: Revestimento das portas dianteiras ? Amazonas
     category: Revestimento
+    system_ids: [cabin]
   - source_row: 180
     description: Dobradiça 1.1/2"
     quantity: 2
@@ -1570,6 +1639,7 @@ cost_items:
     currency: BRL
     detail: Revestimento das portas dianteiras
     category: Revestimento
+    system_ids: [cabin]
   - source_row: 181
     description: Graxa Branca
     quantity: 1
@@ -1588,6 +1658,7 @@ cost_items:
     currency: BRL
     detail: Para tanques de água
     category: Hidráulica
+    system_ids: [plumbing]
   - source_row: 183
     description: Selante PU branco
     quantity: 1
@@ -1639,6 +1710,7 @@ cost_items:
     currency: BRL
     detail: Modelo para Volkswagen ? Maxiclima
     category: Eletrodomésticos
+    system_ids: [climate-control]
   - source_row: 188
     description: Inversor Hayonik
     detail: 500 W; entrada 12 V e saída 127 V; pico de 1.000 W
@@ -1738,6 +1810,7 @@ cost_items:
     currency: BRL
     detail: Revestimento portas traseiras
     category: Revestimento
+    system_ids: [furniture-interiors]
   - source_row: 198
     description: Tubo galvanizado quadrado 20x20x1,11
     quantity: 1
@@ -1747,6 +1820,8 @@ cost_items:
     currency: BRL
     detail: Reforço interno do teto
     category: Estrutura
+    system_ids: [thermal-insulation]
+    allocation_uncertain: true
   - source_row: 199
     description: Cantoneira metálica
     detail: 1.1/2" × 1/8" para o suporte dos painéis; outra compra
@@ -1767,6 +1842,7 @@ cost_items:
     currency: BRL
     detail: Para união dos tanques de água limpa
     category: Hidráulica
+    system_ids: [plumbing]
   - source_row: 201
     description: Selante PU branco
     quantity: 2
@@ -1776,6 +1852,7 @@ cost_items:
     currency: BRL
     detail: Instalação clarabóia ? Sika
     category: Estrutura
+    system_ids: [windows]
   - source_row: 202
     description: Parafusos Allen
     detail: Cabeça chata M6 × 20 para os painéis no rack
@@ -1840,6 +1917,7 @@ cost_items:
     currency: BRL
     detail: Fixação da bomba de água
     category: Hidráulica
+    system_ids: [plumbing]
   - source_row: 208
     description: Parafuso Mitofix cara chata philips 4,5 x 60
     quantity: 30
@@ -1848,6 +1926,7 @@ cost_items:
     amount: 5.4
     currency: BRL
     category: Móveis
+    system_ids: [furniture-interiors]
   - source_row: 209
     description: Parafusos de fixação
     detail: Classe 8.8 M8 × 100 para suporte dos painéis e bateria
@@ -1868,6 +1947,7 @@ cost_items:
     currency: BRL
     detail: Fixação tanques de água
     category: Hidráulica
+    system_ids: [plumbing]
   - source_row: 211
     description: Ripas de madeira Pinus
     quantity: 1
@@ -1877,6 +1957,7 @@ cost_items:
     currency: BRL
     detail: 8 ripas de madeira reaproveitada
     category: Móveis
+    system_ids: [bathroom]
   - source_row: 212
     description: Parafuso M4 x 35
     quantity: 10
@@ -1885,6 +1966,8 @@ cost_items:
     amount: 1.8
     currency: BRL
     category: Hidráulica
+    system_ids: [plumbing]
+    allocation_uncertain: true
   - source_row: 213
     description: Rebite pop nut M4 com rosca
     quantity: 10
@@ -1893,6 +1976,8 @@ cost_items:
     amount: 4.5
     currency: BRL
     category: Hidráulica
+    system_ids: [plumbing]
+    allocation_uncertain: true
   - source_row: 214
     description: Arruela lisa zincada 1/4"
     quantity: 10
@@ -1901,6 +1986,8 @@ cost_items:
     amount: 0.7
     currency: BRL
     category: Hidráulica
+    system_ids: [plumbing]
+    allocation_uncertain: true
   - source_row: 215
     description: Arruela lisa zincada 5/32"
     quantity: 10
@@ -1909,6 +1996,8 @@ cost_items:
     amount: 0.3
     currency: BRL
     category: Hidráulica
+    system_ids: [plumbing]
+    allocation_uncertain: true
   - source_row: 216
     description: Parafuso sextavado 8.8 M6 x 45
     quantity: 10
@@ -1917,6 +2006,8 @@ cost_items:
     amount: 3.5
     currency: BRL
     category: Estrutura
+    system_ids: [thermal-insulation]
+    allocation_uncertain: true
   - source_row: 217
     description: Selante PU branco
     quantity: 2
@@ -1926,6 +2017,7 @@ cost_items:
     currency: BRL
     detail: Instalação clarabóia ? Sika
     category: Estrutura
+    system_ids: [windows]
   - source_row: 218
     description: Solda em tubo
     quantity: 1
@@ -1945,6 +2037,7 @@ cost_items:
     currency: BRL
     detail: "15 peças "
     category: Hidráulica
+    system_ids: [plumbing]
   - source_row: 220
     description: Mangueiras de água
     quantity: 1
@@ -1954,6 +2047,7 @@ cost_items:
     currency: BRL
     detail: 7m de 1" e 3m 1 1/2"
     category: Hidráulica
+    system_ids: [plumbing]
   - source_row: 221
     description: Conexões diversas pa tanques de água
     quantity: 3
@@ -1963,6 +2057,7 @@ cost_items:
     currency: BRL
     detail: Adaptadores 1/2"
     category: Hidráulica
+    system_ids: [plumbing]
   - source_row: 222
     description: Porca olhal 3/8"
     quantity: 1
@@ -1972,6 +2067,7 @@ cost_items:
     currency: BRL
     detail: Para "tiedown" no piso do porta malas
     category: Estrutura
+    system_ids: [flooring]
   - source_row: 223
     description: Carpete sem resina preto
     quantity: 1
@@ -1981,6 +2077,7 @@ cost_items:
     currency: BRL
     detail: Revestimento móvel cabine
     category: Revestimento
+    system_ids: [cabin]
   - source_row: 224
     description: "Cola de contato "
     quantity: 1
@@ -1990,6 +2087,8 @@ cost_items:
     currency: BRL
     detail: FCC
     category: Revestimento
+    system_ids: [furniture-interiors]
+    allocation_uncertain: true
   - source_row: 225
     description: MDF revestido Branco + fita de borda
     quantity: 1
@@ -1999,6 +2098,8 @@ cost_items:
     currency: BRL
     detail: Estrutura dos móveis
     category: Móveis
+    system_ids: [furniture-interiors, kitchen]
+    allocation_uncertain: true
   - source_row: 226
     description: "Tubo de exaustão 90mm "
     quantity: 1
@@ -2008,6 +2109,7 @@ cost_items:
     currency: BRL
     detail: Chaminé do aquecedor de água
     category: Banheiro
+    system_ids: [bathroom]
   - source_row: 227
     description: Torneira com filtro
     quantity: 1
@@ -2017,6 +2119,7 @@ cost_items:
     currency: BRL
     detail: Equation
     category: Cozinha
+    system_ids: [kitchen, plumbing]
   - source_row: 228
     description: Sifão
     quantity: 1
@@ -2026,6 +2129,7 @@ cost_items:
     currency: BRL
     detail: Equation
     category: Cozinha
+    system_ids: [kitchen, plumbing]
   - source_row: 229
     description: Registro para botijão de gás
     quantity: 1
@@ -2034,6 +2138,7 @@ cost_items:
     amount: 20.59
     currency: BRL
     category: GLP
+    system_ids: [gas]
   - source_row: 230
     description: Espumas para colchão e poltrona
     quantity: 1
@@ -2043,6 +2148,8 @@ cost_items:
     currency: BRL
     detail: D33 com 8cm de altura
     category: Móveis
+    system_ids: [furniture-interiors, bed]
+    allocation_uncertain: true
   - source_row: 231
     description: Espaguete termorretrátil
     detail: Para emendas de fios
@@ -2062,9 +2169,8 @@ cost_items:
     unit_price: 4.2
     amount: 4.2
     currency: BRL
-    system_ids:
-      - solar-power
     category: Elétrica
+    system_ids: [solar-power, kitchen]
   - source_row: 233
     description: Conexão 1/2" - corrugado de 5/8"
     quantity: 1
@@ -2074,6 +2180,7 @@ cost_items:
     currency: BRL
     detail: Pra agua fria do aquecedor
     category: Hidráulica
+    system_ids: [plumbing, bathroom]
   - source_row: 234
     description: Luva roscada 1/2"
     quantity: 1
@@ -2083,6 +2190,7 @@ cost_items:
     currency: BRL
     detail: Pra agua fria do aquecedor
     category: Hidráulica
+    system_ids: [plumbing, bathroom]
   - source_row: 235
     description: Adaptador 1/2" - corrugado
     quantity: 1
@@ -2092,6 +2200,7 @@ cost_items:
     currency: BRL
     detail: Para entrada do gás no aquecedor
     category: GLP
+    system_ids: [gas, bathroom]
   - source_row: 236
     description: Conexão TEE
     quantity: 1
@@ -2101,6 +2210,7 @@ cost_items:
     currency: BRL
     detail: Para divisão do gás entre aquecedor e fogão
     category: GLP
+    system_ids: [gas, bathroom]
   - source_row: 237
     description: Pistões a gás
     quantity: 13
@@ -2111,6 +2221,7 @@ cost_items:
     currency: BRL
     detail: para armários aéreos
     category: Móveis
+    system_ids: [furniture-interiors]
   - source_row: 238
     description: "Parafuso auto brocante 4,2x25 "
     quantity: 100
@@ -2120,6 +2231,7 @@ cost_items:
     currency: BRL
     detail: Cabeça flangeada (O cabeça cônica que coloquei no piso soltou com vibração)
     category: Banheiro
+    system_ids: [flooring]
   - source_row: 239
     description: Parafuso sextavado 6x50
     quantity: 2
@@ -2129,6 +2241,7 @@ cost_items:
     currency: BRL
     detail: Pra instalar porca rebite do aquecedor
     category: Banheiro
+    system_ids: [bathroom]
   - source_row: 240
     description: Parafuso sextavado 6x30
     quantity: 4
@@ -2138,6 +2251,7 @@ cost_items:
     currency: BRL
     detail: Fixacão do aquecedor
     category: Banheiro
+    system_ids: [bathroom]
   - source_row: 241
     description: Rebite pop nut M6 com rosca
     quantity: 6
@@ -2147,6 +2261,7 @@ cost_items:
     currency: BRL
     detail: Fixação do aquecedor
     category: Banheiro
+    system_ids: [bathroom]
   - source_row: 242
     description: Conexão 1/2" - corrugado de 5/8"
     quantity: 1
@@ -2156,6 +2271,7 @@ cost_items:
     currency: BRL
     detail: Para entrada de água da torneira da cozinha
     category: Cozinha
+    system_ids: [kitchen, plumbing]
   - source_row: 243
     description: Luva roscada 1/2"
     quantity: 1
@@ -2165,6 +2281,7 @@ cost_items:
     currency: BRL
     detail: Para entrada de água da torneira da cozinha
     category: Cozinha
+    system_ids: [kitchen, plumbing]
   - source_row: 244
     description: Mangueira corrugada
     detail: 1/2" para os fios no porta-malas
@@ -2219,6 +2336,7 @@ cost_items:
     currency: BRL
     detail: 2 unid. Uma pra fixar frigobar outra pra prender carga no porta malas
     category: Estrutura
+    system_ids: [flooring, kitchen]
   - source_row: 249
     description: Par de puxadores de porta
     quantity: 1
@@ -2229,6 +2347,7 @@ cost_items:
     currency: BRL
     detail: Para portas dianteiras
     category: Manutenção
+    system_ids: [cabin]
   - source_row: 250
     description: MDF cru 6mm
     quantity: 2
@@ -2238,6 +2357,7 @@ cost_items:
     currency: BRL
     detail: Revestimento interno do banheio
     category: Banheiro
+    system_ids: [bathroom]
   - source_row: 251
     description: MDF revestido Branco 3mm
     quantity: 2
@@ -2247,6 +2367,7 @@ cost_items:
     currency: BRL
     detail: Revestimento externo do banheiro
     category: Banheiro
+    system_ids: [bathroom]
   - source_row: 252
     description: Conjunto ponta PH2
     quantity: 1
@@ -2265,6 +2386,7 @@ cost_items:
     currency: BRL
     detail: Sobra de material da loja, por isso foi barato
     category: Banheiro
+    system_ids: [bathroom]
   - source_row: 254
     description: Tinta preta 225ml
     quantity: 1
@@ -2274,6 +2396,7 @@ cost_items:
     currency: BRL
     detail: Pintar PU da janela do banheiro
     category: Banheiro
+    system_ids: [bathroom]
   - source_row: 255
     description: Spray branco
     quantity: 1
@@ -2283,6 +2406,8 @@ cost_items:
     currency: BRL
     detail: uso geral
     category: Estrutura
+    system_ids: [thermal-insulation]
+    allocation_uncertain: true
   - source_row: 256
     description: Aguarrás
     quantity: 1
@@ -2292,6 +2417,8 @@ cost_items:
     currency: BRL
     detail: Limpeza
     category: Banheiro
+    system_ids: [bathroom]
+    allocation_uncertain: true
   - source_row: 257
     description: Parafusos, arruelas, porcas e uma tesoura
     quantity: 1
@@ -2301,6 +2428,7 @@ cost_items:
     currency: BRL
     detail: Montagem do banheiro
     category: Banheiro
+    system_ids: [bathroom]
   - source_row: 258
     description: Dobradiça FGV 110 graus curva sem parafuso
     quantity: 18
@@ -2310,6 +2438,7 @@ cost_items:
     currency: BRL
     detail: Montagem dos móveis ? FGV
     category: Móveis
+    system_ids: [furniture-interiors]
   - source_row: 259
     description: Fio paralelo
     detail: 2 × 1,0 mm² branco
@@ -2330,6 +2459,7 @@ cost_items:
     currency: BRL
     detail: Cinza
     category: Móveis
+    system_ids: [cabin]
   - source_row: 261
     description: Tecido para forrar volante
     quantity: 1
@@ -2338,6 +2468,7 @@ cost_items:
     amount: 4
     currency: BRL
     category: Móveis
+    system_ids: [cabin]
   - source_row: 262
     description: Parafusos e porcas rebites M6
     quantity: 1
@@ -2347,6 +2478,7 @@ cost_items:
     currency: BRL
     detail: Fixação do aquecedor na parede do banheiro
     category: Banheiro
+    system_ids: [bathroom]
   - source_row: 263
     description: Capas para colchão e poltrona
     quantity: 1
@@ -2356,6 +2488,8 @@ cost_items:
     currency: BRL
     detail: Mão de obra de 3 capas + tecido
     category: Móveis
+    system_ids: [furniture-interiors, bed]
+    allocation_uncertain: true
   - source_row: 264
     description: Ponteira philips para parafusadeira
     quantity: 1
@@ -2373,6 +2507,7 @@ cost_items:
     currency: BRL
     detail: Colagem do plastico nas paredes do banheiro para impermeabilização
     category: Banheiro
+    system_ids: [bathroom]
   - source_row: 266
     description: Espaguete corrugado
     detail: Para os fios no porta-malas
@@ -2393,6 +2528,7 @@ cost_items:
     currency: BRL
     detail: Para quinas do banheiro ? Sica
     category: Banheiro
+    system_ids: [bathroom]
   - source_row: 268
     description: Parafusos diversos
     quantity: 1
@@ -2402,6 +2538,7 @@ cost_items:
     currency: BRL
     detail: Fixação das paredes do banheiro
     category: Banheiro
+    system_ids: [bathroom]
   - source_row: 269
     description: Válvula para tanque
     quantity: 1
@@ -2411,6 +2548,7 @@ cost_items:
     currency: BRL
     detail: Ralo para banheiro
     category: Hidráulica
+    system_ids: [plumbing, bathroom]
   - source_row: 270
     description: Conexões para ralo do banheiro
     quantity: 1
@@ -2419,6 +2557,7 @@ cost_items:
     amount: 14.2
     currency: BRL
     category: Hidráulica
+    system_ids: [plumbing, bathroom]
   - source_row: 271
     description: Cotovelo para ralo do banheiro
     quantity: 1
@@ -2427,6 +2566,7 @@ cost_items:
     amount: 11.6
     currency: BRL
     category: Hidráulica
+    system_ids: [plumbing, bathroom]
   - source_row: 272
     description: Botijão de gás vazio
     quantity: 1
@@ -2436,6 +2576,7 @@ cost_items:
     currency: BRL
     detail: Botijão usado
     category: GLP
+    system_ids: [gas]
   - source_row: 273
     description: Recarga de gás
     quantity: 1
@@ -2444,6 +2585,7 @@ cost_items:
     amount: 65
     currency: BRL
     category: GLP
+    system_ids: [gas]
   - source_row: 274
     description: Painel MDF branco 3mm
     quantity: 1
@@ -2453,6 +2595,7 @@ cost_items:
     currency: BRL
     detail: revestimento das paredes
     category: Revestimento
+    system_ids: [furniture-interiors]
   - source_row: 275
     description: Fitas LED RGB
     detail: Sanca 5050 de 5 m com controle e fonte
@@ -2486,6 +2629,7 @@ cost_items:
     currency: BRL
     detail: Válvula pro chuveiro
     category: Hidráulica
+    system_ids: [plumbing, bathroom]
   - source_row: 278
     description: Parafusos e porcas rebites M6
     quantity: 1
@@ -2495,6 +2639,7 @@ cost_items:
     currency: BRL
     detail: Fixação dos móveis nas colunas da van
     category: Móveis
+    system_ids: [furniture-interiors]
   - source_row: 279
     description: Furadeira / Parafusadeira
     quantity: 1
@@ -2523,6 +2668,7 @@ cost_items:
     currency: BRL
     detail: Repondo uma que rasgou
     category: Banheiro
+    system_ids: [bathroom]
   - source_row: 282
     description: MDF 15mm Cor Nogal Terracota
     quantity: 1
@@ -2532,6 +2678,8 @@ cost_items:
     currency: BRL
     detail: Para portas, mesa e pia
     category: Móveis
+    system_ids: [furniture-interiors, kitchen]
+    allocation_uncertain: true
   - source_row: 283
     description: Puxador branco 64mm
     quantity: 15
@@ -2541,6 +2689,7 @@ cost_items:
     currency: BRL
     detail: Pauma
     category: Móveis
+    system_ids: [furniture-interiors]
   - source_row: 284
     description: Spray Branco
     quantity: 1
@@ -2550,6 +2699,8 @@ cost_items:
     currency: BRL
     detail: Pinturas de metais diversos
     category: Estrutura
+    system_ids: [thermal-insulation]
+    allocation_uncertain: true
   - source_row: 285
     description: Cortina blackout cinza
     quantity: 1
@@ -2559,6 +2710,7 @@ cost_items:
     currency: BRL
     detail: Para isolar cabine da casa
     category: Estrutura
+    system_ids: [cabin]
   - source_row: 286
     description: Medidores de nível d'água dos tanques
     quantity: 2
@@ -2568,6 +2720,7 @@ cost_items:
     amount: 175
     currency: BRL
     category: Hidráulica
+    system_ids: [plumbing]
   - source_row: 287
     description: Cabo de bateria
     detail: 500 A e 2,5 m
@@ -2587,6 +2740,8 @@ cost_items:
     amount: 13.9
     currency: BRL
     category: Estrutura
+    system_ids: [thermal-insulation]
+    allocation_uncertain: true
   - source_row: 289
     description: Disjuntores diversos
     detail: Conjunto com seis disjuntores
@@ -2614,6 +2769,7 @@ cost_items:
     amount: 4.5
     currency: BRL
     category: GLP
+    system_ids: [gas]
   - source_row: 292
     description: Tubos PVC, conexões, veda rosca, etc
     quantity: 1
@@ -2623,6 +2779,7 @@ cost_items:
     currency: BRL
     detail: Instalação do ralo da pia
     category: Hidráulica
+    system_ids: [plumbing]
   - source_row: 293
     description: Conectores em barra
     detail: 10 mm para os fios no armário e no porta-malas
@@ -2643,6 +2800,7 @@ cost_items:
     currency: BRL
     detail: Para porta malas
     category: Hidráulica
+    system_ids: [plumbing]
   - source_row: 295
     description: Trinco para frigobar
     quantity: 1
@@ -2651,6 +2809,7 @@ cost_items:
     amount: 8.5
     currency: BRL
     category: Eletrodomésticos
+    system_ids: [kitchen]
   - source_row: 296
     description: Trinco, parafusos, brocas
     quantity: 1
@@ -2659,6 +2818,8 @@ cost_items:
     amount: 16.21
     currency: BRL
     category: Banheiro
+    system_ids: [bathroom]
+    allocation_uncertain: true
   - source_row: 297
     description: Suportes para disjuntores
     detail: Metálicos
@@ -2679,6 +2840,7 @@ cost_items:
     currency: BRL
     detail: Para estrutura dos bancos dianteiros
     category: Estrutura
+    system_ids: [cabin]
   - source_row: 299
     description: Espuma expansiva
     quantity: 1
@@ -2688,6 +2850,7 @@ cost_items:
     currency: BRL
     detail: Para gaps nas paredes
     category: Estrutura
+    system_ids: [thermal-insulation]
   - source_row: 300
     description: Painel MDF branco 3mm
     quantity: 1
@@ -2697,6 +2860,7 @@ cost_items:
     currency: BRL
     detail: Revestimento das paredes
     category: Revestimento
+    system_ids: [furniture-interiors]
   - source_row: 301
     description: Cabo de rede
     quantity: 12
@@ -2706,6 +2870,7 @@ cost_items:
     currency: BRL
     detail: Para instalação do medidor de nível dos tanques
     category: Hidráulica
+    system_ids: [plumbing]
   - source_row: 302
     description: Arame de solda MIG sem gás
     quantity: 1
@@ -2715,6 +2880,7 @@ cost_items:
     currency: BRL
     detail: Para estrutura dos bancos
     category: Estrutura
+    system_ids: [cabin]
   - source_row: 303
     description: Espuma expansiva
     quantity: 1
@@ -2724,6 +2890,7 @@ cost_items:
     currency: BRL
     detail: Para gaps nas paredes
     category: Estrutura
+    system_ids: [thermal-insulation]
   - source_row: 304
     description: Parafusos, arruelas e porcas
     quantity: 1
@@ -2733,6 +2900,8 @@ cost_items:
     currency: BRL
     detail: Para suporte dos bancos e fixação das paredes
     category: Estrutura
+    system_ids: [cabin, furniture-interiors]
+    allocation_uncertain: true
   - source_row: 305
     description: Caixa de esgoto chuveiro de barco e motorhome
     quantity: 1
@@ -2742,6 +2911,7 @@ cost_items:
     currency: BRL
     detail: Água do ralo não escoava por gravidade, então instalei essa caixa com bomba automática
     category: Hidráulica
+    system_ids: [plumbing]
   - source_row: 306
     description: Cabo de embreagem
     quantity: 1
@@ -2776,6 +2946,8 @@ cost_items:
     currency: BRL
     detail: Para cabine, porta malas e chapas para proteção dos tanques
     category: Piso
+    system_ids: [flooring, cabin, plumbing]
+    allocation_uncertain: true
   - source_row: 310
     description: Fio de 6 mm²
     detail: Compra de 3 m
@@ -2818,6 +2990,7 @@ cost_items:
     currency: BRL
     detail: Para cinto de segurança
     category: Estrutura
+    system_ids: [cabin]
   - source_row: 314
     description: Travessa dianteira do chassi
     quantity: 1
@@ -2881,6 +3054,7 @@ cost_items:
     amount: 100
     currency: BRL
     category: Cozinha
+    system_ids: [kitchen]
   - source_row: 321
     description: Trava do cinto de segurança
     quantity: 1
@@ -2888,6 +3062,7 @@ cost_items:
     amount: 0
     currency: BRL
     category: Acessórios
+    system_ids: [cabin]
   - source_row: 322
     description: Capa protetora do cinto de segurança
     quantity: 2
@@ -2897,6 +3072,7 @@ cost_items:
     amount: 39.96
     currency: BRL
     category: Acessórios
+    system_ids: [cabin]
   - source_row: 323
     description: "Trava de volante "
     quantity: 1
@@ -2906,6 +3082,7 @@ cost_items:
     amount: 120
     currency: BRL
     category: Acessórios
+    system_ids: [cabin]
   - source_row: 324
     description: Tecido Brim Laranja
     quantity: 5
@@ -2915,6 +3092,7 @@ cost_items:
     currency: BRL
     detail: Para cortinas das janelas
     category: Decoração
+    system_ids: [furniture-interiors]
   - source_row: 325
     description: Porta escova de dentes
     quantity: 1
@@ -2923,6 +3101,7 @@ cost_items:
     amount: 4.99
     currency: BRL
     category: Decoração
+    system_ids: [bathroom]
   - source_row: 326
     description: Saco p/ limpeza xadrez
     quantity: 2
@@ -2932,6 +3111,8 @@ cost_items:
     currency: BRL
     detail: Pano de chão
     category: Cozinha
+    system_ids: [kitchen]
+    allocation_uncertain: true
   - source_row: 327
     description: Pano de copa buzios estampado
     quantity: 1
@@ -2941,6 +3122,7 @@ cost_items:
     currency: BRL
     detail: pano de louça
     category: Cozinha
+    system_ids: [kitchen]
   - source_row: 328
     description: Pano de limpeza superflex rolo 15 x 0,33
     quantity: 1
@@ -2950,6 +3132,8 @@ cost_items:
     currency: BRL
     detail: Pano de microfibra
     category: Cozinha
+    system_ids: [kitchen]
+    allocation_uncertain: true
   - source_row: 329
     description: Suporte para celular com ventosa
     quantity: 1
@@ -2959,6 +3143,7 @@ cost_items:
     currency: BRL
     detail: Para uso na cabine
     category: Acessórios
+    system_ids: [cabin]
   - source_row: 330
     description: Pá de lixo
     quantity: 1
@@ -2967,6 +3152,8 @@ cost_items:
     amount: 3.5
     currency: BRL
     category: Cozinha
+    system_ids: [kitchen]
+    allocation_uncertain: true
   - source_row: 331
     description: "Lixeira 6L "
     quantity: 1
@@ -2975,6 +3162,7 @@ cost_items:
     amount: 13.5
     currency: BRL
     category: Cozinha
+    system_ids: [kitchen]
   - source_row: 332
     description: Rodo para pia
     quantity: 1
@@ -2983,6 +3171,7 @@ cost_items:
     amount: 2.9
     currency: BRL
     category: Cozinha
+    system_ids: [kitchen]
   - source_row: 333
     description: Pano de prato
     quantity: 2
@@ -2991,6 +3180,7 @@ cost_items:
     amount: 7.2
     currency: BRL
     category: Cozinha
+    system_ids: [kitchen]
   - source_row: 334
     description: Varal c/ 8 prenderores
     quantity: 1
@@ -2999,6 +3189,8 @@ cost_items:
     amount: 6.9
     currency: BRL
     category: Cozinha
+    system_ids: [kitchen]
+    allocation_uncertain: true
   - source_row: 335
     description: Escorredor de louça opaco
     quantity: 1
@@ -3007,6 +3199,7 @@ cost_items:
     amount: 19.9
     currency: BRL
     category: Cozinha
+    system_ids: [kitchen]
   - source_row: 336
     description: Caixa organizadora 5L baixa
     quantity: 1
@@ -3016,6 +3209,7 @@ cost_items:
     currency: BRL
     detail: Para talheres
     category: Cozinha
+    system_ids: [kitchen]
   - source_row: 337
     description: Ganchos auto adesivos 8 unidades
     quantity: 1
@@ -3025,6 +3219,7 @@ cost_items:
     currency: BRL
     detail: Para banheiro e cozinha
     category: Banheiro
+    system_ids: [bathroom, kitchen]
   - source_row: 338
     description: Cesto multiuso
     quantity: 2
@@ -3034,6 +3229,7 @@ cost_items:
     currency: BRL
     detail: Porta shampoo
     category: Banheiro
+    system_ids: [bathroom]
   - source_row: 339
     description: Revisão completa do eixo Cardan
     quantity: 1
@@ -3292,6 +3488,7 @@ cost_items:
     currency: BRL
     detail: Para montagem do balcão da cozinha
     category: Móveis
+    system_ids: [furniture-interiors, kitchen]
   - source_row: 369
     description: Tecido carpete e courvim
     quantity: 1
@@ -3301,6 +3498,7 @@ cost_items:
     currency: BRL
     detail: Para revestir parede da cabine e volante
     category: Revestimento
+    system_ids: [cabin]
   - source_row: 370
     description: Terminais isolados
     detail: Olhal para ligação entre alternador e bateria estacionária
@@ -3321,6 +3519,7 @@ cost_items:
     currency: BRL
     detail: Para portas dos armários
     category: Móveis
+    system_ids: [furniture-interiors]
   - source_row: 372
     description: Clips para fechamento de embalagens
     quantity: 1
@@ -3330,6 +3529,7 @@ cost_items:
     currency: BRL
     detail: 20 unidades
     category: Cozinha
+    system_ids: [kitchen]
   - source_row: 373
     description: Tapete 36x50cm
     quantity: 1
@@ -3338,6 +3538,8 @@ cost_items:
     amount: 7.9
     currency: BRL
     category: Banheiro
+    system_ids: [bathroom]
+    allocation_uncertain: true
   - source_row: 374
     description: Cantoneira branca, barra de rosca e corda para cortina
     quantity: 1
@@ -3346,6 +3548,8 @@ cost_items:
     amount: 30
     currency: BRL
     category: Estrutura
+    system_ids: [furniture-interiors]
+    allocation_uncertain: true
   - source_row: 375
     description: Buchas, vassoura e escova de limpeza
     quantity: 1
@@ -3354,6 +3558,8 @@ cost_items:
     amount: 12.97
     currency: BRL
     category: Banheiro
+    system_ids: [bathroom]
+    allocation_uncertain: true
   - source_row: 376
     description: Brocas 3mm e 2,5mm
     quantity: 1
@@ -3363,6 +3569,8 @@ cost_items:
     currency: BRL
     detail: Para furação de parafusos na lataria
     category: Estrutura
+    system_ids: [thermal-insulation]
+    allocation_uncertain: true
   - source_row: 377
     description: Tampa do comando de válvulas
     quantity: 1
@@ -3383,6 +3591,7 @@ cost_items:
     currency: BRL
     detail: Para fazer líquido para o porta potti
     category: Banheiro
+    system_ids: [bathroom]
   - source_row: 379
     description: Mini ventilador USB
     quantity: 1
@@ -3393,6 +3602,7 @@ cost_items:
     currency: BRL
     detail: Para usar como exaustor no fogão
     category: Cozinha
+    system_ids: [kitchen]
   - source_row: 380
     description: Arco de serra
     quantity: 1
@@ -3572,10 +3782,13 @@ systems:
       - SketchUp
     processes:
       - Desenho 3D da distribuição interna da van.
+      - Testes do layout em tamanho real antes da construção dos móveis.
+      - Definição das dimensões dos móveis a partir dos equipamentos e do espaço útil.
+      - Organização da sequência da obra para reduzir retrabalho.
       - Organização dos custos da construção em planilha.
   - system_id: thermal-insulation
     title: Isolamento térmico e acústico
-    video_ids: [pBVVlorqkBU]
+    video_ids: [pBVVlorqkBU, 8Y2hkStLF14]
     materials:
       - Material similar ao 3TC, sem marca confirmada.
       - Lã de rocha nos locais de difícil acesso.
@@ -3583,8 +3796,9 @@ systems:
     title: Piso e assoalho
     video_ids: [WBOeLFDTGbo]
     materials:
-      - Madeira para o piso.
+      - Compensado naval para o piso.
       - Revestimento em piso vinílico.
+      - Verniz e cantoneiras de alumínio no acabamento.
     processes:
       - Recuperação do assoalho metálico, com retirada de ferrugem e soldagem.
       - Preparação e montagem do piso de madeira, com corte, encaixe e verniz.
@@ -3594,6 +3808,12 @@ systems:
     video_ids: [lM10PvYTkGA, yRH7NiOk9BQ, wuOiO7XYDgQ]
     equipment:
       - Janelas Finestra Car.
+      - Claraboia com abertura manual, sem ventoinha.
+    materials:
+      - Selante PU na montagem das janelas.
+    tools:
+      - Serra tico-tico.
+      - Aplicador de selante.
     processes:
       - Instalação das janelas na van.
   - system_id: solar-power
@@ -3634,16 +3854,20 @@ systems:
       - Reservatório de água servida de 70 litros.
     materials:
       - Mangueiras flexíveis.
+    technologies:
+      - Distribuição de água com bomba pressurizada.
+      - Medição elétrica do nível dos reservatórios.
     processes:
       - Instalação das mangueiras e dos medidores de nível.
       - Instalação da caixa de água servida para auxiliar o escoamento.
   - system_id: gas
     title: Sistema de gás
-    video_ids: [8Y2hkStLF14, wuOiO7XYDgQ]
+    video_ids: [8Y2hkStLF14, TMszKJB0tSI, wuOiO7XYDgQ]
     materials:
       - Mangueiras para instalação de gás.
     equipment:
       - Válvula ou registro de gás.
+      - Botijão de gás de 13 kg.
   - system_id: bed
     title: Cama removível e colchões
     video_ids: [D4As-ZLi1wU, wuOiO7XYDgQ, MZ_rUN7TPPg]
@@ -3652,6 +3876,7 @@ systems:
       - Cantoneiras, porcas rebite e parafusos.
       - Sobras de MDF dos móveis, utilizadas no estrado.
       - Espuma D33 com 8 cm de espessura, escolhida após testes na loja.
+      - Capas com zíper em tecido Acquablock.
     processes:
       - Construção de uma estrutura de cama removível.
   - system_id: climate-control
@@ -3670,8 +3895,12 @@ systems:
       - Madeira pinus reaproveitada para a estrutura.
       - MDF de 6 mm no revestimento interno e de 3 mm no externo.
       - Plástico reaproveitado e selante PU.
+      - Cola de contato no revestimento interno.
     equipment:
       - Banheiro portátil Porta Potti.
+      - Aquecedor de água a gás Lorenzetti.
+    tools:
+      - Serra de bancada.
     processes:
       - Construção da estrutura, revestimento e impermeabilização do banheiro.
     precautions:
@@ -3697,11 +3926,20 @@ systems:
       - Pia de inox.
       - Cooktop de duas bocas.
       - Frigobar convertido para 12 V.
+      - Torneira com filtro integrado.
   - system_id: cabin
     title: Reforma da cabine
     video_ids: [Egs9kjhoBcU]
+    equipment:
+      - Bancos usados de Peugeot para a cabine.
+    materials:
+      - Perfis de aço galvanizado nas bases dos bancos.
+      - Compensado naval reaproveitado no baú sobre a cabine.
+      - Carpete ou feltro e courvim nos acabamentos.
+      - Borracha para o piso da cabine e do bagageiro.
     processes:
-      - Reforma da cabine e instalação de bancos de couro, conforme o título e a abertura da descrição.
+      - Substituição dos bancos e construção de novas bases.
+      - Reforma do baú, painel, volante e forros das portas dianteiras.
 decisions:
   - solution: Construção artesanal da motorcasa.
     reason: Os preços dos motorhomes no Brasil motivaram a escolha pela montagem própria.
@@ -3775,6 +4013,26 @@ notes: >
   proprietário em 15/11/2026. Essa aprovação não constitui validação técnica
   das instalações. O ponto do mapa representa a cidade, não o endereço da garagem.
 provenance:
+  - source_type: manual
+    verification_status: reviewed
+    source_id: owner-grouped-costs-policy-2026-11-17
+    fields: ["cost_items.system_ids", "cost_items.allocation_uncertain"]
+  - source_type: external_source
+    verification_status: reviewed
+    source_id: "transcripts/motorhome-projects/iveco-daily-3510/editorial-review.md:quatro-paginas-agrupadas-2026-11-17"
+    fields: [systems, cost_items]
+  - source_type: transcript
+    verification_status: reviewed
+    source_id: "transcripts/motorhome-projects/iveco-daily-3510/qukRFG4Uxmw.raw.pt-orig.vtt:00:06:00-00:26:59"
+    fields: ["systems[0].technologies", "systems[0].processes"]
+  - source_type: transcript
+    verification_status: reviewed
+    source_id: "transcripts/motorhome-projects/iveco-daily-3510/1asypqExBhA.raw.pt-orig.vtt:00:01:00-00:10:59"
+    fields: ["systems[0].processes"]
+  - source_type: transcript
+    verification_status: reviewed
+    source_id: "transcripts/motorhome-projects/iveco-daily-3510/jWKbwh202hg.raw.pt-orig.vtt:00:01:00-00:08:59"
+    fields: ["systems[0].processes"]
   - source_type: manual
     verification_status: confirmed
     source_id: owner-solar-costs-interview-2026-11-15

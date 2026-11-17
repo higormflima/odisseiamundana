@@ -393,3 +393,188 @@ o proprietário autorizou expressamente a publicação do piloto elétrico, alé
 do commit e push de todas as alterações. A página `solar-power` passou para
 `published`. As outras 12 páginas serão desenvolvidas na próxima etapa;
 essa aprovação não equivale a uma certificação técnica da instalação.
+
+## Agrupamento temático e planejamento — 17/11/2026
+
+O proprietário aprovou seis páginas em vez de 13: planejamento; estrutura e
+conforto térmico (isolamento, piso, janelas e climatizador); elétrica; água e banheiro;
+móveis e conforto interno (incluindo cama/colchões e cabine); cozinha e gás.
+As 13 etapas do YAML permanecem distintas. O agrupamento ocorre pelas referências
+`system_ids` das páginas; `page_id` preserva a URL independentemente das etapas.
+O piloto publicado não mudou de URL nem de seleção de vídeos ou compras.
+
+Foi autorizada a adaptação da estrutura e a criação inicial de Planejamento e
+projeto, em rascunho, antes de avançar às outras quatro páginas. Em entrevista,
+o proprietário escolheu **sem tabela própria, com link aos custos completos**.
+Não há atribuição automática de compra da van, documentação ou manutenção a
+despesas de desenho. Ausência de tabela não equivale a custo zero.
+
+### Fontes preservadas e síntese
+
+Obtidas seis legendas automáticas pt-orig pelo executável oficial temporário
+do yt-dlp, sem download de vídeo nem alterações dos originais. Caminhos, URLs,
+datas de captura e hashes estão em `planning.sources.json`. Todos os textos
+foram lidos integralmente em versões temporárias sem tags/repetições consecutivas;
+essas versões não constituem transcrições revisadas.
+
+| Fonte | Trechos usados | Evidência e tratamento editorial |
+| --- | --- | --- |
+| `NFc-9WhVAIY` | 03:00–14:59 | SketchUp, medidas úteis nas laterais curvas, espessura das chapas, alterações de layout, banco único, cama e armários. O desenho representa o interior, não um modelo completo da carroceria. |
+| `jWKbwh202hg` | 01:00–03:59; 05:00–08:59 | Colunas e filtros da planilha, frete, total R$64.564,62, manutenção e lançamentos durante a viagem. Não usar os valores como orçamento atual nem substituir a planilha original. |
+| `1asypqExBhA` | 01:00–10:59 | Sequência retrospectiva para evitar retrabalho, cortes/solda, acesso às fixações, passagens e fechamento; móveis antes de completar revestimentos. A ordem sugerida não foi seguida integralmente na obra e não é regra universal. |
+| `qukRFG4Uxmw` | 01:00–08:59; 09:00–26:59 | Consideração inicial do Defender, escolha da van, referência de outro projeto, versão gratuita do SketchUp, medidas próprias, mockups com cadeiras/caixas e equipamentos definindo móveis. Foram omitidas generalizações de acesso por 4×4 e de disponibilidade de peças. |
+| `9b_Pe5VWjAU` | 01:00–02:59; 07:00–12:59 | Organização em categorias, ferramentas emprestadas, estimativa com planilha de outro projeto e prioridades de cozinha/cama. Não reproduzir correção inflacionária proposta, alegações tributárias ou percentuais como orçamento atual. |
+| `CTWd2t3xvYA` | 01:00–05:59 | Relato retrospectivo sobre conservação da van, atrasos nas oficinas e impacto no tempo de viagem. Não afirmar que todo veículo antigo é inadequado nem generalizar economia de um veículo novo. |
+
+### Normalizações e trechos incertos
+
+- Variações automáticas como “esquenta”, “esquece chato” e “sic é chato” foram
+  lidas como SketchUp, conforme títulos/metadados e contexto de interface.
+  “mocap” foi interpretado como mockup/maquete em tamanho real pelo exemplo
+  descrito; o editorial usa testes de layout, sem atribuir certificação ergonômica.
+- Variações de Iveco Daily, motorhome e do nome do veículo não alteraram as fontes.
+  O editorial usa Iveco e primeira pessoa do plural, sem tentar corrigir cada
+  ocorrência do nome próprio na legenda.
+- A referência automática a “final de 2008” em `jWKbwh202hg` (04:00–04:59)
+  não foi adotada: o período de dezembro/2018 a julho/2019 continua sustentado
+  pela confirmação anterior do proprietário.
+- Foram omitidos números de larguras/alturas com leitura incerta e divergências
+  de número de gavetas entre apresentações. O relato sobre testar o espaço não
+  depende de transformar essas passagens em medidas exatas.
+- A narração das oficinas em `CTWd2t3xvYA` contém durações e locais que não foram
+  usados para recalcular os oito meses totais/seis de trabalho já confirmados.
+  Não foi publicada localização específica de garagem.
+- A alegação de marca/composição do isolamento e do plástico do banheiro em
+  `9b_Pe5VWjAU` não substitui os limites das confirmações anteriores.
+- Links históricos para receber projeto 3D, serviços, cupons e fornecedores não
+  foram anunciados como disponíveis atualmente. O arquivo 3D original não foi
+  fornecido nesta etapa e não foi criado nem disponibilizado por inferência.
+
+## Quatro páginas agrupadas — 2026-11-17
+
+Após aprovar Planejamento e Projeto, o proprietário solicitou a criação dos
+quatro rascunhos restantes. Foram mantidos os 13 sistemas e os componentes do
+piloto. Nenhuma dessas novas páginas foi autorizada para publicação.
+
+### Preservação e revisão das fontes
+
+Foram capturadas 21 novas legendas automáticas pt-orig com o executável oficial
+temporário do yt-dlp, cujo SHA-256 foi conferido contra o checksum oficial.
+Não houve download de vídeos. Os VTTs são preservados como recebidos, sem
+normalização. As fontes `8Y2hkStLF14` e `wuOiO7XYDgQ`, já preservadas na etapa
+elétrica, foram reutilizadas sem nova captura.
+
+Os 23 textos foram lidos integralmente em versões temporárias por minuto,
+sem tags e repetições consecutivas. Essas leituras auxiliares não substituem
+os originais nem constituem transcrições integralmente corrigidas. A revisão
+editorial e as incertezas ficam neste arquivo. Os quatro manifestos
+`<page_id>.sources.json` registram os caminhos, URLs, datas e hashes das fontes
+de cada página; as referências compartilhadas apontam ao mesmo VTT.
+
+| Fonte | Trechos relevantes | Síntese revisada e limites |
+| --- | --- | --- |
+| `pBVVlorqkBU` | 00:00–02:59 | Manta aluminizada autoadesiva similar ao 3TC e lã de rocha nos locais difíceis. Não estabelecer marca ou composição técnica; a música gera palavras espúrias na legenda a partir de aproximadamente 02:00. |
+| `WBOeLFDTGbo` | 00:00–06:59 | Ferrugem, solda, pintura do assoalho, compensado naval em três partes, verniz, piso vinílico em manta e cantoneiras. As durações retrospectivas em 07:00–08:59 não substituem a cronologia confirmada pelo proprietário. |
+| `lM10PvYTkGA` | 00:00–12:59 | Escolha das posições, privacidade da cama, janelas de correr, claraboia manual, moldes e PU. Não reproduzir recomendações de dirigir com aberturas abertas, chama exposta ao vento ou janela como garantia de segurança. |
+| `yRH7NiOk9BQ` | 02:00–08:59 | Modelos usados: duas janelas corrediças e uma maxiar no banheiro; interferência com a porta de correr. O restante é apresentação comercial histórica: nenhum cupom ou prazo virou oferta atual. |
+| `Sj5SnDLPo_A` | 00:00–14:59 | Maxiclima Fusion, reservatório separado dentro do bagageiro, posição da cama, vedação refeita, timer e ruído da bomba. Não reproduzir adaptações de chicotes, mangueiras ou medidas de furação como tutorial. |
+| `aaZcWMbDNZo` | 00:00–02:59 | Avaliação do fluxo de ar, posição perto da cama, timer e ruído. Experiência pessoal, não capacidade de refrigeração comprovada. |
+| `8Y2hkStLF14` | 00:00–04:59 | Passagem de instalações antes de completar o isolamento e posições dos consumidores. Incluído também no isolamento, pois explica essa dependência. Não certificar cabos, mangueiras ou proteções improvisadas. |
+| `nEwzvhLczJ8` | 00:00–07:59 | Falha de escoamento por gravidade, caixa Seaflo com bomba automática, testes e acesso para limpeza. A chapa de proteção é descrita como intenção futura; não afirmar que já estava instalada. |
+| `EYaOv9tWOps` | 00:00–04:59 | Tanques preparados para medição, testes dos indicadores e cabo de rede. Não reproduzir ligação por cores como especificação universal. |
+| `BC2eZ3QBvTU` | 01:00–13:59 | Três tanques, conexões, bomba Matsuri, vazamento da torneira, aquecedor e caixa automática. O nome da marca em 08:00 corrige atribuições genéricas a Seaflo/Shurflo de outros trechos, coerente com confirmação do proprietário. |
+| `TMszKJB0tSI` | 01:00–03:59 | Capacidade narrada como 200 L, mudança de consumo em Itacaré e períodos aproximados de três dias/uma semana. Em 02:00, botijão de 13 kg: fonte também relacionada ao sistema de gás. Não prometer autonomia fixa de água ou gás. |
+| `-_VZvjJXmwc` | 00:00–05:59 | Duas caixas de água limpa, caixa de 70 L de água servida, mangueiras e torneira no bagageiro. Não adotar descarte em bueiro nem alegações de potabilidade. |
+| `ReYewD_68hE` | 00:00–03:59 | Apresentação de time-lapse da estrutura do banheiro. Três minutos não são tempo da obra; trechos musicais não têm evidência técnica. |
+| `fYhPvrB5Fbs` | 01:00–08:59; 11:00–11:59 | Pinus reaproveitado, parede em ângulo, MDF de 3/6 mm, plástico e PU. Não reproduzir teste de gás ou reparo de vazamento em 10:00–10:59. |
+| `LcJMFLZUHP4` | 00:00–03:59 | Registro de uso do banheiro portátil. Receita química, dosagens, alegações de reação e sugestões de descarte foram excluídas do editorial e dos atributos. A miniatura permanece por pertencer à etapa; não é recomendação de reproduzir a receita. |
+| `D4As-ZLi1wU` | 00:00–05:59 | Perfis 40 × 20 mm, travessas removíveis, cantoneiras e porcas rebite. Não reproduzir improvisação de ferramenta ou garantir resistência estrutural. |
+| `MZ_rUN7TPPg` | 00:00–02:59 | Cama de aproximadamente 1,80 × 1,30 m, espuma D33 de 8 cm testada na loja e capas Acquablock. Conforto e limpeza são experiência pessoal, sem alegações sobre ácaros ou ventilação do tecido. |
+| `qHJbU6IYn1I` | 00:00–10:59 | Equipamentos definindo os móveis, moldes, MDF de 15 mm, cortes, gabarito, ferragens e abertura de gavetas na viagem. Não anunciar condições comerciais da loja como atuais nem certificar fixações contra acidentes. |
+| `lcmL0jd1fT4` | 01:00–07:59 | Pistões de 100 N e dificuldades de montagem. Medidas e orientação dos pinos não foram promovidas a regra para qualquer pistão ou porta. |
+| `bEbICB_8g1Y` | 01:00–04:59 | MDF branco de 3 mm instalado; dificuldade de manusear chapas grandes em paredes curvas. Pinus era alternativa retrospectiva, não revestimento já instalado. |
+| `Egs9kjhoBcU` | 01:00–03:59 | Bancos usados de Peugeot, novas bases, baú, carpete/feltro, courvim, portas, borracha e cortinas. A fonte completa substitui a descrição copiada que limitava a revisão inicial. Não afirmar homologação das bases ou modificar o chassi informado. |
+| `Zjj-DIcmFCI` | 00:00–04:59 | Pia, torneira com filtro e reparo de vedação, móveis, frigobar convertido e cooktop. Dosagem de cloro, potabilidade, capacidade do frigobar e consumo elétrico numérico não adotados. |
+| `wuOiO7XYDgQ` | 00:00–19:59; 24:00–38:59 | Contexto dos sistemas e experiência em viagem; partes de água/cozinha/colchão/climatizador reaparecem nos vídeos curtos acima. Contar o ID uma vez em cada página, sem somar como fontes independentes para resolver divergências. |
+
+### Correções de leitura e pontos não resolvidos
+
+- “3tec/3pc” foi lido como referência ao material similar ao 3TC, não como marca
+  instalada. A composição não foi promovida a fato técnico.
+- “finesse/Finestra K”, “masclima”, “PP viu”, “Seaflo/ciclo” e “porta pote”
+  foram normalizados no editorial somente quando sustentados pelos títulos,
+  descrições ou confirmações anteriores. A bomba de água limpa continua Matsuri;
+  Seaflo identifica a caixa de água servida.
+- O tour transcreve uma vez “18 cm” para a espuma, mas o mesmo trecho se corrige
+  para 8 cm; o vídeo específico `MZ_rUN7TPPg` e a compra da linha 230 concordam
+  com 8 cm. Não usar a leitura isolada de 18 cm.
+- O frigobar aparece como 115 L na fala e como 120 L na compra. O editorial
+  omite capacidade e especificação numérica de consumo; não corrigir a planilha.
+- A claraboia é descrita como 30 × 30 cm na fala e 350 × 350 mm na compra.
+  Nenhuma dessas medidas foi adotada como medida final comprovada da abertura.
+- Os tanques de água limpa são narrados como 200 L, enquanto as compras têm
+  70 L + 150 L. Mantido “aproximadamente 200 litros” no relato de experiência;
+  compras e capacidades originais da planilha não foram alteradas.
+- O plástico do banheiro é chamado de PVC e de sobra de fórmica em passagens
+  diferentes. A especificação técnica permanece desconhecida: não certificar
+  composição ou desempenho de impermeabilização para outros projetos.
+- A afirmação retrospectiva de quatro meses de trabalho em `WBOeLFDTGbo` não
+  substitui os oito meses totais/seis de trabalho confirmados anteriormente.
+- O tour contém orientações inseguras de gás, proteção elétrica e tratamento
+  de água. Não foram reproduzidas como instruções; janela aberta não foi
+  apresentada como proteção suficiente para aquecedor em recinto fechado.
+- Preços falados de memória, descontos, contatos e cupons não substituíram os
+  valores do XLSX nem foram publicados como ofertas atuais.
+
+### Entrevista e regras dos custos
+
+O proprietário informou que algumas compras foram usadas em diferentes etapas
+e solicitou itens duvidosos no final das listas, ordenando primeiro os maiores
+valores. Confirmou em seguida:
+
+- Tabelas das etapas: valores pagos em ordem decrescente; aplicação incerta
+  no final, também em ordem decrescente.
+- Para as aplicações não individualizadas, usar o contexto da categoria como
+  referência provisória e exibir “Uso não individualizado na planilha”.
+- Ferramentas e materiais de uso geral sem aplicação documentada permanecem
+  somente na planilha completa.
+- A planilha completa mantém a ordem original. A aprovação desse critério não
+  confirma pessoalmente cada aplicação nem modifica o XLSX.
+
+Foi acrescentado o indicador opcional `allocation_uncertain` ao custo, exigindo
+`system_ids` quando presente. A classificação provisória não altera descrição,
+detalhe, categoria, quantidade, unidade, unitário, frete ou total originais.
+Na apresentação, o aviso de uso não individualizado é acrescentado apenas nas
+tabelas das etapas; não é inserido no lançamento original nem na visão geral.
+
+| Página | Critério e exceções relevantes | Linhas com `allocation_uncertain: true` |
+| --- | --- | --- |
+| Estrutura e Conforto Térmico | Isolamento, piso, janelas, claraboia e climatizador. Linha 144, embora em Cama, descreve uso no teto; linha 238, embora em Banheiro, descreve piso. Reforços/tintas/fixações genéricos de Estrutura têm classificação temática provisória no grupo, não uso comprovado no isolamento. | 106, 110–114, 142, 144, 198, 216, 255, 284, 288, 309, 376 |
+| Água e Banheiro | Hidráulica e banheiro; inclui janela do banheiro (14), pinus reaproveitado (211), conexões de água da cozinha e do aquecedor, conexões de gás do aquecedor e acessórios identificáveis. | 212–215, 256, 296, 309, 373, 375 |
+| Móveis e Conforto Interno | Móveis, cama, revestimento e materiais da cabine. Linha 211 foi para banheiro; 144 foi para estrutura. Cortinas e acessórios da cabine entram pelo detalhe. | 145, 148, 224, 225, 230, 263, 282, 304, 309, 374 |
+| Cozinha e Gás | Equipamentos, componentes e serviço do frigobar, utensílios e GLP; inclui torneira/conexões, terminais do frigobar (232), contenção (248), trinco (295), ganchos (337) e bancada (368). | 225, 282, 326, 328, 330, 334 |
+
+As linhas 225/282 são compras de MDF para mais de uma parte dos móveis;
+230/263 abrangem colchão e poltrona; 304 mistura fixações de bancos e paredes;
+309 reúne borracha, chapas e fita para cabine, bagageiro e proteção dos tanques.
+Permanecem com o valor integral e indicação de uso não individualizado, sem
+inventar rateio. A repetição em páginas diferentes não aumenta o total do projeto.
+O contexto de categoria sem aplicação individualizada não autoriza repetir a
+compra em todos os sistemas.
+
+As linhas 158/159 são lotes que misturam ferramentas e ferragens, sem uso
+individualizado comprovado; 252/264 são ponteiras sem aplicação específica.
+Permanecem apenas na planilha completa, assim como as ferramentas genéricas das
+linhas 279, 290 e 380–382. Não atribuir materiais genéricos de Manutenção às
+etapas apenas porque há produto semelhante no vídeo.
+
+A compra histórica de sulfato de cobre (378) permanece na tabela do banheiro,
+sem receita, dosagem, alegação de eficácia ou instrução de manuseio. Registros
+de mangueiras e conexões de gás são compras originais, não especificações
+certificadas de instalação. Medidas/modelos pagos não viraram automaticamente
+atributos de equipamentos instalados.
+
+As 38 compras do piloto elétrico foram preservadas; somente sua apresentação
+passou à ordem decrescente solicitada. A linha 232 também aparece em cozinha
+porque descreve explicitamente conexão na bateria e no frigobar. Valores,
+negativos, campos ausentes, 380 linhas e total histórico permanecem intactos.

@@ -24,6 +24,7 @@ const { id, label } = Astro.props;
     };
     new ResizeObserver(updateHeight).observe(table);
     updateHeight();
+    document.fonts.ready.then(updateHeight);
   }
 </script>
 
@@ -31,4 +32,5 @@ const { id, label } = Astro.props;
   .cost-table-frame { padding: var(--space-3); border: 1px solid var(--line); overflow-y: auto; scrollbar-gutter: stable; }
   .cost-table-frame:focus-visible { outline: var(--focus-outline); outline-offset: 3px; }
   .cost-table-frame :global(.cost-table) { margin: 0; }
+  .cost-table-frame :global(.cost-table tbody th) { overflow-wrap: anywhere; }
 </style>

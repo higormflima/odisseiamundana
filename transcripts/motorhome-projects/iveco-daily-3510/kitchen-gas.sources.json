@@ -1,0 +1,47 @@
+[
+  {
+    "video_id": "8Y2hkStLF14",
+    "path": "transcripts/motorhome-projects/iveco-daily-3510/8Y2hkStLF14.raw.pt-orig.vtt",
+    "source_url": "https://www.youtube.com/watch?v=8Y2hkStLF14",
+    "language": "pt",
+    "kind": "automatic",
+    "retrieved_at": "2026-11-15T20:40:03.564Z",
+    "raw_sha256": "437e490eae48fda367abe9fd56811fd5de0d0e4aa2392d728ec0d2182a7a7b22"
+  },
+  {
+    "video_id": "TMszKJB0tSI",
+    "path": "transcripts/motorhome-projects/iveco-daily-3510/TMszKJB0tSI.raw.pt-orig.vtt",
+    "source_url": "https://www.youtube.com/watch?v=TMszKJB0tSI",
+    "language": "pt",
+    "kind": "automatic",
+    "retrieved_at": "2026-11-17T12:41:04.755Z",
+    "raw_sha256": "5c6d6a8632ce933d1299adbbf4318770f1f610b162abe19dab9dc1c179450e6b"
+  },
+  {
+    "video_id": "qHJbU6IYn1I",
+    "path": "transcripts/motorhome-projects/iveco-daily-3510/qHJbU6IYn1I.raw.pt-orig.vtt",
+    "source_url": "https://www.youtube.com/watch?v=qHJbU6IYn1I",
+    "language": "pt",
+    "kind": "automatic",
+    "retrieved_at": "2026-11-17T12:42:07.699Z",
+    "raw_sha256": "d3957ac8a579f0bf060de16c40a62000c2c6072ca4d45c08daff3309ade09dd8"
+  },
+  {
+    "video_id": "wuOiO7XYDgQ",
+    "path": "transcripts/motorhome-projects/iveco-daily-3510/wuOiO7XYDgQ.raw.pt-orig.vtt",
+    "source_url": "https://www.youtube.com/watch?v=wuOiO7XYDgQ",
+    "language": "pt",
+    "kind": "automatic",
+    "retrieved_at": "2026-11-15T20:40:49.072Z",
+    "raw_sha256": "7ff26ef3d7e0ccda3c40b3d32a935ceba2491d1999f7bf1e945b1192ffcd87bc"
+  },
+  {
+    "video_id": "Zjj-DIcmFCI",
+    "path": "transcripts/motorhome-projects/iveco-daily-3510/Zjj-DIcmFCI.raw.pt-orig.vtt",
+    "source_url": "https://www.youtube.com/watch?v=Zjj-DIcmFCI",
+    "language": "pt",
+    "kind": "automatic",
+    "retrieved_at": "2026-11-17T12:43:09.361Z",
+    "raw_sha256": "71acd9e762c4c033c399fd6d632e96bbfe4b947f91d211f7fbdc3372c6d58330"
+  }
+]

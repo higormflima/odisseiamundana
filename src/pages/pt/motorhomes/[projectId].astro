@@ -54,10 +54,12 @@ const pieBackground = totalCents > 0
 const videoById = new Map(videos.map((video) => [video.videoId, video]));
 const systemPages = await getCollection('motorhomeSystemPages', (page) =>
   page.data.project_id.id === project.project_id && (page.data.status === 'published' || import.meta.env.DEV));
+const pageBySystemId = new Map(systemPages.flatMap((page) =>
+  page.data.system_ids.map((systemId) => [systemId, page.data.page_id] as const)));
 const systems = (project.systems ?? []).map((system) => ({
   ...system,
-  pageHref: systemPages.some((page) => page.data.system_id === system.system_id)
-    ? `${base}pt/motorhomes/${project.project_id}/${system.system_id}/` : undefined,
+  pageHref: pageBySystemId.has(system.system_id)
+    ? `${base}pt/motorhomes/${project.project_id}/${pageBySystemId.get(system.system_id)}/` : undefined,
   videos: (system.video_ids ?? []).map((videoId) => {
     const video = videoById.get(videoId);
     if (!video) throw new Error(`Vídeo do sistema "${system.system_id}" ausente da sequência: ${videoId}`);

@@ -32,7 +32,7 @@ const { title, description, playlistId, videos } = Astro.props;
     </div>
   </div>
   {description && <p class="section-intro">{description}</p>}
-  <ol id="project-playlist" class="project-playlist" role="list" aria-label="Vídeos na ordem da playlist" tabindex="0">
+  <ol id="project-playlist" class="project-playlist" role="list" aria-label="Vídeos da série" tabindex="0">
     {videos.map((video) => (
       <li id={`video-${video.videoId}`}>
         <a href={video.url} target="_blank" rel="noopener noreferrer" aria-label={`Assistir ao vídeo ${video.position}: ${video.title} (abre em nova aba)`} title={video.title}>

@@ -68,7 +68,12 @@ const motorhomeSystemPages = defineCollection({
   loader: glob({ pattern: '**/*.mdx', base: './content/motorhome-systems' }),
   schema: z.object({
     project_id: reference('motorhomeProjectMetadata'),
-    system_id: z.string(),
+    page_id: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/),
+    featured_video_id: z.string().regex(/^[A-Za-z0-9_-]{11}$/).optional(),
+    system_ids: z.array(z.string().min(1)).min(1).refine(
+      (ids) => new Set(ids).size === ids.length,
+      'As etapas de uma página não podem se repetir.',
+    ),
     title: z.string(),
     language: z.enum(['pt', 'en']),
     status: z.enum(['draft', 'reviewed', 'published']),

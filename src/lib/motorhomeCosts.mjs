@@ -10,7 +10,7 @@ export function formatMotorhomeMoney(amount, currency) {
  * @typedef {{
  *   description: string, detail?: string, category?: string, quantity: number, unit?: string,
  *   unit_price?: number, shipping?: number, amount: number, currency: string,
- *   system_ids?: string[]
+ *   system_ids?: string[], allocation_uncertain?: boolean
  * }} CostItem
  */
 
@@ -29,10 +29,18 @@ function formatCostRow(item) {
 
 /**
  * @param {CostItem[]} items
- * @param {string} systemId
+ * @param {string | string[]} systemIds
  */
-export function buildSystemCostRows(items, systemId) {
-  return items.filter((item) => item.system_ids?.includes(systemId)).map(formatCostRow);
+export function buildSystemCostRows(items, systemIds) {
+  const ids = new Set(typeof systemIds === 'string' ? [systemIds] : systemIds);
+  return items
+    .filter((item) => item.system_ids?.some((id) => ids.has(id)))
+    .sort((left, right) => Number(Boolean(left.allocation_uncertain)) - Number(Boolean(right.allocation_uncertain)) || right.amount - left.amount)
+    .map((item) => {
+      const row = formatCostRow(item);
+      if (item.allocation_uncertain) row.detail += ' · Uso não individualizado na planilha';
+      return row;
+    });
 }
 
 /** @param {CostItem[]} items */

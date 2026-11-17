@@ -7,23 +7,22 @@ import CostTableFrame from '../../../../components/CostTableFrame.astro';
 import VideoCarousel from '../../../../components/VideoCarousel.astro';
 import { loadMotorhomePlaylist } from '../../../../lib/motorhomePlaylist.mjs';
 import { buildSystemCostRows } from '../../../../lib/motorhomeCosts.mjs';
+import { buildMotorhomeSystemPage } from '../../../../lib/motorhomeSystemPages.mjs';
 
 export async function getStaticPaths() {
   const pages = await getCollection('motorhomeSystemPages');
   return Promise.all(pages.filter((page) => page.data.status === 'published' || import.meta.env.DEV).map(async (entry) => {
     const metadata = await getEntry(entry.data.project_id);
-    const system = metadata?.data.systems?.find((item) => item.system_id === entry.data.system_id);
-    if (!metadata || !system) throw new Error(`Projeto ou etapa inexistente: ${entry.id}`);
-    const playlist = await loadMotorhomePlaylist(metadata.data, resolve('imports', 'youtube', 'channel'));
-    const videos = playlist.filter((video) => system.video_ids?.includes(video.videoId));
-    if (videos.length !== (system.video_ids ?? []).length) {
-      throw new Error(`Vídeos da etapa ausentes da playlist: ${entry.id}`);
+    if (!metadata || metadata.id !== metadata.data.project_id) {
+      throw new Error(`Projeto inexistente ou com identificador divergente: ${entry.id}`);
     }
-    return { params: { projectId: metadata.id, systemId: system.system_id }, props: { entry, project: metadata.data, system, videos } };
+    const playlist = await loadMotorhomePlaylist(metadata.data, resolve('imports', 'youtube', 'channel'));
+    const topic = buildMotorhomeSystemPage(metadata.data, entry.data.system_ids, playlist, entry.data.featured_video_id);
+    return { params: { projectId: metadata.id, pageId: entry.data.page_id }, props: { entry, project: metadata.data, topic } };
   }));
 }
 
-const { entry, project, system, videos } = Astro.props;
+const { entry, project, topic } = Astro.props;
 const { Content } = await render(entry);
 const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
 const isDraft = entry.data.status !== 'published';
@@ -32,8 +31,9 @@ const groups = [
   { field: 'materials', title: 'Materiais' },
   { field: 'tools', title: 'Ferramentas' },
   { field: 'technologies', title: 'Tecnologias' },
-];
-const rows = buildSystemCostRows(project.cost_items ?? [], system.system_id);
+] as const;
+const rows = buildSystemCostRows(project.cost_items ?? [], entry.data.system_ids);
+const hasAttributes = groups.some(({ field }) => topic[field].length > 0);
 ---
 
 <SiteLayout title={entry.data.title}>
@@ -44,14 +44,14 @@ const rows = buildSystemCostRows(project.cost_items ?? [], system.system_id);
     <header class="story-header"><h1>{entry.data.title}</h1></header>
     <div class="story-body"><Content /></div>
 
-    <section class="system-attributes" aria-label="O que usamos nesta etapa">
-      {groups.map(({ field, title }) => system[field]?.length > 0 && (
+    {hasAttributes && <section class="system-attributes" aria-label="O que usamos nesta página">
+      {groups.map(({ field, title }) => topic[field].length > 0 && (
         <div>
           <h2>{title}</h2>
-          <ul>{system[field].map((item: string) => <li>{item}</li>)}</ul>
+          <ul>{topic[field].map((item: string) => <li>{item}</li>)}</ul>
         </div>
       ))}
-    </section>
+    </section>}
 
     {rows.length > 0 && (
       <section class="system-costs" aria-labelledby="costs-title">
@@ -69,7 +69,16 @@ const rows = buildSystemCostRows(project.cost_items ?? [], system.system_id);
       </section>
     )}
 
-    <VideoCarousel title="Esta etapa em vídeo" description="Reunimos os vídeos desta etapa na sequência da nossa playlist." videos={videos} playlistId={project.playlist_id} />
+    {rows.length === 0 && (
+      <section class="system-costs" aria-labelledby="project-costs-title">
+        <h2 id="project-costs-title">Custos do Projeto</h2>
+        <p><a class="text-link" href={`${base}pt/motorhomes/${project.project_id}/#construction-costs`}>Consultar a planilha de custos completa →</a></p>
+      </section>
+    )}
+
+    <VideoCarousel title="Esta etapa em vídeo" description={entry.data.featured_video_id
+      ? 'Destacamos o vídeo principal; os demais seguem a sequência da nossa playlist.'
+      : 'Reunimos os vídeos desta página na sequência da nossa playlist.'} videos={topic.videos} playlistId={project.playlist_id} />
   </article>
 </SiteLayout>
 

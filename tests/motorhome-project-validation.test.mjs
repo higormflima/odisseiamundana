@@ -176,6 +176,20 @@ test('preserva lançamentos negativos e campos desconhecidos sem inventar unidad
   assert.ok(validate(data).errors.some((error) => error.keyword === 'costAmount'));
 });
 
+test('aceita classificação temática incerta somente com etapas identificadas e indicador booleano', () => {
+  const data = project();
+  data.cost_items = [{
+    source_row: 10, description: 'Material sem uso individualizado', quantity: 1,
+    amount: 10, currency: 'BRL', system_ids: ['sample-system'], allocation_uncertain: true,
+  }];
+  assert.equal(validate(data).valid, true);
+  data.cost_items[0].allocation_uncertain = 'sim';
+  assert.equal(validate(data).valid, false);
+  data.cost_items[0].allocation_uncertain = true;
+  delete data.cost_items[0].system_ids;
+  assert.equal(validate(data).valid, false);
+});
+
 test('valida o exemplo YAML demonstrativo da documentação', async () => {
   const doc = await readFile(new URL('../docs/motorhome-projects.md', import.meta.url), 'utf8');
   const source = doc.match(/```yaml\r?\n([\s\S]*?)```/)[1];
