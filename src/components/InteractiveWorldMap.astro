@@ -75,8 +75,10 @@ const markersJson = JSON.stringify(markers).replace(/</g, '\\u003c');
 
   @media (prefers-reduced-motion: no-preference) {
     .world-map.has-motion.is-motion-ready :global(.world-map-marker span) { position: relative; animation: marker-arrive 650ms ease-out both; animation-play-state: paused; }
+    .world-map.has-motion.is-motion-ready :global(.world-map-marker span)::before { content: ''; position: absolute; inset: -7px; border: 1px solid var(--nautical); border-radius: 50%; pointer-events: none; animation: marker-pulse 5s ease-out 650ms infinite both; animation-play-state: paused; }
     .world-map.has-motion :global(.world-map-marker.is-selected span)::after { content: ''; position: absolute; inset: -8px; border: 1px solid var(--accent-dark); border-radius: 50%; pointer-events: none; animation: marker-halo 1.4s ease-out 2 both; animation-play-state: paused; }
     .world-map.has-motion.is-motion-ready.is-motion-active :global(.world-map-marker span),
+    .world-map.has-motion.is-motion-ready.is-motion-active :global(.world-map-marker span)::before,
     .world-map.has-motion.is-motion-ready.is-motion-active :global(.world-map-marker.is-selected span)::after { animation-play-state: running; }
   }
   @keyframes marker-arrive {
@@ -86,6 +88,10 @@ const markersJson = JSON.stringify(markers).replace(/</g, '\\u003c');
   @keyframes marker-halo {
     from { opacity: .55; transform: scale(.8); }
     to { opacity: 0; transform: scale(1.8); }
+  }
+  @keyframes marker-pulse {
+    0% { opacity: .28; transform: scale(.8); }
+    55%, 100% { opacity: 0; transform: scale(1.6); }
   }
 
   @media (max-width: 760px) {
