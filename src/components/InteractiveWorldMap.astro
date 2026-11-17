@@ -11,14 +11,15 @@ interface Props {
   entries: WorldMapEntry[];
   label?: string;
   skipTarget?: string;
+  animate?: boolean;
 }
 
-const { entries, label = 'Mapa-múndi interativo das viagens', skipTarget } = Astro.props;
+const { entries, label = 'Mapa-múndi interativo das viagens', skipTarget, animate = false } = Astro.props;
 const markers = entries.map(({ journeyId, title, pointName, lat, lng }) => ({ journeyId, title, pointName, lat, lng }));
 const markersJson = JSON.stringify(markers).replace(/</g, '\\u003c');
 ---
 
-<div class="world-map" data-world-map>
+<div class:list={['world-map', { 'has-motion': animate }]} data-world-map>
   {skipTarget && <a class="world-map-skip" href={skipTarget}>Pular o mapa e ver a lista de viagens</a>}
   <div class="world-map-frame">
     <div class="world-map-canvas" data-world-map-canvas role="region" aria-label={label} tabindex="0">
@@ -71,6 +72,21 @@ const markersJson = JSON.stringify(markers).replace(/</g, '\\u003c');
   .world-map :global(.world-map-marker:hover span) { background: var(--accent-dark); }
   .world-map :global(.world-map-marker.is-selected span) { width: 24px; height: 24px; background: var(--accent-dark); border-width: 4px; box-shadow: 0 0 0 2px var(--accent-dark), 0 4px 14px rgb(40 40 41 / 35%); }
   .world-map :global(.world-map-marker:focus-visible) { outline: var(--focus-outline); outline-offset: 2px; }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .world-map.has-motion.is-motion-ready :global(.world-map-marker span) { position: relative; animation: marker-arrive 650ms ease-out both; animation-play-state: paused; }
+    .world-map.has-motion :global(.world-map-marker.is-selected span)::after { content: ''; position: absolute; inset: -8px; border: 1px solid var(--accent-dark); border-radius: 50%; pointer-events: none; animation: marker-halo 1.4s ease-out 2 both; animation-play-state: paused; }
+    .world-map.has-motion.is-motion-ready.is-motion-active :global(.world-map-marker span),
+    .world-map.has-motion.is-motion-ready.is-motion-active :global(.world-map-marker.is-selected span)::after { animation-play-state: running; }
+  }
+  @keyframes marker-arrive {
+    from { opacity: 0; transform: scale(.7); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  @keyframes marker-halo {
+    from { opacity: .55; transform: scale(.8); }
+    to { opacity: 0; transform: scale(1.8); }
+  }
 
   @media (max-width: 760px) {
     .world-map-canvas { height: 68vh; min-height: 380px; }

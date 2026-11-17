@@ -88,6 +88,29 @@ h1, h2, p { margin-top: 0; }
 .hero-route::before, .hero-route::after { content: ''; position: absolute; width: 9px; height: 9px; border-radius: 50%; background: var(--accent); transform: translate(-50%, -50%); }
 .hero-route::before { top: 14.6%; left: 14.6%; }
 .hero-route::after { top: 85.4%; left: 85.4%; background: var(--copper); }
+@media (prefers-reduced-motion: no-preference) {
+  .hero-portrait.is-motion-ready img { animation: portrait-arrive 900ms ease-out both; }
+  .hero-portrait.is-motion-ready .hero-route { animation: portrait-orbit 60s linear infinite; }
+  .hero-portrait.is-motion-ready::before { animation: portrait-breathe 9s ease-in-out infinite; }
+  .hero-portrait.is-motion-ready img,
+  .hero-portrait.is-motion-ready .hero-route,
+  .hero-portrait.is-motion-ready::before { animation-play-state: paused; }
+  .hero-portrait.is-motion-active img,
+  .hero-portrait.is-motion-active .hero-route,
+  .hero-portrait.is-motion-active::before { animation-play-state: running; }
+}
+@keyframes portrait-arrive {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes portrait-orbit {
+  from { transform: rotate(-12deg); }
+  to { transform: rotate(348deg); }
+}
+@keyframes portrait-breathe {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.025); opacity: .65; }
+}
 .text-link, .button-link { display: inline-flex; gap: 15px; align-items: center; color: var(--ink); font-size: var(--text-sm); font-weight: 700; border: 0; border-bottom: 1px solid var(--copper); padding: 0 0 9px; background: transparent; cursor: pointer; transition: color .2s; }
 .button { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 0 var(--space-4); border: var(--border-width) solid var(--accent-dark); border-radius: var(--radius-small); background: var(--accent-dark); color: var(--white); font: 700 var(--text-sm)/1 var(--font-body); cursor: pointer; transition: background-color .2s, color .2s; }
 .button:hover { background: var(--nautical); border-color: var(--nautical); }

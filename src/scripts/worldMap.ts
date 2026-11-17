@@ -1,4 +1,5 @@
 import type { Map as LeafletMap, Marker } from 'leaflet';
+import { observeMotionVisibility } from './motionVisibility';
 
 export interface WorldMapMarker {
   journeyId: string;
@@ -39,7 +40,7 @@ async function mountWorldMap(root: HTMLElement, canvas: HTMLElement) {
   const panel = root.querySelector<HTMLElement>('[data-world-map-panel]');
   const cards = [...root.querySelectorAll<HTMLElement>('[data-journey-card]')];
   const closeButton = root.querySelector<HTMLButtonElement>('[data-world-map-close]');
-  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)');
   const isTouch = matchMedia('(pointer: coarse)').matches;
 
   // Em telas de toque, um dedo continua rolando a página; dois dedos movem e aproximam o mapa.
@@ -94,7 +95,7 @@ async function mountWorldMap(root: HTMLElement, canvas: HTMLElement) {
     map.panInside([entry.lat, entry.lng], {
       paddingTopLeft: [24, 24],
       paddingBottomRight: isWide ? [panel.offsetWidth + 48, 24] : [24, panel.offsetHeight + 24],
-      animate: !reduceMotion,
+      animate: !reduceMotion.matches,
     });
   }
 
@@ -114,4 +115,5 @@ async function mountWorldMap(root: HTMLElement, canvas: HTMLElement) {
   });
 
   root.classList.add('is-ready');
+  if (root.classList.contains('has-motion')) observeMotionVisibility(root);
 }

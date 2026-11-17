@@ -70,7 +70,7 @@ const homeGalleryPhotos = homeGalleryPhotoPaths.flatMap((path) => {
         </div>
         <p class="map-section-hint">Selecione um marcador para conhecer nossas viagens e nosso motorhome.</p>
       </div>
-      <InteractiveWorldMap entries={mapEntries} label="Mapa-múndi interativo de viagens e motorhome" skipTarget="#viagens" />
+      <InteractiveWorldMap entries={mapEntries} label="Mapa-múndi interativo de viagens e motorhome" skipTarget="#viagens" animate />
     </section>
   )}
 
@@ -136,6 +136,11 @@ const homeGalleryPhotos = homeGalleryPhotoPaths.flatMap((path) => {
 </SiteLayout>
 
 <script>
+  import { observeMotionVisibility } from '../../scripts/motionVisibility';
+
+  const portrait = document.querySelector<HTMLElement>('.hero-portrait');
+  if (portrait) observeMotionVisibility(portrait);
+
   const journeyList = document.querySelector('[data-journey-list]');
   const loadMoreButton = document.querySelector('[data-journey-load-more]');
 
