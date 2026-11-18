@@ -78,6 +78,13 @@ O frontmatter contém `project_id` como referência, `page_id` para a URL estáv
 e `sort_order` para a ordem do submenu. Os sistemas continuam no YAML, separados
 do texto editorial; o frontmatter apenas seleciona quais entram em cada página.
 
+Ao final da visão geral e das páginas temáticas, `MotorhomeStepNavigation` exibe
+**Etapa anterior** e **Próxima etapa**. A sequência começa na visão geral e segue
+`sort_order`, como o submenu, limitada ao mesmo projeto e às páginas disponíveis
+no ambiente atual. A visão geral leva à primeira etapa; esta permite voltar à
+visão geral. O primeiro e o último item omitem o destino inexistente.
+Os links funcionam sem JavaScript e não incluem a âncora de custos.
+
 A rota `/pt/motorhomes/<project_id>/<page_id>/` verifica a existência das etapas
 e de todos os seus vídeos na playlist. Exibe primeiro o resumo editorial, depois
 atributos do YAML, custos e miniaturas na ordem original da playlist.

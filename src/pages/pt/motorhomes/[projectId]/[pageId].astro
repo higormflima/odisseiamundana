@@ -6,6 +6,7 @@ import CostTable from '../../../../components/CostTable.astro';
 import CostTableFrame from '../../../../components/CostTableFrame.astro';
 import VideoCarousel from '../../../../components/VideoCarousel.astro';
 import MotorhomePhotoGallery from '../../../../components/MotorhomePhotoGallery.astro';
+import MotorhomeStepNavigation from '../../../../components/MotorhomeStepNavigation.astro';
 import { loadMotorhomePlaylist } from '../../../../lib/motorhomePlaylist.mjs';
 import { buildSystemCostRows } from '../../../../lib/motorhomeCosts.mjs';
 import { buildMotorhomeSystemPage } from '../../../../lib/motorhomeSystemPages.mjs';
@@ -82,6 +83,8 @@ const hasAttributes = groups.some(({ field }) => topic[field].length > 0);
     <VideoCarousel title="Esta etapa em vídeo" description={entry.data.featured_video_id
       ? 'Destacamos o vídeo principal; os demais seguem a sequência da nossa playlist.'
       : 'Reunimos os vídeos desta página na sequência da nossa playlist.'} videos={topic.videos} playlistId={project.playlist_id} />
+
+    <MotorhomeStepNavigation projectId={project.project_id} pageId={entry.data.page_id} />
   </article>
 </SiteLayout>
 

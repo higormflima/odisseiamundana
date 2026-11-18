@@ -1,0 +1,55 @@
+---
+import { getCollection } from 'astro:content';
+
+interface Props {
+  projectId: string;
+  pageId?: string;
+}
+
+const { projectId, pageId } = Astro.props;
+const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+const projectHref = `${base}pt/motorhomes/${projectId}/`;
+const [overview] = await getCollection('motorhomeProjectPages', (page) =>
+  page.data.project_id.id === projectId && (page.data.status === 'published' || import.meta.env.DEV));
+const systemPages = await getCollection('motorhomeSystemPages', (page) =>
+  page.data.project_id.id === projectId && (page.data.status === 'published' || import.meta.env.DEV));
+const steps = [
+  ...(overview ? [{ href: projectHref, title: overview.data.title }] : []),
+  ...systemPages.sort((left, right) => left.data.sort_order - right.data.sort_order).map((page) => ({
+    href: `${projectHref}${page.data.page_id}/`,
+    title: page.data.title,
+  })),
+];
+const currentHref = pageId ? `${projectHref}${pageId}/` : projectHref;
+const index = steps.findIndex((step) => step.href === currentHref);
+if (index < 0) throw new Error(`Página ausente da navegação da construção: ${currentHref}`);
+const previousStep = steps[index - 1];
+const nextStep = steps[index + 1];
+---
+
+{(previousStep || nextStep) && (
+  <nav class="step-navigation" aria-label="Navegação entre etapas da construção">
+    {previousStep && (
+      <a class="step-link" href={previousStep.href} rel="prev" aria-label={`Etapa anterior: ${previousStep.title}`}>
+        <span aria-hidden="true">←</span> Etapa anterior
+      </a>
+    )}
+    {nextStep && (
+      <a class="step-link step-link-next" href={nextStep.href} rel="next" aria-label={`Próxima etapa: ${nextStep.title}`}>
+        Próxima etapa <span aria-hidden="true">→</span>
+      </a>
+    )}
+  </nav>
+)}
+
+<style>
+  .step-navigation { display: flex; justify-content: space-between; flex-wrap: wrap; gap: var(--space-3); max-width: var(--content-reading); margin: var(--space-6) auto 0; padding-top: var(--space-4); border-top: 1px solid var(--line); }
+  .step-link { display: flex; align-items: center; gap: var(--space-2); min-height: 44px; padding: var(--space-2) var(--space-3); border: 1px solid var(--line); color: var(--ink); font-size: var(--text-base); font-weight: 600; }
+  .step-link:hover { border-color: var(--accent-dark); color: var(--accent-dark); }
+  .step-link-next { margin-left: auto; }
+  @media (max-width: 700px) {
+    .step-navigation { flex-direction: column; }
+    .step-link { justify-content: center; }
+    .step-link-next { margin-left: 0; }
+  }
+</style>
