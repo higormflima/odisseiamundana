@@ -17,7 +17,7 @@
     "gallery:validate": "node scripts/gallery-validate.mjs",
     "youtube:captions": "node scripts/youtube-captions.mjs",
     "youtube:metadata": "node scripts/youtube-captions.mjs",
-    "test": "node --test"
+    "test": "node --experimental-strip-types --test"
   },
   "devDependencies": {
     "@astrojs/mdx": "^8.1.3",
