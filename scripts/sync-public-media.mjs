@@ -1,6 +1,7 @@
-import { cp, mkdir, rm, stat } from 'node:fs/promises';
+import { cp, mkdir, readFile, rm, stat } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import YAML from 'yaml';
 
 const projectRoot = fileURLToPath(new URL('../', import.meta.url));
 const publicMediaDirectories = [
@@ -25,7 +26,7 @@ const publicMediaDirectories = [
   'collaborations',
 ];
 
-for (const relativeDirectory of publicMediaDirectories) {
+async function syncDirectory(relativeDirectory) {
   const source = path.join(projectRoot, 'media', relativeDirectory);
   const destination = path.join(projectRoot, 'public', 'media', relativeDirectory);
 
@@ -39,4 +40,26 @@ for (const relativeDirectory of publicMediaDirectories) {
   await cp(source, destination, { recursive: true, filter: (entry) => path.basename(entry) !== '.gitkeep' });
 }
 
-console.log(`Mídia pública sincronizada: ${publicMediaDirectories.length} diretórios.`);
+for (const relativeDirectory of publicMediaDirectories) await syncDirectory(relativeDirectory);
+
+const motorhome = YAML.parse(await readFile(path.join(projectRoot, 'metadata', 'motorhome-projects', 'iveco-daily-3510.yaml'), 'utf8'));
+const includeDraftPhotos = process.argv.includes('--include-draft-photos');
+const publishPhotos = motorhome.photo_gallery?.status === 'published';
+let photoDirectories = 0;
+for (const folder of ['optimized', 'thumbnails']) {
+  const relativeDirectory = `journeys/2018-construction-motorhome-iveco/${folder}`;
+  if (publishPhotos || includeDraftPhotos) {
+    await syncDirectory(relativeDirectory);
+    photoDirectories += 1;
+  } else {
+    await rm(path.join(projectRoot, 'public', 'media', relativeDirectory), { recursive: true, force: true });
+  }
+}
+
+if (motorhome.map_image) {
+  const destination = path.join(projectRoot, 'public', motorhome.map_image.src);
+  await mkdir(path.dirname(destination), { recursive: true });
+  await cp(path.join(projectRoot, motorhome.map_image.src), destination);
+}
+
+console.log(`Mídia pública sincronizada: ${publicMediaDirectories.length + photoDirectories} diretórios; ${motorhome.map_image ? 1 : 0} imagem de card.`);

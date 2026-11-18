@@ -5,6 +5,7 @@
  * @param {Array<{ id: string, data: {
  *   build_location?: string,
  *   summary?: string,
+ *   map_image?: { src: string, alt: string },
  *   representative_point?: { name: string, coordinates: { lat: number, lng: number } }
  * } }>} input.projects
  * @param {Array<{ data: { project_id: { id: string }, title: string, status: string } }>} input.pages
@@ -24,6 +25,9 @@ export function buildMotorhomeMapEntries({ projects, pages, base }) {
       lng: point.coordinates.lng,
       location: data.build_location,
       summary: data.summary?.trim(),
+      image: data.map_image
+        ? { src: `${base}${data.map_image.src}`, alt: data.map_image.alt }
+        : undefined,
       href: `${base}pt/motorhomes/${id}/`,
       linkLabel: 'Conhecer o motorhome',
     }];

@@ -5,6 +5,7 @@ import SiteLayout from '../../../layouts/SiteLayout.astro';
 import CostTable from '../../../components/CostTable.astro';
 import CostTableFrame from '../../../components/CostTableFrame.astro';
 import VideoCarousel from '../../../components/VideoCarousel.astro';
+import MotorhomePhotoGallery from '../../../components/MotorhomePhotoGallery.astro';
 import { loadMotorhomePlaylist } from '../../../lib/motorhomePlaylist.mjs';
 import { buildProjectCostRows, formatMotorhomeMoney as formatMoney } from '../../../lib/motorhomeCosts.mjs';
 
@@ -86,6 +87,8 @@ const systemGroups = [
     <VideoCarousel title="Acompanhe a construção" description="Reunimos os vídeos da construção e os conteúdos complementares na sequência da nossa playlist." videos={videos} playlistId={project.playlist_id} />
 
     <div class="story-body project-story"><Content /></div>
+
+    <MotorhomePhotoGallery projectId={project.project_id} />
 
     <section class="project-section" aria-labelledby="systems-title">
       <p class="eyebrow">Por dentro do projeto</p>

@@ -13,7 +13,7 @@ imports/photos/
       foto-original.jpg
 ```
 
-Use identificadores em inglês, sem espaços, como `finland-2026/batch-01`. O exemplo ilustra apenas a organização; nenhum lote é criado automaticamente. Use um novo identificador para cada envio, sem sobrescrever arquivos anteriores. Não renomeie as fotos.
+Use identificadores em inglês, sem espaços, como `finland-2026/batch-01`. O exemplo ilustra apenas a organização; nenhum lote é criado automaticamente. Use um novo identificador para cada envio, sem sobrescrever arquivos anteriores. As fotos podem ser renomeadas antes ou depois do envio para padronizar os nomes, preservando seu conteúdo.
 
 ## Como enviar pelo navegador
 
@@ -30,8 +30,9 @@ O [upload pelo navegador](https://docs.github.com/en/repositories/working-with-f
 
 - A presença de arquivos nesta pasta, um commit ou um `git pull` não autorizam abrir ou analisar as fotos.
 - Antes da autorização, limite-se, se solicitado, a confirmar recebimento, nomes, quantidade e tamanho dos arquivos, sem interpretar imagens ou extrair EXIF.
+- Quando o proprietário solicitar, renomeie as fotos na própria pasta conforme o padrão indicado, sem exigir cópias com os nomes antigos. Renomear não autoriza analisar ou processar imagens. Confira colisões antes da operação e não sobrescreva outros arquivos.
 - Não converta, comprima, redimensione, gere miniaturas, crie legendas ou metadados, execute `gallery:process` nem integre fotos ao site sem pedido explícito para o lote.
-- Após autorização de processamento, preserve os arquivos recebidos e grave os derivados separadamente, conforme o fluxo aprovado para a tarefa.
+- Após autorização de processamento, preserve o conteúdo dos arquivos recebidos e grave os derivados separadamente, conforme o fluxo aprovado para a tarefa. Essa preservação não impede a renomeação solicitada pelo proprietário.
 - Não sobrescreva ou exclua arquivos recebidos sem autorização explícita, inclusive depois de processá-los.
 - Não acrescente automações que processem ou publiquem esta pasta.
 

@@ -12,6 +12,9 @@ chassis: >
   informadas pelo proprietário: comprimento de 6,00 m, largura de 2,00 m e
   altura de 2,675 m. Não representam a altura do motorhome com equipamentos no teto.
 build_location: São José dos Campos, São Paulo
+map_image:
+  src: media/journeys/2018-construction-motorhome-iveco/thumbnails/construction-055.webp
+  alt: Posamos ao lado da van branca antes da caracterização externa do motorhome.
 representative_point:
   name: São José dos Campos, São Paulo
   coordinates:
@@ -4159,3 +4162,301 @@ provenance:
     verification_status: confirmed
     source_id: owner-motorhome-plumbing-interview-2026-11-15
     fields: ["systems[5].equipment[4]", "systems[5].equipment[5]"]
+photo_gallery:
+  status: published
+  pages:
+    overview:
+      - construction-055
+      - construction-031
+      - construction-015
+      - construction-038
+      - construction-043
+      - construction-009
+      - construction-007
+      - construction-060
+      - construction-062
+    planning:
+      - construction-055
+      - construction-003
+      - construction-004
+      - construction-005
+    structure-thermal-comfort:
+      - construction-032
+      - construction-001
+      - construction-033
+      - construction-048
+      - construction-045
+      - construction-046
+      - construction-014
+      - construction-012
+      - construction-021
+      - construction-019
+      - construction-020
+      - construction-022
+    solar-power:
+      - construction-047
+      - construction-010
+      - construction-017
+    water-bathroom:
+      - construction-011
+      - construction-013
+      - construction-006
+    furniture-interior-comfort:
+      - construction-002
+      - construction-015
+      - construction-025
+      - construction-026
+      - construction-035
+      - construction-029
+      - construction-034
+      - construction-027
+      - construction-028
+      - construction-016
+      - construction-018
+      - construction-023
+      - construction-024
+      - construction-041
+      - construction-042
+      - construction-043
+      - construction-044
+    kitchen-gas:
+      - construction-006
+      - construction-039
+      - construction-038
+      - construction-040
+photos:
+  - photo_id: construction-001
+    src: media/journeys/2018-construction-motorhome-iveco/optimized/construction-001.webp
+    thumbnail: media/journeys/2018-construction-motorhome-iveco/thumbnails/construction-001.webp
+    alt: Interior da van durante a montagem, com piso de madeira e estrutura das paredes exposta.
+    detail: "Origem: imports/photos/construction-motorhome-iveco/batch-20261117/20190310_191938.jpg; SHA-256: 9f34002a77190f9b5550ae690971e58c6165bf49b4da5439ee0c3d125dd4587a"
+  - photo_id: construction-002
+    src: media/journeys/2018-construction-motorhome-iveco/optimized/construction-002.webp
+    thumbnail: media/journeys/2018-construction-motorhome-iveco/thumbnails/construction-002.webp
+    alt: Durante a construção, fazemos uma pausa na oficina usando máscara de proteção.
+    detail: "Origem: imports/photos/construction-motorhome-iveco/batch-20261117/20190406_131908.jpg; SHA-256: e2e31e06094481b2f06f8aa45d215c84a7ede1fb199a4a6bf286e50c143314aa"
+  - photo_id: construction-003
+    src: media/journeys/2018-construction-motorhome-iveco/optimized/construction-003.webp
+    thumbnail: media/journeys/2018-construction-motorhome-iveco/thumbnails/construction-003.webp
+    alt: Vista em perspectiva do modelo 3D com a disposição dos móveis do motorhome.
+    detail: "Origem: imports/photos/construction-motorhome-iveco/batch-20261117/20190411_182216.jpg; SHA-256: 17e574db9086dce4650a32a9dfaa3aac9990f405e75702d20de820327920d595"
+  - photo_id: construction-004
+    src: media/journeys/2018-construction-motorhome-iveco/optimized/construction-004.webp
+    thumbnail: media/journeys/2018-construction-motorhome-iveco/thumbnails/construction-004.webp
+    alt: Outra perspectiva do projeto 3D, mostrando cama, armários e bancada.
+    detail: "Origem: imports/photos/construction-motorhome-iveco/batch-20261117/20190411_182410.jpg; SHA-256: 42c55151f93af445890ed5ad174235bbbbfc638ee3b004a66b1b2246803360f5"
+  - photo_id: construction-005
+    src: media/journeys/2018-construction-motorhome-iveco/optimized/construction-005.webp
+    thumbnail: media/journeys/2018-construction-motorhome-iveco/thumbnails/construction-005.webp
+    alt: Vista superior do modelo 3D com a distribuição dos ambientes.
+    detail: "Origem: imports/photos/construction-motorhome-iveco/batch-20261117/20190411_182446.jpg; SHA-256: 9d54720ed7f48b36a579a4bf4d70c1d7d87aea4af6849b28d75c0cd85f9d5d23"
+  - photo_id: construction-006
+    src: media/journeys/2018-construction-motorhome-iveco/optimized/construction-006.webp
+    thumbnail: media/journeys/2018-construction-motorhome-iveco/thumbnails/construction-006.webp
+    alt: Compartimento técnico com bomba, tubulações e botijão de gás.
+    detail: "Origem: imports/photos/construction-motorhome-iveco/batch-20261117/20190426_172020.jpg; SHA-256: 967ba2d54de509b4633bbd7b44e57809eef80b455daae60fcfcf28d56ed0b9be"
+  - photo_id: construction-007
+    src: media/journeys/2018-construction-motorhome-iveco/optimized/construction-007.webp
+    thumbnail: media/journeys/2018-construction-motorhome-iveco/thumbnails/construction-007.webp
+    alt: Posamos diante do motorhome já caracterizado com a identidade da Odisseia Mundana.
+    detail: "Origem: imports/photos/construction-motorhome-iveco/batch-20261117/20190713_155323.jpg; SHA-256: 67e867725232457e7f933d3b73dce8114d2ad76c877503727c8e1b4d4b9e76d5"
+  - photo_id: construction-009
+    src: media/journeys/2018-construction-motorhome-iveco/optimized/construction-009.webp
+    thumbnail: media/journeys/2018-construction-motorhome-iveco/thumbnails/construction-009.webp
+    alt: Vista aérea lateral do motorhome com painéis solares no teto e porta aberta.
+    detail: "Origem: imports/photos/construction-motorhome-iveco/batch-20261117/DJI_0451.JPG; SHA-256: acf0b1b9e64dbb1420e97d2754eec65ef7177cb105c4d4ad312d9092a1c1a47f"
+  - photo_id: construction-010
+    src: media/journeys/2018-construction-motorhome-iveco/optimized/construction-010.webp
+    thumbnail: media/journeys/2018-construction-motorhome-iveco/thumbnails/construction-010.webp
+    alt: Vista superior do teto com dois painéis solares e equipamentos de ventilação.
+    detail: "Origem: imports/photos/construction-motorhome-iveco/batch-20261117/DJI_0454.JPG; SHA-256: 0de930cf854c73ea19ee63e7a96b517359e52d6ca22659917f9213f0735f14cd"
+  - photo_id: construction-011
+    src: media/journeys/2018-construction-motorhome-iveco/optimized/construction-011.webp
+    thumbnail: media/journeys/2018-construction-motorhome-iveco/thumbnails/construction-011.webp
+    alt: Três reservatórios retangulares dispostos no chão antes da instalação.
+    detail: "Origem: imports/photos/construction-motorhome-iveco/batch-20261117/IMG-20190110-WA0024.jpg; SHA-256: 9ad0d95ecc51cc3238bfff63ed34cdeaaa24dec8d0fc0ca3e340eb4c1cc8d888"
+  - photo_id: construction-012
+    src: media/journeys/2018-construction-motorhome-iveco/optimized/construction-012.webp
+    thumbnail: media/journeys/2018-construction-motorhome-iveco/thumbnails/construction-012.webp
+    alt: Trabalhamos na estrutura metálica de um banco da cabine.
+    detail: "Origem: imports/photos/construction-motorhome-iveco/batch-20261117/IMG_1237.JPG; SHA-256: 3833bd2a03ebb92457652f0908266fbd7c5f38cf952ebe5977b2246ee869da42"
+  - photo_id: construction-013
+    src: media/journeys/2018-construction-motorhome-iveco/optimized/construction-013.webp
+    thumbnail: media/journeys/2018-construction-motorhome-iveco/thumbnails/construction-013.webp
+    alt: Caixa de esgoto aberta, com conexões laterais e componentes internos visíveis.
+    detail: "Origem: imports/photos/construction-motorhome-iveco/batch-20261117/IMG_1297.JPG; SHA-256: 5f6bf37aaf668c78249392507044a85ee535179503f282c76200c38889e44979"
+  - photo_id: construction-014
+    src: media/journeys/2018-construction-motorhome-iveco/optimized/construction-014.webp
+    thumbnail: media/journeys/2018-construction-motorhome-iveco/thumbnails/construction-014.webp
+    alt: Trabalho com ferramenta que produz faíscas na região do teto da van.
+    detail: "Origem: imports/photos/construction-motorhome-iveco/batch-20261117/IMG_1312.JPG; SHA-256: ec6029c1962ed8089a68cc522fa931e895edc39e9868a674e84af352544e4608"
+  - photo_id: construction-015
+    src: media/journeys/2018-construction-motorhome-iveco/optimized/construction-015.webp
+    thumbnail: media/journeys/2018-construction-motorhome-iveco/thumbnails/construction-015.webp
+    alt: Fixamos o revestimento branco na parede interna da van.
+    detail: "Origem: imports/photos/construction-motorhome-iveco/batch-20261117/IMG_1319.JPG; SHA-256: e6a69b1bdec67d6160d27c7cf83b6ff3077d5620fe5f93fd13872c51b68093ab"
+  - photo_id: construction-016
+    src: media/journeys/2018-construction-motorhome-iveco/optimized/construction-016.webp
+    thumbnail: media/journeys/2018-construction-motorhome-iveco/thumbnails/construction-016.webp
+    alt: Trabalhamos deitados no compartimento sob a cama, com ferramentas ao lado.
+    detail: "Origem: imports/photos/construction-motorhome-iveco/batch-20261117/IMG_1400.JPG; SHA-256: d0a5d150ee608c0d5ad560300041000dfd7a3ff8171e2dd3326ca30de43f3a1c"
+  - photo_id: construction-017
+    src: media/journeys/2018-construction-motorhome-iveco/optimized/construction-017.webp
+    thumbnail: media/journeys/2018-construction-motorhome-iveco/thumbnails/construction-017.webp
+    alt: Compartimento sob a cama com bateria e cabeamento visíveis.
+    detail: "Origem: imports/photos/construction-motorhome-iveco/batch-20261117/IMG_1403.JPG; SHA-256: 2019cc2ecae092c202017aff4869b762851f7dc1706ca3a1b43794faaa72ef01"
+  - photo_id: construction-018
+    src: media/journeys/2018-construction-motorhome-iveco/optimized/construction-018.webp
+    thumbnail: media/journeys/2018-construction-motorhome-iveco/thumbnails/construction-018.webp
+    alt: Sentamos na cama montada, acima do compartimento técnico traseiro.
+    detail: "Origem: imports/photos/construction-motorhome-iveco/batch-20261117/IMG_1406.JPG; SHA-256: bb17220291753dbaa221635ae36b5ec68095d6a8ad52176acb3f69a937f9903b"
+  - photo_id: construction-019
+    src: media/journeys/2018-construction-motorhome-iveco/optimized/construction-019.webp
+    thumbnail: media/journeys/2018-construction-motorhome-iveco/thumbnails/construction-019.webp
+    alt: Bancos da cabine com acabamento escuro após a reforma.
+    detail: "Origem: imports/photos/construction-motorhome-iveco/batch-20261117/IMG_1414.JPG; SHA-256: f8737a2783cab3c4ae8e26d5d08e574c824d526627091628b9b8034946d6d055"
+  - photo_id: construction-020
+    src: media/journeys/2018-construction-motorhome-iveco/optimized/construction-020.webp
+    thumbnail: media/journeys/2018-construction-motorhome-iveco/thumbnails/construction-020.webp
+    alt: Vista lateral do interior da cabine e de seus bancos.
+    detail: "Origem: imports/photos/construction-motorhome-iveco/batch-20261117/IMG_1417.JPG; SHA-256: 1f7f69a01ad68b3094cacbea42eabc90ebe85496c3253944f221bbcabc8fc10c"
+  - photo_id: construction-021
+    src: media/journeys/2018-construction-motorhome-iveco/optimized/construction-021.webp
+    thumbnail: media/journeys/2018-construction-motorhome-iveco/thumbnails/construction-021.webp
+    alt: Comparação dos bancos da cabine antes e depois do revestimento.
+    detail: "Origem: imports/photos/construction-motorhome-iveco/batch-20261117/IMG_1428.JPG; SHA-256: 3c7bb7dee9d75ffb936ec37b02711762b50a7e9d52f832d5937b0962852eeff6"
+  - photo_id: construction-022
+    src: media/journeys/2018-construction-motorhome-iveco/optimized/construction-022.webp
+    thumbnail: media/journeys/2018-construction-motorhome-iveco/thumbnails/construction-022.webp
+    alt: Cabine vista pela porta, com bancos, painel e acabamento do teto.
+    detail: "Origem: imports/photos/construction-motorhome-iveco/batch-20261117/IMG_1449.JPG; SHA-256: 25c6fa2d743b48e0cfac14d03021ad107d66c13184ba7fe82ca2311d1d97f535"
+  - photo_id: construction-023
+    src: media/journeys/2018-construction-motorhome-iveco/optimized/construction-023.webp
+    thumbnail: media/journeys/2018-construction-motorhome-iveco/thumbnails/construction-023.webp
+    alt: Apresentamos um colchão com estampa de folhagens na oficina.
+    detail: "Origem: imports/photos/construction-motorhome-iveco/batch-20261117/IMG_1460.JPG; SHA-256: 5d7f3a691b903bb08959d74929add59d85c52173c86bddf2b69aacad4adceeed"
+  - photo_id: construction-024
+    src: media/journeys/2018-construction-motorhome-iveco/optimized/construction-024.webp
+    thumbnail: media/journeys/2018-construction-motorhome-iveco/thumbnails/construction-024.webp
+    alt: Interior do motorhome com colchão, assentos e mesa em montagem.
+    detail: "Origem: imports/photos/construction-motorhome-iveco/batch-20261117/IMG_1464.jpg; SHA-256: 6574bf16092bced7ec38e7a33afe092b250d6c5acba3ee7fcdae6c234ae49022"
+  - photo_id: construction-025
+    src: media/journeys/2018-construction-motorhome-iveco/optimized/construction-025.webp
+    thumbnail: media/journeys/2018-construction-motorhome-iveco/thumbnails/construction-025.webp
+    alt: Trabalhamos com uma ferramenta sobre a bancada da oficina.
+    detail: "Origem: imports/photos/construction-motorhome-iveco/batch-20261117/IMG_1857.JPG; SHA-256: a693d1bf6381baa4aee3f3f7ec33d13713cbcd34c81735d381565913875ac9df"
+  - photo_id: construction-026
+    src: media/journeys/2018-construction-motorhome-iveco/optimized/construction-026.webp
+    thumbnail: media/journeys/2018-construction-motorhome-iveco/thumbnails/construction-026.webp
+    alt: Apresentamos uma peça de madeira durante a montagem dos móveis.
+    detail: "Origem: imports/photos/construction-motorhome-iveco/batch-20261117/IMG_1890.JPG; SHA-256: 39dfc80af44ec64a0eab4a72e8939f993c9ae962f28ac6bfde1463578b760833"
+  - photo_id: construction-027
+    src: media/journeys/2018-construction-motorhome-iveco/optimized/construction-027.webp
+    thumbnail: media/journeys/2018-construction-motorhome-iveco/thumbnails/construction-027.webp
+    alt: Interior em montagem com bases de móveis, armários e revestimentos.
+    detail: "Origem: imports/photos/construction-motorhome-iveco/batch-20261117/IMG_1896.JPG; SHA-256: 229539f40997e2abf656cad13ca00af85ea56736a53500d5edee1834db910988"
+  - photo_id: construction-028
+    src: media/journeys/2018-construction-motorhome-iveco/optimized/construction-028.webp
+    thumbnail: media/journeys/2018-construction-motorhome-iveco/thumbnails/construction-028.webp
+    alt: Base da cama com furos circulares durante a montagem interna.
+    detail: "Origem: imports/photos/construction-motorhome-iveco/batch-20261117/IMG_1904.JPG; SHA-256: 79f1fe3549f95316e0eb96a9b02ac14d9d18393ee4b67826fa36d8dab5facf6d"
+  - photo_id: construction-029
+    src: media/journeys/2018-construction-motorhome-iveco/optimized/construction-029.webp
+    thumbnail: media/journeys/2018-construction-motorhome-iveco/thumbnails/construction-029.webp
+    alt: Durante a montagem, posamos junto aos móveis com acabamento amadeirado.
+    detail: "Origem: imports/photos/construction-motorhome-iveco/batch-20261117/IMG_1932.JPG; SHA-256: d9012ab3b37b89ba5d45b07b3dad5ea5b04b69e1c591b590cda06fec41946bb0"
+  - photo_id: construction-031
+    src: media/journeys/2018-construction-motorhome-iveco/optimized/construction-031.webp
+    thumbnail: media/journeys/2018-construction-motorhome-iveco/thumbnails/construction-031.webp
+    alt: Sentamos na abertura traseira da van ainda com o interior sem acabamento.
+    detail: "Origem: imports/photos/construction-motorhome-iveco/batch-20261117/IMG_20190119_171927.jpg; SHA-256: 7e26540c0df05270e65966337de69125eeeb1ab04b319cf84001782d37dde802"
+  - photo_id: construction-032
+    src: media/journeys/2018-construction-motorhome-iveco/optimized/construction-032.webp
+    thumbnail: media/journeys/2018-construction-motorhome-iveco/thumbnails/construction-032.webp
+    alt: Interior da van com isolamento refletivo e componentes aguardando instalação.
+    detail: "Origem: imports/photos/construction-motorhome-iveco/batch-20261117/IMG_20190213_140745.jpg; SHA-256: 6746a74ce5348be6010f8d17c6c8b21018d0726036d0223a56bd2b37134fb3d4"
+  - photo_id: construction-033
+    src: media/journeys/2018-construction-motorhome-iveco/optimized/construction-033.webp
+    thumbnail: media/journeys/2018-construction-motorhome-iveco/thumbnails/construction-033.webp
+    alt: Ajustamos o revestimento do piso no interior da van.
+    detail: "Origem: imports/photos/construction-motorhome-iveco/batch-20261117/IMG_20190310_154222.jpg; SHA-256: 340cecf9e71cc3aec7e6d800bfbac9fe83c64600433c5df127ac976fced77a06"
+  - photo_id: construction-034
+    src: media/journeys/2018-construction-motorhome-iveco/optimized/construction-034.webp
+    thumbnail: media/journeys/2018-construction-motorhome-iveco/thumbnails/construction-034.webp
+    alt: Durante a construção, sentamos ao lado de peças de espuma recortadas.
+    detail: "Origem: imports/photos/construction-motorhome-iveco/batch-20261117/IMG_20190328_160525.jpg; SHA-256: 546f2483c22b820c53ba4d42d3d4b309df7970b00a7265ef61bef99569545b03"
+  - photo_id: construction-035
+    src: media/journeys/2018-construction-motorhome-iveco/optimized/construction-035.webp
+    thumbnail: media/journeys/2018-construction-motorhome-iveco/thumbnails/construction-035.webp
+    alt: Montamos um móvel branco sobre a bancada da oficina.
+    detail: "Origem: imports/photos/construction-motorhome-iveco/batch-20261117/IMG_20190414_132030.jpg; SHA-256: acbf00bbd971b782874d91d7dedbd503fc9c2f5fdc15aee571a147c86acd46a5"
+  - photo_id: construction-038
+    src: media/journeys/2018-construction-motorhome-iveco/optimized/construction-038.webp
+    thumbnail: media/journeys/2018-construction-motorhome-iveco/thumbnails/construction-038.webp
+    alt: Cozinha pronta com pia, fogão, torneira e armários com acabamento amadeirado.
+    detail: "Origem: imports/photos/construction-motorhome-iveco/batch-20261117/IMG_2417.JPG; SHA-256: 7102e0a8c0d9c61447a89e39dfd3c32166a441c19f51905cec21190c53083b43"
+  - photo_id: construction-039
+    src: media/journeys/2018-construction-motorhome-iveco/optimized/construction-039.webp
+    thumbnail: media/journeys/2018-construction-motorhome-iveco/thumbnails/construction-039.webp
+    alt: Vista longitudinal do interior pronto, com cozinha e corredor até a cabine.
+    detail: "Origem: imports/photos/construction-motorhome-iveco/batch-20261117/IMG_2422.JPG; SHA-256: edffcee5510458cd23bbd2e09fef8802454fc15b2272995701bd22613cded899"
+  - photo_id: construction-040
+    src: media/journeys/2018-construction-motorhome-iveco/optimized/construction-040.webp
+    thumbnail: media/journeys/2018-construction-motorhome-iveco/thumbnails/construction-040.webp
+    alt: Detalhe da bancada com fogão de duas bocas, pia e armários superiores.
+    detail: "Origem: imports/photos/construction-motorhome-iveco/batch-20261117/IMG_2471.JPG; SHA-256: a074bf1aab21f6bc7b66ccfe9be007d2124cb704d0a7199624b7c9d79b62bfc5"
+  - photo_id: construction-041
+    src: media/journeys/2018-construction-motorhome-iveco/optimized/construction-041.webp
+    thumbnail: media/journeys/2018-construction-motorhome-iveco/thumbnails/construction-041.webp
+    alt: Sentamos sobre a cama, vista pela abertura traseira do motorhome.
+    detail: "Origem: imports/photos/construction-motorhome-iveco/batch-20261117/IMG_2521.JPG; SHA-256: 91594003f71385ae394291203b28d6065f45e651186b5aad0ade894504df03e4"
+  - photo_id: construction-042
+    src: media/journeys/2018-construction-motorhome-iveco/optimized/construction-042.webp
+    thumbnail: media/journeys/2018-construction-motorhome-iveco/thumbnails/construction-042.webp
+    alt: Vista traseira do motorhome com cama e compartimento inferior de armazenamento.
+    detail: "Origem: imports/photos/construction-motorhome-iveco/batch-20261117/IMG_2523.JPG; SHA-256: a73cea2e2a5d5041844e3ebd8417272790c0715138b43c881005e567248f70e0"
+  - photo_id: construction-043
+    src: media/journeys/2018-construction-motorhome-iveco/optimized/construction-043.webp
+    thumbnail: media/journeys/2018-construction-motorhome-iveco/thumbnails/construction-043.webp
+    alt: Vista da cozinha, dos assentos e da cama com o interior concluído.
+    detail: "Origem: imports/photos/construction-motorhome-iveco/batch-20261117/IMG_2535.jpg; SHA-256: 968cc18684f73f54794fd06885cc0d20e828139dfae8274a63d8589364bed3d5"
+  - photo_id: construction-044
+    src: media/journeys/2018-construction-motorhome-iveco/optimized/construction-044.webp
+    thumbnail: media/journeys/2018-construction-motorhome-iveco/thumbnails/construction-044.webp
+    alt: Outra vista do interior concluído, com pia, armários e cama ao fundo.
+    detail: "Origem: imports/photos/construction-motorhome-iveco/batch-20261117/IMG_2540.JPG; SHA-256: f1e065602a7d39f208905274c81e534cd6615d2d23fd4822293ed7a7fb0b6510"
+  - photo_id: construction-045
+    src: media/journeys/2018-construction-motorhome-iveco/optimized/construction-045.webp
+    thumbnail: media/journeys/2018-construction-motorhome-iveco/thumbnails/construction-045.webp
+    alt: Abertura e equipamento no teto com isolamento refletivo ao redor.
+    detail: "Origem: imports/photos/construction-motorhome-iveco/batch-20261117/IMG_4030.jpg; SHA-256: 81d95a4186864de431e9b20de166ae72a19c34490abcaa4c0d06ca2579c2ea6e"
+  - photo_id: construction-046
+    src: media/journeys/2018-construction-motorhome-iveco/optimized/construction-046.webp
+    thumbnail: media/journeys/2018-construction-motorhome-iveco/thumbnails/construction-046.webp
+    alt: Trabalhamos no teto da van, com isolamento refletivo nas paredes.
+    detail: "Origem: imports/photos/construction-motorhome-iveco/batch-20261117/IMG_4041.jpg; SHA-256: 673cea72ad575a001ab3916cd8586edbd9c0bff48101908c7292b0f3dff3b882"
+  - photo_id: construction-047
+    src: media/journeys/2018-construction-motorhome-iveco/optimized/construction-047.webp
+    thumbnail: media/journeys/2018-construction-motorhome-iveco/thumbnails/construction-047.webp
+    alt: Painéis solares instalados no teto, vistos de uma posição elevada.
+    detail: "Origem: imports/photos/construction-motorhome-iveco/batch-20261117/IMG_4078.jpg; SHA-256: 9ee215f58ce784e86fab05c8b538f68487122d49cfc97bcc8ac8535a4766b26a"
+  - photo_id: construction-048
+    src: media/journeys/2018-construction-motorhome-iveco/optimized/construction-048.webp
+    thumbnail: media/journeys/2018-construction-motorhome-iveco/thumbnails/construction-048.webp
+    alt: Janela lateral instalada na carroceria branca da van.
+    detail: "Origem: imports/photos/construction-motorhome-iveco/batch-20261117/IMG_4155.jpg; SHA-256: 222145bc7385c0368da3dd1facb7a7d4f4f205222ad912e1690bb05a9d7a16e9"
+  - photo_id: construction-055
+    src: media/journeys/2018-construction-motorhome-iveco/optimized/construction-055.webp
+    thumbnail: media/journeys/2018-construction-motorhome-iveco/thumbnails/construction-055.webp
+    alt: Posamos ao lado da van branca antes da caracterização externa do motorhome.
+    detail: "Origem: imports/photos/construction-motorhome-iveco/batch-20261117/Photo Album (52).JPG; SHA-256: a388d51d405dcffdb2aa748aa0bc4c5645d0b3bf1fd78547ba7d08c57f4216cf"
+  - photo_id: construction-060
+    src: media/journeys/2018-construction-motorhome-iveco/optimized/construction-060.webp
+    thumbnail: media/journeys/2018-construction-motorhome-iveco/thumbnails/construction-060.webp
+    alt: Sentamos à mesa interna junto à janela com vista para uma paisagem aberta.
+    detail: "Origem: imports/photos/construction-motorhome-iveco/batch-20261117/Photo Album (57).JPG; SHA-256: 122f7ec6d99c2e9a4f1478179333262599461e6615f4b9e98f48b321e8341c26"
+  - photo_id: construction-062
+    src: media/journeys/2018-construction-motorhome-iveco/optimized/construction-062.webp
+    thumbnail: media/journeys/2018-construction-motorhome-iveco/thumbnails/construction-062.webp
+    alt: Outra vista da mesa interna e da janela durante o uso do motorhome.
+    detail: "Origem: imports/photos/construction-motorhome-iveco/batch-20261117/Photo Album (59).JPG; SHA-256: f39827332273c1a4940984625c7931c4d5df28a5e493f5b8f13162855e07f754"

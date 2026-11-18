@@ -152,11 +152,13 @@ antes da publicação.
 | `vehicle_model` | Texto com fabricante/modelo do veículo-base. |
 | `chassis` | Texto com configuração, versão ou características relevantes. |
 | `build_location` | Texto com o local comprovado da construção ou intervenção. |
+| `map_image` | Imagem aprovada para o card do mapa, com `src` em `media/` e `alt`. Sua publicação é independente de `photo_gallery.status`. |
 | `representative_point` | Objeto opcional com `name` e `coordinates`, contendo `lat` entre -90 e 90 e `lng` entre -180 e 180. Ponto público representativo, não endereço particular. |
 | `build_period` | Objeto com `start` e/ou `end`: strings `AAAA`, `AAAA-MM` ou `AAAA-MM-DD`. |
 | `main_costs` | Lista de objetos com `description`, `amount` numérico não negativo, `currency` ISO de três letras e `unit` descrevendo a base do valor; opcionais `approximate`, `system_id` e `video_ids`. |
 | `cost_items` | Lançamentos por linha da planilha: `source_row` único, `description`, `quantity` positiva, `amount` e `currency`; opcionais `category`, `detail`, `unit`, `unit_price`, `shipping`, `system_ids` e `allocation_uncertain`. Preserva valores negativos do original; quando há unitário, o total confere com quantidade × unitário + frete discriminado. |
 | `photos` | Lista com `photo_id`, `src`, `alt`; opcionais `thumbnail`, `caption`, `stage`, `detail`, `system_id`. Caminhos relativos ao repositório, para imagens otimizadas em `media/`. |
+| `photo_gallery` | Objeto opcional com `status` (`draft` ou `published`) e `pages`: seleções ordenadas de `photo_id` por `page_id`; `overview` identifica a página principal. Uma foto pode aparecer em várias seleções sem duplicar o arquivo. Referências ausentes ou repetidas na mesma seleção são rejeitadas. |
 | `videos` | Lista de referências com `video_id` original e `youtube_url` canônica, nos formatos já usados pelo contrato de vídeos. |
 | `playlist_id` | Identificador original da playlist do YouTube. |
 | `playlist_order` | Lista de IDs presentes em `videos`, sem repetição, na ordem da playlist; o primeiro ID ocupa a posição 1. |
@@ -173,6 +175,42 @@ antes da publicação.
 item de `systems`. `video_ids` liga cada assunto às referências únicas em `videos`.
 Um vídeo pode participar de vários sistemas sem duplicar seu registro. Os
 processos de um sistema seguem a lógica do tema; não alteram a playlist.
+
+### Fotografias da construção
+
+O lote recebido em `imports/photos/construction-motorhome-iveco/batch-20261117/`
+foi analisado e teve sua distribuição e padrão de qualidade aprovados pelo
+proprietário antes do processamento integral. Dos 66 arquivos, 47 fotos foram
+selecionadas; cinco versões visualmente repetidas, dois gráficos e 12 fotos de
+reserva ficaram fora da integração. Nenhum original foi renomeado ou excluído.
+O inventário, as folhas de contato e a correspondência entre arquivos recebidos
+e IDs foram mantidos no material de revisão da sessão. Cada foto também registra
+em `detail` o caminho recebido e o SHA-256 original; esse registro técnico não
+é exibido na galeria.
+
+Os derivados ficam em `media/journeys/2018-construction-motorhome-iveco/`,
+com `optimized/` (até 2400 px no lado maior) e `thumbnails/` (até 480 px).
+São WebP com qualidade 85, orientação corrigida, proporções preservadas e sem
+ampliação. Os derivados não contêm EXIF, XMP ou IPTC; o perfil de cor é preservado
+quando disponível. Os nomes `construction-NNN.webp` correspondem à numeração
+do inventário, não a uma data ou sequência cronológica comprovada.
+
+`MotorhomePhotoGallery` reutiliza `PhotoGallery` e respeita a ordem das seleções.
+As fotos não recebem local/mês inferidos da construção e ficam restritas às
+páginas da construção e ao card do mapa. Por decisão do proprietário, não devem
+integrar a galeria geral de viagens nem ganhar uma coleção fotográfica própria.
+Os textos alternativos descrevem apenas o que é
+visível; não identificam especificações ocultas dos equipamentos.
+
+As seleções foram aprovadas para publicação nas sete páginas da construção,
+com `photo_gallery.status: published`. O build inclui os 94 derivados das 47 fotos
+selecionadas. A foto 055 também ilustra o card do mapa por meio de `map_image`.
+Isso não cria coleção nem acrescenta fotos à galeria geral.
+
+Para futuras revisões, `photo_gallery.status: draft` limita as seleções à prévia
+de desenvolvimento. `pnpm dev` sincroniza esses derivados para revisão local;
+`pnpm build` remove as cópias públicas de rascunho, exceto a imagem aprovada em
+`map_image`. A publicação das páginas existentes permanece independente.
 
 Cada `cost_items` representa uma compra, não um subtotal adicional de `main_costs`.
 `system_ids` permite reutilizar a compra em várias etapas sem duplicar o registro.

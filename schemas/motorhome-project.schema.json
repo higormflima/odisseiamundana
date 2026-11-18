@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://odisseiamundana.com/schemas/motorhome-project.schema.json",
   "title": "Metadados de projeto de motorhome — rascunho 0.6",
-  "description": "Contrato independente para construção, conversão ou melhorias de motorhomes. Não controla publicação.",
+  "description": "Contrato independente para construção, conversão ou melhorias de motorhomes. A publicação das páginas é independente; photo_gallery.status controla a publicação das fotos.",
   "type": "object",
   "required": ["project_id"],
   "additionalProperties": false,
@@ -13,6 +13,16 @@
     "vehicle_model": { "$ref": "#/$defs/text" },
     "chassis": { "$ref": "#/$defs/text" },
     "build_location": { "$ref": "#/$defs/text" },
+    "map_image": {
+      "type": "object",
+      "description": "Imagem aprovada para o card do mapa, independente do status das galerias.",
+      "required": ["src", "alt"],
+      "additionalProperties": false,
+      "properties": {
+        "src": { "$ref": "#/$defs/mediaPath" },
+        "alt": { "$ref": "#/$defs/text" }
+      }
+    },
     "representative_point": {
       "type": "object",
       "description": "Ponto representativo público do projeto, usado no mapa; não representa necessariamente o endereço da construção.",
@@ -80,6 +90,25 @@
             "description": "A aplicação da compra não está individualizada na fonte. Associação temática provisória autorizada pelo proprietário; exibir no final da tabela da etapa."
           },
           "system_ids": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": { "$ref": "#/$defs/id" }
+          }
+        }
+      }
+    },
+    "photo_gallery": {
+      "type": "object",
+      "required": ["status", "pages"],
+      "additionalProperties": false,
+      "properties": {
+        "status": { "enum": ["draft", "published"] },
+        "pages": {
+          "type": "object",
+          "minProperties": 1,
+          "propertyNames": { "$ref": "#/$defs/id" },
+          "additionalProperties": {
             "type": "array",
             "minItems": 1,
             "uniqueItems": true,

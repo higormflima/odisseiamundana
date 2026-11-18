@@ -46,6 +46,9 @@ function validateMotorhomeProject(data, errors) {
       }
     }
   };
+  for (const [pageId, photoIds] of Object.entries(data.photo_gallery?.pages ?? {})) {
+    checkReferences(photoIds, knownIds.photos, `/photo_gallery/pages/${pageId}`);
+  }
   for (const [index, video] of (data.videos ?? []).entries()) {
     if (new URL(video.youtube_url).searchParams.get('v') !== video.video_id) {
       addError(`/videos/${index}/youtube_url`, 'videoUrl', 'deve corresponder ao video_id');

@@ -37,4 +37,15 @@ test('monta card de projeto independente de viagens e respeita a base do site', 
   assert.equal(entry.linkLabel, 'Conhecer o motorhome');
   assert.equal(entry.period, undefined);
   assert.equal(entry.duration, undefined);
+  assert.equal(entry.image, undefined);
+});
+
+test('exibe a imagem aprovada do card mesmo com a galeria em rascunho e preserva a base', () => {
+  const image = { src: 'media/journeys/construction/thumbnails/construction-055.webp', alt: 'Nossa van.' };
+  const [entry] = buildMotorhomeMapEntries({
+    projects: [project('sample', { representative_point: point, map_image: image, photo_gallery: { status: 'draft' } })],
+    pages: [page('sample')],
+    base: '/revista/',
+  });
+  assert.deepEqual(entry.image, { src: `/revista/${image.src}`, alt: image.alt });
 });

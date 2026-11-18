@@ -5,6 +5,7 @@ import SiteLayout from '../../../../layouts/SiteLayout.astro';
 import CostTable from '../../../../components/CostTable.astro';
 import CostTableFrame from '../../../../components/CostTableFrame.astro';
 import VideoCarousel from '../../../../components/VideoCarousel.astro';
+import MotorhomePhotoGallery from '../../../../components/MotorhomePhotoGallery.astro';
 import { loadMotorhomePlaylist } from '../../../../lib/motorhomePlaylist.mjs';
 import { buildSystemCostRows } from '../../../../lib/motorhomeCosts.mjs';
 import { buildMotorhomeSystemPage } from '../../../../lib/motorhomeSystemPages.mjs';
@@ -43,6 +44,8 @@ const hasAttributes = groups.some(({ field }) => topic[field].length > 0);
     {isDraft && <p class="eyebrow draft-label">Prévia local · não publicada</p>}
     <header class="story-header"><h1>{entry.data.title}</h1></header>
     <div class="story-body"><Content /></div>
+
+    <MotorhomePhotoGallery projectId={project.project_id} pageId={entry.data.page_id} />
 
     {hasAttributes && <section class="system-attributes" aria-label="O que usamos nesta página">
       {groups.map(({ field, title }) => topic[field].length > 0 && (

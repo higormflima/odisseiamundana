@@ -63,6 +63,21 @@ test('aceita relações compartilhadas sem duplicar vídeos e preserva a sequên
   assert.equal(validate(data).valid, true, 'permite vídeo complementar fora da playlist');
 });
 
+test('valida status e referências das seleções de fotos por página sem duplicação', () => {
+  const data = project();
+  data.photo_gallery = { status: 'draft', pages: { overview: ['sample-before'], planning: ['sample-before'] } };
+  assert.equal(validate(data).valid, true);
+  data.photo_gallery.status = 'published';
+  assert.equal(validate(data).valid, true);
+  data.photo_gallery.status = 'invalid';
+  assert.equal(validate(data).valid, false);
+  data.photo_gallery.status = 'draft';
+  data.photo_gallery.pages.overview = ['missing'];
+  assert.equal(validate(data).valid, false);
+  data.photo_gallery.pages.overview = ['sample-before', 'sample-before'];
+  assert.equal(validate(data).valid, false);
+});
+
 test('valida ponto representativo completo e limites geográficos sem exigir localização no projeto mínimo', () => {
   const data = { project_id: 'sample', representative_point: { name: 'Cidade de referência', coordinates: { lat: -23.1, lng: -45.8 } } };
   assert.equal(validate(data).valid, true);

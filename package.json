@@ -8,8 +8,8 @@
     "node": ">=22.12.0"
   },
   "scripts": {
-    "dev": "astro dev",
-    "start": "astro dev",
+    "dev": "node scripts/sync-public-media.mjs --include-draft-photos && astro dev",
+    "start": "pnpm dev",
     "build": "node scripts/sync-public-media.mjs && pnpm validate:metadata && pnpm gallery:validate && astro build && pagefind --site dist",
     "preview": "astro preview",
     "validate:metadata": "node scripts/validate-metadata.mjs",
