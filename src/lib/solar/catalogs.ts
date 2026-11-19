@@ -51,6 +51,7 @@ export const equipmentCategories = [
 ] as const;
 
 export interface EquipmentCatalogItem {
+  referenceKind: 'manufacturer' | 'usage-example';
   id: string;
   categoryId: (typeof equipmentCategories)[number]['id'];
   namePt: string;
@@ -72,6 +73,7 @@ export interface EquipmentCatalogItem {
 
 export const equipmentCatalog: readonly EquipmentCatalogItem[] = [
   {
+    referenceKind: 'manufacturer',
     id: 'dometic-cfx5-45',
     categoryId: 'refrigeration',
     namePt: 'Geladeira portátil com compressor de 45 L — referência CFX5 45',
@@ -96,13 +98,78 @@ export const equipmentCatalog: readonly EquipmentCatalogItem[] = [
       accessedOn: '2026-11-18',
     },
   },
+  ...([
+    { id: 'example-led-light', categoryId: 'lighting', namePt: 'Luminária LED 12 V — exemplo', powerW: 3, hoursPerDay: 4, usagePt: '4 h/dia por luminária', supply: 'dc', voltageV: 12 },
+    { id: 'example-coffee-maker', categoryId: 'cooking', namePt: 'Cafeteira elétrica AC — exemplo', powerW: 900, hoursPerDay: 0.25, usagePt: '15 min/dia', supply: 'ac', voltageV: 120 },
+    { id: 'example-laptop', categoryId: 'electronics', namePt: 'Notebook com carregador AC — exemplo', powerW: 60, hoursPerDay: 4, usagePt: '4 h/dia', supply: 'ac', voltageV: 120 },
+    { id: 'example-water-pump', categoryId: 'water', namePt: 'Bomba de água 12 V — exemplo', powerW: 75, hoursPerDay: 1 / 3, usagePt: '20 min/dia de funcionamento efetivo', supply: 'dc', voltageV: 12 },
+    { id: 'example-roof-fan', categoryId: 'climate', namePt: 'Exaustor de teto 12 V — exemplo', powerW: 30, hoursPerDay: 6, usagePt: '6 h/dia', supply: 'dc', voltageV: 12 },
+    { id: 'example-background-loads', categoryId: 'other', namePt: 'Detectores e controles em espera 12 V — exemplo', powerW: 6, hoursPerDay: 24, usagePt: '24 h/dia para o conjunto de pequenos consumos', supply: 'dc', voltageV: 12 },
+  ] as const).map((example): EquipmentCatalogItem => ({
+    id: example.id,
+    referenceKind: 'usage-example',
+    categoryId: example.categoryId,
+    namePt: example.namePt,
+    defaultLoad: {
+      id: example.id,
+      supply: example.supply,
+      quantity: 1,
+      simultaneous: true,
+      basis: { kind: 'power-time', powerW: example.powerW, hoursPerDay: example.hoursPerDay },
+      ...(example.supply === 'ac' ? { ratedPowerW: example.powerW } : {}),
+    },
+    applicableSystemVoltagesV: example.supply === 'dc' ? [12] : [12, 24],
+    sourceMeasurement: {
+      value: example.powerW,
+      unit: 'W',
+      voltageV: example.voltageV,
+      conditions: `Cenário genérico de uso, não medição de fabricante: ${example.powerW} W por ${example.usagePt}. Circuito da fonte: ${example.voltageV} V ${example.supply.toUpperCase()}`,
+    },
+    derivationPt: `${example.powerW} W × ${example.hoursPerDay.toLocaleString('pt-BR', { maximumFractionDigits: 4 })} h/dia = ${(example.powerW * example.hoursPerDay).toLocaleString('pt-BR')} Wh/dia por unidade, antes das perdas do inversor.${example.id === 'example-water-pump' ? ' O tempo é 20/60 h, sem arredondamento no cálculo.' : ''}`,
+    source: {
+      name: 'RVing Toolbox — exemplos de consumo diário em motorhomes',
+      url: 'https://rvingtoolbox.com/calculators/power-budget',
+      accessedOn: '2026-11-19',
+    },
+  })),
 ];
+
+export function buildEquipmentLoad(
+  item: EquipmentCatalogItem,
+  quantity: number,
+  usage?: { powerW: number; hoursPerDay: number },
+): ElectricalLoad {
+  if (!usage) return { ...item.defaultLoad, quantity };
+  if (item.defaultLoad.basis.kind !== 'power-time') {
+    throw new TypeError('Este equipamento não usa um perfil de potência e tempo.');
+  }
+  return {
+    ...item.defaultLoad,
+    quantity,
+    basis: { kind: 'power-time', ...usage },
+    ...(item.defaultLoad.supply === 'ac' ? { ratedPowerW: usage.powerW } : {}),
+  };
+}
 
 export interface SolarCatalogSource {
   name: string;
   url: string;
   accessedOn: string;
 }
+
+export const initialInverterScenario = {
+  outputVoltageV: 220,
+  ratedPowerW: 2000,
+  efficiencyPercent: 90,
+  standbyPowerW: 20,
+  standbyHoursPerDay: 8,
+  notePt: 'Cenário inicial editável: 2.000 W para planejar cargas usuais, 90% de eficiência, 20 W sem carga e 8 h/dia sem alimentar aparelhos. São hipóteses de planejamento, não médias estatísticas nem garantia de um modelo. Confira os valores do seu inversor e o tempo real de uso.',
+  powerReference: {
+    name: 'Epever IPower-Plus — referência de porte 2.000 W e saída 220 V',
+    url: 'https://www.epever.com/upload/file/2107/EPEVER-Datasheet_IPower-Plus-220V.pdf',
+    accessedOn: '2026-11-19',
+  },
+} as const;
 
 export interface BatteryCatalogItem {
   id: string;
@@ -195,6 +262,63 @@ export const batteryCatalog: readonly BatteryCatalogItem[] = [
       'Referência editável de modelo específico, não perfil universal de LiFePO₄. A ficha consultada publica corrente máxima de carga e corrente contínua de descarga, mas não foi cadastrado limite de descarga de pico. As eficiências são válidas somente nas taxas e temperatura indicadas; o catálogo não extrapola esses resultados para outras condições.',
   },
 ];
+
+export const leadAcidBatteryReference = {
+  id: 'freedom-df4100',
+  namePt: 'Freedom DF4100 — 12 V / 220 Ah em C20',
+  nominalCapacityAh: 220,
+  parameters: {
+    chemistry: 'lead-acid',
+    nominalVoltageV: 12,
+    depthOfDischarge: 0.2,
+  },
+  capacityRatings: [
+    { hours: 10, capacityAh: 200 },
+    { hours: 20, capacityAh: 220 },
+    { hours: 100, capacityAh: 240 },
+  ],
+  nominalCapacityTestConditionsPt: 'Capacidades a 25 °C; referência de dimensionamento em C20.',
+  depthOfDischargeBasisPt:
+    '20% DoD a 25 °C é a condição publicada para vida útil projetada superior a quatro anos, não um limite máximo de descarga nem garantia em qualquer uso.',
+  chargeVoltageRangeV: { minimum: 14.4, maximum: 15.5 },
+  floatVoltageRangeV: { minimum: 13.2, maximum: 13.8 },
+  dischargeTestEndVoltageV: 10.5,
+  sourceDocumentPt: 'Especifica_o_T_cnica_-_Bateria_Estacion_ria_Freedom_DF.pdf — catálogo técnico Freedom by Heliar fornecido pelo proprietário; páginas 3–5 do PDF.',
+  source: {
+    name: 'NeoSolar — anúncio da Freedom DF4100',
+    url: 'https://www.neosolar.com.br/loja/bateria-estacionaria-freedom-df4001-240ah-220ah.html',
+    accessedOn: '2026-11-19',
+  },
+  notePt:
+    'Referência editável de chumbo-ácido com eletrólito fluido; não é AGM ou GEL. Eficiências de carga e descarga e limites máximos de corrente não são informados na ficha fornecida. Não confundir correntes de ensaio com limites de operação.',
+} as const;
+
+export const agmBatteryReference = {
+  id: 'rolls-s12-230agm-re',
+  namePt: 'Rolls S12-230AGM-RE — 12 V / 210 Ah em C20',
+  nominalVoltageV: 12,
+  nominalCapacityAh: 210,
+  depthOfDischarge: 0.5,
+  nominalCapacityTestConditionsPt: 'C20 a 25 °C; os 230 Ah do nome correspondem a C100.',
+  depthOfDischargeBasisPt:
+    'DoD inicial de 50% segue a orientação geral da Rolls para equilibrar capacidade e vida cíclica em sistemas off-grid; é editável, não um limite máximo específico deste modelo nem garantia de vida útil.',
+  chargeVoltageV: 14.7,
+  floatVoltageV: 13.8,
+  recommendedChargeCurrentA: 40,
+  maxChargeCurrentA: 65,
+  sources: [
+    {
+      name: 'Rolls Battery — S12-230AGM-RE, revisão 5 de agosto de 2022',
+      url: 'https://rollsbattery.com/battery/s12-230agm-re/',
+      accessedOn: '2026-11-19',
+    },
+    {
+      name: 'Rolls Battery — dimensionamento de sistemas off-grid',
+      url: 'https://support.rollsbattery.com/en/support/solutions/articles/246449-what-is-the-best-battery-for-off-grid-systems-',
+      accessedOn: '2026-11-19',
+    },
+  ],
+} as const;
 
 export interface PvModuleCatalogItem {
   id: string;
@@ -362,15 +486,11 @@ export const batteryTechnologyCatalog: readonly BatteryTechnologyCatalogEntry[] 
     chemistry: 'lead-acid',
     labelPt: 'Chumbo-ácido',
     profileStatus: 'requires-battery-specific-data',
-    referenceProfileIds: [],
+    referenceProfileIds: [leadAcidBatteryReference.id],
     requiredDatasheetFields: [
       'nominalVoltageV',
       'nominalCapacityAh',
       'depthOfDischarge',
-      'chargeEfficiency',
-      'dischargeEfficiency',
-      'chargeVoltageV',
-      'dischargeCutoffVoltageV',
     ],
     optionalDatasheetFields: [
       'maxChargeCurrentA',
@@ -378,7 +498,17 @@ export const batteryTechnologyCatalog: readonly BatteryTechnologyCatalogEntry[] 
       'maxPeakDischargeCurrentA',
     ],
     notePt:
-      'Não há perfil genérico pré-preenchido. Valores de chumbo-ácido dependem do subtipo, modelo, idade e condições de operação; eficiência ida-e-volta não é dividida em eficiências de carga e descarga.',
+      'A referência Freedom DF4100 usa a capacidade de descarga publicada em C20 a 25 °C para o guia básico. Não exige eficiências direcionais ou tensões de carga/corte para estimar a quantidade de baterias; esses parâmetros pertencem ao projeto de recarga e proteção.',
+  },
+  {
+    chemistry: 'agm',
+    labelPt: 'AGM',
+    profileStatus: 'has-model-specific-reference',
+    referenceProfileIds: [agmBatteryReference.id],
+    requiredDatasheetFields: ['nominalVoltageV', 'nominalCapacityAh', 'depthOfDischarge'],
+    optionalDatasheetFields: ['maxChargeCurrentA', 'maxContinuousDischargeCurrentA', 'maxPeakDischargeCurrentA'],
+    notePt:
+      'AGM também é chumbo-ácido; a opção separada usa a Rolls S12-230AGM-RE em C20 e estima o banco pela capacidade de descarga publicada, sem presumir eficiências direcionais.',
   },
   {
     chemistry: 'lifepo4',

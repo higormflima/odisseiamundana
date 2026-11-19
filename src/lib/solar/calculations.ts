@@ -1,4 +1,4 @@
-export type BatteryChemistry = 'lead-acid' | 'lifepo4';
+export type BatteryChemistry = 'lead-acid' | 'agm' | 'lifepo4';
 
 export type LoadBasis =
   | { kind: 'power-time'; powerW: number; hoursPerDay: number }
@@ -18,6 +18,7 @@ export interface ElectricalLoad {
 }
 
 export interface BatteryParameters {
+  capacityBasis?: 'stored-energy';
   chemistry: BatteryChemistry;
   nominalVoltageV?: number;
   depthOfDischarge: number;
@@ -27,6 +28,13 @@ export interface BatteryParameters {
   maxContinuousDischargeCurrentA?: number;
   maxPeakDischargeCurrentA?: number;
 }
+
+export interface PublishedBatteryCapacityParameters extends Omit<BatteryParameters, 'capacityBasis' | 'chemistry' | 'chargeEfficiency' | 'dischargeEfficiency'> {
+  capacityBasis: 'published-discharge';
+  chemistry: 'lead-acid' | 'agm';
+}
+
+export type BatteryCapacityParameters = BatteryParameters | PublishedBatteryCapacityParameters;
 
 export interface PvModuleParameters {
   powerWp: number;
@@ -91,13 +99,14 @@ export interface DailyConsumption {
 }
 
 export interface BatterySizing {
+  capacityBasis: 'stored-energy' | 'published-discharge';
   chemistry: BatteryChemistry;
   dailyEnergyAtBatteryBusWh: number;
   autonomyDays: number;
   systemVoltageV: number;
   batteryNominalVoltageV: number;
   depthOfDischarge: number;
-  dischargeEfficiency: number;
+  dischargeEfficiency?: number;
   usableCapacityWh: number;
   nominalCapacityWh: number;
   nominalCapacityAh: number;
@@ -298,17 +307,25 @@ export function calculateBatteryCapacity(
   dailyEnergyAtBatteryBusWh: number,
   autonomyDays: number,
   systemVoltageV: 12 | 24,
-  battery: BatteryParameters,
+  battery: BatteryCapacityParameters,
 ): BatterySizing {
   requirePositive(dailyEnergyAtBatteryBusWh, 'Consumo diário no barramento da bateria');
   requirePositive(autonomyDays, 'Autonomia desejada');
   requireSystemVoltage(systemVoltageV);
-  if (battery.chemistry !== 'lead-acid' && battery.chemistry !== 'lifepo4') {
+  if (battery.chemistry !== 'lead-acid' && battery.chemistry !== 'agm' && battery.chemistry !== 'lifepo4') {
     throw new TypeError('Química de bateria não suportada.');
   }
   requireEfficiency(battery.depthOfDischarge, 'Profundidade de descarga');
-  requireEfficiency(battery.chargeEfficiency, 'Eficiência de carga da bateria');
-  requireEfficiency(battery.dischargeEfficiency, 'Eficiência de descarga da bateria');
+  if (battery.capacityBasis !== undefined
+    && battery.capacityBasis !== 'stored-energy' && battery.capacityBasis !== 'published-discharge') {
+    throw new TypeError('Base de capacidade da bateria não suportada.');
+  }
+  if (battery.capacityBasis === 'published-discharge') {
+    if (battery.chemistry !== 'lead-acid' && battery.chemistry !== 'agm') throw new TypeError('A capacidade publicada de descarga exige uma referência chumbo-ácido ou AGM.');
+  } else {
+    requireEfficiency(battery.chargeEfficiency, 'Eficiência de carga da bateria');
+    requireEfficiency(battery.dischargeEfficiency, 'Eficiência de descarga da bateria');
+  }
   for (const [name, value] of [
     ['Corrente máxima de carga da bateria', battery.maxChargeCurrentA],
     ['Corrente contínua máxima de descarga da bateria', battery.maxContinuousDischargeCurrentA],
@@ -319,15 +336,18 @@ export function calculateBatteryCapacity(
 
   const batteryNominalVoltageV = getBatteryNominalVoltageV(systemVoltageV, battery);
   const usableCapacityWh = dailyEnergyAtBatteryBusWh * autonomyDays;
-  const nominalCapacityWh = usableCapacityWh / (battery.depthOfDischarge * battery.dischargeEfficiency);
+  const nominalCapacityWh = battery.capacityBasis === 'published-discharge'
+    ? usableCapacityWh / battery.depthOfDischarge
+    : usableCapacityWh / (battery.depthOfDischarge * battery.dischargeEfficiency);
   return {
+    capacityBasis: battery.capacityBasis ?? 'stored-energy',
     chemistry: battery.chemistry,
     dailyEnergyAtBatteryBusWh,
     autonomyDays,
     systemVoltageV,
     batteryNominalVoltageV,
     depthOfDischarge: battery.depthOfDischarge,
-    dischargeEfficiency: battery.dischargeEfficiency,
+    ...(battery.capacityBasis === 'published-discharge' ? {} : { dischargeEfficiency: battery.dischargeEfficiency }),
     usableCapacityWh,
     nominalCapacityWh,
     nominalCapacityAh: nominalCapacityWh / batteryNominalVoltageV,
@@ -336,7 +356,7 @@ export function calculateBatteryCapacity(
 
 function getBatteryNominalVoltageV(
   systemVoltageV: 12 | 24,
-  battery: BatteryParameters,
+  battery: Pick<BatteryParameters, 'nominalVoltageV'>,
 ): number {
   const nominalVoltageV = battery.nominalVoltageV ?? systemVoltageV;
   requirePositive(nominalVoltageV, 'Tensão nominal da bateria');
@@ -487,7 +507,7 @@ export function calculateInverterSizing(
   loads: ElectricalLoad[],
   systemVoltageV: 12 | 24,
   inverterEfficiency: number,
-  battery: BatteryParameters,
+  battery: Pick<BatteryParameters, 'nominalVoltageV' | 'maxContinuousDischargeCurrentA' | 'maxPeakDischargeCurrentA'>,
 ): InverterSizing {
   requireSystemVoltage(systemVoltageV);
   requireEfficiency(inverterEfficiency, 'Eficiência do inversor');

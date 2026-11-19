@@ -1,8 +1,10 @@
-# Odisseia Solar — arquitetura e manutenção
+# Planejador Elétrico — arquitetura e manutenção
 
 ## Finalidade
 
-A Odisseia Solar é uma ferramenta local de pré-dimensionamento para veículos, disponível em `/pt/odisseia-solar/`. Ela organiza dados informados, aplica cálculos documentados e sinaliza como pendente o que não pode ser verificado com os parâmetros disponíveis. Não substitui um projeto executivo nem a validação de um profissional qualificado.
+O Planejador Elétrico é uma ferramenta local de pré-dimensionamento de sistemas off-grid, com o título de página **Calculadora de Energia para Motorhome**, disponível em `/pt/odisseia-solar/`. Ele oferece um guia básico de consumo, banco de baterias e inversor, com premissas e limites reunidos, sem seções técnicas incompletas. Não substitui um projeto executivo nem a validação de um profissional qualificado.
+
+O nome anterior era Odisseia Solar. O endereço e os identificadores internos permanecem; o JSON é exportado na versão 2, com importação da versão 1.
 
 ## Arquitetura
 
@@ -14,10 +16,13 @@ A Odisseia Solar é uma ferramenta local de pré-dimensionamento para veículos,
 | Catálogos locais de insolação, cargas e componentes | `src/lib/solar/catalogs.ts` |
 | Tipos de domínio e funções puras de cálculo | `src/lib/solar/calculations.ts` |
 | Composição do relatório a partir das funções de cálculo | `src/lib/solar/report.ts` |
+| Texto e valores compartilhados entre tela e PDF | `src/lib/solar/report-presentation.ts` |
+| Geração local do PDF A4 com fontes incorporadas | `src/lib/solar/report-pdf.ts` |
+| Mensagens de validação do formulário em português | `src/lib/solar/validation.ts` |
 | Formato e validação estrita do JSON transportável | `src/lib/solar/project-file.ts` |
 | Testes do motor, catálogos, relatório e JSON | `tests/solar-*.test.mjs` |
 
-O fluxo é: formulário no navegador → dados locais do catálogo e valores editáveis → funções de cálculo → relatório na tela. A impressão usa a própria janela de impressão do navegador. A exportação cria um arquivo JSON local, e a importação valida o conteúdo antes de aplicar os valores. Não há backend, banco de dados, API de cálculo ou salvamento automático; os dados do formulário não persistem após recarregar a página.
+O fluxo é: formulário no navegador → dados locais do catálogo e valores editáveis → funções de cálculo → apresentação compartilhada → relatório na tela e PDF. O PDF é gerado localmente com jsPDF e baixado diretamente, sem impressão. A exportação também cria um arquivo JSON local, e a importação valida o conteúdo antes de aplicar os valores. Não há backend, banco de dados, API de cálculo ou salvamento automático; os dados do formulário não persistem após recarregar a página.
 
 ## Fórmulas e interpretação
 
@@ -48,17 +53,20 @@ O cálculo de energia diária não depende da simultaneidade. A simultaneidade �
 
 ```text
 E_utilizável = E_barramento/dia × dias_de_autonomia
-E_nominal = E_utilizável ÷ (DoD × η_descarga)
+E_nominal_LiFePO4 = E_utilizável ÷ (DoD × η_descarga)
+E_nominal_capacidade_publicada = E_utilizável ÷ DoD
 Capacidade_Ah = E_nominal ÷ tensão_nominal_real_da_bateria
 ```
 
-A tensão nominal real (por exemplo, 12,8 V ou 25,6 V) é usada na conversão para Ah e na corrente do inversor. A eficiência de carga não entra nessa fórmula de capacidade; ela é usada nos cálculos que representam recarga e geração fotovoltaica.
+A base `published-discharge`, usada para Freedom e Rolls AGM, representa capacidade de descarga publicada: não supõe eficiência de descarga de 100% nem calcula perdas/tempo de recarga. Energia utilizável aproximada por unidade é tensão × Ah publicados × DoD. A base anterior `stored-energy`, com eficiência de descarga, é preservada para LiFePO₄ e cálculos existentes.
 
-Para a configuração reportada, a quantidade em paralelo é arredondada para cima a partir da capacidade nominal em Ah dividida pela capacidade de cada unidade. O perfil LiFePO₄ correspondente é tratado como uma unidade do banco nominal de 12 V ou 24 V; para chumbo-ácido, a quantidade em série deriva da tensão do banco dividida pela tensão de cada bateria. Limites conhecidos de unidades em paralelo geram aviso quando excedidos.
+A tensão nominal real (por exemplo, 12,8 V ou 25,6 V) é usada na conversão para Ah e na corrente do inversor. A eficiência de carga não entra nessa fórmula de capacidade; as funções técnicas de recarga e geração do motor continuam exigindo-a, mas não são chamadas pelo guia.
+
+Para a configuração reportada, a quantidade em paralelo é arredondada para cima a partir da capacidade nominal em Ah dividida pela capacidade de cada unidade. O perfil LiFePO₄ correspondente é tratado como uma unidade do banco nominal de 12 V ou 24 V; para chumbo-ácido/AGM, a quantidade em série deriva da tensão do banco dividida pela tensão de cada bateria. Limites conhecidos de unidades em paralelo geram aviso quando excedidos.
 
 ### Arranjo fotovoltaico e MPPT
 
-O motor possui `calculatePvSizing`, mas o relatório atual da interface mantém PV/MPPT pendentes e não chama essa função; portanto, o fluxo atual não apresenta resultado numérico de PV/MPPT. A função de cálculo usa:
+O motor possui `calculatePvSizing`, mas PV/MPPT estão fora do escopo do guia atual, que não chama essa função. A função de cálculo disponível para uso técnico futuro usa:
 
 ```text
 P_requerida =
@@ -80,7 +88,7 @@ P_pico mínimo = soma(max(P_nominal, P_partida) × quantidade)
 I_bateria = P ÷ (tensão_nominal_real_da_bateria × η_inversor)
 ```
 
-O motor verifica as correntes contínua e de pico contra os limites informados para a bateria/BMS. Essa verificação não compara automaticamente as potências calculadas com as potências contínua e de pico nominais do modelo de inversor escolhido; consulte essa limitação também em [solar-report.md](./solar-report.md).
+O motor verifica as correntes contínua e de pico contra os limites informados para a bateria/BMS. O guia compara a potência contínua mínima à potência escolhida no formulário; o pico e sua duração exigem conferência na ficha. O cenário inicial editável é 220 V e 2.000 W, com hipóteses de eficiência e uso descritas em [solar-catalogs.md](./solar-catalogs.md).
 
 As funções de dimensionamento DC-DC e AC-DC do motor, quando recebem um plano de recarga completo, calculam:
 
@@ -110,11 +118,10 @@ Ao atualizar um registro:
 ## Limitações conhecidas
 
 - As HSP cadastradas são médias nacionais modeladas, não medições locais ou valores sazonais.
-- Os perfis de bateria são referências de modelos específicos LiFePO₄. Chumbo-ácido exige dados do modelo escolhido; não há eficiências genéricas.
-- O relatório deixa PV/MPPT pendentes sem fator de desempenho aprovado, coeficientes térmicos da revisão exata e limites do controlador.
-- Os carregadores DC-DC e AC-DC ficam pendentes sem metas de energia e tempo de recarga e limites das fontes.
-- O relatório não dimensiona numericamente cabos, fusíveis ou disjuntores.
-- A referência Victron SUN é para saída nominal de 230 V. Para outras tensões, os dados do inversor devem ser informados; ainda assim, a potência nominal do modelo selecionado não é comparada automaticamente com a potência mínima calculada.
-- O arquivo JSON é um formato local versionado, limitado e validado; não é sincronizado entre dispositivos. O PDF depende da impressão do navegador e da escolha “Salvar como PDF”.
+- As três opções são LiFePO₄ (perfis NPP), chumbo-ácido (Freedom DF4100, 220 Ah C20) e AGM (Rolls S12-230AGM-RE, 210 Ah C20). DoD inicial de Freedom/AGM é 20%/50%, editável e com bases distintas documentadas; não há eficiências genéricas nem ajuste automático por regime de descarga.
+- O guia não dimensiona PV/MPPT, recarga, carregadores, cabos, fusíveis ou disjuntores. Esses itens exigem dados de instalação e validação técnica específica.
+- Há exemplos genéricos de potência e uso diário em todas as categorias além da referência Dometic; não representam especificações universais. Cargas DC de 12 V não são disponibilizadas silenciosamente em banco de 24 V.
+- A referência Victron SUN é para saída nominal de 230 V; o cenário inicial de 220 V é uma hipótese de planejamento editável, não a indicação de um produto. A comparação de potência contínua não confirma picos de partida.
+- O arquivo JSON é um formato local versionado, limitado e validado; não é sincronizado entre dispositivos. O PDF é baixado diretamente, mas o navegador controla permissões e destino do download.
 
 Consulte [solar-report.md](./solar-report.md) para os detalhes de impressão e do contrato JSON e [solar-catalogs.md](./solar-catalogs.md) para as fontes e condições dos dados atuais.

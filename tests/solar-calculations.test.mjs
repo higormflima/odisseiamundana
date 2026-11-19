@@ -108,6 +108,7 @@ test('usa a tensão nominal real da bateria para converter capacidade em Ah', ()
     ...lifepo4,
     nominalVoltageV: 12.8,
   });
+
   assert.equal(twelvePointEightVolt.systemVoltageV, 12);
   assert.equal(twelvePointEightVolt.batteryNominalVoltageV, 12.8);
   assert.equal(twelvePointEightVolt.nominalCapacityAh, twelvePointEightVolt.nominalCapacityWh / 12.8);
@@ -119,6 +120,28 @@ test('usa a tensão nominal real da bateria para converter capacidade em Ah', ()
   assert.equal(twentyFivePointSixVolt.systemVoltageV, 24);
   assert.equal(twentyFivePointSixVolt.batteryNominalVoltageV, 25.6);
   assert.equal(twentyFivePointSixVolt.nominalCapacityAh, twentyFivePointSixVolt.nominalCapacityWh / 25.6);
+});
+
+test('dimensiona chumbo-ácido e AGM pela capacidade de descarga sem presumir eficiências', () => {
+  for (const chemistry of ['lead-acid', 'agm']) {
+    for (const voltage of [12, 24]) {
+      const result = calculateBatteryCapacity(528, 2, voltage, {
+        chemistry,
+        capacityBasis: 'published-discharge',
+        nominalVoltageV: voltage,
+        depthOfDischarge: 0.2,
+      });
+      assert.equal(result.usableCapacityWh, 1056);
+      assert.equal(result.nominalCapacityWh, 5280);
+      assert.equal(result.nominalCapacityAh, 5280 / voltage);
+      assert.equal(result.capacityBasis, 'published-discharge');
+      assert.equal(Object.hasOwn(result, 'dischargeEfficiency'), false);
+    }
+  }
+  const reference = { chemistry: 'lead-acid', capacityBasis: 'published-discharge', depthOfDischarge: 0.2 };
+  assert.throws(() => calculateBatteryCapacity(528, 2, 12, { ...reference, depthOfDischarge: 0 }), /Profundidade/);
+  assert.throws(() => calculateBatteryCapacity(528, 2, 12, { ...reference, chemistry: 'lifepo4' }), /chumbo-ácido/);
+  assert.throws(() => calculateBatteryCapacity(528, 2, 12, { ...reference, capacityBasis: 'unknown' }), /Base de capacidade/);
 });
 
 test('registra a memória manual do dimensionamento PV, incluindo a série e a correção de Voc', () => {

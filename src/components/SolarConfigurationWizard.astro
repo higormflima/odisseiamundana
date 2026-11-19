@@ -1,9 +1,12 @@
 ---
 import {
+  agmBatteryReference,
   batteryCatalog,
   equipmentCategories,
   equipmentCatalog,
   inverterCatalog,
+  initialInverterScenario,
+  leadAcidBatteryReference,
   solarResourceCountries,
   solarResourceDataset,
   solarResourceNoticePt,
@@ -15,8 +18,8 @@ const brazilHsp = solarResourceCountries.find((country) => country.countryIso3 =
 
 <section class="solar-page" data-solar-wizard>
   <header class="solar-intro">
-    <p class="eyebrow">Pré-dimensionamento para veículos</p>
-    <h1>Odisseia Solar</h1>
+    <p class="eyebrow">Pré-dimensionamento de sistemas off-grid</p>
+    <h1>Calculadora de Energia para Motorhome</h1>
     <p>Organize o consumo e as escolhas principais do seu sistema fotovoltaico. As estimativas são calculadas neste dispositivo.</p>
   </header>
 
@@ -122,15 +125,21 @@ const brazilHsp = solarResourceCountries.find((country) => country.countryIso3 =
                       <input type="checkbox" data-catalog-choice value={item.id} checked={item.id === 'dometic-cfx5-45'} />
                       <span>
                         <strong>{item.namePt}</strong>
-                        <small>{item.defaultLoad.basis.kind === 'daily-energy' ? `${item.defaultLoad.basis.energyWhPerDay.toLocaleString('pt-BR')} Wh/dia` : 'Consumo calculado conforme o perfil'}</small>
+                        <small>{item.defaultLoad.basis.kind === 'daily-energy' ? `${item.defaultLoad.basis.energyWhPerDay.toLocaleString('pt-BR')} Wh/dia` : item.defaultLoad.basis.kind === 'power-time' ? `${(item.defaultLoad.basis.powerW * item.defaultLoad.basis.hoursPerDay).toLocaleString('pt-BR')} Wh/dia no exemplo` : 'Consumo calculado conforme o perfil'}</small>
                       </span>
                     </label>
                     <label class="solar-quantity">
                       Quantidade
                       <input type="number" min="1" step="1" value="1" data-catalog-quantity disabled={item.id !== 'dometic-cfx5-45'} />
                     </label>
-                    <p class="solar-equipment-note">{item.sourceMeasurement.conditions}. Consumo diário derivado do fabricante; sem horas de uso adicionais.</p>
-                    <a class="solar-source-link" href={item.source.url} target="_blank" rel="noopener noreferrer">Ver especificação do fabricante</a>
+                    {item.defaultLoad.basis.kind === 'power-time' && (
+                      <div class="solar-custom-grid">
+                        <label class="solar-field">Potência durante o uso (W)<input type="number" min="0.1" step="any" value={item.defaultLoad.basis.powerW} data-catalog-power disabled required /></label>
+                        <label class="solar-field">Horas por dia<input type="number" min="0" max="24" step="any" value={item.defaultLoad.basis.hoursPerDay} data-catalog-hours disabled required /></label>
+                      </div>
+                    )}
+                    <p class="solar-equipment-note">{item.sourceMeasurement.conditions}. {item.referenceKind === 'manufacturer' ? 'Consumo diário derivado do fabricante; sem horas de uso adicionais.' : 'Potência e uso diário são exemplos pré-preenchidos, não especificações do seu aparelho; ajuste se necessário. Cargas AC exigem um inversor compatível com a tensão do equipamento.'}</p>
+                    <a class="solar-source-link" href={item.source.url} target="_blank" rel="noopener noreferrer">{item.referenceKind === 'manufacturer' ? 'Ver especificação do fabricante' : 'Ver fonte do cenário de uso'}</a>
                   </article>
                 )) : (
                   <p class="solar-empty-category">Sem referência de consumo publicada neste catálogo. Se conhecer os dados do equipamento, adicione-o manualmente.</p>
@@ -210,13 +219,13 @@ const brazilHsp = solarResourceCountries.find((country) => country.countryIso3 =
 
         <section class="solar-inverter-settings" data-inverter-settings hidden aria-labelledby="solar-inverter-title">
           <h3 id="solar-inverter-title">Dados do inversor para cargas AC</h3>
-          <p>O consumo no lado da bateria depende do inversor. Selecione uma tensão e use a referência 230 V somente se ela corresponder ao seu equipamento.</p>
+          <p>Comece pelo cenário de 220 V e 2.000 W, pensado como ponto de partida para cargas usuais. Os valores já estão preenchidos e podem ser ajustados para o seu equipamento.</p>
           <label class="solar-field" for="solar-ac-output">
             Tensão de saída AC
             <select id="solar-ac-output" data-ac-output>
               <option value="">Selecione a tensão do seu sistema</option>
               <option value="127">127 V</option>
-              <option value="220">220 V</option>
+              <option value="220" selected>220 V</option>
               <option value="230">230 V</option>
               <option value="120">120 V</option>
             </select>
@@ -227,11 +236,12 @@ const brazilHsp = solarResourceCountries.find((country) => country.countryIso3 =
           </label>
           <p class="solar-reference-note" data-inverter-reference-note hidden>A eficiência informada pelo fabricante é máxima, não garantida em toda carga. O consumo em espera depende das horas de permanência ligado sem carga.</p>
           <div class="solar-custom-grid">
-            <label class="solar-field">Eficiência do inversor (%)<input type="number" min="1" max="100" step="0.1" data-inverter-efficiency /></label>
-            <label class="solar-field">Consumo sem carga (W)<input type="number" min="0" step="0.1" data-inverter-standby /></label>
-            <label class="solar-field">Horas por dia ligado sem carga<input type="number" min="0" max="24" step="0.1" data-inverter-standby-hours /></label>
+            <label class="solar-field">Potência contínua do inversor (W)<input type="number" min="1" step="any" value={initialInverterScenario.ratedPowerW} data-inverter-rated-power /></label>
+            <label class="solar-field">Eficiência do inversor (%)<input type="number" min="1" max="100" step="0.1" value={initialInverterScenario.efficiencyPercent} data-inverter-efficiency /></label>
+            <label class="solar-field">Consumo sem carga (W)<input type="number" min="0" step="0.1" value={initialInverterScenario.standbyPowerW} data-inverter-standby /></label>
+            <label class="solar-field">Horas por dia ligado sem carga<input type="number" min="0" max="24" step="0.1" value={initialInverterScenario.standbyHoursPerDay} data-inverter-standby-hours /></label>
           </div>
-          <p class="solar-field-note" data-inverter-status>Para 127 V, 220 V ou 120 V, informe os valores da ficha do inversor escolhido; não há perfil de referência cadastrado.</p>
+          <p class="solar-field-note" data-inverter-status>{initialInverterScenario.notePt}</p>
         </section>
       </fieldset>
 
@@ -254,7 +264,11 @@ const brazilHsp = solarResourceCountries.find((country) => country.countryIso3 =
             </label>
             <label class="solar-choice-card">
               <input type="radio" name="batteryChemistry" value="lead-acid" data-battery-chemistry />
-              <span><strong>Chumbo-ácido</strong><small>Exige dados da ficha da bateria escolhida</small></span>
+              <span><strong>Chumbo-ácido</strong><small>Referência Freedom DF4100 em C20</small></span>
+            </label>
+            <label class="solar-choice-card">
+              <input type="radio" name="batteryChemistry" value="agm" data-battery-chemistry />
+              <span><strong>AGM</strong><small>Referência Rolls S12-230AGM-RE em C20</small></span>
             </label>
           </div>
         </fieldset>
@@ -288,96 +302,95 @@ const brazilHsp = solarResourceCountries.find((country) => country.countryIso3 =
 
         <section class="solar-battery-profile" data-lead-acid-panel hidden aria-labelledby="solar-lead-acid-title">
           <h3 id="solar-lead-acid-title">Dados da bateria chumbo-ácido</h3>
-          <p>Não há eficiências genéricas cadastradas. Consulte a ficha do seu modelo; AGM, GEL e baterias inundadas não devem ser tratadas como idênticas.</p>
+          <p><strong>Referência: {leadAcidBatteryReference.namePt}</strong></p>
+          <p class="solar-reference-note">Usamos a capacidade de descarga publicada para estimar o banco, sem exigir eficiências de carga e descarga. Os valores são editáveis para a bateria escolhida. {leadAcidBatteryReference.depthOfDischargeBasisPt}</p>
+          <p class="solar-field-note">
+            {leadAcidBatteryReference.capacityRatings.map((rating) => `${rating.capacityAh} Ah em C${rating.hours}`).join('; ')}.
+            {' '}{leadAcidBatteryReference.nominalCapacityTestConditionsPt}
+            {' '}A capacidade varia com o regime de descarga; o cálculo não ajusta essa variação automaticamente.
+          </p>
+          <a class="solar-source-link" href={leadAcidBatteryReference.source.url} target="_blank" rel="noopener noreferrer">Consultar anúncio da Freedom DF4100</a>
           <div class="solar-custom-grid solar-battery-fields">
             <label class="solar-field">Tensão nominal de cada bateria (V)
               <select data-lead-unit-voltage><option value="12">12 V</option><option value="24">24 V</option></select>
             </label>
-            <label class="solar-field">Capacidade por bateria (Ah)<input type="number" min="0.1" step="any" data-lead-capacity /></label>
-            <label class="solar-field">Profundidade de descarga (DoD %)<input type="number" min="0.1" max="100" step="0.1" data-lead-dod /></label>
-            <label class="solar-field">Eficiência de carga (%)<input type="number" min="0.1" max="100" step="0.1" data-lead-charge-efficiency /></label>
-            <label class="solar-field">Eficiência de descarga (%)<input type="number" min="0.1" max="100" step="0.1" data-lead-discharge-efficiency /></label>
-            <label class="solar-field">Tensão de carga do banco (V)<input type="number" min="0.1" step="0.1" data-lead-charge-voltage /></label>
-            <label class="solar-field">Tensão de corte do banco (V)<input type="number" min="0.1" step="0.1" data-lead-cutoff-voltage /></label>
-            <label class="solar-field">Corrente máxima de carga (A), se publicada<input type="number" min="0.1" step="any" data-lead-max-charge /></label>
-            <label class="solar-field">Corrente contínua máxima de descarga (A), se publicada<input type="number" min="0.1" step="any" data-lead-max-discharge /></label>
+            <label class="solar-field">Capacidade por bateria (Ah)<input type="number" min="0.1" step="any" value={leadAcidBatteryReference.nominalCapacityAh} data-lead-capacity /></label>
+            <label class="solar-field">Profundidade de descarga (DoD %)<input type="number" min="0.1" max="100" step="0.1" value={leadAcidBatteryReference.parameters.depthOfDischarge * 100} data-lead-dod /></label>
+          </div>
+        </section>
+        <section class="solar-battery-profile" data-agm-panel hidden aria-labelledby="solar-agm-title">
+          <h3 id="solar-agm-title">Referência AGM</h3>
+          <p><strong>{agmBatteryReference.namePt}</strong></p>
+          <p class="solar-field-note">AGM também é chumbo-ácido, com eletrólito absorvido em fibra de vidro. {agmBatteryReference.nominalCapacityTestConditionsPt}</p>
+          <p class="solar-reference-note">{agmBatteryReference.depthOfDischargeBasisPt}</p>
+          <p class="solar-field-note">O banco é estimado pela capacidade de descarga publicada, sem exigir eficiências. Cada unidade tem {agmBatteryReference.nominalVoltageV} V; em banco de 24 V, são duas unidades em série por conjunto. A capacidade varia com o regime, a temperatura e o estado da bateria.</p>
+          <a class="solar-source-link" href={agmBatteryReference.sources[0].url} target="_blank" rel="noopener noreferrer">Abrir ficha técnica da Rolls</a>
+          <div class="solar-custom-grid solar-battery-fields">
+            <label class="solar-field">Capacidade por bateria (Ah)<input type="number" min="0.1" step="any" value={agmBatteryReference.nominalCapacityAh} data-agm-capacity /></label>
+            <label class="solar-field">Profundidade de descarga (DoD %)<input type="number" min="0.1" max="100" step="0.1" value={agmBatteryReference.depthOfDischarge * 100} data-agm-dod /></label>
           </div>
         </section>
         <p class="solar-error" data-battery-error role="alert" hidden></p>
       </fieldset>
 
       <fieldset class="solar-step" data-step-panel="4" hidden>
-        <legend tabindex="-1">Relatório técnico</legend>
-        <p class="solar-step-intro">Revise os resultados, as premissas e os dados que ainda precisam ser confirmados.</p>
+        <legend tabindex="-1">Guia básico do sistema elétrico</legend>
+        <p class="solar-step-intro">Use as estimativas de consumo, bateria e inversor como ponto de partida para planejar a instalação.</p>
         <div class="solar-report-actions" role="group" aria-label="Exportar ou importar o projeto">
-          <button class="button" type="button" data-print-report>Imprimir / salvar PDF</button>
+          <button class="button" type="button" data-download-pdf>Baixar relatório PDF</button>
           <button class="button button-secondary" type="button" data-export-project>Salvar projeto JSON</button>
           <button class="button button-secondary solar-import-button" type="button" data-import-trigger>Importar projeto JSON</button>
           <input type="file" accept=".json,application/json" data-import-project hidden />
         </div>
+        <p class="solar-field-note">O PDF é gerado neste dispositivo, sem janela de impressão e sem envio dos seus dados.</p>
         <p class="solar-file-status" data-project-file-status role="status" aria-live="polite"></p>
 
         <article class="solar-report" data-report-content>
           <header class="solar-report-header">
-            <p class="eyebrow">Odisseia Mundana · Odisseia Solar</p>
-            <h2 data-report-title>Pré-dimensionamento do sistema</h2>
-            <dl class="solar-report-identification">
-              <div><dt>Projeto</dt><dd data-report-project-name>—</dd></div>
-              <div><dt>Veículo</dt><dd data-report-vehicle>—</dd></div>
-              <div><dt>Banco</dt><dd data-report-system>—</dd></div>
-              <div><dt>Local / HSP</dt><dd data-report-sun>—</dd></div>
-              <div><dt>Gerado em</dt><dd data-report-generated>—</dd></div>
-              <div><dt>Versão</dt><dd data-report-version>—</dd></div>
-            </dl>
+            <p class="eyebrow">Odisseia Mundana · Guia de planejamento</p>
+            <h2 data-report-title>Guia básico do sistema elétrico</h2>
+            <p class="solar-report-lead">Consumo, baterias e inversor: um ponto de partida para planejar seu motorhome.</p>
+            <dl class="solar-report-identification" data-report-identification></dl>
           </header>
 
           <section class="solar-report-section">
-            <h3>1. Resumo executivo</h3>
-            <dl class="solar-report-metrics" data-report-summary></dl>
+            <h3><span>01</span> Seu sistema em resumo</h3>
+            <dl class="solar-report-highlights" data-report-summary></dl>
+            <aside class="solar-report-warning-box" data-report-warning-box role="note" hidden>
+              <h4>Atenção antes de usar os resultados</h4>
+              <ul data-report-warnings></ul>
+            </aside>
           </section>
 
           <section class="solar-report-section">
-            <h3>2. Inventário de cargas</h3>
+            <h3><span>02</span> Consumo dos equipamentos</h3>
+            <p class="solar-report-note">A energia de cada equipamento inclui a quantidade escolhida, mas ainda não as perdas do inversor.</p>
             <div class="solar-report-table-wrap">
               <table class="solar-report-table">
-                <thead><tr><th>Equipamento</th><th>Categoria</th><th>Qtd.</th><th>Base de consumo</th><th>Energia diária</th><th>Origem do valor</th></tr></thead>
+                <thead><tr><th scope="col">Equipamento / referência</th><th scope="col">Qtd.</th><th scope="col">Uso por unidade</th><th scope="col">Energia por dia</th></tr></thead>
                 <tbody data-report-loads></tbody>
               </table>
             </div>
+            <h4 class="solar-report-subtitle">Composição do consumo diário</h4>
+            <dl class="solar-report-totals" data-report-consumption></dl>
             <p class="solar-report-note" data-report-excluded-loads></p>
           </section>
 
           <section class="solar-report-section">
-            <h3>3. Dimensionamento das baterias</h3>
+            <h3><span>03</span> Banco de baterias estimado</h3>
             <dl class="solar-report-metrics" data-report-battery></dl>
           </section>
 
           <section class="solar-report-section">
-            <h3>4. Dimensionamento fotovoltaico</h3>
-            <dl class="solar-report-metrics" data-report-pv></dl>
-          </section>
-
-          <section class="solar-report-section">
-            <h3>5. Controlador, inversor e carregadores</h3>
+            <h3><span>04</span> Inversor</h3>
             <dl class="solar-report-metrics" data-report-components></dl>
+            <p class="solar-report-callout" data-report-inverter-note></p>
           </section>
 
           <section class="solar-report-section">
-            <h3>6. Cabos e proteções</h3>
-            <div class="solar-report-table-wrap">
-              <table class="solar-report-table">
-                <thead><tr><th>Circuito</th><th>Status</th></tr></thead>
-                <tbody data-report-circuits></tbody>
-              </table>
-            </div>
-            <p class="solar-report-note">Não são informadas seções de cabos nem correntes nominais de fusíveis/disjuntores sem os dados de instalação e validação normativa necessários.</p>
-          </section>
-
-          <section class="solar-report-section">
-            <h3>7. Memória de cálculo, considerações e avisos</h3>
+            <h3><span>05</span> Premissas e limites</h3>
             <ul data-report-calculation-notes></ul>
-            <ul class="solar-report-warnings" data-report-warnings></ul>
-            <p class="solar-report-disclaimer">Este documento é um pré-dimensionamento, não um projeto executivo. A instalação deve ser verificada por profissional qualificado e atender às normas aplicáveis no local de utilização, além das fichas dos equipamentos e das condições reais de montagem.</p>
+            <p class="solar-report-disclaimer" data-report-disclaimer></p>
           </section>
         </article>
       </fieldset>
@@ -402,7 +415,7 @@ const brazilHsp = solarResourceCountries.find((country) => country.countryIso3 =
       </dl>
       <p class="solar-summary-status" data-summary-status role="status" aria-live="polite">As estimativas aparecem conforme você preenche os dados.</p>
       <p class="solar-summary-note" data-summary-note></p>
-      <p class="solar-next-stage">O relatório apresenta os resultados calculáveis e identifica os dimensionamentos que ainda dependem de dados técnicos.</p>
+      <p class="solar-next-stage">O guia reúne consumo, banco de baterias e potência mínima do inversor para ajudar no planejamento.</p>
     </aside>
   </div>
 
@@ -414,13 +427,15 @@ const brazilHsp = solarResourceCountries.find((country) => country.countryIso3 =
 </section>
 
 <script>
-  import type { BatteryParameters, ElectricalLoad } from '../lib/solar/calculations.ts';
+  import type { BatteryCapacityParameters, BatteryChemistry, ElectricalLoad } from '../lib/solar/calculations.ts';
   import {
+    agmBatteryReference,
     batteryCatalog,
+    buildEquipmentLoad,
     equipmentCategories,
     equipmentCatalog,
     inverterCatalog,
-    solarResourceDataset,
+    initialInverterScenario,
     solarResourceCountries,
   } from '../lib/solar/catalogs.ts';
   import {
@@ -428,6 +443,9 @@ const brazilHsp = solarResourceCountries.find((country) => country.countryIso3 =
     calculateDailyConsumption,
   } from '../lib/solar/calculations.ts';
   import { buildSolarReport } from '../lib/solar/report.ts';
+  import { presentSolarReport } from '../lib/solar/report-presentation.ts';
+  import type { SolarReportDocument } from '../lib/solar/report-presentation.ts';
+  import { localizeValidation } from '../lib/solar/validation.ts';
   import {
     validateSolarProjectFile,
   } from '../lib/solar/project-file.ts';
@@ -437,9 +455,10 @@ const brazilHsp = solarResourceCountries.find((country) => country.countryIso3 =
     SolarProjectFile,
   } from '../lib/solar/project-file.ts';
 
-  const solarApplicationVersion = '0.1.0';
-  const root = document.querySelector<HTMLElement>('[data-solar-wizard]');
-  if (root) {
+  const solarApplicationVersion = '0.2.0';
+  const wizardRoot = document.querySelector<HTMLElement>('[data-solar-wizard]');
+  if (wizardRoot) {
+    const root = wizardRoot;
     const get = <T extends HTMLElement>(selector: string): T => {
       const element = root.querySelector<T>(selector);
       if (!element) throw new Error(`Elemento obrigatório não encontrado: ${selector}`);
@@ -451,6 +470,7 @@ const brazilHsp = solarResourceCountries.find((country) => country.countryIso3 =
     const customLoads: Array<{ name: string; categoryId: string; load: ElectricalLoad }> = [];
     let activeStep = 0;
     let customLoadNumber = 0;
+    let importedLeadAcidFields: SolarProjectBatteryFields | undefined;
 
     const format = (value: number, maximumFractionDigits = 1) =>
       new Intl.NumberFormat('pt-BR', { maximumFractionDigits }).format(value);
@@ -462,11 +482,15 @@ const brazilHsp = solarResourceCountries.find((country) => country.countryIso3 =
     };
     const systemVoltage = (): 12 | 24 =>
       get<HTMLInputElement>('input[name="systemVoltageV"]:checked').value === '24' ? 24 : 12;
-    const selectedChemistry = (): 'lead-acid' | 'lifepo4' =>
-      get<HTMLInputElement>('input[name="batteryChemistry"]:checked').value === 'lead-acid' ? 'lead-acid' : 'lifepo4';
+    const selectedChemistry = (): BatteryChemistry => {
+      const value = get<HTMLInputElement>('input[name="batteryChemistry"]:checked').value;
+      if (value !== 'lead-acid' && value !== 'lifepo4' && value !== 'agm') throw new TypeError('Tecnologia de bateria não suportada.');
+      return value;
+    };
 
     function setPanel(panelIndex: number) {
       activeStep = panelIndex;
+      root.dataset.reportVisible = String(activeStep === panels.length - 1);
       panels.forEach((panel, index) => {
         panel.hidden = index !== activeStep;
       });
@@ -488,6 +512,7 @@ const brazilHsp = solarResourceCountries.find((country) => country.countryIso3 =
     function validatePanel(): boolean {
       const panel = panels[activeStep];
       const fields = Array.from(panel.querySelectorAll<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>('input, select, textarea'));
+      fields.forEach(localizeValidation);
       const invalid = fields.find((field) => !field.disabled && !field.checkValidity());
       if (invalid) {
         invalid.reportValidity();
@@ -507,7 +532,11 @@ const brazilHsp = solarResourceCountries.find((country) => country.countryIso3 =
         const choice = card?.querySelector<HTMLInputElement>('[data-catalog-choice]');
         const quantity = card?.querySelector<HTMLInputElement>('[data-catalog-quantity]');
         if (!choice?.checked || !item.applicableSystemVoltagesV.includes(voltage) || !quantity) return [];
-        return [{ ...item.defaultLoad, quantity: Number(quantity.value) }];
+        const usage = item.defaultLoad.basis.kind === 'power-time' ? {
+          powerW: numeric(`[data-equipment-id="${item.id}"] [data-catalog-power]`) ?? Number.NaN,
+          hoursPerDay: numeric(`[data-equipment-id="${item.id}"] [data-catalog-hours]`) ?? Number.NaN,
+        } : undefined;
+        return [buildEquipmentLoad(item, Number(quantity.value), usage)];
       });
       return [...catalogLoads, ...customLoads.map(({ load }) => load)];
     }
@@ -569,10 +598,13 @@ const brazilHsp = solarResourceCountries.find((country) => country.countryIso3 =
         const card = root.querySelector<HTMLElement>(`[data-equipment-id="${item.id}"]`);
         const choice = card?.querySelector<HTMLInputElement>('[data-catalog-choice]');
         const quantity = card?.querySelector<HTMLInputElement>('[data-catalog-quantity]');
-        if (!choice || !quantity) return;
+        if (!card || !choice || !quantity) return;
         const compatible = item.applicableSystemVoltagesV.includes(voltage);
         choice.disabled = !compatible;
         quantity.disabled = !compatible || !choice.checked;
+        card.querySelectorAll<HTMLInputElement>('[data-catalog-power], [data-catalog-hours]').forEach((field) => {
+          field.disabled = !compatible || !choice.checked;
+        });
       });
       renderSelectedLoads();
     }
@@ -711,8 +743,10 @@ const brazilHsp = solarResourceCountries.find((country) => country.countryIso3 =
 
     function updateBatteryChoice() {
       const isLifepo4 = selectedChemistry() === 'lifepo4';
+      const isLeadAcid = selectedChemistry() === 'lead-acid';
       const lifepo4Panel = get<HTMLElement>('[data-lifepo4-panel]');
       const leadAcidPanel = get<HTMLElement>('[data-lead-acid-panel]');
+      const agmPanel = get<HTMLElement>('[data-agm-panel]');
       const profileSelect = get<HTMLSelectElement>('[data-battery-profile]');
       const compatibleProfile = profileForCurrentVoltage();
       Array.from(profileSelect.options).forEach((option) => {
@@ -723,12 +757,17 @@ const brazilHsp = solarResourceCountries.find((country) => country.countryIso3 =
         applyLifepo4Profile(compatibleProfile.id);
       }
       lifepo4Panel.hidden = !isLifepo4;
-      leadAcidPanel.hidden = isLifepo4;
+      leadAcidPanel.hidden = !isLeadAcid;
+      agmPanel.hidden = selectedChemistry() !== 'agm';
       lifepo4Panel.querySelectorAll<HTMLInputElement | HTMLSelectElement>('input, select').forEach((field) => {
         field.disabled = !isLifepo4;
       });
       leadAcidPanel.querySelectorAll<HTMLInputElement | HTMLSelectElement>('input, select').forEach((field) => {
-        field.disabled = isLifepo4;
+        field.disabled = !isLeadAcid;
+      });
+      agmPanel.querySelectorAll<HTMLInputElement>('input').forEach((field) => {
+        field.disabled = Boolean(agmPanel.hidden);
+        field.required = !agmPanel.hidden;
       });
       [
         '[data-lfp-nominal-voltage]', '[data-lfp-capacity]', '[data-lfp-dod]',
@@ -737,11 +776,9 @@ const brazilHsp = solarResourceCountries.find((country) => country.countryIso3 =
       ].forEach((selector) => { get<HTMLInputElement>(selector).required = isLifepo4; });
       [
         '[data-lead-unit-voltage]', '[data-lead-capacity]', '[data-lead-dod]',
-        '[data-lead-charge-efficiency]', '[data-lead-discharge-efficiency]',
-        '[data-lead-charge-voltage]', '[data-lead-cutoff-voltage]',
       ].forEach((selector) => {
         const field = get<HTMLInputElement | HTMLSelectElement>(selector);
-        field.required = !isLifepo4;
+        field.required = isLeadAcid;
       });
       const unitVoltage = get<HTMLSelectElement>('[data-lead-unit-voltage]');
       Array.from(unitVoltage.options).forEach((option) => {
@@ -760,6 +797,7 @@ const brazilHsp = solarResourceCountries.find((country) => country.countryIso3 =
       const referenceNote = get<HTMLElement>('[data-inverter-reference-note]');
       const useReference = get<HTMLInputElement>('[data-use-victron-reference]');
       const fields = [
+        get<HTMLInputElement>('[data-inverter-rated-power]'),
         get<HTMLInputElement>('[data-inverter-efficiency]'),
         get<HTMLInputElement>('[data-inverter-standby]'),
         get<HTMLInputElement>('[data-inverter-standby-hours]'),
@@ -773,30 +811,27 @@ const brazilHsp = solarResourceCountries.find((country) => country.countryIso3 =
       referenceWrap.querySelector('input')?.toggleAttribute('disabled', !hasAcLoads || outputVoltage.value !== '230');
       if ((!hasAcLoads || outputVoltage.value !== '230') && useReference.checked) {
         useReference.checked = false;
-        get<HTMLInputElement>('[data-inverter-efficiency]').value = '';
-        get<HTMLInputElement>('[data-inverter-standby]').value = '';
-        get<HTMLInputElement>('[data-inverter-standby-hours]').value = '';
       }
       referenceNote.hidden = !hasAcLoads || !useReference.checked;
-      get<HTMLElement>('[data-inverter-status]').textContent = outputVoltage.value === '230'
+      get<HTMLElement>('[data-inverter-status]').textContent = useReference.checked
         ? 'Perfil de referência: eficiência máxima e consumo sem carga do modelo Victron correspondente a 12/24 V; ajuste as horas em espera.'
-        : 'Para 127 V, 220 V ou 120 V, informe os valores da ficha do inversor escolhido; não há perfil de referência cadastrado.';
+        : initialInverterScenario.notePt;
       updateSummary();
     }
 
     function applyInverterReference() {
       const inverter = inverterCatalog.find((item) => item.batteryVoltageV === systemVoltage() && item.outputVoltageV === 230);
       if (!inverter) throw new Error(`Perfil de inversor 230 V não encontrado para ${systemVoltage()} V.`);
+      get<HTMLInputElement>('[data-inverter-rated-power]').value = String(inverter.continuousOutputPowerW);
       get<HTMLInputElement>('[data-inverter-efficiency]').value = String(inverter.maximumEfficiency * 100);
       get<HTMLInputElement>('[data-inverter-standby]').value = String(inverter.zeroLoadPowerW);
-      get<HTMLInputElement>('[data-inverter-standby-hours]').value = '';
       updateInverterFields();
     }
 
     function readBatteryConfig(): {
-      battery: BatteryParameters;
-      chargeVoltageV: number;
-      dischargeCutoffVoltageV: number;
+      battery: BatteryCapacityParameters & { nominalVoltageV: number };
+      chargeVoltageV?: number;
+      dischargeCutoffVoltageV?: number;
       unitCapacityAh: number;
       unitVoltageV: number;
       maxParallelBatteries?: number;
@@ -838,29 +873,33 @@ const brazilHsp = solarResourceCountries.find((country) => country.countryIso3 =
         };
       }
 
+      if (chemistry === 'agm') {
+        const unitCapacityAh = numeric('[data-agm-capacity]');
+        const depthOfDischarge = numeric('[data-agm-dod]');
+        if (unitCapacityAh === undefined || depthOfDischarge === undefined) return undefined;
+        return {
+          battery: {
+            chemistry,
+            capacityBasis: 'published-discharge',
+            nominalVoltageV: systemVoltage(),
+            depthOfDischarge: depthOfDischarge / 100,
+          },
+          unitCapacityAh,
+          unitVoltageV: agmBatteryReference.nominalVoltageV,
+        };
+      }
+
       const unitCapacityAh = numeric('[data-lead-capacity]');
       const depthOfDischarge = numeric('[data-lead-dod]');
-      const chargeEfficiency = numeric('[data-lead-charge-efficiency]');
-      const dischargeEfficiency = numeric('[data-lead-discharge-efficiency]');
-      const chargeVoltageV = numeric('[data-lead-charge-voltage]');
-      const dischargeCutoffVoltageV = numeric('[data-lead-cutoff-voltage]');
       const unitVoltageV = Number(get<HTMLSelectElement>('[data-lead-unit-voltage]').value);
-      if (unitCapacityAh === undefined || depthOfDischarge === undefined
-        || chargeEfficiency === undefined || dischargeEfficiency === undefined
-      || chargeVoltageV === undefined || dischargeCutoffVoltageV === undefined
-      || chargeVoltageV <= systemVoltage() || dischargeCutoffVoltageV >= systemVoltage()) return undefined;
+      if (unitCapacityAh === undefined || depthOfDischarge === undefined) return undefined;
       return {
         battery: {
+          capacityBasis: 'published-discharge',
           chemistry,
           nominalVoltageV: systemVoltage(),
           depthOfDischarge: depthOfDischarge / 100,
-          chargeEfficiency: chargeEfficiency / 100,
-          dischargeEfficiency: dischargeEfficiency / 100,
-          maxChargeCurrentA: numeric('[data-lead-max-charge]'),
-          maxContinuousDischargeCurrentA: numeric('[data-lead-max-discharge]'),
         },
-        chargeVoltageV,
-        dischargeCutoffVoltageV,
         unitCapacityAh,
         unitVoltageV,
       };
@@ -870,11 +909,12 @@ const brazilHsp = solarResourceCountries.find((country) => country.countryIso3 =
       const hasAcLoads = getCompatibleLoads().some((load) => load.supply === 'ac');
       if (!hasAcLoads) return { efficiency: 1, standbyPowerW: 0, standbyHoursPerDay: 0 };
       const outputVoltage = get<HTMLSelectElement>('[data-ac-output]').value;
+      const ratedPowerW = numeric('[data-inverter-rated-power]');
       const efficiencyPercent = numeric('[data-inverter-efficiency]');
       const standbyPowerW = numeric('[data-inverter-standby]');
       const standbyHoursPerDay = numeric('[data-inverter-standby-hours]');
-      if (!outputVoltage || efficiencyPercent === undefined || standbyPowerW === undefined || standbyHoursPerDay === undefined) return undefined;
-      return { efficiency: efficiencyPercent / 100, standbyPowerW, standbyHoursPerDay };
+      if (!outputVoltage || ratedPowerW === undefined || efficiencyPercent === undefined || standbyPowerW === undefined || standbyHoursPerDay === undefined) return undefined;
+      return { ratedPowerW, efficiency: efficiencyPercent / 100, standbyPowerW, standbyHoursPerDay };
     }
 
     function setReportDefinitionList(selector: string, entries: Array<[string, string]>) {
@@ -891,14 +931,21 @@ const brazilHsp = solarResourceCountries.find((country) => country.countryIso3 =
       });
     }
 
-    function setReportTable(selector: string, rows: string[][]) {
-      const body = get<HTMLTableSectionElement>(selector);
+    function setReportLoads(loads: SolarReportDocument['loads']) {
+      const body = get<HTMLTableSectionElement>('[data-report-loads]');
       body.replaceChildren();
-      rows.forEach((values) => {
+      loads.forEach((load) => {
         const row = document.createElement('tr');
-        values.forEach((value) => {
+        [load.name, load.quantity, load.basis, load.energy].forEach((value, index) => {
           const cell = document.createElement('td');
-          cell.textContent = value;
+          cell.dataset.label = ['Equipamento', 'Quantidade', 'Uso por unidade', 'Energia por dia'][index];
+          if (index === 0) {
+            const name = document.createElement('strong');
+            name.textContent = value;
+            const detail = document.createElement('small');
+            detail.textContent = load.detail;
+            cell.append(name, detail);
+          } else cell.textContent = value;
           row.append(cell);
         });
         body.append(row);
@@ -915,8 +962,12 @@ const brazilHsp = solarResourceCountries.find((country) => country.countryIso3 =
       });
     }
 
-    function renderReport() {
+    function renderReport(): SolarReportDocument | undefined {
       const status = get<HTMLElement>('[data-project-file-status]');
+      const reportContent = get<HTMLElement>('[data-report-content]');
+      const downloadButton = get<HTMLButtonElement>('[data-download-pdf]');
+      reportContent.hidden = true;
+      downloadButton.disabled = true;
       const loads = getCompatibleLoads();
       const inverter = readInverterConfig();
       const batteryConfig = readBatteryConfig();
@@ -941,9 +992,9 @@ const brazilHsp = solarResourceCountries.find((country) => country.countryIso3 =
             return {
               name: catalogItem.namePt,
               categoryLabelPt: categoryLabel(catalogItem.categoryId),
-              originLabelPt: load.quantity === 1
-                ? 'Referência do catálogo (editável)'
-                : 'Referência do catálogo; quantidade ajustada',
+              originLabelPt: catalogItem.referenceKind === 'usage-example'
+                ? 'Cenário genérico de uso; valores editáveis'
+                : load.quantity === 1 ? 'Referência do catálogo (editável)' : 'Referência do catálogo; quantidade ajustada',
               load,
             };
           }
@@ -959,7 +1010,9 @@ const brazilHsp = solarResourceCountries.find((country) => country.countryIso3 =
         const batteryProfile = batteryCatalog.find((item) => item.id === get<HTMLSelectElement>('[data-battery-profile]').value);
         const batteryProfileLabelPt = selectedChemistry() === 'lifepo4'
           ? batteryProfile?.namePt ?? 'Referência LiFePO₄'
-          : 'Bateria chumbo-ácido informada pelo usuário';
+          : selectedChemistry() === 'agm'
+            ? 'AGM — capacidade de descarga informada; referência inicial Rolls S12-230AGM-RE'
+            : 'Chumbo-ácido — capacidade de descarga informada; referência inicial Freedom DF4100';
         const generatedAt = new Date();
         const report = buildSolarReport({
           projectName: get<HTMLInputElement>('[data-project-name]').value.trim(),
@@ -987,46 +1040,6 @@ const brazilHsp = solarResourceCountries.find((country) => country.countryIso3 =
           maxParallelBatteries: batteryConfig.maxParallelBatteries,
           batteryProfileLabelPt,
         });
-        const batteryCount = report.batteryConfiguration.withinKnownLimit
-          ? `${report.batteryConfiguration.totalCount} ${report.batteryConfiguration.totalCount === 1 ? 'unidade' : 'unidades'} (${report.batteryConfiguration.seriesCount} em série × ${report.batteryConfiguration.parallelCount} em paralelo)`
-          : `Não recomendada: excede ${report.batteryConfiguration.maxParallelBatteries} unidades em paralelo`;
-        const inverterSummary = report.inverter
-          ? `${format(report.inverter.minimumContinuousPowerW)} W contínuos e ${format(report.inverter.minimumPeakPowerW)} W de pico; corrente mínima no banco de ${format(report.inverter.minimumContinuousBatteryCurrentA)} A contínuos e ${format(report.inverter.minimumPeakBatteryCurrentA)} A de pico. Eficiência usada: ${format(report.inverterEfficiency * 100)}%; consumo em espera: ${format(report.inverterStandbyPowerW)} W por ${format(report.inverterStandbyHoursPerDay)} h/dia. Verificação: ${report.inverter.compatibility === 'within-known-limits' ? 'dentro dos limites informados' : report.inverter.compatibility === 'exceeds-known-limits' ? 'excede limite informado' : 'requer confirmação de limites da bateria/BMS'}.`
-          : 'Não necessário no cenário atual: nenhuma carga AC foi selecionada.';
-        const outputVoltage = report.inverterOutputVoltageV
-          ? `${report.inverterOutputVoltageV} V`
-          : 'Não configurada (sem cargas AC)';
-        const inverterDetails = report.inverter
-          ? `${inverterSummary} Saída configurada: ${outputVoltage}. Recomenda-se onda senoidal pura; confira potência de partida e compatibilidade da bateria/BMS.`
-          : inverterSummary;
-
-        get<HTMLElement>('[data-report-title]').textContent = report.projectName || 'Pré-dimensionamento do sistema';
-        get<HTMLElement>('[data-report-project-name]').textContent = report.projectName || 'Sem nome';
-        get<HTMLElement>('[data-report-vehicle]').textContent = report.vehicleLabelPt;
-        get<HTMLElement>('[data-report-system]').textContent = `${report.systemVoltageV} V`;
-        get<HTMLElement>('[data-report-sun]').textContent =
-          `${report.countryLabelPt} · ${format(report.peakSunHours, 3)} h/dia`;
-        get<HTMLElement>('[data-report-generated]').textContent = report.generatedAt;
-        get<HTMLElement>('[data-report-version]').textContent = report.applicationVersion;
-
-        setReportDefinitionList('[data-report-summary]', [
-          ['Consumo no barramento da bateria', `${format(report.consumption.totalAtBatteryBusWhPerDay)} Wh/dia · ${format(report.consumption.totalAtBatteryBusWhPerDay / 1000, 3)} kWh/dia`],
-          ['Autonomia desejada', `${format(report.battery.autonomyDays)} ${report.battery.autonomyDays === 1 ? 'dia' : 'dias'}`],
-          ['Banco de baterias', `${report.battery.chemistry === 'lifepo4' ? 'LiFePO₄' : 'Chumbo-ácido'} · ${format(report.battery.nominalCapacityAh)} Ah nominais · ${batteryCount}`],
-          ['Potência fotovoltaica', report.pvStatus],
-          ['Controlador', report.mpptStatus],
-          ['Inversor', inverterSummary],
-          ['Carregador DC-DC', report.dcDcChargerStatus],
-          ['Carregador AC-DC', report.acDcChargerStatus],
-        ]);
-        setReportTable('[data-report-loads]', report.loads.map((load) => [
-          load.name,
-          load.categoryLabelPt,
-          String(load.quantity),
-          `${load.supply.toUpperCase()} · ${load.basisSummaryPt}`,
-          `${format(load.energyWhPerDay)} Wh/dia`,
-          load.originLabelPt,
-        ]));
         const excludedCatalogLoads = equipmentCatalog.flatMap((item) => {
           const card = root.querySelector<HTMLElement>(`[data-equipment-id="${item.id}"]`);
           const choice = card?.querySelector<HTMLInputElement>('[data-catalog-choice]');
@@ -1034,53 +1047,38 @@ const brazilHsp = solarResourceCountries.find((country) => country.countryIso3 =
             ? [item.namePt]
             : [];
         });
-        get<HTMLElement>('[data-report-excluded-loads]').textContent = excludedCatalogLoads.length
-          ? `Referências selecionadas, mas excluídas por incompatibilidade de tensão: ${excludedCatalogLoads.join('; ')}.`
-          : '';
-        const formatCurrentLimit = (value: number | undefined) =>
-          value === undefined ? 'não informado' : `${format(value)} A`;
-        setReportDefinitionList('[data-report-battery]', [
-          ['Perfil', report.batteryConfiguration.profileLabelPt],
-          ['Capacidade nominal calculada', `${format(report.battery.nominalCapacityWh)} Wh · ${format(report.battery.nominalCapacityAh)} Ah`],
-          ['Capacidade utilizável calculada', `${format(report.battery.usableCapacityWh)} Wh`],
-          ['Configuração por capacidade', batteryCount],
-          ['Profundidade de descarga usada', `${format(report.battery.depthOfDischarge * 100)}%`],
-          ['Eficiência de descarga', `${format(report.battery.dischargeEfficiency * 100)}%`],
-          ['Eficiência de carga', `${format(report.batteryConfiguration.chargeEfficiency * 100)}%`],
-          ['Tensão nominal da bateria', `${format(report.battery.batteryNominalVoltageV)} V`],
-          ['Tensão de carga / corte', `${format(report.batteryConfiguration.chargeVoltageV)} V / ${format(report.batteryConfiguration.dischargeCutoffVoltageV)} V`],
-          ['Limites de corrente', `Carga: ${formatCurrentLimit(batteryConfig.battery.maxChargeCurrentA)}; descarga contínua: ${formatCurrentLimit(batteryConfig.battery.maxContinuousDischargeCurrentA)}; pico: ${formatCurrentLimit(batteryConfig.battery.maxPeakDischargeCurrentA)}.`],
-          ['Memória simplificada', `${format(report.battery.dailyEnergyAtBatteryBusWh)} Wh/dia × ${format(report.battery.autonomyDays)} dias ÷ (DoD × eficiência de descarga).`],
-        ]);
-        const resourceSource = country
-          ? `${solarResourceDataset.sourceName}, média nacional do período ${solarResourceDataset.referencePeriodStartYear}–${solarResourceDataset.referencePeriodEndYear}.`
-          : 'Valor informado pelo usuário; a fonte não foi registrada nesta configuração.';
-        setReportDefinitionList('[data-report-pv]', [
-          ['HSP adotada', `${format(report.peakSunHours, 3)} h/dia · ${resourceSource}`],
-          ['Potência e arranjo', report.pvStatus],
-          ['Fator de desempenho', 'Não definido: não foi adotado um valor genérico sem fonte aprovada.'],
-          ['Limitação regional', 'A HSP nacional ou manual não representa uma medição local nem uma condição sazonal.'],
-        ]);
-        setReportDefinitionList('[data-report-components]', [
-          ['Controlador MPPT', report.mpptStatus],
-          ['Inversor DC-AC', inverterDetails],
-          ['Carregador DC-DC (alternador)', report.dcDcChargerStatus],
-          ['Carregador AC-DC (rede externa)', report.acDcChargerStatus],
-        ]);
-        setReportTable('[data-report-circuits]', report.cableCircuits.map((circuit) => [
-          circuit.namePt,
-          circuit.statusPt,
-        ]));
-        setReportList('[data-report-calculation-notes]', [
-          `HSP utilizada: ${format(report.peakSunHours, 3)} h/dia (${resourceSource})`,
-          ...report.calculationNotes,
-        ]);
-        const warnings = [...report.warnings];
-        if (get<HTMLInputElement>('[data-use-victron-reference]').checked) {
-          warnings.push('A eficiência do perfil Victron SUN selecionado é máxima; não é garantida em toda condição de carga.');
-        }
-        setReportList('[data-report-warnings]', warnings);
-        status.textContent = 'Relatório atualizado. Os resultados são locais e os itens pendentes estão identificados.';
+        const reportDocument = presentSolarReport(report, excludedCatalogLoads, get<HTMLInputElement>('[data-use-victron-reference]').checked);
+        get<HTMLElement>('[data-report-title]').textContent = reportDocument.title;
+        setReportDefinitionList('[data-report-identification]', reportDocument.identification);
+        const summary = get<HTMLDListElement>('[data-report-summary]');
+        summary.replaceChildren();
+        reportDocument.summary.forEach((metric) => {
+          const row = document.createElement('div');
+          const label = document.createElement('dt');
+          label.textContent = metric.label;
+          const value = document.createElement('dd');
+          const primary = document.createElement('strong');
+          primary.textContent = metric.value;
+          const detail = document.createElement('small');
+          detail.textContent = metric.detail;
+          value.append(primary, detail);
+          row.append(label, value);
+          summary.append(row);
+        });
+        setReportLoads(reportDocument.loads);
+        setReportDefinitionList('[data-report-consumption]', reportDocument.consumption);
+        get<HTMLElement>('[data-report-excluded-loads]').textContent = reportDocument.excludedLoadsNote;
+        setReportDefinitionList('[data-report-battery]', reportDocument.battery);
+        setReportDefinitionList('[data-report-components]', reportDocument.inverter);
+        get<HTMLElement>('[data-report-inverter-note]').textContent = reportDocument.inverterNote;
+        setReportList('[data-report-calculation-notes]', reportDocument.notes);
+        setReportList('[data-report-warnings]', reportDocument.warnings);
+        get<HTMLElement>('[data-report-warning-box]').hidden = reportDocument.warnings.length === 0;
+        get<HTMLElement>('[data-report-disclaimer]').textContent = reportDocument.disclaimer;
+        reportContent.hidden = false;
+        downloadButton.disabled = false;
+        status.textContent = 'Guia atualizado com as estimativas de consumo, bateria e inversor.';
+        return reportDocument;
       } catch (calculationError) {
         if (!(calculationError instanceof TypeError || calculationError instanceof RangeError)) throw calculationError;
         status.textContent = `Não foi possível gerar o relatório: ${calculationError.message}`;
@@ -1137,7 +1135,15 @@ const brazilHsp = solarResourceCountries.find((country) => country.countryIso3 =
         const choice = card?.querySelector<HTMLInputElement>('[data-catalog-choice]');
         const quantity = card?.querySelector<HTMLInputElement>('[data-catalog-quantity]');
         if (!choice || !quantity) throw new Error(`Campos do catálogo não encontrados: ${item.id}.`);
-        return { equipmentId: item.id, selected: choice.checked, quantity: Number(quantity.value) || 1 };
+        return {
+          equipmentId: item.id, selected: choice.checked, quantity: Number(quantity.value) || 1,
+          ...(item.defaultLoad.basis.kind === 'power-time' ? {
+            usage: {
+              powerW: readNullable(`[data-equipment-id="${item.id}"] [data-catalog-power]`) ?? Number.NaN,
+              hoursPerDay: readNullable(`[data-equipment-id="${item.id}"] [data-catalog-hours]`) ?? Number.NaN,
+            },
+          } : {}),
+        };
       });
       return {
         projectName: get<HTMLInputElement>('[data-project-name]').value,
@@ -1167,20 +1173,29 @@ const brazilHsp = solarResourceCountries.find((country) => country.countryIso3 =
             maxContinuousDischargeCurrentA: '[data-lfp-max-discharge]',
             maxPeakDischargeCurrentA: '[data-lfp-max-peak]',
           }),
-          leadAcid: readBatteryFields({
-            nominalVoltageV: '[data-lead-unit-voltage]',
-            capacityAh: '[data-lead-capacity]',
-            depthOfDischargePercent: '[data-lead-dod]',
-            chargeEfficiencyPercent: '[data-lead-charge-efficiency]',
-            dischargeEfficiencyPercent: '[data-lead-discharge-efficiency]',
-            chargeVoltageV: '[data-lead-charge-voltage]',
-            cutoffVoltageV: '[data-lead-cutoff-voltage]',
-            maxChargeCurrentA: '[data-lead-max-charge]',
-            maxContinuousDischargeCurrentA: '[data-lead-max-discharge]',
-          }),
+          leadAcid: {
+            // Preserva dados antigos no JSON; o guia usa somente tensão, capacidade e DoD.
+            ...(importedLeadAcidFields ?? {
+              chargeEfficiencyPercent: null,
+              dischargeEfficiencyPercent: null,
+              chargeVoltageV: null,
+              cutoffVoltageV: null,
+              maxChargeCurrentA: null,
+              maxContinuousDischargeCurrentA: null,
+              maxPeakDischargeCurrentA: null,
+            }),
+            nominalVoltageV: leadUnitVoltage,
+            capacityAh: readNullable('[data-lead-capacity]'),
+            depthOfDischargePercent: readNullable('[data-lead-dod]'),
+          },
           leadUnitVoltageV: leadUnitVoltage,
+          agm: {
+            capacityAh: readNullable('[data-agm-capacity]'),
+            depthOfDischargePercent: readNullable('[data-agm-dod]'),
+          },
         },
         inverter: {
+          ratedPowerW: readNullable('[data-inverter-rated-power]'),
           outputVoltageV,
           useVictronReference: get<HTMLInputElement>('[data-use-victron-reference]').checked,
           efficiencyPercent: readNullable('[data-inverter-efficiency]'),
@@ -1190,30 +1205,36 @@ const brazilHsp = solarResourceCountries.find((country) => country.countryIso3 =
       };
     }
 
+    function downloadFile(blob: Blob, filename: string) {
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = filename;
+      document.body.append(link);
+      link.click();
+      link.remove();
+      window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+    }
+
+    function filenameBase(name: string): string {
+      return name.normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-|-$/g, '') || 'odisseia-solar';
+    }
+
     function exportProjectFile() {
       const status = get<HTMLElement>('[data-project-file-status]');
       const file: SolarProjectFile = {
         format: 'odisseia-solar-project',
-        version: 1,
+        version: 2,
         savedAt: new Date().toISOString(),
         config: readProjectConfiguration(),
       };
       validateSolarProjectFile(file);
       const blob = new Blob([JSON.stringify(file, null, 2)], { type: 'application/json' });
-      const url = URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      const safeName = file.config.projectName
-        .normalize('NFD')
-        .replace(/[\u0300-\u036f]/g, '')
-        .toLowerCase()
-        .replace(/[^a-z0-9]+/g, '-')
-        .replace(/^-|-$/g, '') || 'odisseia-solar';
-      link.href = url;
-      link.download = `${safeName}.odisseia-solar.json`;
-      document.body.append(link);
-      link.click();
-      link.remove();
-      window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+      downloadFile(blob, `${filenameBase(file.config.projectName)}.odisseia-solar.json`);
       status.textContent = 'Arquivo JSON preparado para download local. Nenhum dado foi enviado.';
     }
 
@@ -1268,6 +1289,10 @@ const brazilHsp = solarResourceCountries.find((country) => country.countryIso3 =
           choice.checked = saved?.selected ?? false;
           quantity.value = String(saved?.quantity ?? 1);
         }
+        if (item.defaultLoad.basis.kind === 'power-time') {
+          get<HTMLInputElement>(`[data-equipment-id="${item.id}"] [data-catalog-power]`).value = String(saved?.usage?.powerW ?? item.defaultLoad.basis.powerW);
+          get<HTMLInputElement>(`[data-equipment-id="${item.id}"] [data-catalog-hours]`).value = String(saved?.usage?.hoursPerDay ?? item.defaultLoad.basis.hoursPerDay);
+        }
       });
       customLoads.splice(0, customLoads.length, ...config.customLoads.map((item) => ({
         name: item.name,
@@ -1297,21 +1322,20 @@ const brazilHsp = solarResourceCountries.find((country) => country.countryIso3 =
         maxContinuousDischargeCurrentA: '[data-lfp-max-discharge]',
         maxPeakDischargeCurrentA: '[data-lfp-max-peak]',
       });
-      setBatteryFields(config.battery.leadAcid, {
-        nominalVoltageV: '[data-lead-unit-voltage]',
-        capacityAh: '[data-lead-capacity]',
-        depthOfDischargePercent: '[data-lead-dod]',
-        chargeEfficiencyPercent: '[data-lead-charge-efficiency]',
-        dischargeEfficiencyPercent: '[data-lead-discharge-efficiency]',
-        chargeVoltageV: '[data-lead-charge-voltage]',
-        cutoffVoltageV: '[data-lead-cutoff-voltage]',
-        maxChargeCurrentA: '[data-lead-max-charge]',
-        maxContinuousDischargeCurrentA: '[data-lead-max-discharge]',
-      });
+      importedLeadAcidFields = { ...config.battery.leadAcid };
+      get<HTMLInputElement>('[data-lead-capacity]').value = config.battery.leadAcid.capacityAh === null ? '' : String(config.battery.leadAcid.capacityAh);
+      get<HTMLInputElement>('[data-lead-dod]').value = config.battery.leadAcid.depthOfDischargePercent === null ? '' : String(config.battery.leadAcid.depthOfDischargePercent);
       get<HTMLSelectElement>('[data-lead-unit-voltage]').value = String(config.battery.leadUnitVoltageV);
+      const agm = config.battery.agm ?? {
+        capacityAh: agmBatteryReference.nominalCapacityAh,
+        depthOfDischargePercent: agmBatteryReference.depthOfDischarge * 100,
+      };
+      get<HTMLInputElement>('[data-agm-capacity]').value = agm.capacityAh === null ? '' : String(agm.capacityAh);
+      get<HTMLInputElement>('[data-agm-dod]').value = agm.depthOfDischargePercent === null ? '' : String(agm.depthOfDischargePercent);
       get<HTMLSelectElement>('[data-ac-output]').value = config.inverter.outputVoltageV === null
         ? ''
         : String(config.inverter.outputVoltageV);
+      get<HTMLInputElement>('[data-inverter-rated-power]').value = String(config.inverter.ratedPowerW ?? initialInverterScenario.ratedPowerW);
       get<HTMLInputElement>('[data-use-victron-reference]').checked = config.inverter.useVictronReference;
       get<HTMLInputElement>('[data-inverter-efficiency]').value =
         config.inverter.efficiencyPercent === null ? '' : String(config.inverter.efficiencyPercent);
@@ -1361,7 +1385,7 @@ const brazilHsp = solarResourceCountries.find((country) => country.countryIso3 =
           ...equipmentCatalog.flatMap((item) => {
             const choice = project.config.catalogLoads.find((saved) => saved.equipmentId === item.id);
             return choice?.selected && item.applicableSystemVoltagesV.includes(project.config.systemVoltageV)
-              ? [{ ...item.defaultLoad, quantity: choice.quantity }]
+              ? [buildEquipmentLoad(item, choice.quantity, choice.usage)]
               : [];
           }),
           ...project.config.customLoads.map((item) => item.load),
@@ -1383,7 +1407,9 @@ const brazilHsp = solarResourceCountries.find((country) => country.countryIso3 =
         throw error;
       }
       applyProjectConfiguration(project.config);
-      status.textContent = 'Projeto importado neste dispositivo. Revise os dados antes de usar os resultados.';
+      status.textContent = project.config.battery.chemistry === 'lead-acid'
+        ? 'Projeto importado. O guia usa capacidade de descarga e DoD; eficiências e tensões de carga/corte de arquivos antigos são preservadas no JSON, mas não aplicadas ao cálculo básico. Revise as estimativas.'
+        : 'Projeto importado neste dispositivo. Revise os dados antes de usar os resultados.';
     }
 
     function updateSummary() {
@@ -1474,8 +1500,8 @@ const brazilHsp = solarResourceCountries.find((country) => country.countryIso3 =
           return;
         }
         countNode.textContent = `${totalCount} ${totalCount === 1 ? 'bateria' : 'baterias'} (${seriesCount} em série × ${parallelCount} em paralelo)`;
-        summaryStatus.textContent = `Estimativa para ${format(autonomyDays)} ${autonomyDays === 1 ? 'dia' : 'dias'} de autonomia; confira os limites do modelo e do BMS.`;
-        summaryNote.textContent = selectedChemistry() === 'lead-acid'
+        summaryStatus.textContent = `Estimativa para ${format(autonomyDays)} ${autonomyDays === 1 ? 'dia' : 'dias'} de autonomia; confira os limites da bateria e da instalação.`;
+        summaryNote.textContent = selectedChemistry() !== 'lifepo4'
           ? 'Quantidade calculada pela capacidade informada. Confirme no manual as ligações em série/paralelo e os limites de corrente.'
           : 'Quantidade calculada pelo perfil de capacidade informado; revise o perfil, as eficiências e a condição de uso antes de escolher a bateria.';
       } catch (calculationError) {
@@ -1506,9 +1532,9 @@ const brazilHsp = solarResourceCountries.find((country) => country.countryIso3 =
       const checked = (event.currentTarget as HTMLInputElement).checked;
       if (checked) applyInverterReference();
       else {
-        get<HTMLInputElement>('[data-inverter-efficiency]').value = '';
-        get<HTMLInputElement>('[data-inverter-standby]').value = '';
-        get<HTMLInputElement>('[data-inverter-standby-hours]').value = '';
+        get<HTMLInputElement>('[data-inverter-rated-power]').value = String(initialInverterScenario.ratedPowerW);
+        get<HTMLInputElement>('[data-inverter-efficiency]').value = String(initialInverterScenario.efficiencyPercent);
+        get<HTMLInputElement>('[data-inverter-standby]').value = String(initialInverterScenario.standbyPowerW);
         updateInverterFields();
       }
     });
@@ -1530,6 +1556,9 @@ const brazilHsp = solarResourceCountries.find((country) => country.countryIso3 =
         const card = choice.closest<HTMLElement>('[data-catalog-equipment]');
         const quantity = card?.querySelector<HTMLInputElement>('[data-catalog-quantity]');
         if (quantity) quantity.disabled = !choice.checked || choice.disabled;
+        card?.querySelectorAll<HTMLInputElement>('[data-catalog-power], [data-catalog-hours]').forEach((field) => {
+          field.disabled = !choice.checked || choice.disabled;
+        });
         renderSelectedLoads();
         updateInverterFields();
         updateSummary();
@@ -1537,9 +1566,19 @@ const brazilHsp = solarResourceCountries.find((country) => country.countryIso3 =
     });
     root.querySelectorAll<HTMLInputElement>('[data-catalog-quantity]').forEach((quantity) =>
       quantity.addEventListener('input', updateSummary));
+    root.addEventListener('invalid', (event) => {
+      const field = event.target;
+      if (field instanceof HTMLInputElement || field instanceof HTMLSelectElement || field instanceof HTMLTextAreaElement) {
+        localizeValidation(field);
+      }
+    }, true);
     root.querySelectorAll<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>('input, select, textarea').forEach((field) => {
-      field.addEventListener('input', updateSummary);
-      field.addEventListener('change', updateSummary);
+      const updateField = () => {
+        localizeValidation(field);
+        updateSummary();
+      };
+      field.addEventListener('input', updateField);
+      field.addEventListener('change', updateField);
     });
 
     get<HTMLButtonElement>('[data-step-back]').addEventListener('click', () => {
@@ -1550,11 +1589,37 @@ const brazilHsp = solarResourceCountries.find((country) => country.countryIso3 =
       if (!validatePanel()) return;
       setPanel(activeStep + 1);
     });
-    get<HTMLButtonElement>('[data-print-report]').addEventListener('click', () => {
-      document.body.classList.add('solar-printing');
-      window.print();
+    get<HTMLButtonElement>('[data-download-pdf]').addEventListener('click', async (event) => {
+      const reportDocument = renderReport();
+      if (!reportDocument) return;
+      const button = event.currentTarget as HTMLButtonElement;
+      const status = get<HTMLElement>('[data-project-file-status]');
+      button.disabled = true;
+      button.setAttribute('aria-busy', 'true');
+      button.textContent = 'Gerando PDF…';
+      status.textContent = 'Preparando seu PDF neste dispositivo…';
+      try {
+        const [{ createSolarReportPdf }, [regular, bold, display]] = await Promise.all([
+          import('../lib/solar/report-pdf.ts'),
+          Promise.all(['Manrope-Regular.ttf', 'Manrope-Bold.ttf', 'DMSerifDisplay-Regular.ttf'].map(async (filename) => {
+            const response = await fetch(`${import.meta.env.BASE_URL}media/branding/fonts/${filename}`);
+            if (!response.ok) throw new Error('Não foi possível carregar as fontes do PDF.');
+            const bytes = new Uint8Array(await response.arrayBuffer());
+            return btoa(bytes.reduce((text, byte) => text + String.fromCharCode(byte), ''));
+          })),
+        ]);
+        const pdf = createSolarReportPdf(reportDocument, { regular, bold, display });
+        downloadFile(pdf.output('blob'), `${filenameBase(reportDocument.title)}.pdf`);
+        status.textContent = 'PDF preparado para download. Confira os downloads do navegador. Nenhum dado foi enviado.';
+      } catch (error) {
+        console.error('Falha ao gerar o relatório PDF.', error);
+        status.textContent = 'Não foi possível gerar o PDF. Confira sua conexão para carregar os arquivos da ferramenta e tente novamente. Seus dados continuam no formulário.';
+      } finally {
+        button.disabled = false;
+        button.removeAttribute('aria-busy');
+        button.textContent = 'Baixar relatório PDF';
+      }
     });
-    window.addEventListener('afterprint', () => document.body.classList.remove('solar-printing'));
     get<HTMLButtonElement>('[data-export-project]').addEventListener('click', () => {
       try {
         exportProjectFile();
@@ -1600,6 +1665,8 @@ const brazilHsp = solarResourceCountries.find((country) => country.countryIso3 =
   .solar-progress li[aria-current="step"] span { border-color: var(--accent-dark); background: var(--accent-dark); color: var(--white); }
   .solar-progress > p { margin: 0; color: var(--muted); font-size: 12px; white-space: nowrap; }
   .solar-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(270px, 330px); align-items: start; gap: clamp(24px, 4vw, 52px); }
+  .solar-page[data-report-visible="true"] .solar-layout { grid-template-columns: minmax(0, 1fr); }
+  .solar-page[data-report-visible="true"] .solar-summary { display: none; }
   .solar-form { min-width: 0; }
   .solar-step { min-width: 0; margin: 0; padding: 0; border: 0; }
   .solar-step > legend { width: 100%; margin-bottom: 10px; color: var(--ink); font: 400 clamp(30px, 4vw, 42px)/1.12 var(--font-display); }
@@ -1641,6 +1708,7 @@ const brazilHsp = solarResourceCountries.find((country) => country.countryIso3 =
   .solar-custom-load > p, .solar-inverter-settings > p, .solar-battery-profile > p { color: var(--muted); font-size: 12px; line-height: 1.65; }
   .solar-custom-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin-top: 16px; }
   .solar-custom-grid > .solar-field { min-width: 0; }
+  .solar-equipment > .solar-custom-grid { grid-column: 1 / -1; margin-top: 6px; }
   .solar-custom-actions { display: flex; flex-wrap: wrap; align-items: end; gap: 14px; margin-top: 16px; }
   .solar-inline-field { width: 110px; }
   .solar-checkbox { display: inline-flex; align-items: center; gap: 9px; color: var(--muted); font-size: 12px; font-weight: 650; line-height: 1.5; }
@@ -1658,24 +1726,51 @@ const brazilHsp = solarResourceCountries.find((country) => country.countryIso3 =
   .solar-report-actions { display: flex; flex-wrap: wrap; gap: 10px; margin: 0 0 12px; }
   .solar-import-button { display: inline-flex; align-items: center; }
   .solar-file-status { min-height: 1.5em; margin: 0 0 20px; color: var(--muted); font-size: 12px; line-height: 1.5; }
-  .solar-report { padding: clamp(18px, 3vw, 32px); border: 1px solid var(--line); background: var(--white); color: var(--ink); }
-  .solar-report-header { padding-bottom: 20px; border-bottom: 2px solid var(--copper); }
+  .solar-report { border: 1px solid var(--line); background: var(--white); color: var(--ink); }
+  .solar-report-header { padding: clamp(20px, 4vw, 40px); border-top: 3px solid var(--copper); border-bottom: 1px solid var(--line); background: var(--surface); }
   .solar-report-header .eyebrow { margin-bottom: 8px; }
-  .solar-report-header h2 { margin: 0 0 20px; font: 400 clamp(30px, 4vw, 42px)/1.12 var(--font-display); }
+  .solar-report-header h2 { margin: 0 0 14px; overflow-wrap: anywhere; font: 400 clamp(32px, 4vw, 48px)/1.12 var(--font-display); }
+  .solar-report-lead { max-width: 620px; margin-bottom: 24px; color: var(--muted); font-size: 14px; line-height: 1.7; }
   .solar-report-identification, .solar-report-metrics { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 18px; margin: 0; }
-  .solar-report-identification > div, .solar-report-metrics > div { min-width: 0; padding: 10px 0; border-top: 1px solid var(--line); }
-  .solar-report-identification dt, .solar-report-metrics dt { color: var(--muted); font-size: 10px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
-  .solar-report-identification dd, .solar-report-metrics dd { margin: 4px 0 0; overflow-wrap: anywhere; font-size: 12px; line-height: 1.55; }
-  .solar-report-section { margin-top: 24px; break-inside: avoid; }
-  .solar-report-section h3 { margin: 0 0 10px; color: var(--ink); font: 400 22px/1.2 var(--font-display); }
+  .solar-report-identification > :global(div), .solar-report-metrics > :global(div) { min-width: 0; padding: 14px 0; border-top: 1px solid var(--line); }
+  .solar-report-identification :global(dt), .solar-report-metrics :global(dt) { color: var(--muted); font-size: 10px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
+  .solar-report-identification :global(dd), .solar-report-metrics :global(dd) { margin: 6px 0 0; overflow-wrap: anywhere; font-size: 14px; line-height: 1.65; }
+  .solar-report-metrics :global(dd) { font-weight: 650; }
+  .solar-report-section { padding: clamp(20px, 4vw, 40px); border-bottom: 1px solid var(--line); }
+  .solar-report-section:last-child { border-bottom: 0; }
+  .solar-report-section h3 { display: flex; align-items: baseline; gap: 12px; margin: 0 0 22px; color: var(--ink); font: 400 clamp(24px, 3vw, 30px)/1.3 var(--font-display); }
+  .solar-report-section h3 > span { flex-shrink: 0; color: var(--accent-dark); font: 800 12px var(--font-body); }
+  .solar-report-highlights { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin: 0; }
+  .solar-report-highlights > :global(div) { min-width: 0; padding: 20px; border-top: 2px solid var(--accent-dark); background: var(--surface); }
+  .solar-report-highlights :global(dt) { color: var(--muted); font-size: 12px; font-weight: 700; line-height: 1.5; }
+  .solar-report-highlights :global(dd) { margin: 10px 0 0; }
+  .solar-report-highlights :global(strong) { display: block; overflow-wrap: anywhere; color: var(--accent-dark); font-size: clamp(22px, 3vw, 30px); line-height: 1.25; }
+  .solar-report-highlights :global(small) { display: block; margin-top: 9px; color: var(--muted); font-size: 12px; line-height: 1.65; }
   .solar-report-table-wrap { max-width: 100%; overflow-x: auto; }
-  .solar-report-table { width: 100%; border-collapse: collapse; font-size: 10px; line-height: 1.45; }
-  .solar-report-table th, .solar-report-table td { padding: 8px 7px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; overflow-wrap: anywhere; }
-  .solar-report-table th { background: var(--surface); color: var(--ink); font-size: 9px; }
-  .solar-report-note, .solar-report-disclaimer { color: var(--muted); font-size: 11px; line-height: 1.6; }
-  .solar-report-section ul { padding-left: 20px; color: var(--muted); font-size: 11px; line-height: 1.65; }
-  .solar-report-warnings { padding: 12px 20px; border-left: 3px solid var(--gold); background: var(--surface); }
-  .solar-report-disclaimer { padding-top: 12px; border-top: 1px solid var(--line); color: var(--ink); }
+  .solar-report-table { width: 100%; border-collapse: collapse; font-size: 13px; line-height: 1.6; }
+  .solar-report-table th, .solar-report-table :global(td) { padding: 14px 12px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; overflow-wrap: anywhere; }
+  .solar-report-table th { background: #314b7b; color: var(--white); font-size: 11px; }
+  .solar-report-table :global(td:first-child) { width: 38%; }
+  .solar-report-table :global(td:last-child) { min-width: 100px; color: var(--accent-dark); font-weight: 800; font-variant-numeric: tabular-nums; }
+  .solar-report-table :global(tbody tr:nth-child(even)) { background: var(--surface); }
+  .solar-report-table :global(small) { display: block; margin-top: 5px; color: var(--muted); font-size: 11px; font-weight: 500; }
+  .solar-report-subtitle { margin: 24px 0 14px; font-size: 14px; }
+  .solar-report-totals { max-width: 600px; margin: 0; }
+  .solar-report-totals > :global(div) { display: flex; justify-content: space-between; gap: 18px; padding: 10px 0; border-bottom: 1px solid var(--line); font-size: 13px; line-height: 1.6; }
+  .solar-report-totals :global(dt) { color: var(--muted); }
+  .solar-report-totals :global(dd) { flex-shrink: 0; margin: 0; font-weight: 700; }
+  .solar-report-totals > :global(div:last-child) { border-bottom: 0; color: var(--accent-dark); font-weight: 800; }
+  .solar-report-note, .solar-report-callout, .solar-report-disclaimer { color: var(--muted); font-size: 13px; line-height: 1.8; }
+  .solar-report-note:empty, .solar-report-callout:empty { display: none; }
+  .solar-report-callout { margin: 20px 0 0; padding: 16px 18px; border-left: 3px solid var(--copper); background: var(--surface); }
+  .solar-report-section ul { display: grid; gap: 14px; margin: 0; padding-left: 20px; color: var(--muted); font-size: 13px; line-height: 1.8; }
+  .solar-report-section :global(li) { padding-left: 6px; }
+  .solar-report-section :global(li)::marker { color: var(--accent-dark); }
+  .solar-report-warning-box { margin-top: 22px; padding: 18px 22px; border-left: 3px solid var(--gold); background: var(--surface); }
+  .solar-report-warning-box h4 { margin: 0 0 10px; color: var(--nautical); font-size: 14px; }
+  .solar-report-warning-box ul { color: var(--ink); }
+  .solar-report-disclaimer { margin: 24px 0 0; padding: 18px; border-top: 2px solid var(--copper); background: var(--surface); color: var(--ink); font-weight: 700; }
+  .solar-report-actions .button:disabled { cursor: wait; opacity: .7; }
   .solar-step-actions { display: flex; align-items: center; justify-content: space-between; gap: 14px; margin-top: 34px; padding-top: 18px; border-top: 1px solid var(--line); }
   .solar-step-actions > p { flex: 1; margin: 0; color: var(--muted); font-size: 11px; line-height: 1.5; }
   .solar-step-actions .button { min-height: 48px; }
@@ -1714,34 +1809,12 @@ const brazilHsp = solarResourceCountries.find((country) => country.countryIso3 =
     .solar-step-actions .button { flex: 0 0 auto; min-width: 92px; padding-inline: 8px; }
     .solar-step-actions > p { font-size: 10px; }
     .solar-load-list li { grid-template-columns: minmax(0, 1fr) 84px auto; gap: 8px; }
-    .solar-report-identification, .solar-report-metrics { grid-template-columns: minmax(0, 1fr); }
-  }
-  @page { size: A4; margin: 14mm; }
-  @media print {
-    :global(body.solar-printing > *:not(main)) { display: none !important; }
-    :global(body.solar-printing) { background: #fff !important; color: #282829; }
-    :global(body.solar-printing main) { display: block !important; margin: 0 !important; padding: 0 !important; }
-    :global(body.solar-printing .solar-intro),
-    :global(body.solar-printing .solar-progress),
-    :global(body.solar-printing .solar-layout > .solar-summary),
-    :global(body.solar-printing .solar-step-actions),
-    :global(body.solar-printing .solar-disclaimer),
-    :global(body.solar-printing .solar-report-actions),
-    :global(body.solar-printing .solar-file-status),
-    :global(body.solar-printing .solar-step:not([data-step-panel="4"])) { display: none !important; }
-    :global(body.solar-printing .solar-page) { max-width: none; margin: 0; padding: 0; }
-    :global(body.solar-printing .solar-layout) { display: block; }
-    :global(body.solar-printing .solar-form) { width: 100%; }
-    :global(body.solar-printing .solar-step[data-step-panel="4"]) { display: block !important; }
-    :global(body.solar-printing .solar-step[data-step-panel="4"] > legend) { display: none; }
-    :global(body.solar-printing .solar-report) { padding: 0; border: 0; }
-    :global(body.solar-printing .solar-report-section) { break-inside: avoid; }
-    :global(body.solar-printing .solar-report-table tr) { break-inside: avoid; }
-    :global(body.solar-printing .solar-report-table-wrap) { overflow: visible; }
-    :global(body.solar-printing .solar-report-table) { font-size: 8pt; }
-    :global(body.solar-printing .solar-report-table th) { background: #f3f0ec !important; print-color-adjust: exact; }
-    :global(body.solar-printing .solar-report-warnings) { background: #f3f0ec !important; print-color-adjust: exact; }
-    :global(body.solar-printing .solar-report-header h2) { font-size: 26pt; }
-    :global(body.solar-printing .solar-report-section h3) { font-size: 16pt; }
+    .solar-report-identification, .solar-report-metrics, .solar-report-highlights { grid-template-columns: minmax(0, 1fr); }
+    .solar-report-table, .solar-report-table tbody, .solar-report-table :global(tr), .solar-report-table :global(td) { display: block; width: 100%; }
+    .solar-report-table thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+    .solar-report-table :global(tr) { margin-bottom: 14px; padding: 12px; border: 1px solid var(--line); }
+    .solar-report-table :global(td), .solar-report-table :global(td:first-child) { width: 100%; min-width: 0; padding: 7px 0; border: 0; }
+    .solar-report-table :global(td:not(:first-child))::before { content: attr(data-label) ': '; color: var(--muted); font-size: 11px; font-weight: 600; }
+    .solar-report-totals > :global(div) { flex-direction: column; gap: 2px; }
   }
 </style>

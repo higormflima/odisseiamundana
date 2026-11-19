@@ -27,8 +27,11 @@ Com `pnpm dev`, acesse `/pt/motorhomes/iveco-daily-3510/`. Rascunhos só são
 gerados em desenvolvimento, com aviso de prévia e `noindex, nofollow`; em
 produção a rota aceita apenas páginas com `status: published`.
 
-O item **Motorhome**, após **Viagens**, abre um submenu com **Construção Iveco Daily**,
-as etapas disponíveis e **Custos do Projeto** sempre na última posição.
+O item **Motorhome**, após **Viagens**, contém **Iveco Daily 35.10** e
+**Planejador Elétrico**. O primeiro abre um submenu com **Construção Iveco Daily**,
+as etapas disponíveis e **Custos do Projeto** sempre na última posição;
+o segundo leva diretamente à ferramenta solar. Essa hierarquia é a mesma
+no desktop e no mobile, sem alterar os endereços das páginas.
 O último link abre a visão geral na âncora `#construction-costs`, incluindo
 “Nossas contas” e “Planilha de custos completa”, mesmo quando usado de outra página.
 Desktop e mobile usam o mesmo filtro de publicação das etapas. O mapa também inclui o projeto,

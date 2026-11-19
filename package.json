@@ -29,6 +29,7 @@
     "yaml": "^2.9.1"
   },
   "dependencies": {
+    "jspdf": "^4.2.1",
     "leaflet": "^1.9.4"
   }
 }

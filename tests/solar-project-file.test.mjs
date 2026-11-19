@@ -65,7 +65,7 @@ test('valida e preserva um arquivo de projeto versionado', () => {
 
 test('rejeita versão incompatível, propriedades extras e perfil de tensão divergente', () => {
   const wrongVersion = createProjectFile();
-  wrongVersion.version = 2;
+  wrongVersion.version = 99;
   assert.throws(() => validateSolarProjectFile(wrongVersion), /versão do arquivo não é compatível/);
 
   const extraProperty = createProjectFile();
@@ -75,6 +75,24 @@ test('rejeita versão incompatível, propriedades extras e perfil de tensão div
   const mismatchedProfile = createProjectFile();
   mismatchedProfile.config.systemVoltageV = 24;
   assert.throws(() => validateSolarProjectFile(mismatchedProfile), /profileId não corresponde à tensão/);
+});
+
+test('transporta AGM na versão 2 sem aceitar a nova opção no contrato antigo', () => {
+  const file = createProjectFile();
+  file.version = 2;
+  file.config.battery.chemistry = 'agm';
+  file.config.battery.agm = { capacityAh: 210, depthOfDischargePercent: 50 };
+  assert.deepEqual(validateSolarProjectFile(JSON.parse(JSON.stringify(file))), file);
+  const version1 = structuredClone(file);
+  version1.version = 1;
+  delete version1.config.battery.agm;
+  assert.throws(() => validateSolarProjectFile(version1), /chemistry não é compatível/);
+  const missing = structuredClone(file);
+  delete missing.config.battery.agm;
+  assert.throws(() => validateSolarProjectFile(missing), /propriedade obrigatória "agm"/);
+  const invalid = structuredClone(file);
+  invalid.config.battery.agm.depthOfDischargePercent = 0;
+  assert.throws(() => validateSolarProjectFile(invalid), /depthOfDischargePercent deve ser um número/);
 });
 
 test('rejeita valores inválidos em cargas e configurações importadas', () => {
@@ -95,9 +113,46 @@ test('rejeita valores inválidos em cargas e configurações importadas', () => 
       ratedPowerW: 12,
     },
   });
+
   assert.throws(() => validateSolarProjectFile(invalidCustomLoad), /não pode usar corrente DC para uma carga AC/);
 
   const invalidHsp = createProjectFile();
   invalidHsp.config.peakSunHours = Number.NaN;
   assert.throws(() => validateSolarProjectFile(invalidHsp), /peakSunHours deve ser um número/);
+});
+
+test('versão 2 preserva cenários editados e rejeita uso inválido ou incompatível', () => {
+  const file = createProjectFile();
+  file.version = 2;
+  file.config.battery.agm = { capacityAh: 210, depthOfDischargePercent: 50 };
+  file.config.inverter.ratedPowerW = 2000;
+  file.config.catalogLoads.push({
+    equipmentId: 'example-water-pump', selected: true, quantity: 2,
+    usage: { powerW: 80, hoursPerDay: 1 / 3 },
+  });
+  assert.deepEqual(validateSolarProjectFile(JSON.parse(JSON.stringify(file))), file);
+  for (const usage of [
+    { powerW: 0, hoursPerDay: 1 },
+    { powerW: 80, hoursPerDay: 25 },
+    { powerW: 80 },
+    { powerW: 80, hoursPerDay: 1, extra: true },
+  ]) {
+    const invalid = structuredClone(file);
+    invalid.config.catalogLoads[1].usage = usage;
+    assert.throws(() => validateSolarProjectFile(invalid));
+  }
+  const incompatible = structuredClone(file);
+  incompatible.config.catalogLoads[0].usage = { powerW: 10, hoursPerDay: 1 };
+  assert.throws(() => validateSolarProjectFile(incompatible), /usage não se aplica/);
+  const oldVersion = structuredClone(file);
+  oldVersion.version = 1;
+  delete oldVersion.config.battery.agm;
+  delete oldVersion.config.inverter.ratedPowerW;
+  assert.throws(() => validateSolarProjectFile(oldVersion), /propriedade não reconhecida "usage"/);
+  const invalidInverter = structuredClone(file);
+  invalidInverter.config.inverter.ratedPowerW = 0;
+  assert.throws(() => validateSolarProjectFile(invalidInverter), /ratedPowerW deve ser um número/);
+  const oldInverter = createProjectFile();
+  oldInverter.config.inverter.ratedPowerW = 2000;
+  assert.throws(() => validateSolarProjectFile(oldInverter), /propriedade não reconhecida "ratedPowerW"/);
 });

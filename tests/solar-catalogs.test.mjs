@@ -3,6 +3,7 @@ import test from 'node:test';
 import {
   batteryCatalog,
   batteryTechnologyCatalog,
+  buildEquipmentLoad,
   equipmentCatalog,
   inverterCatalog,
   mpptCatalog,
@@ -48,14 +49,43 @@ test('químicas de bateria não recebem eficiências genéricas sem fonte direci
     batteryTechnologyCatalog.map(({ chemistry, profileStatus }) => [chemistry, profileStatus]),
     [
       ['lead-acid', 'requires-battery-specific-data'],
+      ['agm', 'has-model-specific-reference'],
       ['lifepo4', 'has-model-specific-reference'],
     ],
   );
 
-  for (const technology of batteryTechnologyCatalog) {
-    assert.ok(technology.requiredDatasheetFields.includes('chargeEfficiency'));
-    assert.ok(technology.requiredDatasheetFields.includes('dischargeEfficiency'));
+  const [leadAcid, agm, lifepo4] = batteryTechnologyCatalog;
+  assert.ok(!leadAcid.requiredDatasheetFields.includes('chargeEfficiency'));
+  assert.ok(!leadAcid.requiredDatasheetFields.includes('dischargeEfficiency'));
+  assert.ok(!agm.requiredDatasheetFields.includes('chargeEfficiency'));
+  assert.ok(!agm.requiredDatasheetFields.includes('dischargeEfficiency'));
+  assert.ok(lifepo4.requiredDatasheetFields.includes('chargeEfficiency'));
+  assert.ok(lifepo4.requiredDatasheetFields.includes('dischargeEfficiency'));
+});
+
+test('exemplos cobrem as categorias e calculam consumo diário sem preencher campos', () => {
+  const examples = equipmentCatalog.filter((item) => item.referenceKind === 'usage-example');
+  const expectedWh = { lighting: 12, cooking: 225, electronics: 240, water: 25, climate: 180, other: 144 };
+  assert.deepEqual(examples.map((item) => item.categoryId).sort(), Object.keys(expectedWh).sort());
+  for (const item of examples) {
+    const result = calculateDailyConsumption([buildEquipmentLoad(item, 1)], 12, 0.9, 0, 0);
+    assert.equal(result.loads[0].applianceEnergyWhPerDay, expectedWh[item.categoryId]);
+    assert.ok(item.source.url.startsWith('https://'));
+    assert.ok(item.applicableSystemVoltagesV.includes(12));
+    if (item.defaultLoad.supply === 'dc') assert.deepEqual(item.applicableSystemVoltagesV, [12]);
   }
+  const result = calculateDailyConsumption(examples.map((item) => buildEquipmentLoad(item, 1)), 12, 0.9, 0, 0);
+  assert.equal(result.totalAtBatteryBusWhPerDay, 361 + 465 / 0.9);
+});
+
+test('editar o cenário atualiza energia e potência AC sem alterar a referência do catálogo', () => {
+  const item = equipmentCatalog.find((item) => item.id === 'example-laptop');
+  const load = buildEquipmentLoad(item, 2, { powerW: 80, hoursPerDay: 3 });
+  assert.equal(load.ratedPowerW, 80);
+  assert.equal(calculateDailyConsumption([load], 24, 0.8, 0, 0).totalAtBatteryBusWhPerDay, 600);
+  assert.equal(item.defaultLoad.basis.powerW, 60);
+  assert.equal(item.defaultLoad.basis.hoursPerDay, 4);
+  assert.throws(() => buildEquipmentLoad(equipmentCatalog[0], 1, { powerW: 20, hoursPerDay: 3 }), /não usa um perfil/);
 });
 
 test('perfis LiFePO4 mantêm valores e condições publicados para cada tensão de banco', () => {

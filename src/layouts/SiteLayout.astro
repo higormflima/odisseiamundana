@@ -12,19 +12,29 @@ interface Props {
   lang?: string;
 }
 
+interface NavigationLink {
+  label: string;
+  href: string;
+  children?: NavigationLink[];
+}
+
 const { title, fullTitle, description = 'Histórias, roteiros e experiências de viagem.', lang = 'pt-BR' } = Astro.props;
 const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
 const systemPages = await getCollection('motorhomeSystemPages', (page) =>
   page.data.project_id.id === 'iveco-daily-3510' && (page.data.status === 'published' || import.meta.env.DEV));
-const motorhomeChildren = [
+const ivecoChildren = [
+  { label: 'Construção Iveco Daily', href: `${base}pt/motorhomes/iveco-daily-3510/` },
   ...systemPages.sort((left, right) => left.data.sort_order - right.data.sort_order).map((page) => ({
     label: page.data.title,
     href: `${base}pt/motorhomes/${page.data.project_id.id}/${page.data.page_id}/`,
   })),
-  { label: 'Odisseia Solar', href: `${base}pt/odisseia-solar/` },
   { label: 'Custos do Projeto', href: `${base}pt/motorhomes/iveco-daily-3510/#construction-costs` },
 ];
-const navigationLinks = [
+const motorhomeChildren: NavigationLink[] = [
+  { label: 'Iveco Daily 35.10', href: `${base}pt/motorhomes/iveco-daily-3510/`, children: ivecoChildren },
+  { label: 'Planejador Elétrico', href: `${base}pt/odisseia-solar/` },
+];
+const navigationLinks: NavigationLink[] = [
   { label: 'Início', href: `${base}pt/` },
   { label: 'Viagens', href: `${base}pt/viagens/` },
   { label: 'Motorhome', href: `${base}pt/motorhomes/iveco-daily-3510/`, children: motorhomeChildren },
@@ -74,8 +84,14 @@ const navigationLinks = [
             <details class="motorhome-navigation">
               <summary>{label} <span aria-hidden="true">▾</span></summary>
               <div class="motorhome-submenu">
-                <a href={href}>Construção Iveco Daily</a>
-                {children.map((child) => <a href={child.href}>{child.label}</a>)}
+                {children.map((child) => child.children?.length ? (
+                  <details class="motorhome-navigation">
+                    <summary>{child.label} <span aria-hidden="true">▾</span></summary>
+                    <div class="motorhome-submenu">
+                      {child.children.map((item) => <a href={item.href}>{item.label}</a>)}
+                    </div>
+                  </details>
+                ) : <a href={child.href}>{child.label}</a>)}
               </div>
             </details>
           ) : <a href={href}>{label}</a>)}
@@ -93,8 +109,14 @@ const navigationLinks = [
               <details class="motorhome-navigation">
                 <summary>{label} <span aria-hidden="true">▾</span></summary>
                 <div class="motorhome-submenu">
-                  <a href={href}>Construção Iveco Daily</a>
-                  {children.map((child) => <a href={child.href}>{child.label}</a>)}
+                  {children.map((child) => child.children?.length ? (
+                    <details class="motorhome-navigation">
+                      <summary>{child.label} <span aria-hidden="true">▾</span></summary>
+                      <div class="motorhome-submenu">
+                        {child.children.map((item) => <a href={item.href}>{item.label}</a>)}
+                      </div>
+                    </details>
+                  ) : <a href={child.href}>{child.label}</a>)}
                 </div>
               </details>
             ) : <a href={href}>{label}</a>)}
@@ -164,6 +186,8 @@ const navigationLinks = [
   .motorhome-navigation > summary:focus-visible { outline: var(--focus-outline); outline-offset: 5px; }
   .motorhome-submenu { position: absolute; top: 100%; left: 0; z-index: 20; display: flex; flex-direction: column; width: min(320px, calc(100vw - 48px)); max-height: 65vh; overflow-y: auto; padding: 8px; border: 1px solid var(--line); background: var(--paper); box-shadow: var(--shadow-soft); }
   .motorhome-submenu a { display: block; padding: 12px; font-size: 14px; line-height: 1.5; }
+  .motorhome-submenu > .motorhome-navigation > summary { padding: 12px; font-size: 14px; line-height: 1.5; }
+  .motorhome-submenu .motorhome-submenu { position: static; width: auto; max-height: none; margin: 0 12px; padding: 0 0 0 8px; border: 0; border-left: 1px solid var(--line); box-shadow: none; }
   @media (max-width: 1350px) {
     .site-header .mobile-navigation nav { max-width: calc(100vw - 24px); max-height: calc(100dvh - 112px); overflow-y: auto; }
     .site-header .mobile-navigation .motorhome-navigation > summary { display: flex; width: auto; height: auto; padding: 12px; border: 0; border-radius: 0; }

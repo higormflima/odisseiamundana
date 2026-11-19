@@ -20,7 +20,7 @@ export interface SolarProjectConfiguration {
   systemVoltageV: 12 | 24;
   countryIso3: string;
   peakSunHours: number;
-  catalogLoads: Array<{ equipmentId: string; selected: boolean; quantity: number }>;
+  catalogLoads: Array<{ equipmentId: string; selected: boolean; quantity: number; usage?: { powerW: number; hoursPerDay: number } }>;
   customLoads: Array<{ name: string; categoryId: string; load: ElectricalLoad }>;
   autonomyDays: number | null;
   battery: {
@@ -29,8 +29,13 @@ export interface SolarProjectConfiguration {
     lifepo4: SolarProjectBatteryFields;
     leadAcid: SolarProjectBatteryFields;
     leadUnitVoltageV: 12 | 24;
+    agm?: {
+      capacityAh: number | null;
+      depthOfDischargePercent: number | null;
+    };
   };
   inverter: {
+    ratedPowerW?: number | null;
     outputVoltageV: 120 | 127 | 220 | 230 | null;
     useVictronReference: boolean;
     efficiencyPercent: number | null;
@@ -41,7 +46,7 @@ export interface SolarProjectConfiguration {
 
 export interface SolarProjectFile {
   format: 'odisseia-solar-project';
-  version: 1;
+  version: 1 | 2;
   savedAt: string;
   config: SolarProjectConfiguration;
 }
@@ -181,7 +186,7 @@ function assertElectricalLoad(value: unknown, path: string): asserts value is El
   }
 }
 
-function assertProjectConfiguration(value: unknown): asserts value is SolarProjectConfiguration {
+function assertProjectConfiguration(value: unknown, version: 1 | 2): asserts value is SolarProjectConfiguration {
   const config = record(value, 'config');
   assertKeys(config, 'config', [
     'projectName',
@@ -214,7 +219,7 @@ function assertProjectConfiguration(value: unknown): asserts value is SolarProje
   config.catalogLoads.forEach((value, index) => {
     const path = `config.catalogLoads[${index}]`;
     const item = record(value, path);
-    assertKeys(item, path, ['equipmentId', 'selected', 'quantity']);
+    assertKeys(item, path, ['equipmentId', 'selected', 'quantity'], version === 2 ? ['usage'] : []);
     if (typeof item.equipmentId !== 'string' || !equipmentCatalog.some((equipment) => equipment.id === item.equipmentId)) {
       throw new TypeError(`${path}.equipmentId não corresponde a um equipamento do catálogo.`);
     }
@@ -223,6 +228,14 @@ function assertProjectConfiguration(value: unknown): asserts value is SolarProje
     if (typeof item.selected !== 'boolean') throw new TypeError(`${path}.selected deve ser booleano.`);
     numberValue(item.quantity, `${path}.quantity`, 1);
     if (!Number.isInteger(item.quantity)) throw new TypeError(`${path}.quantity deve ser um número inteiro.`);
+    if (item.usage !== undefined) {
+      const equipment = equipmentCatalog.find((equipment) => equipment.id === item.equipmentId);
+      if (equipment?.defaultLoad.basis.kind !== 'power-time') throw new TypeError(`${path}.usage não se aplica a esse equipamento.`);
+      const usage = record(item.usage, `${path}.usage`);
+      assertKeys(usage, `${path}.usage`, ['powerW', 'hoursPerDay']);
+      numberValue(usage.powerW, `${path}.usage.powerW`, 0.1);
+      numberValue(usage.hoursPerDay, `${path}.usage.hoursPerDay`, 0, 24);
+    }
   });
 
   if (!Array.isArray(config.customLoads)) throw new TypeError('config.customLoads deve ser uma lista.');
@@ -242,8 +255,9 @@ function assertProjectConfiguration(value: unknown): asserts value is SolarProje
   });
 
   const battery = record(config.battery, 'config.battery');
-  assertKeys(battery, 'config.battery', ['chemistry', 'profileId', 'lifepo4', 'leadAcid', 'leadUnitVoltageV']);
-  if (battery.chemistry !== 'lead-acid' && battery.chemistry !== 'lifepo4') {
+  assertKeys(battery, 'config.battery', ['chemistry', 'profileId', 'lifepo4', 'leadAcid', 'leadUnitVoltageV', ...(version === 2 ? ['agm'] : [])]);
+  if (battery.chemistry !== 'lead-acid' && battery.chemistry !== 'lifepo4'
+    && !(version === 2 && battery.chemistry === 'agm')) {
     throw new TypeError('config.battery.chemistry não é compatível.');
   }
   if (typeof battery.profileId !== 'string'
@@ -252,6 +266,12 @@ function assertProjectConfiguration(value: unknown): asserts value is SolarProje
   }
   assertBatteryFields(battery.lifepo4, 'config.battery.lifepo4');
   assertBatteryFields(battery.leadAcid, 'config.battery.leadAcid');
+  if (version === 2) {
+    const agm = record(battery.agm, 'config.battery.agm');
+    assertKeys(agm, 'config.battery.agm', ['capacityAh', 'depthOfDischargePercent']);
+    nullableNumberValue(agm.capacityAh, 'config.battery.agm.capacityAh', 0.1);
+    nullableNumberValue(agm.depthOfDischargePercent, 'config.battery.agm.depthOfDischargePercent', 0.1, 100);
+  }
   if (battery.leadUnitVoltageV !== 12 && battery.leadUnitVoltageV !== 24) {
     throw new TypeError('config.battery.leadUnitVoltageV deve ser 12 ou 24.');
   }
@@ -266,7 +286,8 @@ function assertProjectConfiguration(value: unknown): asserts value is SolarProje
     'efficiencyPercent',
     'standbyPowerW',
     'standbyHoursPerDay',
-  ]);
+  ], version === 2 ? ['ratedPowerW'] : []);
+  if (inverter.ratedPowerW !== undefined) nullableNumberValue(inverter.ratedPowerW, 'config.inverter.ratedPowerW', 1);
   if (inverter.outputVoltageV !== null
     && (typeof inverter.outputVoltageV !== 'number' || !inverterVoltages.includes(inverter.outputVoltageV))) {
     throw new TypeError('config.inverter.outputVoltageV não corresponde a uma tensão disponível.');
@@ -285,11 +306,11 @@ function assertProjectConfiguration(value: unknown): asserts value is SolarProje
 export function validateSolarProjectFile(value: unknown): SolarProjectFile {
   const file = record(value, 'arquivo');
   assertKeys(file, 'arquivo', ['format', 'version', 'savedAt', 'config']);
-  if (file.format !== 'odisseia-solar-project') throw new TypeError('O arquivo não é um projeto da Odisseia Solar.');
-  if (file.version !== 1) throw new TypeError('A versão do arquivo não é compatível com esta versão da Odisseia Solar.');
+  if (file.format !== 'odisseia-solar-project') throw new TypeError('O arquivo não é um projeto do Planejador Elétrico.');
+  if (file.version !== 1 && file.version !== 2) throw new TypeError('A versão do arquivo não é compatível com esta versão do Planejador Elétrico.');
   if (typeof file.savedAt !== 'string' || !Number.isFinite(Date.parse(file.savedAt))) {
     throw new TypeError('arquivo.savedAt deve conter uma data válida.');
   }
-  assertProjectConfiguration(file.config);
+  assertProjectConfiguration(file.config, file.version);
   return value as SolarProjectFile;
 }

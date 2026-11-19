@@ -3,7 +3,7 @@ import {
   calculateDailyConsumption,
   calculateInverterSizing,
 } from './calculations.ts';
-import type { BatteryParameters, DailyConsumption, ElectricalLoad, InverterSizing } from './calculations.ts';
+import type { BatteryCapacityParameters, DailyConsumption, ElectricalLoad, InverterSizing } from './calculations.ts';
 
 export interface SolarReportLoadInput {
   name: string;
@@ -22,15 +22,16 @@ export interface SolarReportInput {
   peakSunHours: number;
   loads: SolarReportLoadInput[];
   inverter: {
+    ratedPowerW?: number;
     efficiency: number;
     standbyPowerW: number;
     standbyHoursPerDay: number;
     outputVoltageV: number | null;
   };
-  battery: BatteryParameters & {
+  battery: BatteryCapacityParameters & {
     nominalVoltageV: number;
-    chargeVoltageV: number;
-    dischargeCutoffVoltageV: number;
+    chargeVoltageV?: number;
+    dischargeCutoffVoltageV?: number;
   };
   autonomyDays: number;
   unitCapacityAh: number;
@@ -70,20 +71,16 @@ export interface SolarReport {
     maxParallelBatteries?: number;
     withinKnownLimit: boolean;
     profileLabelPt: string;
-    chargeEfficiency: number;
-    chargeVoltageV: number;
-    dischargeCutoffVoltageV: number;
+    chargeEfficiency?: number;
+    chargeVoltageV?: number;
+    dischargeCutoffVoltageV?: number;
   };
   inverter: InverterSizing | undefined;
+  inverterRatedPowerW?: number;
   inverterOutputVoltageV: number | null;
   inverterEfficiency: number;
   inverterStandbyPowerW: number;
   inverterStandbyHoursPerDay: number;
-  pvStatus: string;
-  mpptStatus: string;
-  dcDcChargerStatus: string;
-  acDcChargerStatus: string;
-  cableCircuits: Array<{ namePt: string; statusPt: string }>;
   warnings: string[];
   calculationNotes: string[];
 }
@@ -95,7 +92,7 @@ function describeLoadBasis(load: ElectricalLoad): string {
   const basis = load.basis;
   switch (basis.kind) {
     case 'power-time':
-      return `${displayNumber(basis.powerW)} W × ${displayNumber(basis.hoursPerDay)} h/dia`;
+      return `${displayNumber(basis.powerW)} W × ${basis.hoursPerDay > 0 && basis.hoursPerDay < 1 ? `${displayNumber(basis.hoursPerDay * 60)} min/dia` : `${displayNumber(basis.hoursPerDay)} h/dia`}`;
     case 'average-power-24h':
       return `${displayNumber(basis.averagePowerW)} W médios × 24 h/dia`;
     case 'compressor-cycle':
@@ -108,6 +105,14 @@ function describeLoadBasis(load: ElectricalLoad): string {
 }
 
 export function buildSolarReport(input: SolarReportInput): SolarReport {
+  if (input.inverter.ratedPowerW !== undefined
+    && (!Number.isFinite(input.inverter.ratedPowerW) || input.inverter.ratedPowerW <= 0)) {
+    throw new RangeError('Informe uma potência do inversor maior que zero.');
+  }
+  if (!Number.isFinite(input.unitCapacityAh) || input.unitCapacityAh <= 0
+    || !Number.isFinite(input.unitVoltageV) || input.unitVoltageV <= 0) {
+    throw new RangeError('Informe tensão e capacidade por bateria maiores que zero.');
+  }
   const loads = input.loads.map((item) => item.load);
   const consumption = calculateDailyConsumption(
     loads,
@@ -147,17 +152,8 @@ export function buildSolarReport(input: SolarReportInput): SolarReport {
   const withinKnownLimit = input.maxParallelBatteries === undefined
     || parallelCount <= input.maxParallelBatteries;
   const warnings = [
-    'O dimensionamento fotovoltaico e a compatibilidade do MPPT permanecem pendentes: faltam parâmetros validados de perdas, temperatura do módulo e limites do controlador.',
-    'Os carregadores DC-DC e AC-DC permanecem pendentes: faltam metas de recarga e limites das fontes de entrada.',
-    'Cabos e proteções permanecem sem valores numéricos: faltam comprimentos, método de instalação, temperatura, agrupamento e validação normativa específica.',
-    ...(input.battery.maxChargeCurrentA === undefined
-      ? ['A corrente máxima de carga da bateria/BMS não foi informada; a compatibilidade dos carregadores não pode ser verificada.']
-      : []),
-    ...(input.battery.maxContinuousDischargeCurrentA === undefined
-      ? ['A corrente contínua máxima de descarga da bateria/BMS não foi informada; a compatibilidade da corrente do inversor não pode ser verificada.']
-      : []),
-    ...(input.battery.chemistry === 'lifepo4' && input.battery.maxPeakDischargeCurrentA === undefined
-      ? ['A ficha de referência não informa limite de descarga de pico; a verificação de picos do inversor depende da bateria escolhida.']
+    ...(inverter && input.inverter.ratedPowerW !== undefined && inverter.minimumContinuousPowerW > input.inverter.ratedPowerW
+      ? [`A potência contínua escolhida para o inversor (${displayNumber(input.inverter.ratedPowerW)} W) é menor que a exigida pelas cargas simultâneas (${displayNumber(inverter.minimumContinuousPowerW)} W). Escolha um inversor maior ou reduza a simultaneidade.`]
       : []),
     ...(inverter?.compatibility === 'exceeds-known-limits'
       ? ['A corrente calculada do inversor excede um limite de descarga informado para a bateria/BMS.']
@@ -187,32 +183,32 @@ export function buildSolarReport(input: SolarReportInput): SolarReport {
       maxParallelBatteries: input.maxParallelBatteries,
       withinKnownLimit,
       profileLabelPt: input.batteryProfileLabelPt,
-      chargeEfficiency: input.battery.chargeEfficiency,
+      ...(input.battery.capacityBasis === 'published-discharge' ? {} : { chargeEfficiency: input.battery.chargeEfficiency }),
       chargeVoltageV: input.battery.chargeVoltageV,
       dischargeCutoffVoltageV: input.battery.dischargeCutoffVoltageV,
     },
     inverter,
+    inverterRatedPowerW: input.inverter.ratedPowerW,
     inverterOutputVoltageV: input.inverter.outputVoltageV,
     inverterEfficiency: input.inverter.efficiency,
     inverterStandbyPowerW: input.inverter.standbyPowerW,
     inverterStandbyHoursPerDay: input.inverter.standbyHoursPerDay,
-    pvStatus: 'Não foi possível dimensionar com segurança: faltam o fator de desempenho do arranjo, coeficientes térmicos confirmados do módulo e parâmetros validados do controlador.',
-    mpptStatus: 'Tipo sugerido: MPPT. Corrente, potência suportada, tensão PV máxima e configuração série/paralelo não foram calculadas porque dependem dos parâmetros confirmados do arranjo e do controlador.',
-    dcDcChargerStatus: 'Não foi possível dimensionar com segurança: informe a energia a repor, o tempo de recarga e a corrente que sobra no alternador após as cargas do veículo.',
-    acDcChargerStatus: 'Não foi possível dimensionar com segurança: informe a energia a repor, o tempo de recarga e os limites de eficiência, fator de potência e corrente do circuito AC.',
-    cableCircuits: [
-      { namePt: 'Painéis → controlador MPPT', statusPt: 'Pendente: arranjo, corrente e comprimento do circuito.' },
-      { namePt: 'Controlador MPPT → bateria', statusPt: 'Pendente: corrente e comprimento do circuito.' },
-      ...(hasAcLoads ? [{ namePt: 'Bateria → inversor', statusPt: 'Pendente: corrente, pico e comprimento do circuito.' }] : []),
-      { namePt: 'Carregador DC-DC → bateria', statusPt: 'Pendente: carregador e comprimento do circuito.' },
-      { namePt: 'Carregador AC-DC → bateria', statusPt: 'Pendente: carregador e comprimento do circuito.' },
-    ],
     warnings,
     calculationNotes: [
-      'Consumo no barramento da bateria = cargas DC + cargas AC divididas pela eficiência do inversor + consumo em espera informado.',
-      'Capacidade utilizável = consumo diário no barramento × autonomia; capacidade nominal = capacidade utilizável ÷ (DoD × eficiência de descarga).',
-      'A corrente contínua do inversor considera somente cargas AC marcadas como simultâneas. A potência de pico considera os picos informados para esse mesmo grupo.',
-      'Nenhum valor de cabo, fusível ou disjuntor é estimado sem dados de instalação suficientes.',
+      'Consumo da bateria: soma dos equipamentos DC, dos equipamentos AC com as perdas do inversor e do consumo do inversor ligado sem carga.',
+      battery.capacityBasis === 'published-discharge'
+        ? `Capacidade publicada: usamos a descarga da referência ${battery.chemistry === 'agm' ? 'Rolls S12-230AGM-RE' : 'Freedom DF4100'} em C20 a 25 °C. A energia em Wh é aproximada; não foi presumida eficiência de 100%. Valores editados precisam corresponder à bateria escolhida.`
+        : 'Capacidade do banco: consideramos o consumo diário, a autonomia, a profundidade de descarga (DoD) e a eficiência de descarga informada.',
+      ...(battery.capacityBasis === 'published-discharge' ? [
+        battery.chemistry === 'agm'
+          ? 'DoD inicial de 50%: segue a orientação geral da Rolls para equilibrar capacidade e vida útil em sistemas off-grid; não é um limite máximo específico deste modelo.'
+          : 'DoD inicial de 20%: é a condição de vida útil publicada pela Freedom, não o limite máximo de descarga.',
+      ] : []),
+      'Autonomia real: temperatura, envelhecimento, regime de descarga e perdas da instalação podem reduzir o tempo disponível. A contagem por capacidade não aprova a montagem em série/paralelo.',
+      ...(inverter ? [
+        'Inversor: usamos apenas as cargas AC marcadas como simultâneas e os picos informados. A escolha final também depende dos limites de descarga da bateria e da duração das partidas.',
+      ] : []),
+      'Fora deste guia: painéis, controlador, carregadores, cabos, proteções e energia/tempo de recarga não foram dimensionados aqui. Esses itens precisam do projeto da instalação.',
     ],
   };
 }
