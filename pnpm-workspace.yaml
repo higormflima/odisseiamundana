@@ -1,3 +1,5 @@
 nodeLinker: hoisted
 virtualStoreType: project
 storeDir: .pnpm-store
+allowBuilds:
+  core-js: false

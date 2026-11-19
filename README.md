@@ -30,6 +30,11 @@ pnpm install
 pnpm dev
 ```
 
+A política de scripts de dependências fica em `pnpm-workspace.yaml`. O script de
+pós-instalação de `core-js` está explicitamente bloqueado: ele apenas exibe uma
+mensagem de apoio e não é necessário para gerar o PDF. Ao adicionar dependências,
+revise os scripts pendentes e registre a decisão nesse arquivo antes do push.
+
 Abra o endereço local exibido pelo Astro. Para validar e gerar o website estático:
 
 ```powershell
