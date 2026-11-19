@@ -1,4 +1,4 @@
-# Relatório e arquivos de projeto — Planejador Elétrico
+# Relatório PDF — Planejador Elétrico
 
 Para a arquitetura, as fórmulas e as limitações gerais da ferramenta, consulte [odisseia-solar.md](./odisseia-solar.md).
 
@@ -22,22 +22,14 @@ A detecção usa `navigator.canShare({ files })` com o arquivo real. Sem suporte
 
 Não há clique automático de download após operações assíncronas, `window.open()`, `window.print()`, captura de tela ou serviço externo de geração. O compartilhamento só ocorre por ação explícita e para o destino escolhido pelo usuário. Tela e PDF compartilham a mesma apresentação de dados em `report-presentation.ts`, evitando divergência de valores, exclusões e avisos.
 
-A URL local do PDF permanece válida enquanto o relatório estiver aberto, sem expiração de um segundo. Ao gerar novamente, importar outra configuração ou sair da etapa do relatório, o link anterior é removido e sua URL é revogada. Uma geração ainda em andamento não pode disponibilizar um arquivo obsoleto após essas ações.
+A URL local do PDF permanece válida enquanto o relatório estiver aberto, sem expiração de um segundo. Ao gerar novamente ou sair da etapa do relatório, o link anterior é removido e sua URL é revogada. Uma geração ainda em andamento não pode disponibilizar um arquivo obsoleto após essas ações.
 
 O PDF contém texto selecionável, fontes oficiais incorporadas, cabeçalhos, rodapés numerados e paginação automática, incluindo continuação da tabela de equipamentos. Manrope regular/negrito e DM Serif Display são servidas localmente em `public/media/branding/fonts/`, com suas licenças OFL. A primeira exportação precisa carregar os arquivos da ferramenta; não depende do Google Fonts em tempo de geração. O navegador ainda controla permissões e o destino do download.
 
 Durante a geração, o botão fica ocupado e indisponível para evitar cliques duplicados. Falhas são informadas em português, sem perder o formulário ou recorrer silenciosamente à impressão. Os avisos de validação do formulário também são localizados em português, independentemente do idioma do navegador.
 
-## Arquivo JSON
+## Contrato JSON legado
 
-O arquivo `.odisseia-solar.json` transporta uma configuração entre dispositivos. A exportação usa a versão `2`, com aceitação explícita da versão `1`. O identificador continua `odisseia-solar-project`; o arquivo não contém código executável e não é enviado a servidor nem guardado automaticamente.
+A interface pública oferece apenas o PDF, sem botões, seletor de arquivo ou fluxo de importação/exportação JSON. Os dados do formulário continuam locais e não persistem ao recarregar a página.
 
-A versão 2 inclui `battery.agm` (capacidade e DoD) e permite `catalogLoads[].usage` (potência e horas), apenas para equipamentos com base potência-tempo. Ao importar arquivos sem ajustes de uso, os valores originais do catálogo são usados; AGM recebe sua referência inicial quando ausente na versão 1, sem alterar a química selecionada. A versão 1 continua recusando campos novos e a opção AGM.
-
-A potência contínua é transportada como `inverter.ratedPowerW`, opcional na versão 2 para aceitar arquivos anteriores à inclusão desse campo. Quando ausente, o novo controle recebe 2.000 W como ponto de partida editável; os demais parâmetros importados são preservados. A versão 1 não aceita essa propriedade.
-
-Campos Freedom legados de eficiências, carga/corte e corrente são preservados para reexportação, mas o guia passa a usar capacidade de descarga e DoD; a mensagem de importação explica essa mudança.
-
-Na importação, o aplicativo limita o tamanho a 1 MB, analisa o JSON como dado, valida versão, propriedades, tipos, faixas e referências conhecidas e só então aplica a configuração. Arquivos inválidos ou com propriedades não reconhecidas são recusados com uma mensagem explícita. Os campos textuais importados são renderizados como texto, nunca como HTML.
-
-Alterações futuras incompatíveis devem incrementar a versão do formato ou definir uma migração explícita antes de aceitar os novos arquivos.
+O contrato versionado `.odisseia-solar.json` permanece isolado em `src/lib/solar/project-file.ts`, com os testes de validação das versões 1 e 2 preservados. Esse módulo legado não é carregado pelo assistente público.

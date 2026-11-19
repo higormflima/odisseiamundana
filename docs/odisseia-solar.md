@@ -4,7 +4,7 @@
 
 O Planejador Elétrico é uma ferramenta local de pré-dimensionamento de sistemas off-grid, com o título de página **Calculadora de Energia para Motorhome**, disponível em `/pt/odisseia-solar/`. Ele oferece um guia básico de consumo, banco de baterias e inversor, com premissas e limites reunidos, sem seções técnicas incompletas. Não substitui um projeto executivo nem a validação de um profissional qualificado.
 
-O nome anterior era Odisseia Solar. O endereço e os identificadores internos permanecem; o JSON é exportado na versão 2, com importação da versão 1.
+O nome anterior era Odisseia Solar. O endereço e os identificadores internos permanecem. A interface pública oferece apenas o relatório PDF, sem importação ou exportação JSON.
 
 ## Arquitetura
 
@@ -12,17 +12,17 @@ O nome anterior era Odisseia Solar. O endereço e os identificadores internos pe
 |---|---|
 | Rota Astro em português | `src/pages/pt/odisseia-solar.astro` |
 | Integração ao layout e à navegação do site | `src/layouts/SiteLayout.astro` |
-| Etapas do formulário, estado local, relatório, impressão e arquivo de projeto | `src/components/SolarConfigurationWizard.astro` |
+| Etapas do formulário, estado local, relatório e ações do PDF | `src/components/SolarConfigurationWizard.astro` |
 | Catálogos locais de insolação, cargas e componentes | `src/lib/solar/catalogs.ts` |
 | Tipos de domínio e funções puras de cálculo | `src/lib/solar/calculations.ts` |
 | Composição do relatório a partir das funções de cálculo | `src/lib/solar/report.ts` |
 | Texto e valores compartilhados entre tela e PDF | `src/lib/solar/report-presentation.ts` |
 | Geração local do PDF A4 com fontes incorporadas | `src/lib/solar/report-pdf.ts` |
 | Mensagens de validação do formulário em português | `src/lib/solar/validation.ts` |
-| Formato e validação estrita do JSON transportável | `src/lib/solar/project-file.ts` |
+| Contrato JSON legado e validação, sem integração à interface pública | `src/lib/solar/project-file.ts` |
 | Testes do motor, catálogos, relatório e JSON | `tests/solar-*.test.mjs` |
 
-O fluxo é: formulário no navegador → dados locais do catálogo e valores editáveis → funções de cálculo → apresentação compartilhada → relatório na tela e PDF. O PDF é gerado localmente com jsPDF e baixado diretamente, sem impressão. A exportação também cria um arquivo JSON local, e a importação valida o conteúdo antes de aplicar os valores. Não há backend, banco de dados, API de cálculo ou salvamento automático; os dados do formulário não persistem após recarregar a página.
+O fluxo é: formulário no navegador → dados locais do catálogo e valores editáveis → funções de cálculo → apresentação compartilhada → relatório na tela e PDF. O PDF é gerado localmente com jsPDF e salvo por compartilhamento nativo ou download, sem impressão. Não há backend, banco de dados, API de cálculo ou salvamento automático; os dados do formulário não persistem após recarregar a página.
 
 ## Fórmulas e interpretação
 
@@ -113,7 +113,7 @@ Ao atualizar um registro:
 3. Mantenha campos desconhecidos ausentes; não preencha lacunas com estimativas, valores genéricos ou conversões não justificadas.
 4. Para países, mantenha o código de três letras, o período, a unidade, a metodologia de agregação e a atribuição da fonte junto ao conjunto de dados.
 5. Atualize `docs/solar-catalogs.md` e os testes de catálogo ou cálculo afetados. Valide com `pnpm.cmd test` e `pnpm.cmd exec astro build`.
-6. Se a alteração mudar o formato exportado do projeto, atualize a validação em `project-file.ts` e trate a compatibilidade pela versão do JSON; não aceite propriedades novas silenciosamente.
+6. O contrato JSON legado em `project-file.ts` não faz parte da interface pública. Preserve a compatibilidade e a validação estrita ao alterá-lo.
 
 ## Limitações conhecidas
 
@@ -122,6 +122,6 @@ Ao atualizar um registro:
 - O guia não dimensiona PV/MPPT, recarga, carregadores, cabos, fusíveis ou disjuntores. Esses itens exigem dados de instalação e validação técnica específica.
 - Há exemplos genéricos de potência e uso diário em todas as categorias além da referência Dometic; não representam especificações universais. Cargas DC de 12 V não são disponibilizadas silenciosamente em banco de 24 V.
 - A referência Victron SUN é para saída nominal de 230 V; o cenário inicial de 220 V é uma hipótese de planejamento editável, não a indicação de um produto. A comparação de potência contínua não confirma picos de partida.
-- O arquivo JSON é um formato local versionado, limitado e validado; não é sincronizado entre dispositivos. O PDF é baixado diretamente, mas o navegador controla permissões e destino do download.
+- Não há importação/exportação JSON nem sincronização entre dispositivos. O PDF é gerado localmente, mas o navegador e o sistema operacional controlam permissões e destino do salvamento.
 
-Consulte [solar-report.md](./solar-report.md) para os detalhes de impressão e do contrato JSON e [solar-catalogs.md](./solar-catalogs.md) para as fontes e condições dos dados atuais.
+Consulte [solar-report.md](./solar-report.md) para os detalhes do PDF e do contrato legado e [solar-catalogs.md](./solar-catalogs.md) para as fontes e condições dos dados atuais.
