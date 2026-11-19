@@ -338,12 +338,14 @@ const brazilHsp = solarResourceCountries.find((country) => country.countryIso3 =
         <p class="solar-step-intro">Use as estimativas de consumo, bateria e inversor como ponto de partida para planejar a instalação.</p>
         <div class="solar-report-actions" role="group" aria-label="Exportar ou importar o projeto">
           <button class="button" type="button" data-download-pdf>Gerar PDF</button>
-          <a class="button button-secondary" target="_blank" rel="noopener" aria-describedby="solar-pdf-help" data-open-pdf hidden>Abrir/Salvar PDF</a>
+          <button class="button" type="button" aria-describedby="solar-pdf-help" data-share-pdf hidden>Salvar/Compartilhar PDF</button>
+          <a class="button button-secondary" aria-describedby="solar-pdf-help" data-save-pdf hidden>Baixar PDF</a>
+          <a class="button button-secondary" target="_blank" rel="noopener" data-open-pdf hidden>Visualizar PDF</a>
           <button class="button button-secondary" type="button" data-export-project>Salvar projeto JSON</button>
           <button class="button button-secondary solar-import-button" type="button" data-import-trigger>Importar projeto JSON</button>
           <input type="file" accept=".json,application/json" data-import-project hidden />
         </div>
-        <p class="solar-field-note" id="solar-pdf-help">Gere o PDF e depois toque em Abrir/Salvar PDF. O arquivo abre em uma nova aba; no iPhone, use Compartilhar e Salvar em Arquivos. Nenhum dado é enviado.</p>
+        <p class="solar-field-note" id="solar-pdf-help">Primeiro gere o PDF. Depois, use Salvar/Compartilhar PDF e escolha Salvar em Arquivos no iPhone. Se o compartilhamento não estiver disponível, use Baixar PDF. Visualizar PDF apenas abre o arquivo. Nada é enviado automaticamente.</p>
         <p class="solar-file-status" data-project-file-status role="status" aria-live="polite"></p>
 
         <article class="solar-report" data-report-content>
@@ -473,6 +475,7 @@ const brazilHsp = solarResourceCountries.find((country) => country.countryIso3 =
     let customLoadNumber = 0;
     let importedLeadAcidFields: SolarProjectBatteryFields | undefined;
     let preparedPdfUrl: string | undefined;
+    let preparedPdfFile: File | undefined;
     let pdfGeneration = 0;
 
     const format = (value: number, maximumFractionDigits = 1) =>
@@ -968,11 +971,19 @@ const brazilHsp = solarResourceCountries.find((country) => country.countryIso3 =
 
     function clearPreparedPdf() {
       pdfGeneration += 1;
-      const link = get<HTMLAnchorElement>('[data-open-pdf]');
-      link.hidden = true;
-      link.removeAttribute('href');
+      for (const selector of ['[data-open-pdf]', '[data-save-pdf]']) {
+        const link = get<HTMLAnchorElement>(selector);
+        link.hidden = true;
+        link.removeAttribute('href');
+        link.removeAttribute('download');
+      }
+      const shareButton = get<HTMLButtonElement>('[data-share-pdf]');
+      shareButton.hidden = true;
+      shareButton.disabled = false;
+      shareButton.removeAttribute('aria-busy');
       if (preparedPdfUrl) URL.revokeObjectURL(preparedPdfUrl);
       preparedPdfUrl = undefined;
+      preparedPdfFile = undefined;
       const button = get<HTMLButtonElement>('[data-download-pdf]');
       button.disabled = false;
       button.removeAttribute('aria-busy');
@@ -1629,11 +1640,22 @@ const brazilHsp = solarResourceCountries.find((country) => country.countryIso3 =
         ]);
         if (generation !== pdfGeneration) return;
         const pdf = createSolarReportPdf(reportDocument, { regular, bold, display });
-        preparedPdfUrl = URL.createObjectURL(pdf.output('blob'));
+        preparedPdfFile = new File([pdf.output('blob')], `${filenameBase(reportDocument.title)}.pdf`, { type: 'application/pdf' });
+        preparedPdfUrl = URL.createObjectURL(preparedPdfFile);
         const link = get<HTMLAnchorElement>('[data-open-pdf]');
         link.href = preparedPdfUrl;
         link.hidden = false;
-        status.textContent = 'PDF pronto. Toque em Abrir/Salvar PDF para abrir o arquivo em uma nova aba e salvá-lo. No iPhone, use Compartilhar e Salvar em Arquivos.';
+        const downloadLink = get<HTMLAnchorElement>('[data-save-pdf]');
+        downloadLink.href = preparedPdfUrl;
+        downloadLink.download = preparedPdfFile.name;
+        const canShareFile = typeof navigator.share === 'function'
+          && typeof navigator.canShare === 'function'
+          && navigator.canShare({ files: [preparedPdfFile] });
+        get<HTMLButtonElement>('[data-share-pdf]').hidden = !canShareFile;
+        downloadLink.hidden = canShareFile;
+        status.textContent = canShareFile
+          ? 'PDF pronto. Toque em Salvar/Compartilhar PDF para abrir o menu do dispositivo. No iPhone, escolha Salvar em Arquivos.'
+          : 'PDF pronto. Toque em Baixar PDF para salvar o arquivo. O compartilhamento de arquivos não está disponível neste navegador.';
       } catch (error) {
         console.error('Falha ao gerar o relatório PDF.', error);
         if (generation === pdfGeneration) {
@@ -1643,7 +1665,39 @@ const brazilHsp = solarResourceCountries.find((country) => country.countryIso3 =
         if (generation === pdfGeneration) {
           button.disabled = false;
           button.removeAttribute('aria-busy');
-          button.textContent = 'Gerar PDF';
+          button.textContent = preparedPdfFile ? 'Gerar novamente' : 'Gerar PDF';
+        }
+      }
+    });
+    get<HTMLButtonElement>('[data-share-pdf]').addEventListener('click', async (event) => {
+      const status = get<HTMLElement>('[data-project-file-status]');
+      if (!preparedPdfFile) {
+        status.textContent = 'Gere o PDF antes de salvar ou compartilhar.';
+        return;
+      }
+      const button = event.currentTarget as HTMLButtonElement;
+      const generation = pdfGeneration;
+      button.disabled = true;
+      button.setAttribute('aria-busy', 'true');
+      status.textContent = 'Escolha o destino no menu do dispositivo. No iPhone, use Salvar em Arquivos.';
+      try {
+        await navigator.share({ files: [preparedPdfFile] });
+        if (generation === pdfGeneration) {
+          status.textContent = 'Confira no destino escolhido se o PDF foi salvo ou compartilhado.';
+        }
+      } catch (error) {
+        const canceled = error instanceof DOMException && error.name === 'AbortError';
+        if (!canceled) console.error('Falha ao compartilhar o relatório PDF.', error);
+        if (generation === pdfGeneration) {
+          get<HTMLAnchorElement>('[data-save-pdf]').hidden = false;
+          status.textContent = canceled
+            ? 'Compartilhamento não concluído. Você pode tentar novamente ou usar Baixar PDF.'
+            : 'Não foi possível abrir o compartilhamento do dispositivo. Tente novamente ou use Baixar PDF.';
+        }
+      } finally {
+        if (generation === pdfGeneration) {
+          button.disabled = false;
+          button.removeAttribute('aria-busy');
         }
       }
     });
