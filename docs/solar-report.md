@@ -16,7 +16,9 @@ Sem potência de partida publicada, o pico calculado não confirma a partida dos
 
 O relatório usa blocos de resumo, títulos numerados, valores em destaque, tabela de cargas adaptada a cartões no celular e avisos apenas quando aplicáveis. A composição do consumo separa cargas DC, cargas AC, perdas no inversor e funcionamento sem carga.
 
-O botão **Baixar relatório PDF** gera um arquivo A4 diretamente no dispositivo com jsPDF, carregado apenas ao exportar. Não usa `window.print()`, nova janela, captura de tela ou serviço externo. Tela e PDF compartilham a mesma apresentação de dados em `report-presentation.ts`, evitando divergência de valores, exclusões e avisos.
+O fluxo é explícito em todos os dispositivos: **Gerar PDF → Abrir/Salvar PDF**. O primeiro botão gera um arquivo A4 diretamente no dispositivo com jsPDF, carregado apenas ao exportar. Depois, um link HTML nativo abre o arquivo em nova aba por ação direta do usuário. No iPhone, o usuário pode usar **Compartilhar → Salvar em Arquivos**. Não há clique automático de download após operações assíncronas, `window.open()`, `window.print()`, captura de tela ou serviço externo. Tela e PDF compartilham a mesma apresentação de dados em `report-presentation.ts`, evitando divergência de valores, exclusões e avisos.
+
+A URL local do PDF permanece válida enquanto o relatório estiver aberto, sem expiração de um segundo. Ao gerar novamente, importar outra configuração ou sair da etapa do relatório, o link anterior é removido e sua URL é revogada. Uma geração ainda em andamento não pode disponibilizar um arquivo obsoleto após essas ações.
 
 O PDF contém texto selecionável, fontes oficiais incorporadas, cabeçalhos, rodapés numerados e paginação automática, incluindo continuação da tabela de equipamentos. Manrope regular/negrito e DM Serif Display são servidas localmente em `public/media/branding/fonts/`, com suas licenças OFL. A primeira exportação precisa carregar os arquivos da ferramenta; não depende do Google Fonts em tempo de geração. O navegador ainda controla permissões e o destino do download.
 

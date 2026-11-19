@@ -337,12 +337,13 @@ const brazilHsp = solarResourceCountries.find((country) => country.countryIso3 =
         <legend tabindex="-1">Guia básico do sistema elétrico</legend>
         <p class="solar-step-intro">Use as estimativas de consumo, bateria e inversor como ponto de partida para planejar a instalação.</p>
         <div class="solar-report-actions" role="group" aria-label="Exportar ou importar o projeto">
-          <button class="button" type="button" data-download-pdf>Baixar relatório PDF</button>
+          <button class="button" type="button" data-download-pdf>Gerar PDF</button>
+          <a class="button button-secondary" target="_blank" rel="noopener" aria-describedby="solar-pdf-help" data-open-pdf hidden>Abrir/Salvar PDF</a>
           <button class="button button-secondary" type="button" data-export-project>Salvar projeto JSON</button>
           <button class="button button-secondary solar-import-button" type="button" data-import-trigger>Importar projeto JSON</button>
           <input type="file" accept=".json,application/json" data-import-project hidden />
         </div>
-        <p class="solar-field-note">O PDF é gerado neste dispositivo, sem janela de impressão e sem envio dos seus dados.</p>
+        <p class="solar-field-note" id="solar-pdf-help">Gere o PDF e depois toque em Abrir/Salvar PDF. O arquivo abre em uma nova aba; no iPhone, use Compartilhar e Salvar em Arquivos. Nenhum dado é enviado.</p>
         <p class="solar-file-status" data-project-file-status role="status" aria-live="polite"></p>
 
         <article class="solar-report" data-report-content>
@@ -471,6 +472,8 @@ const brazilHsp = solarResourceCountries.find((country) => country.countryIso3 =
     let activeStep = 0;
     let customLoadNumber = 0;
     let importedLeadAcidFields: SolarProjectBatteryFields | undefined;
+    let preparedPdfUrl: string | undefined;
+    let pdfGeneration = 0;
 
     const format = (value: number, maximumFractionDigits = 1) =>
       new Intl.NumberFormat('pt-BR', { maximumFractionDigits }).format(value);
@@ -489,6 +492,7 @@ const brazilHsp = solarResourceCountries.find((country) => country.countryIso3 =
     };
 
     function setPanel(panelIndex: number) {
+      if (panelIndex !== panels.length - 1) clearPreparedPdf();
       activeStep = panelIndex;
       root.dataset.reportVisible = String(activeStep === panels.length - 1);
       panels.forEach((panel, index) => {
@@ -962,7 +966,21 @@ const brazilHsp = solarResourceCountries.find((country) => country.countryIso3 =
       });
     }
 
+    function clearPreparedPdf() {
+      pdfGeneration += 1;
+      const link = get<HTMLAnchorElement>('[data-open-pdf]');
+      link.hidden = true;
+      link.removeAttribute('href');
+      if (preparedPdfUrl) URL.revokeObjectURL(preparedPdfUrl);
+      preparedPdfUrl = undefined;
+      const button = get<HTMLButtonElement>('[data-download-pdf]');
+      button.disabled = false;
+      button.removeAttribute('aria-busy');
+      button.textContent = 'Gerar PDF';
+    }
+
     function renderReport(): SolarReportDocument | undefined {
+      clearPreparedPdf();
       const status = get<HTMLElement>('[data-project-file-status]');
       const reportContent = get<HTMLElement>('[data-report-content]');
       const downloadButton = get<HTMLButtonElement>('[data-download-pdf]');
@@ -1594,6 +1612,7 @@ const brazilHsp = solarResourceCountries.find((country) => country.countryIso3 =
       if (!reportDocument) return;
       const button = event.currentTarget as HTMLButtonElement;
       const status = get<HTMLElement>('[data-project-file-status]');
+      const generation = pdfGeneration;
       button.disabled = true;
       button.setAttribute('aria-busy', 'true');
       button.textContent = 'Gerando PDF…';
@@ -1608,16 +1627,24 @@ const brazilHsp = solarResourceCountries.find((country) => country.countryIso3 =
             return btoa(bytes.reduce((text, byte) => text + String.fromCharCode(byte), ''));
           })),
         ]);
+        if (generation !== pdfGeneration) return;
         const pdf = createSolarReportPdf(reportDocument, { regular, bold, display });
-        downloadFile(pdf.output('blob'), `${filenameBase(reportDocument.title)}.pdf`);
-        status.textContent = 'PDF preparado para download. Confira os downloads do navegador. Nenhum dado foi enviado.';
+        preparedPdfUrl = URL.createObjectURL(pdf.output('blob'));
+        const link = get<HTMLAnchorElement>('[data-open-pdf]');
+        link.href = preparedPdfUrl;
+        link.hidden = false;
+        status.textContent = 'PDF pronto. Toque em Abrir/Salvar PDF para abrir o arquivo em uma nova aba e salvá-lo. No iPhone, use Compartilhar e Salvar em Arquivos.';
       } catch (error) {
         console.error('Falha ao gerar o relatório PDF.', error);
-        status.textContent = 'Não foi possível gerar o PDF. Confira sua conexão para carregar os arquivos da ferramenta e tente novamente. Seus dados continuam no formulário.';
+        if (generation === pdfGeneration) {
+          status.textContent = 'Não foi possível gerar o PDF. Confira sua conexão para carregar os arquivos da ferramenta e tente novamente. Seus dados continuam no formulário.';
+        }
       } finally {
-        button.disabled = false;
-        button.removeAttribute('aria-busy');
-        button.textContent = 'Baixar relatório PDF';
+        if (generation === pdfGeneration) {
+          button.disabled = false;
+          button.removeAttribute('aria-busy');
+          button.textContent = 'Gerar PDF';
+        }
       }
     });
     get<HTMLButtonElement>('[data-export-project]').addEventListener('click', () => {
