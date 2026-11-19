@@ -18,6 +18,7 @@ O nome anterior era Odisseia Solar. O endereço e os identificadores internos pe
 | Composição do relatório a partir das funções de cálculo | `src/lib/solar/report.ts` |
 | Texto e valores compartilhados entre tela e PDF | `src/lib/solar/report-presentation.ts` |
 | Geração local do PDF A4 com fontes incorporadas | `src/lib/solar/report-pdf.ts` |
+| Visualização local do PDF, sem abas externas | `src/lib/solar/pdf-preview.ts` |
 | Mensagens de validação do formulário em português | `src/lib/solar/validation.ts` |
 | Contrato JSON legado e validação, sem integração à interface pública | `src/lib/solar/project-file.ts` |
 | Testes do motor, catálogos, relatório e JSON | `tests/solar-*.test.mjs` |

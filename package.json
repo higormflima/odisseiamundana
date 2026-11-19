@@ -30,6 +30,7 @@
   },
   "dependencies": {
     "jspdf": "^4.2.1",
-    "leaflet": "^1.9.4"
+    "leaflet": "^1.9.4",
+    "pdfjs-dist": "~5.4.624"
   }
 }

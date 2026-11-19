@@ -340,9 +340,9 @@ const brazilHsp = solarResourceCountries.find((country) => country.countryIso3 =
           <button class="button" type="button" data-download-pdf>Gerar PDF</button>
           <button class="button" type="button" aria-describedby="solar-pdf-help" data-share-pdf hidden>Salvar/Compartilhar PDF</button>
           <a class="button button-secondary" aria-describedby="solar-pdf-help" data-save-pdf hidden>Baixar PDF</a>
-          <a class="button button-secondary" target="_blank" rel="noopener" data-open-pdf hidden>Visualizar PDF</a>
+          <button class="button button-secondary" type="button" aria-haspopup="dialog" data-open-pdf hidden>Visualizar PDF</button>
         </div>
-        <p class="solar-field-note" id="solar-pdf-help">Primeiro gere o PDF. Depois, use Salvar/Compartilhar PDF e escolha Salvar em Arquivos no iPhone. Se o compartilhamento não estiver disponível, use Baixar PDF. Visualizar PDF apenas abre o arquivo. Nada é enviado automaticamente.</p>
+        <p class="solar-field-note" id="solar-pdf-help">Primeiro gere o PDF. Depois, use Salvar/Compartilhar PDF e escolha Salvar em Arquivos no iPhone. Se o compartilhamento não estiver disponível, use Baixar PDF. Visualizar PDF exibe o arquivo aqui mesmo, sem abrir outra aba. Nada é enviado automaticamente.</p>
         <p class="solar-file-status" data-project-file-status role="status" aria-live="polite"></p>
 
         <article class="solar-report" data-report-content>
@@ -423,6 +423,21 @@ const brazilHsp = solarResourceCountries.find((country) => country.countryIso3 =
     <strong>Importante:</strong> os resultados são estimativas de pré-dimensionamento baseadas nos dados informados e nos parâmetros de referência. A instalação deve ser verificada por profissional qualificado e atender às normas aplicáveis no local de utilização.
   </aside>
 
+  <dialog class="solar-pdf-preview" aria-labelledby="solar-pdf-preview-title" data-pdf-preview>
+    <header class="solar-pdf-preview-header">
+      <h2 id="solar-pdf-preview-title">Visualizar PDF</h2>
+      <button class="button button-secondary" type="button" data-pdf-preview-close autofocus>Fechar</button>
+    </header>
+    <p class="solar-field-note">Este é o arquivo PDF gerado. Para leitura com tecnologia assistiva, o relatório também está disponível na página, fora desta janela.</p>
+    <nav class="solar-pdf-preview-controls" aria-label="Páginas e ampliação do PDF">
+      <button class="button button-secondary" type="button" data-pdf-preview-previous disabled>Anterior</button>
+      <button class="button button-secondary" type="button" data-pdf-preview-next disabled>Próxima</button>
+      <button class="button button-secondary" type="button" aria-pressed="false" data-pdf-preview-zoom disabled>Ampliar</button>
+    </nav>
+    <p class="solar-file-status" role="status" aria-live="polite" data-pdf-preview-status></p>
+    <div class="solar-pdf-preview-stage" tabindex="0" role="region" aria-label="Página do PDF; role para ler quando ampliada" data-pdf-preview-stage></div>
+  </dialog>
+
   <noscript><p class="solar-noscript">Ative o JavaScript do navegador para usar o assistente. Os cálculos são feitos localmente e os dados não são enviados a um servidor.</p></noscript>
 </section>
 
@@ -446,6 +461,7 @@ const brazilHsp = solarResourceCountries.find((country) => country.countryIso3 =
   import { presentSolarReport } from '../lib/solar/report-presentation.ts';
   import type { SolarReportDocument } from '../lib/solar/report-presentation.ts';
   import { localizeValidation } from '../lib/solar/validation.ts';
+  import { createSolarPdfPreview } from '../lib/solar/pdf-preview.ts';
 
   const solarApplicationVersion = '0.2.0';
   const wizardRoot = document.querySelector<HTMLElement>('[data-solar-wizard]');
@@ -456,6 +472,7 @@ const brazilHsp = solarResourceCountries.find((country) => country.countryIso3 =
       if (!element) throw new Error(`Elemento obrigatório não encontrado: ${selector}`);
       return element;
     };
+    const pdfPreview = createSolarPdfPreview(get<HTMLDialogElement>('[data-pdf-preview]'));
     const panels = Array.from(root.querySelectorAll<HTMLElement>('[data-step-panel]'));
     const progressItems = Array.from(root.querySelectorAll<HTMLElement>('[data-progress-item]'));
     const stepStatus = get<HTMLElement>('[data-step-status]');
@@ -959,12 +976,12 @@ const brazilHsp = solarResourceCountries.find((country) => country.countryIso3 =
 
     function clearPreparedPdf() {
       pdfGeneration += 1;
-      for (const selector of ['[data-open-pdf]', '[data-save-pdf]']) {
-        const link = get<HTMLAnchorElement>(selector);
-        link.hidden = true;
-        link.removeAttribute('href');
-        link.removeAttribute('download');
-      }
+      pdfPreview.reset();
+      get<HTMLButtonElement>('[data-open-pdf]').hidden = true;
+      const downloadLink = get<HTMLAnchorElement>('[data-save-pdf]');
+      downloadLink.hidden = true;
+      downloadLink.removeAttribute('href');
+      downloadLink.removeAttribute('download');
       const shareButton = get<HTMLButtonElement>('[data-share-pdf]');
       shareButton.hidden = true;
       shareButton.disabled = false;
@@ -1311,9 +1328,7 @@ const brazilHsp = solarResourceCountries.find((country) => country.countryIso3 =
         const pdf = createSolarReportPdf(reportDocument, { regular, bold, display });
         preparedPdfFile = new File([pdf.output('blob')], `${filenameBase(reportDocument.title)}.pdf`, { type: 'application/pdf' });
         preparedPdfUrl = URL.createObjectURL(preparedPdfFile);
-        const link = get<HTMLAnchorElement>('[data-open-pdf]');
-        link.href = preparedPdfUrl;
-        link.hidden = false;
+        get<HTMLButtonElement>('[data-open-pdf]').hidden = false;
         const downloadLink = get<HTMLAnchorElement>('[data-save-pdf]');
         downloadLink.href = preparedPdfUrl;
         downloadLink.download = preparedPdfFile.name;
@@ -1358,10 +1373,9 @@ const brazilHsp = solarResourceCountries.find((country) => country.countryIso3 =
         const canceled = error instanceof DOMException && error.name === 'AbortError';
         if (!canceled) console.error('Falha ao compartilhar o relatório PDF.', error);
         if (generation === pdfGeneration) {
-          get<HTMLAnchorElement>('[data-save-pdf]').hidden = false;
           status.textContent = canceled
-            ? 'Compartilhamento não concluído. Você pode tentar novamente ou usar Baixar PDF.'
-            : 'Não foi possível abrir o compartilhamento do dispositivo. Tente novamente ou use Baixar PDF.';
+            ? 'O menu do dispositivo foi fechado. Se você escolheu salvar, confira o PDF no destino. Para tentar novamente, use Salvar/Compartilhar PDF.'
+            : 'Não foi possível concluir o compartilhamento do dispositivo. Tente novamente usando Salvar/Compartilhar PDF.';
         }
       } finally {
         if (generation === pdfGeneration) {
@@ -1369,6 +1383,13 @@ const brazilHsp = solarResourceCountries.find((country) => country.countryIso3 =
           button.removeAttribute('aria-busy');
         }
       }
+    });
+    get<HTMLButtonElement>('[data-open-pdf]').addEventListener('click', () => {
+      if (!preparedPdfFile) {
+        get<HTMLElement>('[data-project-file-status]').textContent = 'Gere o PDF antes de visualizar.';
+        return;
+      }
+      void pdfPreview.open(preparedPdfFile);
     });
 
     updateCustomBasis();
@@ -1454,6 +1475,17 @@ const brazilHsp = solarResourceCountries.find((country) => country.countryIso3 =
   .solar-error { margin: 12px 0 0; color: #8d2f28; font-size: 12px; font-weight: 700; line-height: 1.6; }
   .solar-report-actions { display: flex; flex-wrap: wrap; gap: 10px; margin: 0 0 12px; }
   .solar-file-status { min-height: 1.5em; margin: 0 0 20px; color: var(--muted); font-size: 12px; line-height: 1.5; }
+  .solar-pdf-preview { width: min(100% - 24px, 980px); max-width: none; max-height: calc(100dvh - 24px); margin: auto; padding: 18px; border: 1px solid var(--line); background: var(--white); color: var(--ink); }
+  .solar-pdf-preview::backdrop { background: rgb(40 40 41 / 65%); }
+  .solar-pdf-preview-header { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+  .solar-pdf-preview-header h2 { margin: 0; font: 400 clamp(24px, 4vw, 32px)/1.2 var(--font-display); }
+  .solar-pdf-preview-controls { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 12px; }
+  .solar-pdf-preview .button { min-height: 44px; padding: 10px 14px; }
+  .solar-pdf-preview .button:disabled { opacity: .6; cursor: not-allowed; }
+  .solar-pdf-preview .solar-file-status { margin-bottom: 12px; }
+  .solar-pdf-preview-stage { max-height: 60dvh; min-height: 180px; overflow: auto; padding: 16px; background: var(--surface); }
+  .solar-pdf-preview-stage:focus-visible { outline: var(--focus-outline); outline-offset: 2px; }
+  .solar-pdf-preview-stage :global(canvas) { display: block; max-width: none; margin: auto; background: var(--white); }
   .solar-report { border: 1px solid var(--line); background: var(--white); color: var(--ink); }
   .solar-report-header { padding: clamp(20px, 4vw, 40px); border-top: 3px solid var(--copper); border-bottom: 1px solid var(--line); background: var(--surface); }
   .solar-report-header .eyebrow { margin-bottom: 8px; }
