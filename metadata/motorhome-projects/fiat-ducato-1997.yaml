@@ -1,0 +1,120 @@
+project_id: fiat-ducato-1997
+title: Camper FIAT Ducato
+summary: Nosso camper Fiat Ducato de 1997, uma nova casa sobre rodas para nossas aventuras na Europa.
+vehicle_model: Fiat Ducato 1997
+chassis: Motor 1.9 diesel e câmbio manual de cinco marchas.
+notes: >-
+  Ficha recebida em 2026: comprimento de 6,0 m, altura de 3,10 m,
+  massa máxima autorizada de 2.800 kg, cinco lugares registrados e
+  144.932 km na data da ficha. Inspeção técnica em 05/10/2026.
+  Manutenção informada: correia dentada aos 101.000 km; troca de óleo em
+  01/09/2025 aos 142.677 km; reparos nos freios, suspensão dianteira e
+  bomba de água. Dados fornecidos pelo vendedor, pendentes de conferência.
+  Outros dados da ficha ainda não confirmados: colchão de 140 × 200 cm e
+  escada de madeira; geladeira Electrolux com congelador, três sensores de gás
+  e fumaça e botijão de propano de 11 litros; cassete Thetford de 20 litros;
+  painel JaSolar Tiger Neo N-type de 440 Wp, 108 células e 1.762 × 1.134 × 30 mm;
+  controlador Volt Polska SOL MPPT para 12 ou 24 V; bateria Green Cell AGM32
+  VRLA de 12 V e 1.800 Wh; bateria de partida Jenox Gold de 12 V e 95 Ah;
+  inversor Victron Energy Phoenix de 12 V e 1200 VA com onda senoidal pura.
+photo_gallery:
+  status: published
+  pages:
+    overview:
+      - front
+      - left-side
+      - rear
+      - right-side
+photos:
+  - photo_id: front
+    src: media/motorhome-projects/fiat-ducato-1997/optimized/front.webp
+    thumbnail: media/motorhome-projects/fiat-ducato-1997/thumbnails/front.webp
+    alt: Vista frontal do camper Fiat Ducato.
+    detail: "IMG_0310.jpeg; SHA-256: e3acb5f4d8a16dcd52e27768096ce20bcdb43516ce0a8ae29fcc9fcc6b3186fe; placa borrada nos derivados."
+  - photo_id: left-side
+    src: media/motorhome-projects/fiat-ducato-1997/optimized/left-side.webp
+    thumbnail: media/motorhome-projects/fiat-ducato-1997/thumbnails/left-side.webp
+    alt: Vista lateral esquerda do camper Fiat Ducato.
+    detail: "IMG_0309.jpeg; SHA-256: bfc539d0d1ee2997f727f5c24330ae3361a4078165e0ff46ff2f910b92baa707."
+  - photo_id: rear
+    src: media/motorhome-projects/fiat-ducato-1997/optimized/rear.webp
+    thumbnail: media/motorhome-projects/fiat-ducato-1997/thumbnails/rear.webp
+    alt: Vista traseira do camper Fiat Ducato.
+    detail: "IMG_0314.jpeg; SHA-256: 9df9b0bd69d8afac41f3be7e4e6d023e55eb67b05897cb2ae0c9c2f0c94a0d85; placa borrada nos derivados."
+  - photo_id: right-side
+    src: media/motorhome-projects/fiat-ducato-1997/optimized/right-side.webp
+    thumbnail: media/motorhome-projects/fiat-ducato-1997/thumbnails/right-side.webp
+    alt: Vista lateral direita do camper Fiat Ducato.
+    detail: "IMG_0312.jpeg; SHA-256: f55294608853e3cedb88c303c140ea8a8f42c168d29f156c02d4f5cd37bb9443."
+videos:
+  - video_id: jUec9aofo50
+    youtube_url: https://www.youtube.com/watch?v=jUec9aofo50
+systems:
+  - system_id: living-and-sleeping
+    title: Sala e camas
+    equipment:
+      - Cama de casal sobre a cabine.
+      - Mesa e bancos conversíveis em uma segunda cama de casal.
+      - Banco conversível em cama de solteiro.
+    video_ids:
+      - jUec9aofo50
+  - system_id: kitchen-and-gas
+    title: Cozinha e gás
+    equipment:
+      - Fogão a gás de duas bocas e pia.
+      - Geladeira com alimentação a gás, pela bateria do veículo ou por energia externa.
+      - Aquecimento do ambiente e da água a gás.
+    video_ids:
+      - jUec9aofo50
+  - system_id: water-and-bathroom
+    title: Água e banheiro
+    equipment:
+      - Dois reservatórios de água limpa, de 100 e 80 litros.
+      - Aquecedor de água Truma de 10 litros.
+      - Banheiro com chuveiro e vaso sanitário cassete.
+      - Reservatório de água usada de 60 litros.
+    video_ids:
+      - jUec9aofo50
+  - system_id: electrical
+    title: Sistema elétrico
+    equipment:
+      - Painel solar de 440 W.
+      - Controlador solar de 30 A.
+      - Bateria AGM da casa de 150 Ah.
+      - Inversor Victron.
+      - Conexão para energia externa.
+    video_ids:
+      - jUec9aofo50
+provenance:
+  - source_type: transcript
+    verification_status: unverified
+    source_id: transcripts/motorhome-projects/fiat-ducato-1997/jUec9aofo50.raw.pt-orig.vtt
+    fields:
+      - title
+      - summary
+      - vehicle_model
+      - chassis
+      - systems
+  - source_type: external_source
+    verification_status: unverified
+    source_id: imports/motorhome-projects/fiat-ducato-1997/Fiat_Ducato_Camper_Specifications_2026-10-12.pdf
+    fields:
+      - notes
+      - systems
+  - source_type: manual
+    verification_status: confirmed
+    source_id: confirmação do proprietário para publicação
+    fields:
+      - systems.water-and-bathroom.reservatório de água usada de 60 litros
+      - systems.electrical.controlador solar de 30 A
+      - systems.electrical.bateria da casa de 150 Ah
+  - source_type: manual
+    verification_status: unverified
+    source_id: fotografias fornecidas pelo proprietário em 2026-11-23
+    fields:
+      - photos
+  - source_type: youtube_metadata
+    verification_status: confirmed
+    source_id: imports/youtube/channel/jUec9aofo50.info.json
+    fields:
+      - videos

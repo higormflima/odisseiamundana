@@ -48,23 +48,25 @@ const { title, description, playlistId, videos } = Astro.props;
   const controls = document.querySelector<HTMLElement>('.playlist-controls');
   const previous = document.querySelector<HTMLButtonElement>('[data-playlist-previous]');
   const next = document.querySelector<HTMLButtonElement>('[data-playlist-next]');
-  if (!playlist || !controls || !previous || !next) {
+  if (playlist && (!controls || !previous || !next)) {
     throw new Error('Elementos de navegação da playlist não encontrados.');
   }
-  const updateControls = () => {
-    previous.disabled = playlist.scrollLeft <= 1;
-    next.disabled = playlist.scrollLeft + playlist.clientWidth >= playlist.scrollWidth - 1;
-  };
-  const scrollPlaylist = (direction: number) => playlist.scrollBy({
-    left: direction * playlist.clientWidth * .85,
-    behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth',
-  });
-  previous.addEventListener('click', () => scrollPlaylist(-1));
-  next.addEventListener('click', () => scrollPlaylist(1));
-  playlist.addEventListener('scroll', updateControls, { passive: true });
-  new ResizeObserver(updateControls).observe(playlist);
-  updateControls();
-  controls.hidden = false;
+  if (playlist && controls && previous && next) {
+    const updateControls = () => {
+      previous.disabled = playlist.scrollLeft <= 1;
+      next.disabled = playlist.scrollLeft + playlist.clientWidth >= playlist.scrollWidth - 1;
+    };
+    const scrollPlaylist = (direction: number) => playlist.scrollBy({
+      left: direction * playlist.clientWidth * .85,
+      behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth',
+    });
+    previous.addEventListener('click', () => scrollPlaylist(-1));
+    next.addEventListener('click', () => scrollPlaylist(1));
+    playlist.addEventListener('scroll', updateControls, { passive: true });
+    new ResizeObserver(updateControls).observe(playlist);
+    updateControls();
+    controls.hidden = false;
+  }
 </script>
 
 <style>

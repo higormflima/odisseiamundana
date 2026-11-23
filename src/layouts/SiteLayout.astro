@@ -30,8 +30,23 @@ const ivecoChildren = [
   })),
   { label: 'Custos do Projeto', href: `${base}pt/motorhomes/iveco-daily-3510/#construction-costs` },
 ];
+const [fiatOverview] = await getCollection('motorhomeProjectPages', (page) =>
+  page.data.project_id.id === 'fiat-ducato-1997' && (page.data.status === 'published' || import.meta.env.DEV));
+const fiatSystemPages = await getCollection('motorhomeSystemPages', (page) =>
+  page.data.project_id.id === 'fiat-ducato-1997' && (page.data.status === 'published' || import.meta.env.DEV));
 const motorhomeChildren: NavigationLink[] = [
   { label: 'Iveco Daily 35.10', href: `${base}pt/motorhomes/iveco-daily-3510/`, children: ivecoChildren },
+  ...(fiatOverview ? [{
+    label: 'Camper FIAT Ducato',
+    href: `${base}pt/motorhomes/fiat-ducato-1997/`,
+    children: [
+      { label: 'Apresentação', href: `${base}pt/motorhomes/fiat-ducato-1997/` },
+      ...fiatSystemPages.sort((left, right) => left.data.sort_order - right.data.sort_order).map((page) => ({
+        label: page.data.title,
+        href: `${base}pt/motorhomes/${page.data.project_id.id}/${page.data.page_id}/`,
+      })),
+    ],
+  }] : []),
   { label: 'Planejador Elétrico', href: `${base}pt/odisseia-solar/` },
 ];
 const navigationLinks: NavigationLink[] = [

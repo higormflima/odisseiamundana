@@ -62,4 +62,15 @@ if (motorhome.map_image) {
   await cp(path.join(projectRoot, motorhome.map_image.src), destination);
 }
 
+const fiat = YAML.parse(await readFile(path.join(projectRoot, 'metadata', 'motorhome-projects', 'fiat-ducato-1997.yaml'), 'utf8'));
+const fiatDirectory = 'motorhome-projects/fiat-ducato-1997';
+if (fiat.photo_gallery?.status === 'published' || includeDraftPhotos) {
+  for (const folder of ['optimized', 'thumbnails']) {
+    await syncDirectory(`${fiatDirectory}/${folder}`);
+    photoDirectories += 1;
+  }
+} else {
+  await rm(path.join(projectRoot, 'public', 'media', fiatDirectory), { recursive: true, force: true });
+}
+
 console.log(`Mídia pública sincronizada: ${publicMediaDirectories.length + photoDirectories} diretórios; ${motorhome.map_image ? 1 : 0} imagem de card.`);

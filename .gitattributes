@@ -1,2 +1,4 @@
 transcripts/motorhome-projects/**/*.raw.*.vtt -text -whitespace
 imports/youtube/channel/*ZUPpQwlqrsg*.pt.srt -text -whitespace
+imports/youtube/channel/jUec9aofo50.raw.pt-orig.vtt -text -whitespace
+imports/motorhome-projects/fiat-ducato-1997/Fiat_Ducato_Camper_Specifications_2026-10-12.pdf binary

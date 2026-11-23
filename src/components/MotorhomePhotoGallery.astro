@@ -7,9 +7,11 @@ import { readImageSizeFromSrc } from '../lib/imageSize.mjs';
 interface Props {
   projectId: string;
   pageId?: string;
+  title?: string;
+  variant?: 'editorial' | 'compact';
 }
 
-const { projectId, pageId = 'overview' } = Astro.props;
+const { projectId, pageId = 'overview', title = 'Nossa construção em fotos', variant = 'editorial' } = Astro.props;
 const entry = await getEntry('motorhomeProjectMetadata', projectId);
 if (!entry) throw new Error(`Projeto de motorhome inexistente: ${projectId}`);
 const selected = selectMotorhomePhotos(entry.data, pageId, import.meta.env.DEV);
@@ -27,6 +29,6 @@ const photos = selected.map((photo) => {
 {photos.length > 0 && (
   <>
     {entry.data.photo_gallery.status === 'draft' && <p class="eyebrow">Prévia local · fotos não publicadas</p>}
-    <PhotoGallery title="Nossa construção em fotos" photos={photos} />
+    <PhotoGallery title={title} photos={photos} variant={variant} />
   </>
 )}

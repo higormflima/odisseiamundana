@@ -14,6 +14,17 @@ pública em 15/11/2026. A [revisão e as lacunas](../transcripts/motorhome-proje
 ficam separadas do conteúdo editorial. Após validar o rascunho, o proprietário
 aprovou a página principal para publicação em 15/11/2026.
 
+O [Camper FIAT Ducato](../metadata/motorhome-projects/fiat-ducato-1997.yaml)
+é um projeto separado, com página de apresentação autorizada para publicação e
+[revisão da legenda](../transcripts/motorhome-projects/fiat-ducato-1997/editorial-review.md)
+registrada separadamente. O submenu **Camper FIAT Ducato** aparece após
+**Iveco Daily 35.10**. O vídeo individual usa os metadados originais, sem inventar playlist.
+As seções de sistemas e custos só são exibidas quando houver dados respectivos.
+Os três valores divergentes foram confirmados pelo proprietário; os demais
+detalhes não confirmados da ficha não são exibidos na página.
+As quatro vistas selecionadas usam derivados WebP e uma grade compacta mantém
+as imagens inteiras em quadros uniformes. As fotos não integram a galeria geral.
+
 ## Página, navegação e mapa
 
 O conteúdo editorial fica em
@@ -21,7 +32,8 @@ O conteúdo editorial fica em
 As coleções `motorhomeProjectPages` e `motorhomeProjectMetadata` mantêm MDX e
 YAML separados. A rota `src/pages/pt/motorhomes/[projectId].astro` carrega os
 títulos dos vídeos diretamente dos arquivos originais `.info.json`, na ordem
-de `playlist_order`, sem duplicar registros ou incorporar players.
+de `playlist_order` quando há playlist, ou das referências quando não há. Para
+vídeos sem playlist, a apresentação usa o player do YouTube.
 
 Com `pnpm dev`, acesse `/pt/motorhomes/iveco-daily-3510/`. Rascunhos só são
 gerados em desenvolvimento, com aviso de prévia e `noindex, nofollow`; em

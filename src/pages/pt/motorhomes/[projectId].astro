@@ -5,6 +5,7 @@ import SiteLayout from '../../../layouts/SiteLayout.astro';
 import CostTable from '../../../components/CostTable.astro';
 import CostTableFrame from '../../../components/CostTableFrame.astro';
 import VideoCarousel from '../../../components/VideoCarousel.astro';
+import YouTubeVideo from '../../../components/YouTubeVideo.astro';
 import MotorhomePhotoGallery from '../../../components/MotorhomePhotoGallery.astro';
 import MotorhomeStepNavigation from '../../../components/MotorhomeStepNavigation.astro';
 import { loadMotorhomePlaylist } from '../../../lib/motorhomePlaylist.mjs';
@@ -85,16 +86,33 @@ const systemGroups = [
       {project.summary && <p class="project-intro">{project.summary}</p>}
     </header>
 
-    <VideoCarousel title="Acompanhe a construção" description="Reunimos os vídeos da construção e os conteúdos complementares na sequência da nossa playlist." videos={videos} playlistId={project.playlist_id} />
+    {project.playlist_id && videos.length > 0 ? (
+      <VideoCarousel title="Acompanhe a construção" description="Reunimos os vídeos da construção e os conteúdos complementares na sequência da nossa playlist." videos={videos} playlistId={project.playlist_id} />
+    ) : videos.length > 0 && (
+      <section class="project-section" aria-labelledby="project-videos-title">
+        <h2 id="project-videos-title">Conheça nosso camper</h2>
+        {videos.map((video) => (
+          <div id={`video-${video.videoId}`}>
+            <YouTubeVideo videoId={video.videoId} title={video.title} />
+          </div>
+        ))}
+      </section>
+    )}
 
     <div class="story-body project-story"><Content /></div>
 
-    <MotorhomePhotoGallery projectId={project.project_id} />
+    <MotorhomePhotoGallery
+      projectId={project.project_id}
+      title={project.playlist_id ? 'Nossa construção em fotos' : 'Nosso camper em fotos'}
+      variant={project.project_id === 'fiat-ducato-1997' ? 'compact' : 'editorial'}
+    />
 
-    <section class="project-section" aria-labelledby="systems-title">
+    {systems.length > 0 && <section class="project-section" aria-labelledby="systems-title">
       <p class="eyebrow">Por dentro do projeto</p>
       <h2 id="systems-title">Sistemas e etapas</h2>
-      <p class="section-intro">Do isolamento à cozinha, organizamos aqui os materiais, equipamentos e vídeos de cada parte da nossa casa sobre rodas.</p>
+      <p class="section-intro">{project.playlist_id
+        ? 'Do isolamento à cozinha, organizamos aqui os materiais, equipamentos e vídeos de cada parte da nossa casa sobre rodas.'
+        : 'Organizamos aqui os equipamentos e vídeos de cada parte da nossa casa sobre rodas.'}</p>
       <div class="project-systems">
         {systems.map((system) => (
           <details>
@@ -117,9 +135,9 @@ const systemGroups = [
           </details>
         ))}
       </div>
-    </section>
+    </section>}
 
-    <section id="construction-costs" class="project-section project-costs" aria-labelledby="costs-title">
+    {(ledgerRows.length > 0 || rows.length > 0 || project.downloads?.length > 0) && <section id="construction-costs" class="project-section project-costs" aria-labelledby="costs-title">
       <p class="eyebrow">Nossas contas</p>
       <h2 id="costs-title">Planilha de custos completa</h2>
       <p class="section-intro">Reunimos a compra e as despesas da van, a manutenção e as demais categorias. O total não representa apenas a conversão: também inclui gastos de manutenção posteriores ao fim da construção.</p>
@@ -173,7 +191,7 @@ const systemGroups = [
           ))}
         </div>
       )}
-    </section>
+    </section>}
     <MotorhomeStepNavigation projectId={project.project_id} />
   </article>
 </SiteLayout>

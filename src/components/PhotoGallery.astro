@@ -24,7 +24,7 @@ interface Props {
   title?: string;
   photos?: Photo[];
   images?: VideoImage[];
-  variant?: 'editorial' | 'featured';
+  variant?: 'editorial' | 'featured' | 'compact';
 }
 
 const { title = 'Galeria de fotos', photos = [], images = [], variant = 'editorial' } = Astro.props;
@@ -35,7 +35,7 @@ const photoCount = lightboxPhotos.length;
 
 {photoCount > 0 && (
   <section
-    class:list={['photo-gallery', 'photo-gallery--editorial', { 'photo-gallery--featured': variant === 'featured' }]}
+    class:list={['photo-gallery', 'photo-gallery--editorial', { 'photo-gallery--featured': variant === 'featured', 'photo-gallery--compact': variant === 'compact' }]}
     aria-label={title}
     data-photos={JSON.stringify(lightboxPhotos.map((photo) => ({ src: photo.src, alt: photo.alt, caption: photo.caption || '', journeyContext: photo.journeyContext || '' })))}
   >
@@ -196,7 +196,7 @@ const photoCount = lightboxPhotos.length;
 
     document.querySelectorAll('.photo-gallery--editorial').forEach((gallery) => {
       const mosaic = gallery.querySelector('.photo-mosaic');
-      if (mosaic && !gallery.classList.contains('photo-gallery--featured')) {
+      if (mosaic && !gallery.classList.contains('photo-gallery--featured') && !gallery.classList.contains('photo-gallery--compact')) {
         const layout = () => layoutMosaic(mosaic);
         layout();
         if (typeof ResizeObserver !== 'undefined') new ResizeObserver(layout).observe(mosaic);
@@ -292,6 +292,10 @@ const photoCount = lightboxPhotos.length;
   .photo-gallery--featured .photo-mosaic { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); max-height: none; overflow: visible; }
   .photo-gallery--featured .photo-mosaic::after { display: none; }
   .photo-gallery--featured .photo-mosaic-item { width: 100%; aspect-ratio: 3 / 2; }
+  .photo-gallery--compact .photo-mosaic { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); max-height: none; overflow: visible; }
+  .photo-gallery--compact .photo-mosaic::after { display: none; }
+  .photo-gallery--compact .photo-mosaic-item { width: 100%; aspect-ratio: 4 / 3; }
+  .photo-gallery--editorial.photo-gallery--compact .photo-mosaic-item img { object-fit: contain; }
   .photo-mosaic-more { position: absolute; inset: 0; display: grid; place-items: center; background: rgb(24 23 22 / 56%); color: white; font: 700 16px/1.4 var(--font-body); text-align: center; }
   .photo-mosaic-more[hidden] { display: none; }
   .photo-lightbox:not([open]) { display: none; }
@@ -318,6 +322,7 @@ const photoCount = lightboxPhotos.length;
 
   @media (max-width: 760px) {
     .photo-gallery--featured .photo-mosaic { grid-template-columns: 1fr; }
+    .photo-gallery--compact .photo-mosaic { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .photo-lightbox { padding: 12px; }
     .photo-lightbox-stage { grid-template-columns: 38px minmax(0, 1fr) 38px; gap: 4px; }
     .photo-lightbox-nav { width: 36px; height: 36px; }

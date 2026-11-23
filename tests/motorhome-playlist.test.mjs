@@ -46,3 +46,13 @@ test('rejeita identificador divergente ou título ausente em vez de mostrar um s
     await assert.rejects(loadMotorhomePlaylist(single, directory), /Identificador ou título inválido/);
   }
 });
+
+test('carrega vídeos sem playlist na ordem das referências e aceita arquivo pelo ID', async (t) => {
+  const directory = await sourceDirectory(t);
+  await writeFile(path.join(directory, 'AAAAAAAAAAA.info.json'), JSON.stringify({ id: 'AAAAAAAAAAA', title: 'Apresentação' }));
+  const result = await loadMotorhomePlaylist({ videos: [project.videos[0]] }, directory);
+  assert.deepEqual(result, [{
+    videoId: 'AAAAAAAAAAA', title: 'Apresentação',
+    url: 'https://www.youtube.com/watch?v=AAAAAAAAAAA', position: 1,
+  }]);
+});
