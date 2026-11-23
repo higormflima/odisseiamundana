@@ -8,6 +8,10 @@ import { buildMotorhomeMapEntries } from '../../lib/motorhomeMapData.mjs';
 
 const pages = await getCollection('journeyPages');
 const journeys = await getCollection('journeyMetadata');
+const publishedMotorhomeProjectIds = new Set(
+  (await getCollection('motorhomeProjectPages', (page) => page.data.status === 'published'))
+    .map((page) => page.data.project_id.id),
+);
 const publishedJourneyPages = pages.filter(
   (page) => page.data.status === 'published' && page.data.episode_id === 'journey-summary',
 );
@@ -133,6 +137,31 @@ const homeGalleryPhotos = homeGalleryPhotoPaths.flatMap((path) => {
       </div>
     </section>
   )}
+  <section class="home-vanlife" aria-labelledby="home-vanlife-title">
+    <figure class="home-vanlife-photo">
+      <img src={`${base}media/home/vanlife.webp`} alt="Posamos ao lado do Chivunk, nosso motorhome Iveco, diante de uma formação rochosa." width="768" height="1048" loading="lazy" decoding="async" />
+    </figure>
+    <div class="home-vanlife-content">
+      <p class="eyebrow">Vanlife</p>
+      <h2 id="home-vanlife-title">Nossas casas sobre rodas</h2>
+      <p>Da construção às próximas viagens, compartilhamos nossos projetos e experiências sobre rodas.</p>
+      <ul class="home-vanlife-links">
+        {publishedMotorhomeProjectIds.has('iveco-daily-3510') && (
+          <li>
+            <p><svg class="motorhome-icon" viewBox="0 0 32 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M2 18V5a2 2 0 0 1 2-2h15v6h5l5 5v4H2Z"></path><path d="M19 9v5h10M6 7h8v5H6z"></path><circle cx="8" cy="18" r="2.5"></circle><circle cx="24" cy="18" r="2.5"></circle></svg><strong>Iveco Daily 35.10</strong> — conheça a construção do Chivunk, seus sistemas e custos.</p>
+            <a class="text-link" href={`${base}pt/motorhomes/iveco-daily-3510/`}>Explorar a construção <span aria-hidden="true">→</span></a>
+          </li>
+        )}
+        {publishedMotorhomeProjectIds.has('fiat-ducato-1997') && (
+          <li>
+            <p><svg class="motorhome-icon" viewBox="0 0 32 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M2 18V5a2 2 0 0 1 2-2h15v6h5l5 5v4H2Z"></path><path d="M19 9v5h10M6 7h8v5H6z"></path><circle cx="8" cy="18" r="2.5"></circle><circle cx="24" cy="18" r="2.5"></circle></svg><strong>Camper FIAT Ducato</strong> — conheça nosso novo camper.</p>
+            <a class="text-link" href={`${base}pt/motorhomes/fiat-ducato-1997/`}>Conhecer o camper <span aria-hidden="true">→</span></a>
+          </li>
+        )}
+        <li><a class="text-link" href={`${base}pt/odisseia-solar/`}>Planejador Elétrico <span aria-hidden="true">→</span></a></li>
+      </ul>
+    </div>
+  </section>
 </SiteLayout>
 
 <script>
@@ -185,5 +214,18 @@ const homeGalleryPhotos = homeGalleryPhotoPaths.flatMap((path) => {
   .home-gallery h2 { margin: 0 0 18px; font: 400 clamp(32px, 4vw, 52px)/1.1 var(--font-display); letter-spacing: -.025em; }
   .home-gallery p:not(.eyebrow) { max-width: 430px; color: var(--muted); line-height: 1.8; }
   .home-gallery .text-link span { color: var(--copper); }
-  @media (max-width: 760px) { .home-gallery { grid-template-columns: 1fr; } }
+  .home-vanlife { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; gap: clamp(24px, 5vw, 72px); padding: 0 var(--content-gutter) var(--space-section); }
+  .home-vanlife-photo { margin: 0; }
+  .home-vanlife-photo img { display: block; width: 100%; height: auto; aspect-ratio: 8 / 9; object-fit: cover; object-position: top; }
+  .home-vanlife .eyebrow { margin-bottom: 12px; }
+  .home-vanlife h2 { margin: 0 0 18px; font: 400 clamp(32px, 4vw, 52px)/1.1 var(--font-display); letter-spacing: -.025em; }
+  .home-vanlife-content > p:not(.eyebrow), .home-vanlife-links p { max-width: 460px; color: var(--muted); line-height: 1.8; }
+  .home-vanlife-links { display: grid; gap: var(--space-4); margin: var(--space-5) 0 0; padding: 0; list-style: none; }
+  .home-vanlife-links p { margin: 0 0 var(--space-2); }
+  .motorhome-icon { display: inline-block; width: 26px; height: 20px; margin-right: 8px; color: var(--accent-dark); vertical-align: -4px; }
+  .home-vanlife-links strong { color: var(--ink); }
+  .home-vanlife .text-link span { color: var(--copper); }
+  @media (max-width: 760px) {
+    .home-gallery, .home-vanlife { grid-template-columns: 1fr; }
+  }
 </style>
