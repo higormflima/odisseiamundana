@@ -8,34 +8,99 @@ Para a arquitetura, as fórmulas e o processo de atualização dos registros, co
 
 Fonte: [Solar Analytica — Solar resource by nation](https://solaranalytica.com/solar-resource-by-nation), baseada na reanálise ERA5 do Copernicus Climate Change Service. A série consultada cobre 1940–2025; os valores cadastrados são a média das médias anuais no período de referência 1991–2020. A agregação é ponderada pela área de cada país, usando limites Natural Earth 5.1.1.
 
-O catálogo inicial contém oito países cujos registros foram conferidos: Brasil (5,015), China (4,647), Finlândia (2,318), Quênia (5,850), México (5,723), Omã (6,292), Filipinas (5,031) e Polônia (2,989). A unidade na fonte é kWh/m²/dia; os valores são usados numericamente como uma estimativa de HSP equivalente.
+O catálogo contém **238 países e territórios**: todas as feições da fonte com código ISO 3166 de três letras, exceto a Antártida. Ficam de fora apenas áreas sem código de país próprio na fonte (bancos e recifes, bases militares, zonas-tampão, campos de gelo, Baikonur, Somalilândia e Chipre do Norte). França, Noruega e Kosovo, que a fonte publica sem código ISO, usam FRA, NOR e XKX. O seletor agrupa os países por continente, com a América do Sul primeiro. A unidade na fonte é kWh/m²/dia; os valores são usados numericamente como uma estimativa de HSP equivalente.
 
-São médias nacionais modeladas, não medições de uma localização nem mínimos sazonais. Em países extensos, a média pode diferir bastante do local do veículo. O valor pode ser editado e, para países sem registro neste catálogo inicial, deve ser informado manualmente.
+A lista é gerada por `node --use-system-ca scripts/generate-solar-resource-countries.mjs`, que grava `src/lib/solar/solar-resource-countries.ts`; não edite esse arquivo manualmente. O script:
+
+1. lê `https://solaranalytica.com/solar-resource-by-nation/data.json` (contrato `solar-resource-by-nation-v1`, 258 feições, licença CC BY 4.0);
+2. calcula, para cada feição, a média das 30 médias anuais publicadas de 1991 a 2020, arredondada a três casas, o mesmo valor exibido na página da fonte (por exemplo, Brasil 5,015 e Finlândia 2,318);
+3. converte o código ISO alfa-3 em alfa-2 com a tabela pública [mledoze/countries](https://github.com/mledoze/countries) e obtém o nome em português com `Intl.DisplayNames('pt-BR')`, com poucos ajustes de nome registrados no próprio script.
+
+`--use-system-ca` permite usar os certificados do sistema em redes com inspeção TLS. Territórios pequenos marcados pela fonte como menores que uma célula da grade ERA5 (por exemplo, Malta, Singapura e microestados) foram mantidos, mas a média representa a célula que os contém.
+
+Não há HSP por estado brasileiro: não foi encontrada fonte que publique esse valor já agregado, e os dados em grade do Atlas Brasileiro de Energia Solar (INPE/LABREN, 2017) têm licença CC BY-NC-ND, que não permite publicar médias derivadas sem autorização. A etapa solar indica o [CRESESB SunData](https://cresesb.cepel.br/index.php?section=sundata), em que o usuário consulta a irradiação do próprio local e digita o valor; a ferramenta não copia dados dessa fonte.
+
+São médias nacionais modeladas, não medições de uma localização nem mínimos sazonais. Em países extensos, a média pode diferir bastante do local do veículo. O valor pode ser editado e, quando necessário, informado manualmente.
 
 A fonte informa a seguinte atribuição:
 
 > Contains modified Copernicus Climate Change Service information. Neither the European Commission nor ECMWF is responsible for any use that may be made of the Copernicus information or data it contains. Changes made: monthly grids aggregated to Natural Earth 5.1.1 admin-0 feature area-weighted means.
 
-Dados consultados em 18/11/2026. A página identifica a série como ERA5, fonte Copernicus Climate Change Service, e os limites como Natural Earth 5.1.1, de domínio público.
+Dados consultados em 27/11/2026, com licença CC BY 4.0. A página identifica a série como ERA5, fonte Copernicus Climate Change Service, e os limites como Natural Earth 5.1.1, de domínio público.
 
 ## Equipamentos consumidores
 
-O primeiro registro é uma referência específica de produto, não um valor universal para geladeiras. A página da Dometic para a CFX5 45 informa consumo de 0,76 Ah/h em 12 VDC, com ambiente a 32 °C e interior a 4 °C. O valor de 218,88 Wh/dia é derivado dessa medição: 0,76 Ah/h × 24 h/dia × 12 V.
+O catálogo tem 36 itens em sete categorias: seis referências de fabricante e 30 cenários genéricos de uso. Cada item registra fonte, data de consulta, condições e derivação, exibidas em **Fonte e premissas** no cartão.
 
-O dado corresponde apenas às condições publicadas e à alimentação de 12 V. Não há perfil cadastrado para 24 V, nem horas de uso adicionais: o consumo já é diário e não deve ser multiplicado novamente por 24.
+### Referências de fabricante
 
-Por autorização do proprietário, também há cenários genéricos pré-preenchidos, identificados separadamente das referências de fabricante. A fonte é a tabela pública [RVing Toolbox — Power Budget](https://rvingtoolbox.com/calculators/power-budget), de Brian Hamilton, atualizada em 10/10/2026 e consultada em 19/11/2026. Não são médias estatísticas universais nem especificações do aparelho do usuário.
+| Item | Valor publicado | Derivação no catálogo | Fonte |
+|---|---|---|---|
+| Dometic CFX5 45 (12 V) | 0,76 Ah/h, ambiente 32 °C e interior 4 °C | 0,76 × 24 h × 12 V = 218,88 Wh/dia | [Dometic](https://www.dometic.com/en/product/dometic-cfx5-45-9620015959), 18/11/2026 |
+| Dometic CFX3 45 (12 V) | 1,03 Ah/h, ambiente 32 °C e interior 4 °C | 1,03 × 24 h × 12 V = 296,64 Wh/dia | [Dometic](https://www.dometic.com/en-ae/product/dometic-cfx3-45-9620009573), 27/11/2026 |
+| Resfri Ar geladeira 67 L (RESGED67), 12 V | 3,8 ± 0,5 A (Turbo: 5,6 A) | 45,6 W × 24 h × 50% = 547,2 Wh/dia | [Resfri Ar](https://resfriar.com.br/product/refrigerator-67-liters-refrigerator), 27/11/2026 |
+| Resfri Ar geladeira 67 L (RESGED67), 24 V | 1,9 ± 0,5 A (Turbo: 2,8 A) | 45,6 W × 24 h × 50% = 547,2 Wh/dia | idem |
+| Resfri Ar RT8000 (400AC), 12 V | consumo máximo 650 W, 55 A, 6.500 BTU/h | 650 W × 8 h × 60% = 3.120 Wh/dia | [Resfri Ar](https://www.resfriar.com.br/produto/ar-condicionado-rt8000-serie-4-inverter), 27/11/2026 |
+| Resfri Ar RT8000 (400AC), 24 V | consumo máximo 750 W, 31 A, 7.500 BTU/h | 750 W × 8 h × 60% = 3.600 Wh/dia | idem |
+
+Os valores Dometic são consumos médios por hora nas condições publicadas e não recebem horas adicionais. A Resfri Ar publica corrente (geladeira) e consumo máximo (ar-condicionado), mas não o tempo de funcionamento do compressor. Para esses itens, o ciclo inicial vem do cenário genérico da RVing Toolbox para o mesmo tipo de aparelho (geladeira com compressor: 24 h a 50%; ar-condicionado: 8 h a 60%). O cartão informa essa combinação, e potência, horas e ciclo são editáveis. O RT8000 usa o consumo máximo; o modo inverter tende a consumir menos. As referências Resfri Ar são as únicas cargas DC do catálogo publicadas também em 24 V.
+
+### Cenários genéricos (RVing Toolbox)
+
+Por autorização do proprietário, há cenários genéricos pré-preenchidos, identificados separadamente das referências de fabricante. A fonte é a tabela pública [RVing Toolbox — Power Budget](https://rvingtoolbox.com/calculators/power-budget), de Brian Hamilton, atualizada em 10/10/2026. Os seis primeiros itens foram consultados em 19/11/2026 e os demais em 27/11/2026. Não são médias estatísticas universais nem especificações do aparelho do usuário.
 
 | Categoria | Exemplo | Potência | Uso diário | Energia por unidade |
 |---|---|---|---|---|
+| Refrigeração | Geladeira de absorção a gás (controles 12 V) | 12 W | 24 h | 288 Wh |
+| Refrigeração | Geladeira com compressor 12 V | 55 W | 24 h × 50% | 660 Wh |
+| Refrigeração | Geladeira residencial AC | 150 W | 24 h × 40% | 1.440 Wh |
+| Refrigeração | Geladeira de absorção na tomada AC* | 325 W | 24 h × 60% | 4.680 Wh |
 | Iluminação | Luminária LED 12 V | 3 W | 4 h | 12 Wh |
 | Cozinha | Cafeteira AC | 900 W | 15 min | 225 Wh |
-| Eletrônicos | Notebook com carregador AC | 60 W | 4 h | 240 Wh |
-| Água | Bomba 12 V | 75 W | 20 min | 25 Wh |
-| Climatização | Exaustor de teto 12 V | 30 W | 6 h | 180 Wh |
-| Outros | Conjunto de detectores e controles em espera 12 V | 6 W | 24 h | 144 Wh |
+| Cozinha | Micro-ondas AC | 1.200 W | 10 min | 200 Wh |
+| Cozinha | Chaleira elétrica AC | 1.500 W | 6 min | 150 Wh |
+| Cozinha | Torradeira AC | 1.100 W | 5 min | 91,67 Wh |
+| Cozinha | Cooktop de indução AC | 1.800 W | 30 min × 70% | 630 Wh |
+| Cozinha | Panela elétrica ou airfryer AC | 1.000 W | 30 min × 60% | 300 Wh |
+| Eletrônicos e Internet | Notebook com carregador AC | 60 W | 4 h | 240 Wh |
+| Eletrônicos e Internet | Carregamento de celular 12 V | 10 W | 3 h | 30 Wh |
+| Eletrônicos e Internet | TV LED 32" AC | 50 W | 3 h | 150 Wh |
+| Eletrônicos e Internet | Starlink Standard (Gen 3) | 88 W | 8 h | 704 Wh |
+| Eletrônicos e Internet | Starlink Mini | 25 W | 8 h | 200 Wh |
+| Eletrônicos e Internet | Roteador ou hotspot 12 V | 10 W | 24 h | 240 Wh |
+| Eletrônicos e Internet | Console de videogame AC | 150 W | 2 h | 300 Wh |
+| Água e Higiene | Bomba 12 V | 75 W | 20 min | 25 Wh |
+| Água e Higiene | Manta de aquecimento de tanque 12 V | 100 W | 24 h × 40% | 960 Wh |
+| Água e Higiene | Aquecedor de água elétrico AC* | 1.400 W | 1,5 h | 2.100 Wh |
+| Água e Higiene | Secador de cabelo AC | 1.500 W | 6 min | 150 Wh |
+| Climatização e Aquecimento | Exaustor de teto 12 V | 30 W | 6 h | 180 Wh |
+| Climatização e Aquecimento | Ventilador de aquecedor a gás 12 V | 100 W | 4,3 h | 430 Wh |
+| Climatização e Aquecimento | Ar-condicionado AC 13.500 BTU* | 1.500 W | 8 h × 60% | 7.200 Wh |
+| Climatização e Aquecimento | Ar-condicionado AC 15.000 BTU* | 1.700 W | 8 h × 60% | 8.160 Wh |
+| Climatização e Aquecimento | Aquecedor elétrico AC | 1.500 W | 4 h × 70% | 4.200 Wh |
+| Climatização e Aquecimento | Cobertor elétrico AC | 60 W | 8 h × 50% | 240 Wh |
+| Saúde e Outros | CPAP 12 V | 40 W | 8 h | 320 Wh |
+| Saúde e Outros | Detectores e controles em espera 12 V | 6 W | 24 h | 144 Wh |
 
-Basta selecionar os exemplos; quantidade, potência e horas já estão preenchidas e podem ser editadas. O motor multiplica potência × horas × quantidade, preservando `20/60 h` para a bomba, sem arredondamento intermediário. As energias da tabela são anteriores às perdas do inversor. Os exemplos AC da fonte são para 120 V: a potência serve como cenário de consumo, não confirma compatibilidade com aparelhos ou inversores de 127/220/230 V. Não foram presumidos picos de partida. Os exemplos DC ficam disponíveis apenas para banco de 12 V; não se presume conversor DC-DC em banco de 24 V.
+\* Na fonte, uso típico com energia externa (tomada); o cartão avisa que o consumo é alto para sistemas somente com bateria.
+
+O percentual indica o tempo em que o aparelho efetivamente funciona dentro das horas informadas (base `compressor-cycle`). O motor multiplica potência × horas × ciclo × quantidade, sem arredondamento intermediário. A tabela da fonte arredonda alguns totais de forma diferente (micro-ondas 204 Wh, torradeira 88 Wh, ventilador do aquecedor 432 Wh); o catálogo usa a potência e o tempo publicados. As energias da tabela são anteriores às perdas do inversor.
+
+Os exemplos AC da fonte são para 120 V. A potência serve como cenário de consumo, não confirma compatibilidade com aparelhos ou inversores de 127/220/230 V. Não foram encontradas tabelas oficiais brasileiras acessíveis com potência e tempo de uso por aparelho (a Pesquisa de Posse e Hábitos do Procel/Eletrobras foi localizada apenas por fontes secundárias); para aparelhos com ENCE do Inmetro, o usuário pode informar o consumo mensal em kWh/mês. Não foram presumidos picos de partida. Os exemplos DC genéricos ficam disponíveis apenas para banco de 12 V; não se presume conversor DC-DC em banco de 24 V.
+
+### Perfis prontos
+
+`loadProfiles` marca conjuntos de itens do catálogo como ponto de partida: **Fim de semana**, **Viagem em tempo integral** e **Trabalho remoto**. São escolhas editoriais de exemplo, não consumo médio de viajantes. Ao aplicar um perfil, potência, horas e ciclo voltam aos valores do catálogo; equipamentos adicionados manualmente são mantidos.
+
+## Fatores da estimativa solar
+
+Fonte: CRESESB/CEPEL, [*Manual de Engenharia para Sistemas Fotovoltaicos*](https://cresesb.cepel.br/index.php/publicacoes/download/Manual_de_Engenharia_FV_2014.pdf?section=publicacoes&cid=481), edição 2014, seção 6.2 (método do mês crítico), Eq. 6.2 e 6.3, p. 309. Consultado em 27/11/2026; o texto foi conferido no PDF da edição de 2014.
+
+- **Red1 = 0,75**: "fator de redução (derating) da potência dos módulos fotovoltaicos", englobando sujeira, degradação, tolerância de fabricação e temperatura, default para módulos de silício cristalino.
+- **Red2 = 0,9**: perdas no sistema, "incluindo fiação, controlador, diodos etc.".
+- **η_bat = 86%**: eficiência global sugerida para bateria chumbo-ácido (Capítulo 4 do manual). Usada para chumbo-ácido e AGM. Para LiFePO₄, a ferramenta usa o produto das eficiências direcionais publicadas no perfil (por exemplo, 99,5% × 96% = 95,52% para os perfis NPP), sem transferir o valor do chumbo-ácido.
+
+Os três valores são editáveis. O manual dimensiona pelo mês de pior irradiação no plano do painel; a ferramenta usa a HSP informada pelo usuário e avisa que médias anuais superestimam a geração nos meses de pouco sol.
 
 ## Painel fotovoltaico
 

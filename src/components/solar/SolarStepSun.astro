@@ -1,0 +1,81 @@
+---
+import { solarCoverageDefaults, solarLocalResource, solarResourceContinentOrderPt, solarResourceCountries, solarResourceDataset, solarResourceNoticePt } from '../../lib/solar/catalogs.ts';
+
+const brazilHsp = solarResourceCountries.find((country) => country.countryIso3 === 'BRA')?.peakSunHours ?? '';
+const continentGroups = solarResourceContinentOrderPt
+  .map((continent) => [continent, solarResourceCountries.filter((country) => country.continentPt === continent)] as const)
+  .filter(([, countries]) => countries.length > 0);
+---
+
+<fieldset class="solar-step" data-step-panel="solar" hidden>
+  <legend tabindex="-1">Energia solar (opcional)</legend>
+  <p class="solar-step-intro">Descubra quantos watts-pico (Wp) de painéis repõem o seu consumo diário e quanto os painéis que cabem no teto conseguem cobrir. Se preferir, pule esta etapa e gere o relatório.</p>
+
+  <label class="solar-checkbox solar-solar-toggle">
+    <input type="checkbox" data-solar-enabled />
+    Quero estimar os painéis solares e o controlador de carga
+  </label>
+
+  <div class="solar-solar-fields" data-solar-fields hidden>
+    <div class="solar-custom-grid">
+      <label class="solar-field" for="solar-country">
+        País
+        <select id="solar-country" data-country>
+          <option value="manual">Informar HSP manualmente</option>
+          {continentGroups.map(([continent, countries]) => (
+            <optgroup label={continent}>
+              {countries.map((country) => (
+                <option value={country.countryIso3} selected={country.countryIso3 === 'BRA'}>
+                  {country.countryNamePt}
+                </option>
+              ))}
+            </optgroup>
+          ))}
+        </select>
+      </label>
+
+      <label class="solar-field" for="solar-hsp">
+        Horas de sol-pico (HSP) por dia
+        <span class="solar-field-control">
+          <input id="solar-hsp" data-hsp type="number" min="0.1" max="24" step="0.001" value={brazilHsp} required />
+          <span>h/dia</span>
+        </span>
+      </label>
+    </div>
+    <p class="solar-field-note" data-hsp-status>Média nacional anual do Brasil. Para viajar no inverno ou em regiões de pouco sol, informe um valor menor.</p>
+    <p class="solar-field-note">No Brasil, a insolação varia muito entre regiões. Para o seu local, consulte o <a class="solar-source-link" href={solarLocalResource.url} target="_blank" rel="noopener noreferrer">{solarLocalResource.name}</a>: informe as coordenadas, use a irradiação no plano horizontal (kWh/m²·dia) da média anual ou do mês de menor valor e digite o número no campo acima.</p>
+    <details class="solar-info">
+      <summary>O que significa HSP?</summary>
+      <p>Horas de sol-pico representam a energia solar diária equivalente a uma hora de irradiância de 1.000 W/m². A referência nacional é uma média anual aproximada, não uma medição local nem uma condição sazonal: nos meses de pouco sol a geração é menor.</p>
+      <p>{solarResourceNoticePt}</p>
+      <p>Fonte: <a href={solarResourceDataset.sourceUrl} target="_blank" rel="noopener noreferrer">{solarResourceDataset.sourceName}</a>, período de referência {solarResourceDataset.referencePeriodStartYear}–{solarResourceDataset.referencePeriodEndYear}.</p>
+    </details>
+
+    <label class="solar-field" for="solar-max-wp">
+      Potência máxima de painéis que cabe no veículo (Wp), se souber
+      <span class="solar-field-control">
+        <input id="solar-max-wp" data-solar-max-wp type="number" min="1" step="any" inputmode="decimal" />
+        <span>Wp</span>
+      </span>
+    </label>
+    <p class="solar-field-note">Some a potência dos painéis que cabem no teto ou no espaço disponível. Exemplo: três painéis de 200 Wp = 600 Wp. Deixe em branco para ver só a potência ideal.</p>
+
+    <details class="solar-info">
+      <summary>Fatores de perda usados no cálculo</summary>
+      <p>Usamos o método do Manual de Engenharia para Sistemas Fotovoltaicos do CRESESB/CEPEL. Os valores iniciais são os sugeridos pelo manual e podem ser ajustados.</p>
+      <div class="solar-custom-grid">
+        <label class="solar-field">Perdas dos módulos (Red1)<input type="number" min="0.01" max="1" step="0.01" value={solarCoverageDefaults.moduleDeratingFactor} data-solar-red1 required /></label>
+        <label class="solar-field">Perdas do sistema (Red2)<input type="number" min="0.01" max="1" step="0.01" value={solarCoverageDefaults.systemDeratingFactor} data-solar-red2 required /></label>
+        <label class="solar-field">Eficiência global da bateria (%)<input type="number" min="1" max="100" step="any" data-solar-battery-efficiency required /></label>
+      </div>
+      <p class="solar-field-note">Red1 inclui sujeira, degradação, tolerância de fabricação e temperatura dos módulos. Red2 inclui fiação, controlador e diodos. A eficiência da bateria acompanha a química escolhida: 86% para chumbo-ácido e AGM, conforme o manual, e carga × descarga do perfil para LiFePO₄.</p>
+      <p><a class="solar-source-link" href={solarCoverageDefaults.source.url} target="_blank" rel="noopener noreferrer">{solarCoverageDefaults.source.name}</a></p>
+    </details>
+
+    <section class="solar-coverage" aria-labelledby="solar-coverage-title">
+      <h3 id="solar-coverage-title">Resultado solar</h3>
+      <dl class="solar-coverage-results" data-solar-results></dl>
+      <p class="solar-field-note" data-solar-status role="status" aria-live="polite"></p>
+    </section>
+  </div>
+</fieldset>

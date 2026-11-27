@@ -1,11 +1,25 @@
 ---
 import SiteLayout from '../../layouts/SiteLayout.astro';
 import SolarConfigurationWizard from '../../components/SolarConfigurationWizard.astro';
+
+const title = 'Planejador Elétrico para Motorhome e Van';
+const description = 'Calcule grátis o consumo dos equipamentos do seu motorhome, van ou sistema off-grid e estime baterias, inversor e painéis solares. Relatório em PDF, sem cadastro.';
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  name: title,
+  description,
+  url: new URL(Astro.url.pathname, Astro.site ?? Astro.url).href,
+  applicationCategory: 'UtilitiesApplication',
+  operatingSystem: 'Navegador',
+  inLanguage: 'pt-BR',
+  isAccessibleForFree: true,
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'BRL' },
+  publisher: { '@type': 'Organization', name: 'Odisseia Mundana' },
+};
 ---
 
-<SiteLayout
-  title="Calculadora de Energia para Motorhome"
-  description="Assistente local de pré-dimensionamento de sistemas fotovoltaicos para veículos."
->
+<SiteLayout title={title} description={description}>
+  <script slot="head" type="application/ld+json" is:inline set:html={JSON.stringify(structuredData)} />
   <SolarConfigurationWizard />
 </SiteLayout>

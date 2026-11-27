@@ -1,8 +1,9 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { buildSolarReport } from '../src/lib/solar/report.ts';
-import { presentSolarReport } from '../src/lib/solar/report-presentation.ts';
+import { describeBatteryBank, presentSolarReport } from '../src/lib/solar/report-presentation.ts';
 import { createSolarReportPdf } from '../src/lib/solar/report-pdf.ts';
+import { createSolarReportWorkbook } from '../src/lib/solar/report-xlsx.ts';
 import { readFileSync } from 'node:fs';
 
 const pdfFonts = {
@@ -104,6 +105,86 @@ test('monta o guia de consumo, bateria e inversor sem seções técnicas incompl
     loads: Array.from({ length: 60 }, (_, i) => ({ ...document.loads[i % 2], name: `Equipamento ${i + 1} — Água e iluminação` })),
   }, pdfFonts);
   assert.ok(longPdf.getNumberOfPages() > pdf.getNumberOfPages());
+});
+
+test('inclui a seção solar somente quando a estimativa é pedida', () => {
+  const input = {
+    projectName: 'Van', generatedAt: '27/11/2026', applicationVersion: '0.3.0', vehicleLabelPt: 'Van', systemVoltageV: 12,
+    loads: [{ name: 'Geladeira', categoryLabelPt: 'Refrigeração', originLabelPt: 'Catálogo', load: { id: 'fridge', supply: 'dc', quantity: 1, simultaneous: true, basis: { kind: 'daily-energy', energyWhPerDay: 860 } } }],
+    inverter: { efficiency: 1, standbyPowerW: 0, standbyHoursPerDay: 0, outputVoltageV: null },
+    battery, autonomyDays: 1, unitCapacityAh: 100, unitVoltageV: 12.8, batteryProfileLabelPt: 'LiFePO₄',
+  };
+  const withoutSolar = presentSolarReport(buildSolarReport(input), [], false);
+  assert.equal(withoutSolar.solar.length, 0);
+  assert.match(withoutSolar.notes.join(' '), /painéis, controlador/);
+
+  const report = buildSolarReport({ ...input, solar: {
+    countryLabelPt: 'Brasil', peakSunHours: 5, moduleDeratingFactor: 0.75, systemDeratingFactor: 0.9, batteryRoundTripEfficiency: 0.86, availableArrayPowerWp: 200,
+  } });
+  assert.ok(Math.abs(report.solar.coverageFraction - 580.5 / 860) < 1e-9);
+  const document = presentSolarReport(report, [], false);
+  const solarEntries = Object.fromEntries(document.solar);
+  assert.equal(solarEntries['Potência ideal de painéis'], '297 Wp para repor 100% do consumo diário');
+  assert.equal(solarEntries['Cobertura do consumo'], '67,5%');
+  assert.equal(solarEntries['Controlador de carga (MPPT): corrente mínima'], '17 A para 200 Wp em banco de 12 V');
+  assert.match(document.solarNote, /alternador/);
+  assert.ok(document.summary.some((metric) => metric.label === 'Cobertura solar'));
+  assert.match(document.notes.join(' '), /CRESESB/);
+  assert.equal(Buffer.from(createSolarReportPdf(document, pdfFonts).output('arraybuffer')).subarray(0, 5).toString(), '%PDF-');
+});
+
+test('exporta planilha Excel com abas Resumo e Consumo e valores numéricos', () => {
+  const report = buildSolarReport({
+    projectName: 'Van & "Casa"', generatedAt: '27/11/2026', applicationVersion: '0.3.0', vehicleLabelPt: 'Van', systemVoltageV: 12,
+    loads: [{ name: 'Luminária <LED>', categoryLabelPt: 'Iluminação', originLabelPt: 'Catálogo', load: { id: 'led', supply: 'dc', quantity: 4, simultaneous: true, basis: { kind: 'power-time', powerW: 3, hoursPerDay: 4 } } }],
+    inverter: { efficiency: 1, standbyPowerW: 0, standbyHoursPerDay: 0, outputVoltageV: null },
+    battery, autonomyDays: 1, unitCapacityAh: 100, unitVoltageV: 12.8, batteryProfileLabelPt: 'LiFePO₄',
+  });
+  const bytes = createSolarReportWorkbook(presentSolarReport(report, [], false));
+  assert.deepEqual([...bytes.subarray(0, 4)], [0x50, 0x4B, 0x03, 0x04]);
+
+  // ZIP sem compressão: lê as entradas pelo diretório central.
+  const view = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);
+  const end = bytes.byteLength - 22;
+  assert.equal(view.getUint32(end, true), 0x06054B50);
+  const files = new Map();
+  for (let position = view.getUint32(end + 16, true), index = 0; index < view.getUint16(end + 10, true); index += 1) {
+    const nameLength = view.getUint16(position + 28, true);
+    const size = view.getUint32(position + 24, true);
+    const localOffset = view.getUint32(position + 42, true);
+    const name = new TextDecoder().decode(bytes.subarray(position + 46, position + 46 + nameLength));
+    const dataStart = localOffset + 30 + view.getUint16(localOffset + 26, true);
+    files.set(name, new TextDecoder().decode(bytes.subarray(dataStart, dataStart + size)));
+    position += 46 + nameLength;
+  }
+  assert.ok(files.has('[Content_Types].xml'));
+  assert.match(files.get('xl/workbook.xml'), /<sheet name="Resumo".*<sheet name="Consumo"/);
+  const summary = files.get('xl/worksheets/sheet1.xml');
+  assert.match(summary, /Van &amp; &quot;Casa&quot;/);
+  assert.match(summary, /Como ligar as baterias/);
+  const consumption = files.get('xl/worksheets/sheet2.xml');
+  assert.match(consumption, /Luminária &lt;LED&gt;/);
+  assert.match(consumption, /<c r="D2"><v>4<\/v><\/c>/);
+  assert.match(consumption, /<c r="F2" s="2"><v>48<\/v><\/c>/);
+  assert.match(consumption, /Total exigido da bateria.*<v>48<\/v>/);
+});
+
+test('descreve o banco com tipo, capacidade e a forma de ligar as baterias', () => {
+  const parallel = describeBatteryBank({ chemistryLabel: 'LiFePO4', unitVoltageV: 12.8, unitCapacityAh: 100, seriesCount: 1, parallelCount: 3 });
+  assert.equal(parallel.headline, '3 baterias de 100 Ah');
+  assert.equal(parallel.unitPt, 'LiFePO4 de 12,8 V e 100 Ah cada');
+  assert.match(parallel.connectionPt, /^Ligação em paralelo .*12,8 V.*300 Ah/);
+
+  const series = describeBatteryBank({ chemistryLabel: 'AGM', unitVoltageV: 12, unitCapacityAh: 210, seriesCount: 2, parallelCount: 1 });
+  assert.match(series.connectionPt, /^Ligação em série .*24 V.*210 Ah/);
+
+  const mixed = describeBatteryBank({ chemistryLabel: 'Chumbo-ácido', unitVoltageV: 12, unitCapacityAh: 220, seriesCount: 2, parallelCount: 2 });
+  assert.equal(mixed.headline, '4 baterias de 220 Ah');
+  assert.match(mixed.connectionPt, /2 conjuntos com 2 baterias em série.*24 V e 440 Ah/);
+
+  const single = describeBatteryBank({ chemistryLabel: 'LiFePO4', unitVoltageV: 25.6, unitCapacityAh: 100, seriesCount: 1, parallelCount: 1 });
+  assert.equal(single.unitPt, 'LiFePO4 de 25,6 V e 100 Ah');
+  assert.match(single.connectionPt, /^Uma única bateria/);
 });
 
 test('gera guia Freedom em 12 e 24 V sem eficiências nem tensões de carga e corte', () => {

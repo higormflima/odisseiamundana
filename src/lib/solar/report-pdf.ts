@@ -87,7 +87,7 @@ export function createSolarReportPdf(report: SolarReportDocument, fonts: SolarPd
   pageHeader();
   paragraph('GUIA BÁSICO DO SISTEMA ELÉTRICO', 9, true, copper);
   paragraph(report.title, 22, false, ocean, 'DM Serif Display');
-  paragraph('Consumo, baterias e inversor: um ponto de partida para planejar seu motorhome.', 10, false, muted);
+  paragraph('Consumo, baterias, inversor e energia solar: um ponto de partida para planejar seu veículo.', 10, false, muted);
   entries(report.identification);
 
   heading(1, 'Seu sistema em resumo');
@@ -162,7 +162,13 @@ export function createSolarReportPdf(report: SolarReportDocument, fonts: SolarPd
   heading(4, 'Inversor');
   entries(report.inverter);
   if (report.inverterNote) paragraph(report.inverterNote, 9, false, muted);
-  heading(5, 'Premissas e limites');
+  let section = 5;
+  if (report.solar.length) {
+    heading(section++, 'Energia solar e controlador');
+    entries(report.solar);
+    if (report.solarNote) paragraph(report.solarNote, 9, false, muted);
+  }
+  heading(section, 'Premissas e limites');
   for (const note of report.notes) paragraph(`• ${note}`, 9, false, muted);
   y += 3;
   paragraph(report.disclaimer, 10, true);

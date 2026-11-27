@@ -160,6 +160,12 @@ function assertLoadBasis(value: unknown, path: string): asserts value is LoadBas
         ['hoursPerDay', 0, 24],
       ]);
       return;
+    case 'monthly-energy':
+      numberFields(['energyKWhPerMonth'], [['energyKWhPerMonth', 0.001]]);
+      return;
+    case 'amp-hours-per-day':
+      numberFields(['ampHoursPerDay', 'voltageV'], [['ampHoursPerDay', 0.001], ['voltageV', 0.1]]);
+      return;
     default:
       throw new TypeError(`${path}.kind não corresponde a uma base de consumo compatível.`);
   }
@@ -176,7 +182,7 @@ function assertElectricalLoad(value: unknown, path: string): asserts value is El
   if (!Number.isInteger(load.quantity)) throw new TypeError(`${path}.quantity deve ser um número inteiro.`);
   if (typeof load.simultaneous !== 'boolean') throw new TypeError(`${path}.simultaneous deve ser booleano.`);
   assertLoadBasis(load.basis, `${path}.basis`);
-  if (load.supply === 'ac' && (load.basis as LoadBasis).kind === 'current-time') {
+  if (load.supply === 'ac' && ['current-time', 'amp-hours-per-day'].includes((load.basis as LoadBasis).kind)) {
     throw new TypeError(`${path} não pode usar corrente DC para uma carga AC.`);
   }
   if (Object.hasOwn(load, 'ratedPowerW')) numberValue(load.ratedPowerW, `${path}.ratedPowerW`, 0.1);

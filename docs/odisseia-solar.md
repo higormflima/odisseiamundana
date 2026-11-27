@@ -2,28 +2,35 @@
 
 ## Finalidade
 
-O Planejador Elétrico é uma ferramenta local de pré-dimensionamento de sistemas off-grid, com o título de página **Calculadora de Energia para Motorhome**, disponível em `/pt/odisseia-solar/`. Ele oferece um guia básico de consumo, banco de baterias e inversor, com premissas e limites reunidos, sem seções técnicas incompletas. Não substitui um projeto executivo nem a validação de um profissional qualificado.
+O Planejador Elétrico é uma ferramenta local de pré-dimensionamento de sistemas off-grid, com o título de página **Planejador Elétrico para Motorhome e Van**, disponível em `/pt/odisseia-solar/`. Ele soma o consumo dos equipamentos e estima banco de baterias, inversor e, opcionalmente, painéis solares e corrente mínima do controlador de carga. Não substitui um projeto executivo nem a validação de um profissional qualificado.
 
-O nome anterior era Odisseia Solar. O endereço e os identificadores internos permanecem. A interface pública oferece apenas o relatório PDF, sem importação ou exportação JSON.
+O nome anterior era Odisseia Solar. O endereço e os identificadores internos permanecem, para não quebrar links já divulgados. A interface pública oferece o relatório PDF e a planilha Excel (.xlsx), sem importação ou exportação JSON.
+
+As etapas são: **Veículo → Cargas → Bateria → Solar (opcional) → Relatório**. Nas cargas, o usuário pode começar por um perfil pronto, buscar no catálogo, ajustar potência, horas e ciclo de funcionamento, ou adicionar equipamentos próprios. Uma ajuda explica como descobrir o consumo pela etiqueta, pela ENCE do Inmetro, por medidor de tomada ou por monitor de bateria.
 
 ## Arquitetura
 
 | Responsabilidade | Arquivo |
 |---|---|
-| Rota Astro em português | `src/pages/pt/odisseia-solar.astro` |
+| Rota Astro em português, metadados e JSON-LD | `src/pages/pt/odisseia-solar.astro` |
 | Integração ao layout e à navegação do site | `src/layouts/SiteLayout.astro` |
-| Etapas do formulário, estado local, relatório e ações do PDF | `src/components/SolarConfigurationWizard.astro` |
-| Catálogos locais de insolação, cargas e componentes | `src/lib/solar/catalogs.ts` |
+| Estrutura da página, progresso e diálogo do PDF | `src/components/SolarConfigurationWizard.astro` |
+| Marcação de cada etapa e do resumo lateral | `src/components/solar/*.astro` |
+| Estado do formulário, eventos, relatório e ações do PDF/Excel | `src/scripts/solarWizard.ts` |
+| Progresso salvo no navegador | `src/scripts/solarWizardStorage.ts` |
+| Estilos do planejador (seletores prefixados por `.solar-`) | `src/styles/solar-wizard.css` |
+| Catálogos locais de insolação, cargas, perfis, fatores solares e componentes | `src/lib/solar/catalogs.ts` |
 | Tipos de domínio e funções puras de cálculo | `src/lib/solar/calculations.ts` |
 | Composição do relatório a partir das funções de cálculo | `src/lib/solar/report.ts` |
 | Texto e valores compartilhados entre tela e PDF | `src/lib/solar/report-presentation.ts` |
 | Geração local do PDF A4 com fontes incorporadas | `src/lib/solar/report-pdf.ts` |
+| Planilha Excel (.xlsx) sem dependências | `src/lib/solar/report-xlsx.ts` |
 | Visualização local do PDF, sem abas externas | `src/lib/solar/pdf-preview.ts` |
 | Mensagens de validação do formulário em português | `src/lib/solar/validation.ts` |
 | Contrato JSON legado e validação, sem integração à interface pública | `src/lib/solar/project-file.ts` |
 | Testes do motor, catálogos, relatório e JSON | `tests/solar-*.test.mjs` |
 
-O fluxo é: formulário no navegador → dados locais do catálogo e valores editáveis → funções de cálculo → apresentação compartilhada → relatório na tela e PDF. O PDF é gerado localmente com jsPDF e salvo por compartilhamento nativo ou download, sem impressão. Não há backend, banco de dados, API de cálculo ou salvamento automático; os dados do formulário não persistem após recarregar a página.
+O fluxo é: formulário no navegador → dados locais do catálogo e valores editáveis → funções de cálculo → apresentação compartilhada → relatório na tela, PDF e planilha Excel. O PDF é gerado localmente com jsPDF e salvo por compartilhamento nativo ou download, sem impressão. Não há backend, banco de dados nem API de cálculo. O progresso fica salvo apenas no `localStorage` do navegador e pode ser apagado com **Recomeçar**.
 
 ## Fórmulas e interpretação
 
@@ -38,6 +45,8 @@ Nas fórmulas, `η` representa eficiência em fração decimal (por exemplo, 95%
 | Ciclo de compressor | `P_funcionamento × janela diária × ciclo de trabalho` |
 | Energia diária publicada ou informada | `Wh/dia informado` — não se multiplica novamente por 24 |
 | Corrente e tempo | `I × V × horas por dia`; somente para carga DC na tensão do banco |
+| Consumo mensal de etiqueta (kWh/mês) | `kWh/mês × 1.000 ÷ 30`; convenção de mês de 30 dias, sem correção para as condições do veículo |
+| Consumo diário em Ah | `Ah/dia × V`; somente para carga DC na tensão do banco |
 
 O resultado de cada base é multiplicado pela quantidade. Cargas AC são convertidas para a energia exigida no barramento da bateria dividindo sua energia diária pela eficiência do inversor. O consumo em espera é `P_espera × horas sem carga`.
 
@@ -67,7 +76,7 @@ Para a configuração reportada, a quantidade em paralelo é arredondada para ci
 
 ### Arranjo fotovoltaico e MPPT
 
-O motor possui `calculatePvSizing`, mas PV/MPPT estão fora do escopo do guia atual, que não chama essa função. A função de cálculo disponível para uso técnico futuro usa:
+O motor possui `calculatePvSizing`, mas a interface usa a estimativa mais simples de cobertura descrita abaixo. A função detalhada, disponível para uso técnico futuro, usa:
 
 ```text
 P_requerida =
@@ -78,6 +87,28 @@ P_requerida =
 O fator de desempenho do arranjo exclui as eficiências do MPPT e da bateria, que são aplicadas separadamente. A quantidade de módulos é arredondada para cima e ajustada à configuração em série informada. As correções térmicas usam os coeficientes do modelo exato do módulo em relação a 25 °C, como fração por °C (`fator = 1 + coeficiente × (temperatura − 25 °C)`): Voc é verificada na temperatura mínima; Vmp e correntes, na máxima. Coeficientes ausentes deixam a verificação pendente, em vez de receberem valores presumidos.
 
 A corrente de saída estimada do MPPT é `potência instalada × η_MPPT ÷ tensão de carga da bateria`. O motor também verifica limites de tensão PV, corrente de curto-circuito, corrente operacional quando publicada e corrente máxima de carga. Falhas conhecidas são marcadas como incompatíveis; dados ausentes e possível limitação de potência exigem confirmação.
+
+### Cobertura solar e controlador (etapa opcional)
+
+A etapa solar segue o método do mês crítico do *Manual de Engenharia para Sistemas Fotovoltaicos* (CRESESB/CEPEL, 2014, seção 6.2, Eq. 6.2 e 6.3, p. 309), implementado em `calculateSolarCoverage`:
+
+```text
+E_gerar = E_barramento/dia ÷ η_bat
+P_ideal (Wp) = E_gerar ÷ (HSP × Red1 × Red2)
+Geração (Wh/dia) = P_disponível × HSP × Red1 × Red2 × η_bat
+Cobertura = Geração ÷ E_barramento/dia
+Déficit = max(0, E_barramento/dia − Geração)
+I_controlador_mínima = P_disponível (ou P_ideal) ÷ tensão nominal do banco
+```
+
+- `Red1 = 0,75` (default do manual): sujeira, degradação, tolerância de fabricação e temperatura de módulos de silício cristalino.
+- `Red2 = 0,9` (default do manual): fiação, controlador, diodos e demais perdas.
+- `η_bat` é a eficiência global da bateria: 86% para chumbo-ácido e AGM (valor sugerido pelo manual para chumbo-ácido); para LiFePO₄, o produto das eficiências de carga e descarga do perfil escolhido. Todos os valores são editáveis.
+- O limite do teto é informado como potência máxima em Wp. Sem esse limite, a ferramenta mostra só a potência ideal.
+- A corrente do controlador é conservadora: potência nominal ÷ tensão nominal do banco, sem perdas. Tensão máxima de entrada e correção por temperatura não são verificadas sem um painel e um controlador específicos.
+- A HSP nacional é média anual; o manual dimensiona pelo mês de pior irradiação. O texto da interface e do relatório orienta o usuário a informar um valor menor para inverno ou regiões de pouco sol.
+
+A função `calculatePvSizing`, mais detalhada e dependente de módulo e MPPT específicos, continua disponível no motor, mas não é usada pela interface.
 
 ### Inversor e carregadores
 
@@ -118,11 +149,12 @@ Ao atualizar um registro:
 
 ## Limitações conhecidas
 
-- As HSP cadastradas são médias nacionais modeladas, não medições locais ou valores sazonais.
+- As HSP cadastradas são médias nacionais anuais modeladas, não medições locais nem o mês crítico usado no método do CRESESB.
 - As três opções são LiFePO₄ (perfis NPP), chumbo-ácido (Freedom DF4100, 220 Ah C20) e AGM (Rolls S12-230AGM-RE, 210 Ah C20). DoD inicial de Freedom/AGM é 20%/50%, editável e com bases distintas documentadas; não há eficiências genéricas nem ajuste automático por regime de descarga.
-- O guia não dimensiona PV/MPPT, recarga, carregadores, cabos, fusíveis ou disjuntores. Esses itens exigem dados de instalação e validação técnica específica.
-- Há exemplos genéricos de potência e uso diário em todas as categorias além da referência Dometic; não representam especificações universais. Cargas DC de 12 V não são disponibilizadas silenciosamente em banco de 24 V.
+- O guia não dimensiona recarga por alternador ou tomada, carregadores, cabos, fusíveis ou disjuntores. Painéis e controlador recebem apenas a estimativa de cobertura e a corrente mínima; tensão máxima de entrada, arranjo série/paralelo e correção térmica exigem as fichas do painel e do controlador escolhidos.
+- Há exemplos genéricos de potência e uso diário em todas as categorias, além das referências de fabricante (Dometic, Resfri Ar); não representam especificações universais. Cargas DC genéricas de 12 V não são disponibilizadas silenciosamente em banco de 24 V: ficam ocultas, com aviso, e só as referências publicadas em 24 V aparecem.
+- Os perfis prontos (fim de semana, tempo integral, trabalho remoto) apenas marcam itens do catálogo; não representam consumo médio de viajantes.
 - A referência Victron SUN é para saída nominal de 230 V; o cenário inicial de 220 V é uma hipótese de planejamento editável, não a indicação de um produto. A comparação de potência contínua não confirma picos de partida.
-- Não há importação/exportação JSON nem sincronização entre dispositivos. O PDF é gerado localmente, mas o navegador e o sistema operacional controlam permissões e destino do salvamento.
+- Não há importação/exportação JSON nem sincronização entre dispositivos; o progresso salvo vale só para o navegador em uso. O PDF e a planilha são gerados localmente, mas o navegador e o sistema operacional controlam permissões e destino do salvamento.
 
 Consulte [solar-report.md](./solar-report.md) para os detalhes do PDF e do contrato legado e [solar-catalogs.md](./solar-catalogs.md) para as fontes e condições dos dados atuais.

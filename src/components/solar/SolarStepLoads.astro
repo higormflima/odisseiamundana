@@ -1,0 +1,236 @@
+---
+import { equipmentCategories, equipmentCatalog, initialInverterScenario, loadProfiles } from '../../lib/solar/catalogs.ts';
+import type { EquipmentCatalogItem } from '../../lib/solar/catalogs.ts';
+
+const defaultSelectedIds = new Set(['dometic-cfx5-45']);
+const formatPt = (value: number, digits = 1) => value.toLocaleString('pt-BR', { maximumFractionDigits: digits });
+const normalize = (text: string) => text.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+
+function dailyEnergyLabel(item: EquipmentCatalogItem): string {
+  const basis = item.defaultLoad.basis;
+  switch (basis.kind) {
+    case 'daily-energy': return `${formatPt(basis.energyWhPerDay)} Wh/dia`;
+    case 'power-time': return `${formatPt(basis.powerW * basis.hoursPerDay)} Wh/dia no exemplo`;
+    case 'compressor-cycle': return `${formatPt(basis.runningPowerW * basis.operatingWindowHoursPerDay * basis.dutyCycle)} Wh/dia no exemplo`;
+    default: return 'Consumo calculado conforme o perfil';
+  }
+}
+
+function itemNote(item: EquipmentCatalogItem): string {
+  if (item.usageNotePt) return item.usageNotePt;
+  if (item.referenceKind === 'manufacturer') return 'Consumo diário derivado do fabricante; sem horas de uso adicionais.';
+  return 'Potência e uso diário são exemplos pré-preenchidos, não especificações do seu aparelho; ajuste se necessário.';
+}
+
+function tags(item: EquipmentCatalogItem): string[] {
+  const voltageTag = item.defaultLoad.supply === 'ac' ? 'AC · inversor' : `${item.applicableSystemVoltagesV.join('/')} V DC`;
+  return [item.referenceKind === 'manufacturer' ? 'Fabricante' : 'Exemplo', voltageTag];
+}
+---
+
+<fieldset class="solar-step" data-step-panel="loads" data-loads-step hidden>
+  <legend tabindex="-1">Equipamentos e consumo</legend>
+  <p class="solar-step-intro">Marque os equipamentos que você vai usar. Potência e horas já vêm preenchidas e podem ser ajustadas ao seu dia a dia.</p>
+
+  <section class="solar-profiles" aria-labelledby="solar-profiles-title">
+    <h3 id="solar-profiles-title">Comece por um perfil</h3>
+    <p>Um perfil marca uma lista típica de equipamentos do catálogo. Depois, ajuste quantidades, potências e horas ou acrescente o que faltar.</p>
+    <div class="solar-profile-buttons">
+      {loadProfiles.map((profile) => (
+        <button class="solar-profile-button" type="button" data-load-profile={profile.id}>
+          <strong>{profile.namePt}</strong>
+          <small>{profile.descriptionPt}</small>
+        </button>
+      ))}
+    </div>
+    <p class="solar-field-note" data-profile-status role="status" aria-live="polite"></p>
+  </section>
+
+  <details class="solar-info solar-measure-help">
+    <summary>Como descobrir o consumo do seu aparelho?</summary>
+    <p><strong>Etiqueta ou placa do aparelho.</strong> Procure a potência em watts (W). Se houver só corrente e tensão, multiplique: amperes × volts = watts. A potência da etiqueta costuma ser a máxima; o uso real pode ser menor.</p>
+    <p><strong>Etiqueta do Inmetro (ENCE).</strong> Geladeiras, frigobares e outros eletrodomésticos informam o consumo em kWh/mês. Em “Adicionar outro equipamento”, escolha “Consumo mensal da etiqueta (kWh/mês)” e copie o valor.</p>
+    <p><strong>Medidor de tomada.</strong> Para aparelhos AC, um medidor de energia ligado entre a tomada e o aparelho mostra o consumo real em Wh ou kWh. Para geladeiras, meça pelo menos 24 horas, porque o compressor liga e desliga.</p>
+    <p><strong>Monitor de bateria com shunt.</strong> Em sistemas DC, o monitor registra os ampere-horas (Ah) consumidos. Use a base “Consumo diário em Ah (DC)” com o valor de um dia típico.</p>
+    <p><strong>Carregadores USB e fontes.</strong> A potência impressa no carregador é o máximo que ele fornece, não o consumo médio do aparelho carregado.</p>
+  </details>
+
+  <div class="solar-catalog-tools">
+    <label class="solar-field" for="solar-catalog-search" data-storage-ignore>
+      Buscar equipamento
+      <input id="solar-catalog-search" type="search" autocomplete="off" placeholder="Ex.: geladeira, Starlink, cafeteira" data-catalog-search />
+    </label>
+    <p class="solar-load-total" data-load-total role="status" aria-live="polite"></p>
+  </div>
+  <p class="solar-field-note" data-catalog-voltage-note></p>
+
+  <div class="solar-catalog">
+    {equipmentCategories.map((category) => {
+      const items = equipmentCatalog.filter((item) => item.categoryId === category.id);
+      return (
+        <details class="solar-category" data-catalog-category={category.id} open={items.some((item) => defaultSelectedIds.has(item.id))}>
+          <summary>
+            <span class="solar-category-title">{category.labelPt}</span>
+            <small data-category-count></small>
+          </summary>
+          <div class="solar-category-items">
+            {items.map((item) => {
+              const basis = item.defaultLoad.basis;
+              const checked = defaultSelectedIds.has(item.id);
+              return (
+                <article
+                  class="solar-equipment"
+                  data-catalog-equipment
+                  data-equipment-id={item.id}
+                  data-supported-voltages={item.applicableSystemVoltagesV.join(',')}
+                  data-search-text={normalize(`${item.namePt} ${item.keywordsPt ?? ''} ${category.labelPt}`)}
+                >
+                  <label class="solar-equipment-select">
+                    <input type="checkbox" data-catalog-choice value={item.id} checked={checked} />
+                    <span>
+                      <strong>{item.namePt}</strong>
+                      <small>{dailyEnergyLabel(item)}</small>
+                      <span class="solar-equipment-tags">{tags(item).map((tag) => <em>{tag}</em>)}</span>
+                    </span>
+                  </label>
+                  <label class="solar-quantity">
+                    Quantidade
+                    <input type="number" min="1" step="1" value="1" data-catalog-quantity disabled={!checked} />
+                  </label>
+                  {basis.kind === 'power-time' && (
+                    <div class="solar-custom-grid" data-catalog-fields hidden={!checked}>
+                      <label class="solar-field">Potência durante o uso (W)<input type="number" min="0.1" step="any" value={basis.powerW} data-catalog-power disabled required /></label>
+                      <label class="solar-field">Horas por dia<input type="number" min="0" max="24" step="any" value={basis.hoursPerDay} data-catalog-hours disabled required /></label>
+                    </div>
+                  )}
+                  {basis.kind === 'compressor-cycle' && (
+                    <div class="solar-custom-grid solar-custom-grid-3" data-catalog-fields hidden={!checked}>
+                      <label class="solar-field">Potência ligado (W)<input type="number" min="0.1" step="any" value={basis.runningPowerW} data-catalog-power disabled required /></label>
+                      <label class="solar-field">Horas por dia<input type="number" min="0" max="24" step="any" value={basis.operatingWindowHoursPerDay} data-catalog-hours disabled required /></label>
+                      <label class="solar-field">Tempo funcionando (%)<input type="number" min="0" max="100" step="any" value={basis.dutyCycle * 100} data-catalog-duty disabled required /></label>
+                    </div>
+                  )}
+                  <details class="solar-equipment-details">
+                    <summary>Fonte e premissas</summary>
+                    <p>{item.sourceMeasurement.conditions}. {itemNote(item)}</p>
+                    <p>{item.derivationPt}</p>
+                    <a class="solar-source-link" href={item.source.url} target="_blank" rel="noopener noreferrer">{item.source.name}</a>
+                  </details>
+                </article>
+              );
+            })}
+          </div>
+          <p class="solar-empty-category" data-category-empty hidden>Nenhum equipamento desta categoria é compatível com a busca ou a tensão escolhida.</p>
+        </details>
+      );
+    })}
+  </div>
+  <p class="solar-empty-category" data-catalog-no-results hidden>Nenhum equipamento encontrado. Você pode adicioná-lo manualmente logo abaixo.</p>
+
+  <section class="solar-custom-load" aria-labelledby="solar-custom-title">
+    <h3 id="solar-custom-title">Adicionar outro equipamento</h3>
+    <p>Informe os dados da ficha do equipamento ou o consumo que você já conhece. Não há horas recomendadas para itens sem uma fonte validada.</p>
+    <div class="solar-custom-grid">
+      <label class="solar-field" for="solar-custom-name">
+        Nome do equipamento
+        <input id="solar-custom-name" type="text" maxlength="80" data-custom-name />
+      </label>
+      <label class="solar-field" for="solar-custom-category">
+        Categoria
+        <select id="solar-custom-category" data-custom-category>
+          {equipmentCategories.map((category) => <option value={category.id}>{category.labelPt}</option>)}
+        </select>
+      </label>
+      <label class="solar-field" for="solar-custom-supply">
+        Alimentação
+        <select id="solar-custom-supply" data-custom-supply>
+          <option value="dc">Corrente contínua (DC)</option>
+          <option value="ac">Corrente alternada (AC)</option>
+        </select>
+      </label>
+      <label class="solar-field" for="solar-custom-basis">
+        Como informar o consumo
+        <select id="solar-custom-basis" data-custom-basis>
+          <option value="power-time">Potência durante o uso × horas</option>
+          <option value="monthly-energy">Consumo mensal da etiqueta (kWh/mês)</option>
+          <option value="daily-energy">Consumo diário em Wh</option>
+          <option value="amp-hours-per-day">Consumo diário em Ah (DC)</option>
+          <option value="average-power-24h">Potência média ao longo de 24 h</option>
+          <option value="compressor-cycle">Potência e ciclo de funcionamento</option>
+          <option value="current-time">Corrente DC × horas</option>
+        </select>
+      </label>
+    </div>
+
+    <div class="solar-custom-grid" data-basis-fields="power-time">
+      <label class="solar-field">Potência durante o uso (W)<input type="number" min="0.1" step="any" data-custom-power /></label>
+      <label class="solar-field">Horas de uso por dia<input type="number" min="0" max="24" step="0.1" data-custom-hours /></label>
+    </div>
+    <div class="solar-custom-grid" data-basis-fields="daily-energy" hidden>
+      <label class="solar-field">Consumo diário (Wh/dia)<input type="number" min="0.1" step="any" data-custom-daily-energy /></label>
+    </div>
+    <div class="solar-custom-grid" data-basis-fields="monthly-energy" hidden>
+      <label class="solar-field">Consumo mensal (kWh/mês)<input type="number" min="0.001" step="any" data-custom-monthly-energy /></label>
+      <p class="solar-field-note">Valor da etiqueta Inmetro (ENCE) ou da ficha. Convertemos para Wh/dia considerando um mês de 30 dias. A etiqueta é medida em ensaio padronizado; no veículo, calor e uso podem alterar o consumo.</p>
+    </div>
+    <div class="solar-custom-grid" data-basis-fields="amp-hours-per-day" hidden>
+      <label class="solar-field">Consumo diário (Ah/dia)<input type="number" min="0.001" step="any" data-custom-amp-hours /></label>
+      <label class="solar-field">Tensão do equipamento
+        <select data-custom-amp-hours-voltage><option value="12">12 V</option><option value="24">24 V</option></select>
+      </label>
+    </div>
+    <div class="solar-custom-grid" data-basis-fields="average-power-24h" hidden>
+      <label class="solar-field">Potência média contínua (W)<input type="number" min="0.1" step="any" data-custom-average-power /></label>
+    </div>
+    <div class="solar-custom-grid" data-basis-fields="compressor-cycle" hidden>
+      <label class="solar-field">Potência enquanto funciona (W)<input type="number" min="0.1" step="any" data-custom-running-power /></label>
+      <label class="solar-field">Janela de funcionamento por dia (h)<input type="number" min="0" max="24" step="0.1" data-custom-operating-hours /></label>
+      <label class="solar-field">Ciclo de trabalho (%)<input type="number" min="0" max="100" step="1" data-custom-duty-cycle /></label>
+    </div>
+    <div class="solar-custom-grid" data-basis-fields="current-time" hidden>
+      <label class="solar-field">Corrente do equipamento (A)<input type="number" min="0.1" step="any" data-custom-current /></label>
+      <label class="solar-field">Tensão do equipamento
+        <select data-custom-voltage><option value="12">12 V</option><option value="24">24 V</option></select>
+      </label>
+      <label class="solar-field">Horas de uso por dia<input type="number" min="0" max="24" step="0.1" data-custom-current-hours /></label>
+    </div>
+    <div class="solar-custom-grid" data-custom-ac-fields hidden>
+      <label class="solar-field">Potência nominal AC (W)<input type="number" min="0.1" step="any" data-custom-rated-power /></label>
+      <label class="solar-field">Potência de partida (W), se conhecida<input type="number" min="0.1" step="any" data-custom-startup-power /></label>
+    </div>
+    <div class="solar-custom-actions">
+      <label class="solar-field solar-inline-field">Quantidade<input type="number" min="1" step="1" value="1" data-custom-quantity /></label>
+      <label class="solar-checkbox"><input type="checkbox" checked data-custom-simultaneous /> Pode funcionar ao mesmo tempo que outras cargas AC</label>
+      <button class="button" type="button" data-add-custom-load>Adicionar equipamento</button>
+    </div>
+    <p class="solar-error" data-custom-error role="alert" hidden></p>
+    <ul class="solar-load-list" data-selected-loads aria-label="Equipamentos selecionados"></ul>
+  </section>
+
+  <section class="solar-inverter-settings" data-inverter-settings hidden aria-labelledby="solar-inverter-title">
+    <h3 id="solar-inverter-title">Dados do inversor para cargas AC</h3>
+    <p>Comece pelo cenário de 220 V e 2.000 W, pensado como ponto de partida para cargas usuais. Os valores já estão preenchidos e podem ser ajustados para o seu equipamento.</p>
+    <label class="solar-field" for="solar-ac-output">
+      Tensão de saída AC
+      <select id="solar-ac-output" data-ac-output>
+        <option value="">Selecione a tensão do seu sistema</option>
+        <option value="127">127 V</option>
+        <option value="220" selected>220 V</option>
+        <option value="230">230 V</option>
+        <option value="120">120 V</option>
+      </select>
+    </label>
+    <label class="solar-checkbox solar-reference-toggle" data-inverter-reference-wrap hidden>
+      <input type="checkbox" data-use-victron-reference />
+      Usar perfil Victron SUN de 230 V como referência editável
+    </label>
+    <p class="solar-reference-note" data-inverter-reference-note hidden>A eficiência informada pelo fabricante é máxima, não garantida em toda carga. O consumo em espera depende das horas de permanência ligado sem carga.</p>
+    <div class="solar-custom-grid">
+      <label class="solar-field">Potência contínua do inversor (W)<input type="number" min="1" step="any" value={initialInverterScenario.ratedPowerW} data-inverter-rated-power /></label>
+      <label class="solar-field">Eficiência do inversor (%)<input type="number" min="1" max="100" step="0.1" value={initialInverterScenario.efficiencyPercent} data-inverter-efficiency /></label>
+      <label class="solar-field">Consumo sem carga (W)<input type="number" min="0" step="0.1" value={initialInverterScenario.standbyPowerW} data-inverter-standby /></label>
+      <label class="solar-field">Horas por dia ligado sem carga<input type="number" min="0" max="24" step="0.1" value={initialInverterScenario.standbyHoursPerDay} data-inverter-standby-hours /></label>
+    </div>
+    <p class="solar-field-note" data-inverter-status>{initialInverterScenario.notePt}</p>
+  </section>
+</fieldset>

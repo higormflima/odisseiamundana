@@ -5,7 +5,12 @@ export type LoadBasis =
   | { kind: 'average-power-24h'; averagePowerW: number }
   | { kind: 'compressor-cycle'; runningPowerW: number; operatingWindowHoursPerDay: number; dutyCycle: number }
   | { kind: 'daily-energy'; energyWhPerDay: number }
-  | { kind: 'current-time'; currentA: number; voltageV: number; hoursPerDay: number };
+  | { kind: 'current-time'; currentA: number; voltageV: number; hoursPerDay: number }
+  /** Consumo mensal de etiquetas como a ENCE do Inmetro; convertido para Wh/dia com mês de 30 dias. */
+  | { kind: 'monthly-energy'; energyKWhPerMonth: number }
+  | { kind: 'amp-hours-per-day'; ampHoursPerDay: number; voltageV: number };
+
+export const DAYS_PER_MONTH = 30;
 
 export interface ElectricalLoad {
   id: string;
@@ -246,6 +251,19 @@ function calculateLoadEnergy(load: ElectricalLoad, systemVoltageV: number): numb
       }
       energyPerUnitWh = load.basis.voltageV * load.basis.currentA * load.basis.hoursPerDay;
       break;
+    case 'monthly-energy':
+      requirePositive(load.basis.energyKWhPerMonth, `Consumo mensal da carga "${load.id}"`);
+      energyPerUnitWh = (load.basis.energyKWhPerMonth * 1000) / DAYS_PER_MONTH;
+      break;
+    case 'amp-hours-per-day':
+      if (load.supply !== 'dc') throw new TypeError(`A base Ah/dia da carga "${load.id}" aceita somente corrente contínua.`);
+      requirePositive(load.basis.ampHoursPerDay, `Ah por dia da carga "${load.id}"`);
+      requirePositive(load.basis.voltageV, `Tensão da carga "${load.id}"`);
+      if (load.basis.voltageV !== systemVoltageV) {
+        throw new RangeError(`A tensão da carga "${load.id}" difere do banco; a eficiência do conversor precisa ser modelada.`);
+      }
+      energyPerUnitWh = load.basis.ampHoursPerDay * load.basis.voltageV;
+      break;
     default: {
       const exhaustive: never = load.basis;
       throw new TypeError(`Base de consumo não suportada: ${String(exhaustive)}.`);
@@ -361,6 +379,66 @@ function getBatteryNominalVoltageV(
   const nominalVoltageV = battery.nominalVoltageV ?? systemVoltageV;
   requirePositive(nominalVoltageV, 'Tensão nominal da bateria');
   return nominalVoltageV;
+}
+
+export interface SolarCoverageInput {
+  dailyEnergyAtBatteryBusWh: number;
+  peakSunHours: number;
+  /** Red1 do CRESESB: sujeira, degradação, tolerância e temperatura dos módulos. */
+  moduleDeratingFactor: number;
+  /** Red2 do CRESESB: fiação, controlador, diodos e demais perdas do sistema. */
+  systemDeratingFactor: number;
+  /** Eficiência global (ida e volta) da bateria, como em η_bat da Eq. 6.2 do CRESESB. */
+  batteryRoundTripEfficiency: number;
+  systemVoltageV: 12 | 24;
+  /** Potência máxima de painéis que cabe no veículo; ausente quando o usuário não informa o limite. */
+  availableArrayPowerWp?: number;
+}
+
+export interface SolarCoverage extends SolarCoverageInput {
+  energyToGenerateWhPerDay: number;
+  idealArrayPowerWp: number;
+  estimatedGenerationWhPerDay?: number;
+  coverageFraction?: number;
+  deficitWhPerDay?: number;
+  /** Potência considerada para o controlador: a disponível, ou a ideal quando não há limite informado. */
+  controllerArrayPowerWp: number;
+  /** Estimativa conservadora: potência nominal do arranjo ÷ tensão nominal do banco, sem perdas. */
+  minimumControllerChargeCurrentA: number;
+}
+
+/**
+ * Potência do arranjo conforme a Eq. 6.3 do Manual de Engenharia FV (CRESESB/CEPEL, 2014):
+ * P = (E ÷ η_bat) ÷ (HSP × Red1 × Red2). A cobertura aplica a mesma relação em sentido inverso.
+ */
+export function calculateSolarCoverage(input: SolarCoverageInput): SolarCoverage {
+  requirePositive(input.dailyEnergyAtBatteryBusWh, 'Consumo diário no barramento da bateria');
+  requirePositive(input.peakSunHours, 'Horas de sol-pico');
+  if (input.peakSunHours > 24) throw new RangeError('Horas de sol-pico precisa ser no máximo 24.');
+  requireEfficiency(input.moduleDeratingFactor, 'Fator de redução dos módulos (Red1)');
+  requireEfficiency(input.systemDeratingFactor, 'Fator de perdas do sistema (Red2)');
+  requireEfficiency(input.batteryRoundTripEfficiency, 'Eficiência global da bateria');
+  requireSystemVoltage(input.systemVoltageV);
+  if (input.availableArrayPowerWp !== undefined) requirePositive(input.availableArrayPowerWp, 'Potência de painéis disponível');
+
+  const energyToGenerateWhPerDay = input.dailyEnergyAtBatteryBusWh / input.batteryRoundTripEfficiency;
+  const yieldWhPerWp = input.peakSunHours * input.moduleDeratingFactor * input.systemDeratingFactor;
+  const idealArrayPowerWp = energyToGenerateWhPerDay / yieldWhPerWp;
+  const controllerArrayPowerWp = input.availableArrayPowerWp ?? idealArrayPowerWp;
+  const result: SolarCoverage = {
+    ...input,
+    energyToGenerateWhPerDay,
+    idealArrayPowerWp,
+    controllerArrayPowerWp,
+    minimumControllerChargeCurrentA: controllerArrayPowerWp / input.systemVoltageV,
+  };
+  if (input.availableArrayPowerWp !== undefined) {
+    const estimatedGenerationWhPerDay = input.availableArrayPowerWp * yieldWhPerWp * input.batteryRoundTripEfficiency;
+    result.estimatedGenerationWhPerDay = estimatedGenerationWhPerDay;
+    result.coverageFraction = estimatedGenerationWhPerDay / input.dailyEnergyAtBatteryBusWh;
+    result.deficitWhPerDay = Math.max(0, input.dailyEnergyAtBatteryBusWh - estimatedGenerationWhPerDay);
+  }
+  return result;
 }
 
 export function calculatePvSizing(

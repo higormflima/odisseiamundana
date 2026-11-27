@@ -1,0 +1,71 @@
+---
+---
+
+<fieldset class="solar-step" data-step-panel="report" hidden>
+  <legend tabindex="-1">Guia básico do sistema elétrico</legend>
+  <p class="solar-step-intro">Use as estimativas de consumo, bateria, inversor e energia solar como ponto de partida para planejar a instalação.</p>
+  <div class="solar-report-actions" role="group" aria-label="Ações do relatório PDF">
+    <button class="button" type="button" data-download-pdf>Gerar PDF</button>
+    <button class="button" type="button" aria-describedby="solar-pdf-help" data-share-pdf hidden>Salvar/Compartilhar PDF</button>
+    <a class="button button-secondary" aria-describedby="solar-pdf-help" data-save-pdf hidden>Baixar PDF</a>
+    <button class="button button-secondary" type="button" aria-haspopup="dialog" data-open-pdf hidden>Visualizar PDF</button>
+    <button class="button button-secondary" type="button" data-download-xlsx>Baixar planilha (Excel)</button>
+  </div>
+  <p class="solar-field-note" id="solar-pdf-help">Primeiro gere o PDF. Depois, use Salvar/Compartilhar PDF e escolha Salvar em Arquivos no iPhone. Se o compartilhamento não estiver disponível, use Baixar PDF. Visualizar PDF exibe o arquivo aqui mesmo, sem abrir outra aba. Nada é enviado automaticamente.</p>
+  <p class="solar-file-status" data-project-file-status role="status" aria-live="polite"></p>
+
+  <article class="solar-report" data-report-content>
+    <header class="solar-report-header">
+      <p class="eyebrow">Odisseia Mundana · Guia de planejamento</p>
+      <h2 data-report-title>Guia básico do sistema elétrico</h2>
+      <p class="solar-report-lead">Consumo, baterias, inversor e energia solar: um ponto de partida para planejar seu veículo.</p>
+      <dl class="solar-report-identification" data-report-identification></dl>
+    </header>
+
+    <section class="solar-report-section">
+      <h3><span>01</span> Seu sistema em resumo</h3>
+      <dl class="solar-report-highlights" data-report-summary></dl>
+      <aside class="solar-report-warning-box" data-report-warning-box role="note" hidden>
+        <h4>Atenção antes de usar os resultados</h4>
+        <ul data-report-warnings></ul>
+      </aside>
+    </section>
+
+    <section class="solar-report-section">
+      <h3><span>02</span> Consumo dos equipamentos</h3>
+      <p class="solar-report-note">A energia de cada equipamento inclui a quantidade escolhida, mas ainda não as perdas do inversor.</p>
+      <div class="solar-report-table-wrap">
+        <table class="solar-report-table">
+          <thead><tr><th scope="col">Equipamento / referência</th><th scope="col">Qtd.</th><th scope="col">Uso por unidade</th><th scope="col">Energia por dia</th></tr></thead>
+          <tbody data-report-loads></tbody>
+        </table>
+      </div>
+      <h4 class="solar-report-subtitle">Composição do consumo diário</h4>
+      <dl class="solar-report-totals" data-report-consumption></dl>
+      <p class="solar-report-note" data-report-excluded-loads></p>
+    </section>
+
+    <section class="solar-report-section">
+      <h3><span>03</span> Banco de baterias estimado</h3>
+      <dl class="solar-report-metrics" data-report-battery></dl>
+    </section>
+
+    <section class="solar-report-section">
+      <h3><span>04</span> Inversor</h3>
+      <dl class="solar-report-metrics" data-report-components></dl>
+      <p class="solar-report-callout" data-report-inverter-note></p>
+    </section>
+
+    <section class="solar-report-section" data-report-solar-section hidden>
+      <h3><span>05</span> Energia solar e controlador</h3>
+      <dl class="solar-report-metrics" data-report-solar></dl>
+      <p class="solar-report-callout" data-report-solar-note></p>
+    </section>
+
+    <section class="solar-report-section">
+      <h3><span data-report-notes-number>05</span> Premissas e limites</h3>
+      <ul data-report-calculation-notes></ul>
+      <p class="solar-report-disclaimer" data-report-disclaimer></p>
+    </section>
+  </article>
+</fieldset>

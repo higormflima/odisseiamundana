@@ -2,8 +2,9 @@ import {
   calculateBatteryCapacity,
   calculateDailyConsumption,
   calculateInverterSizing,
+  calculateSolarCoverage,
 } from './calculations.ts';
-import type { BatteryCapacityParameters, DailyConsumption, ElectricalLoad, InverterSizing } from './calculations.ts';
+import type { BatteryCapacityParameters, DailyConsumption, ElectricalLoad, InverterSizing, SolarCoverage } from './calculations.ts';
 
 export interface SolarReportLoadInput {
   name: string;
@@ -12,15 +13,24 @@ export interface SolarReportLoadInput {
   load: ElectricalLoad;
 }
 
+export interface SolarReportSolarInput {
+  countryLabelPt: string;
+  peakSunHours: number;
+  moduleDeratingFactor: number;
+  systemDeratingFactor: number;
+  batteryRoundTripEfficiency: number;
+  availableArrayPowerWp?: number;
+}
+
 export interface SolarReportInput {
   projectName: string;
   generatedAt: string;
   applicationVersion: string;
   vehicleLabelPt: string;
   systemVoltageV: 12 | 24;
-  countryLabelPt: string;
-  peakSunHours: number;
   loads: SolarReportLoadInput[];
+  /** Estimativa solar opcional; ausente quando o usuário não pede painéis. */
+  solar?: SolarReportSolarInput;
   inverter: {
     ratedPowerW?: number;
     efficiency: number;
@@ -57,9 +67,8 @@ export interface SolarReport {
   applicationVersion: string;
   vehicleLabelPt: string;
   systemVoltageV: 12 | 24;
-  countryLabelPt: string;
-  peakSunHours: number;
   loads: SolarReportLoad[];
+  solar?: SolarCoverage & { countryLabelPt: string };
   consumption: DailyConsumption;
   battery: ReturnType<typeof calculateBatteryCapacity>;
   batteryConfiguration: {
@@ -101,6 +110,10 @@ function describeLoadBasis(load: ElectricalLoad): string {
       return `${displayNumber(basis.energyWhPerDay)} Wh/dia informado`;
     case 'current-time':
       return `${displayNumber(basis.currentA)} A × ${displayNumber(basis.voltageV)} V × ${displayNumber(basis.hoursPerDay)} h/dia`;
+    case 'monthly-energy':
+      return `${displayNumber(basis.energyKWhPerMonth)} kWh/mês ÷ 30 dias`;
+    case 'amp-hours-per-day':
+      return `${displayNumber(basis.ampHoursPerDay)} Ah/dia × ${displayNumber(basis.voltageV)} V`;
   }
 }
 
@@ -151,6 +164,18 @@ export function buildSolarReport(input: SolarReportInput): SolarReport {
   }));
   const withinKnownLimit = input.maxParallelBatteries === undefined
     || parallelCount <= input.maxParallelBatteries;
+  const solar = input.solar ? {
+    countryLabelPt: input.solar.countryLabelPt,
+    ...calculateSolarCoverage({
+      dailyEnergyAtBatteryBusWh: consumption.totalAtBatteryBusWhPerDay,
+      peakSunHours: input.solar.peakSunHours,
+      moduleDeratingFactor: input.solar.moduleDeratingFactor,
+      systemDeratingFactor: input.solar.systemDeratingFactor,
+      batteryRoundTripEfficiency: input.solar.batteryRoundTripEfficiency,
+      systemVoltageV: input.systemVoltageV,
+      availableArrayPowerWp: input.solar.availableArrayPowerWp,
+    }),
+  } : undefined;
   const warnings = [
     ...(inverter && input.inverter.ratedPowerW !== undefined && inverter.minimumContinuousPowerW > input.inverter.ratedPowerW
       ? [`A potência contínua escolhida para o inversor (${displayNumber(input.inverter.ratedPowerW)} W) é menor que a exigida pelas cargas simultâneas (${displayNumber(inverter.minimumContinuousPowerW)} W). Escolha um inversor maior ou reduza a simultaneidade.`]
@@ -169,9 +194,8 @@ export function buildSolarReport(input: SolarReportInput): SolarReport {
     applicationVersion: input.applicationVersion,
     vehicleLabelPt: input.vehicleLabelPt,
     systemVoltageV: input.systemVoltageV,
-    countryLabelPt: input.countryLabelPt,
-    peakSunHours: input.peakSunHours,
     loads: reportLoads,
+    solar,
     consumption,
     battery,
     batteryConfiguration: {
@@ -208,7 +232,11 @@ export function buildSolarReport(input: SolarReportInput): SolarReport {
       ...(inverter ? [
         'Inversor: usamos apenas as cargas AC marcadas como simultâneas e os picos informados. A escolha final também depende dos limites de descarga da bateria e da duração das partidas.',
       ] : []),
-      'Fora deste guia: painéis, controlador, carregadores, cabos, proteções e energia/tempo de recarga não foram dimensionados aqui. Esses itens precisam do projeto da instalação.',
+      ...(solar ? [
+        'Energia solar: método do mês crítico do Manual de Engenharia para Sistemas Fotovoltaicos (CRESESB/CEPEL, 2014), com a HSP informada. Médias anuais escondem os meses de pouco sol; para uso no inverno, informe a HSP do mês mais crítico do local.',
+        'Controlador de carga: a corrente mínima é uma estimativa conservadora (potência nominal dos painéis ÷ tensão do banco). Confira na ficha do controlador e dos painéis a tensão máxima de entrada, sobretudo em dias frios, quando a tensão dos módulos aumenta.',
+      ] : []),
+      `Fora deste guia: ${solar ? '' : 'painéis, controlador, '}carregadores, cabos, proteções e energia/tempo de recarga não foram dimensionados aqui. Esses itens precisam do projeto da instalação e das normas brasileiras aplicáveis ao veículo.`,
     ],
   };
 }

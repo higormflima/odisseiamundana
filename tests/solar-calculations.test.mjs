@@ -7,6 +7,7 @@ import {
   calculateDcDcChargerSizing,
   calculateInverterSizing,
   calculatePvSizing,
+  calculateSolarCoverage,
   calculateSolarSystem,
 } from '../src/lib/solar/calculations.ts';
 
@@ -72,6 +73,46 @@ test('calcula potência-tempo e corrente-tempo, validando tensão DC do banco', 
   assert.throws(() => calculateDailyConsumption([
     { id: 'pump', supply: 'dc', quantity: 1, simultaneous: true, basis: { kind: 'current-time', currentA: 5, voltageV: 12, hoursPerDay: 2 } },
   ], 24, 0.9, 0, 0), /difere do banco/);
+});
+
+test('converte kWh/mês de etiqueta (mês de 30 dias) e Ah/dia DC na tensão do banco', () => {
+  const result = calculateDailyConsumption([
+    { id: 'minibar', supply: 'ac', quantity: 1, simultaneous: true, ratedPowerW: 80, basis: { kind: 'monthly-energy', energyKWhPerMonth: 21 } },
+    { id: 'fridge', supply: 'dc', quantity: 2, simultaneous: true, basis: { kind: 'amp-hours-per-day', ampHoursPerDay: 18, voltageV: 12 } },
+  ], 12, 1, 0, 0);
+
+  assert.deepEqual(result.loads.map((load) => load.applianceEnergyWhPerDay), [700, 432]);
+  assert.throws(() => calculateDailyConsumption([
+    { id: 'fridge', supply: 'dc', quantity: 1, simultaneous: true, basis: { kind: 'amp-hours-per-day', ampHoursPerDay: 18, voltageV: 12 } },
+  ], 24, 1, 0, 0), /difere do banco/);
+  assert.throws(() => calculateDailyConsumption([
+    { id: 'fridge', supply: 'ac', quantity: 1, simultaneous: true, ratedPowerW: 50, basis: { kind: 'amp-hours-per-day', ampHoursPerDay: 18, voltageV: 12 } },
+  ], 12, 1, 0, 0), /somente corrente contínua/);
+});
+
+test('estima potência ideal, cobertura e déficit solar pela Eq. 6.3 do CRESESB', () => {
+  const input = {
+    dailyEnergyAtBatteryBusWh: 1000,
+    peakSunHours: 5,
+    moduleDeratingFactor: 0.75,
+    systemDeratingFactor: 0.9,
+    batteryRoundTripEfficiency: 0.86,
+    systemVoltageV: 12,
+    availableArrayPowerWp: 200,
+  };
+  const coverage = calculateSolarCoverage(input);
+  assert.ok(Math.abs(coverage.idealArrayPowerWp - 1000 / 0.86 / (5 * 0.75 * 0.9)) < 1e-9);
+  assert.ok(Math.abs(coverage.estimatedGenerationWhPerDay - 580.5) < 1e-9);
+  assert.ok(Math.abs(coverage.coverageFraction - 0.5805) < 1e-9);
+  assert.ok(Math.abs(coverage.deficitWhPerDay - 419.5) < 1e-9);
+  assert.ok(Math.abs(coverage.minimumControllerChargeCurrentA - 200 / 12) < 1e-9);
+
+  const withoutLimit = calculateSolarCoverage({ ...input, availableArrayPowerWp: undefined, systemVoltageV: 24 });
+  assert.equal(withoutLimit.coverageFraction, undefined);
+  assert.ok(Math.abs(withoutLimit.minimumControllerChargeCurrentA - withoutLimit.idealArrayPowerWp / 24) < 1e-9);
+  const surplus = calculateSolarCoverage({ ...input, availableArrayPowerWp: 800 });
+  assert.equal(surplus.deficitWhPerDay, 0);
+  assert.throws(() => calculateSolarCoverage({ ...input, moduleDeratingFactor: 1.2 }), /Red1/);
 });
 
 test('converte consumo AC pela eficiência do inversor e inclui seu consumo em espera', () => {

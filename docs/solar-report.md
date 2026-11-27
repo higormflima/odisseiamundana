@@ -4,11 +4,11 @@ Para a arquitetura, as fórmulas e as limitações gerais da ferramenta, consult
 
 ## Relatório
 
-O guia básico é montado localmente no navegador a partir da configuração atual, com cinco seções: resumo, consumo dos equipamentos, banco de baterias estimado, inversor e premissas/limites. O inventário distingue referências de fabricante, cenários genéricos editáveis e cargas próprias.
+O guia básico é montado localmente no navegador a partir da configuração atual, com cinco seções: resumo, consumo dos equipamentos, banco de baterias estimado, inversor e premissas/limites. Quando o usuário ativa a etapa solar, entra uma sexta seção, **Energia solar e controlador**, antes das premissas. O inventário distingue referências de fabricante, cenários genéricos editáveis e cargas próprias.
 
 Freedom DF4100 e Rolls AGM usam a capacidade de descarga publicada e DoD para estimar energia e quantidade de baterias, sem exigir eficiências direcionais desconhecidas. LiFePO₄ preserva o método com eficiência de descarga do perfil. Nenhum método promete capacidade real em qualquer temperatura ou regime.
 
-Não são inventados parâmetros ausentes. Painéis, MPPT, recarga, carregadores, cabos e proteções ficam fora do escopo deste guia, explicitados em uma nota de limites em vez de várias seções incompletas. Avisos de incompatibilidades conhecidas, como ultrapassar limite publicado de paralelos ou descarga, continuam visíveis.
+Não são inventados parâmetros ausentes. Recarga por alternador ou tomada, carregadores, cabos e proteções ficam fora do escopo deste guia, explicitados em uma nota de limites em vez de várias seções incompletas. Painéis e controlador só aparecem quando a etapa solar é ativada, com o método e os fatores de perda do CRESESB descritos em [odisseia-solar.md](./odisseia-solar.md). Avisos de incompatibilidades conhecidas, como ultrapassar limite publicado de paralelos ou descarga, continuam visíveis.
 
 O cálculo do inversor informa potências mínimas contínua e de pico e verifica correntes da bateria/BMS. A potência contínua escolhida é comparada à mínima calculada; insuficiência gera aviso. A potência de pico e a duração de partida ainda exigem conferência na ficha do modelo.
 
@@ -32,8 +32,21 @@ O PDF contém texto selecionável, fontes oficiais incorporadas, cabeçalhos, ro
 
 Durante a geração, o botão fica ocupado e indisponível para evitar cliques duplicados. Falhas são informadas em português, sem perder o formulário ou recorrer silenciosamente à impressão. Os avisos de validação do formulário também são localizados em português, independentemente do idioma do navegador.
 
+## Planilha Excel
+
+**Baixar planilha (Excel)** gera, no próprio clique, um arquivo `.xlsx` com duas abas:
+
+- **Resumo:** identificação, resumo do sistema, banco de baterias (incluindo como ligá-las), inversor, energia solar quando ativada, avisos, premissas e o aviso final.
+- **Consumo:** uma linha por equipamento (nome, categoria, alimentação, quantidade, uso por unidade e energia por dia em Wh) e a composição do consumo diário. Quantidades e energias são células numéricas, que podem ser somadas e editadas.
+
+O arquivo abre diretamente no Excel, no Numbers e no Google Planilhas, sem conversão. É montado em `src/lib/solar/report-xlsx.ts`, sem dependências: um pacote ZIP sem compressão com as partes mínimas do formato Office Open XML (`[Content_Types].xml`, relações, `workbook.xml`, `styles.xml` e uma planilha por aba, com textos em células `inlineStr`). A geração reutiliza a mesma apresentação da tela e do PDF e não descarta um PDF já gerado. A compatibilidade foi conferida abrindo o arquivo no Excel e no `openpyxl`.
+
+## Progresso salvo no navegador
+
+O formulário é salvo automaticamente no `localStorage` do navegador (chave `odisseia-mundana:planejador-eletrico`), incluindo a etapa atual e os equipamentos adicionados manualmente. Nada é enviado a um servidor. **Recomeçar** apaga esses dados após confirmação. A lógica fica em `src/scripts/solarWizardStorage.ts`: cada campo é identificado pelo grupo do rádio ou pelo primeiro atributo `data-*`, prefixado pelo equipamento do catálogo; campos desconhecidos são ignorados ao restaurar, e a versão do formato (`version: 1`) invalida dados incompatíveis.
+
 ## Contrato JSON legado
 
-A interface pública oferece apenas o PDF, sem botões, seletor de arquivo ou fluxo de importação/exportação JSON. Os dados do formulário continuam locais e não persistem ao recarregar a página.
+A interface pública oferece o PDF e a planilha Excel, sem botões, seletor de arquivo ou fluxo de importação/exportação JSON. O progresso salvo no navegador usa um formato próprio e independente desse contrato.
 
 O contrato versionado `.odisseia-solar.json` permanece isolado em `src/lib/solar/project-file.ts`, com os testes de validação das versões 1 e 2 preservados. Esse módulo legado não é carregado pelo assistente público.

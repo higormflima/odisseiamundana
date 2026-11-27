@@ -1,0 +1,43 @@
+---
+---
+
+<fieldset class="solar-step" data-step-panel="vehicle">
+  <legend tabindex="-1">Veículo e sistema</legend>
+  <p class="solar-step-intro">Comece com uma configuração básica. Você poderá voltar e alterar as escolhas.</p>
+
+  <label class="solar-field" for="solar-project-name">
+    Nome do projeto (opcional)
+    <input id="solar-project-name" type="text" maxlength="100" data-project-name />
+  </label>
+
+  <label class="solar-field" for="solar-vehicle-type">
+    Tipo de veículo
+    <select id="solar-vehicle-type" data-vehicle-type required>
+      <option value="" selected disabled>Selecione uma opção</option>
+      <option value="van-compact">Van compacta</option>
+      <option value="van-large">Van grande</option>
+      <option value="motorhome-medium">Motorhome médio</option>
+      <option value="motorhome-large">Motorhome grande</option>
+      <option value="truck-bus">Caminhão ou ônibus convertido</option>
+      <option value="other">Outro</option>
+    </select>
+  </label>
+
+  <fieldset class="solar-choice-group">
+    <legend>Tensão nominal do banco</legend>
+    <div class="solar-choice-cards">
+      <label class="solar-choice-card">
+        <input type="radio" name="systemVoltageV" value="12" checked />
+        <span><strong>12 V</strong><small>Opção inicial</small></span>
+      </label>
+      <label class="solar-choice-card">
+        <input type="radio" name="systemVoltageV" value="24" />
+        <span><strong>24 V</strong><small>Compatibilidade depende dos equipamentos</small></span>
+      </label>
+    </div>
+    <details class="solar-info">
+      <summary>Como escolher entre 12 V e 24 V?</summary>
+      <p>Sistemas maiores, como motorhomes de grande porte e caminhões, ou instalações com equipamentos de alto consumo, podem se beneficiar de 24 V. Para a mesma potência, uma tensão maior reduz a corrente elétrica, podendo permitir cabos de menor seção e reduzir perdas. A escolha também depende dos equipamentos e componentes disponíveis.</p>
+    </details>
+  </fieldset>
+</fieldset>

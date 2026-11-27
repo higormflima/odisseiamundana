@@ -10,7 +10,7 @@
   "scripts": {
     "dev": "node scripts/sync-public-media.mjs --include-draft-photos && astro dev",
     "start": "pnpm dev",
-    "build": "node scripts/sync-public-media.mjs && pnpm validate:metadata && pnpm gallery:validate && astro build && pagefind --site dist",
+    "build": "node scripts/sync-public-media.mjs && pnpm validate:metadata && pnpm gallery:validate && astro build && pagefind --site dist && node scripts/generate-sitemap.mjs",
     "preview": "astro preview",
     "validate:metadata": "node scripts/validate-metadata.mjs",
     "gallery:process": "node scripts/gallery-process.mjs",

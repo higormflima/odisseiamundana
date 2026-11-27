@@ -1,0 +1,93 @@
+---
+import { agmBatteryReference, batteryCatalog, leadAcidBatteryReference } from '../../lib/solar/catalogs.ts';
+
+const initialBatteryProfile = batteryCatalog[0];
+---
+
+<fieldset class="solar-step" data-step-panel="battery" hidden>
+  <legend tabindex="-1">Banco de baterias</legend>
+  <p class="solar-step-intro">Escolha a química. A capacidade necessária usa o consumo diário e a autonomia que você definir.</p>
+
+  <label class="solar-field" for="solar-autonomy">
+    Quantos dias de autonomia você deseja?
+    <input id="solar-autonomy" type="number" min="0.5" step="0.5" data-autonomy required />
+  </label>
+  <p class="solar-field-note">Autonomia é o período desejado sem reposição de energia solar. Não há um valor padrão para o seu perfil de uso.</p>
+
+  <fieldset class="solar-choice-group">
+    <legend>Tecnologia da bateria</legend>
+    <div class="solar-choice-cards">
+      <label class="solar-choice-card">
+        <input type="radio" name="batteryChemistry" value="lifepo4" checked data-battery-chemistry />
+        <span><strong>LiFePO₄</strong><small>Perfil de referência editável por tensão</small></span>
+      </label>
+      <label class="solar-choice-card">
+        <input type="radio" name="batteryChemistry" value="lead-acid" data-battery-chemistry />
+        <span><strong>Chumbo-ácido</strong><small>Referência Freedom DF4100 em C20</small></span>
+      </label>
+      <label class="solar-choice-card">
+        <input type="radio" name="batteryChemistry" value="agm" data-battery-chemistry />
+        <span><strong>AGM</strong><small>Referência Rolls S12-230AGM-RE em C20</small></span>
+      </label>
+    </div>
+  </fieldset>
+
+  <section class="solar-battery-profile" data-lifepo4-panel aria-labelledby="solar-profile-title">
+    <h3 id="solar-profile-title">Referência LiFePO₄</h3>
+    <label class="solar-field" for="solar-battery-profile">
+      Perfil compatível com a tensão escolhida
+      <select id="solar-battery-profile" data-battery-profile>
+        {batteryCatalog.map((profile) => (
+          <option value={profile.id} selected={profile.id === initialBatteryProfile.id}>{profile.namePt}</option>
+        ))}
+      </select>
+    </label>
+    <p class="solar-field-note">A referência foi publicada para um modelo específico. Você pode ajustar os valores conforme a bateria escolhida.</p>
+    <p class="solar-reference-note" data-battery-profile-note>{initialBatteryProfile.notePt} {initialBatteryProfile.depthOfDischargeBasisPt}</p>
+    <a class="solar-source-link" data-battery-source href={initialBatteryProfile.sources[0].url} target="_blank" rel="noopener noreferrer">Abrir ficha técnica do perfil</a>
+    <div class="solar-custom-grid solar-battery-fields">
+      <label class="solar-field">Tensão nominal da bateria (V)<input type="number" min="0.1" step="0.1" value={initialBatteryProfile.parameters.nominalVoltageV} data-lfp-nominal-voltage /></label>
+      <label class="solar-field">Capacidade por bateria (Ah)<input type="number" min="0.1" step="any" value={initialBatteryProfile.nominalCapacityAh} data-lfp-capacity /></label>
+      <label class="solar-field">Profundidade de descarga (DoD %)<input type="number" min="0.1" max="100" step="0.1" value={initialBatteryProfile.parameters.depthOfDischarge * 100} data-lfp-dod /></label>
+      <label class="solar-field">Eficiência de carga (%)<input type="number" min="0.1" max="100" step="0.1" value={initialBatteryProfile.parameters.chargeEfficiency * 100} data-lfp-charge-efficiency /></label>
+      <label class="solar-field">Eficiência de descarga (%)<input type="number" min="0.1" max="100" step="0.1" value={initialBatteryProfile.parameters.dischargeEfficiency * 100} data-lfp-discharge-efficiency /></label>
+      <label class="solar-field">Tensão de carga (V)<input type="number" min="0.1" step="0.1" value={initialBatteryProfile.parameters.chargeVoltageV} data-lfp-charge-voltage /></label>
+      <label class="solar-field">Tensão de corte de descarga (V)<input type="number" min="0.1" step="0.1" value={initialBatteryProfile.parameters.dischargeCutoffVoltageV} data-lfp-cutoff-voltage /></label>
+      <label class="solar-field">Corrente máxima de carga (A)<input type="number" min="0.1" step="any" value={initialBatteryProfile.parameters.maxChargeCurrentA} data-lfp-max-charge /></label>
+      <label class="solar-field">Corrente contínua máxima de descarga (A)<input type="number" min="0.1" step="any" value={initialBatteryProfile.parameters.maxContinuousDischargeCurrentA} data-lfp-max-discharge /></label>
+      <label class="solar-field">Corrente de pico máxima (A), se publicada<input type="number" min="0.1" step="any" value={initialBatteryProfile.parameters.maxPeakDischargeCurrentA} data-lfp-max-peak /></label>
+    </div>
+  </section>
+
+  <section class="solar-battery-profile" data-lead-acid-panel hidden aria-labelledby="solar-lead-acid-title">
+    <h3 id="solar-lead-acid-title">Dados da bateria chumbo-ácido</h3>
+    <p><strong>Referência: {leadAcidBatteryReference.namePt}</strong></p>
+    <p class="solar-reference-note">Usamos a capacidade de descarga publicada para estimar o banco, sem exigir eficiências de carga e descarga. Os valores são editáveis para a bateria escolhida. {leadAcidBatteryReference.depthOfDischargeBasisPt}</p>
+    <p class="solar-field-note">
+      {leadAcidBatteryReference.capacityRatings.map((rating) => `${rating.capacityAh} Ah em C${rating.hours}`).join('; ')}.
+      {' '}{leadAcidBatteryReference.nominalCapacityTestConditionsPt}
+      {' '}A capacidade varia com o regime de descarga; o cálculo não ajusta essa variação automaticamente.
+    </p>
+    <a class="solar-source-link" href={leadAcidBatteryReference.source.url} target="_blank" rel="noopener noreferrer">Consultar anúncio da Freedom DF4100</a>
+    <div class="solar-custom-grid solar-battery-fields">
+      <label class="solar-field">Tensão nominal de cada bateria (V)
+        <select data-lead-unit-voltage><option value="12">12 V</option><option value="24">24 V</option></select>
+      </label>
+      <label class="solar-field">Capacidade por bateria (Ah)<input type="number" min="0.1" step="any" value={leadAcidBatteryReference.nominalCapacityAh} data-lead-capacity /></label>
+      <label class="solar-field">Profundidade de descarga (DoD %)<input type="number" min="0.1" max="100" step="0.1" value={leadAcidBatteryReference.parameters.depthOfDischarge * 100} data-lead-dod /></label>
+    </div>
+  </section>
+  <section class="solar-battery-profile" data-agm-panel hidden aria-labelledby="solar-agm-title">
+    <h3 id="solar-agm-title">Referência AGM</h3>
+    <p><strong>{agmBatteryReference.namePt}</strong></p>
+    <p class="solar-field-note">AGM também é chumbo-ácido, com eletrólito absorvido em fibra de vidro. {agmBatteryReference.nominalCapacityTestConditionsPt}</p>
+    <p class="solar-reference-note">{agmBatteryReference.depthOfDischargeBasisPt}</p>
+    <p class="solar-field-note">O banco é estimado pela capacidade de descarga publicada, sem exigir eficiências. Cada unidade tem {agmBatteryReference.nominalVoltageV} V; em banco de 24 V, são duas unidades em série por conjunto. A capacidade varia com o regime, a temperatura e o estado da bateria.</p>
+    <a class="solar-source-link" href={agmBatteryReference.sources[0].url} target="_blank" rel="noopener noreferrer">Abrir ficha técnica da Rolls</a>
+    <div class="solar-custom-grid solar-battery-fields">
+      <label class="solar-field">Capacidade por bateria (Ah)<input type="number" min="0.1" step="any" value={agmBatteryReference.nominalCapacityAh} data-agm-capacity /></label>
+      <label class="solar-field">Profundidade de descarga (DoD %)<input type="number" min="0.1" max="100" step="0.1" value={agmBatteryReference.depthOfDischarge * 100} data-agm-dod /></label>
+    </div>
+  </section>
+  <p class="solar-error" data-battery-error role="alert" hidden></p>
+</fieldset>

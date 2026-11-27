@@ -6,32 +6,34 @@ import {
   buildEquipmentLoad,
   equipmentCatalog,
   inverterCatalog,
+  loadProfiles,
   mpptCatalog,
   pvModuleCatalog,
+  solarResourceContinentOrderPt,
   solarResourceCountries,
   solarResourceDataset,
 } from '../src/lib/solar/catalogs.ts';
 import { calculateDailyConsumption } from '../src/lib/solar/calculations.ts';
 
-test('HSP usa códigos ISO, período e valores nacionais da fonte aprovada', () => {
+test('HSP cobre todos os países da fonte com códigos ISO, continentes e valores de referência', () => {
   assert.equal(solarResourceDataset.referencePeriodStartYear, 1991);
   assert.equal(solarResourceDataset.referencePeriodEndYear, 2020);
   assert.equal(solarResourceDataset.sourceUnit, 'kWh/m2/day');
-  assert.equal(new Set(solarResourceCountries.map((country) => country.countryIso3)).size, 8);
+  assert.equal(solarResourceCountries.length, 238);
+  assert.equal(new Set(solarResourceCountries.map((country) => country.countryIso3)).size, solarResourceCountries.length);
+  for (const country of solarResourceCountries) {
+    assert.match(country.countryIso3, /^[A-Z]{3}$/);
+    assert.ok(country.countryNamePt.trim());
+    assert.ok(solarResourceContinentOrderPt.includes(country.continentPt), country.countryIso3);
+    assert.ok(country.peakSunHours > 1 && country.peakSunHours < 8, country.countryIso3);
+  }
 
+  const byIso = Object.fromEntries(solarResourceCountries.map(({ countryIso3, peakSunHours }) => [countryIso3, peakSunHours]));
   assert.deepEqual(
-    Object.fromEntries(solarResourceCountries.map(({ countryIso3, peakSunHours }) => [countryIso3, peakSunHours])),
-    {
-      BRA: 5.015,
-      CHN: 4.647,
-      FIN: 2.318,
-      KEN: 5.85,
-      MEX: 5.723,
-      OMN: 6.292,
-      PHL: 5.031,
-      POL: 2.989,
-    },
+    ['BRA', 'CHN', 'FIN', 'KEN', 'MEX', 'OMN', 'PHL', 'POL', 'AUS', 'DEU', 'EGY', 'ISL'].map((iso) => byIso[iso]),
+    [5.015, 4.647, 2.318, 5.85, 5.723, 6.292, 5.031, 2.989, 5.704, 3.056, 6.372, 2.292],
   );
+  assert.equal(byIso.ATA, undefined);
 });
 
 test('geladeira usa consumo diário derivado do fabricante sem multiplicar por horas outra vez', () => {
@@ -63,19 +65,66 @@ test('químicas de bateria não recebem eficiências genéricas sem fonte direci
   assert.ok(lifepo4.requiredDatasheetFields.includes('dischargeEfficiency'));
 });
 
-test('exemplos cobrem as categorias e calculam consumo diário sem preencher campos', () => {
-  const examples = equipmentCatalog.filter((item) => item.referenceKind === 'usage-example');
-  const expectedWh = { lighting: 12, cooking: 225, electronics: 240, water: 25, climate: 180, other: 144 };
-  assert.deepEqual(examples.map((item) => item.categoryId).sort(), Object.keys(expectedWh).sort());
+test('exemplos originais calculam consumo diário sem preencher campos', () => {
+  const expectedWh = {
+    'example-led-light': 12,
+    'example-coffee-maker': 225,
+    'example-laptop': 240,
+    'example-water-pump': 25,
+    'example-roof-fan': 180,
+    'example-background-loads': 144,
+  };
+  const examples = equipmentCatalog.filter((item) => item.id in expectedWh);
+  assert.equal(examples.length, 6);
   for (const item of examples) {
     const result = calculateDailyConsumption([buildEquipmentLoad(item, 1)], 12, 0.9, 0, 0);
-    assert.equal(result.loads[0].applianceEnergyWhPerDay, expectedWh[item.categoryId]);
-    assert.ok(item.source.url.startsWith('https://'));
-    assert.ok(item.applicableSystemVoltagesV.includes(12));
-    if (item.defaultLoad.supply === 'dc') assert.deepEqual(item.applicableSystemVoltagesV, [12]);
+    assert.equal(result.loads[0].applianceEnergyWhPerDay, expectedWh[item.id]);
   }
   const result = calculateDailyConsumption(examples.map((item) => buildEquipmentLoad(item, 1)), 12, 0.9, 0, 0);
   assert.equal(result.totalAtBatteryBusWhPerDay, 361 + 465 / 0.9);
+});
+
+test('todo item do catálogo tem fonte, id único e calcula nas tensões declaradas', () => {
+  assert.ok(equipmentCatalog.length >= 35);
+  assert.equal(new Set(equipmentCatalog.map((item) => item.id)).size, equipmentCatalog.length);
+  for (const item of equipmentCatalog) {
+    assert.ok(item.source.url.startsWith('https://'), item.id);
+    assert.match(item.source.accessedOn, /^\d{4}-\d{2}-\d{2}$/);
+    assert.equal(item.defaultLoad.id, item.id);
+    if (item.referenceKind === 'usage-example' && item.defaultLoad.supply === 'dc') {
+      assert.deepEqual(item.applicableSystemVoltagesV, [12], `${item.id}: DC genérico só em 12 V`);
+    }
+    for (const voltage of item.applicableSystemVoltagesV) {
+      const [load] = calculateDailyConsumption([buildEquipmentLoad(item, 1)], voltage, 1, 0, 0).loads;
+      assert.ok(load.applianceEnergyWhPerDay > 0, item.id);
+    }
+  }
+  const categories = new Set(equipmentCatalog.map((item) => item.categoryId));
+  assert.equal(categories.size, 7);
+});
+
+test('perfis prontos usam apenas equipamentos existentes, sem repetição e com quantidades inteiras', () => {
+  assert.deepEqual(loadProfiles.map((profile) => profile.id), ['weekend', 'full-time', 'remote-work']);
+  for (const profile of loadProfiles) {
+    const ids = profile.items.map((item) => item.equipmentId);
+    assert.equal(new Set(ids).size, ids.length, profile.id);
+    for (const { equipmentId, quantity } of profile.items) {
+      assert.ok(equipmentCatalog.some((item) => item.id === equipmentId), `${profile.id}: ${equipmentId}`);
+      assert.ok(Number.isInteger(quantity) && quantity >= 1);
+    }
+  }
+});
+
+test('referências Resfri Ar cobrem 12 e 24 V com a corrente publicada e ciclo genérico editável', () => {
+  const fridge24 = equipmentCatalog.find((item) => item.id === 'resfriar-geladeira-67l-24v');
+  assert.deepEqual(fridge24.applicableSystemVoltagesV, [24]);
+  assert.equal(calculateDailyConsumption([fridge24.defaultLoad], 24, 1, 0, 0).totalAtBatteryBusWhPerDay, 1.9 * 24 * 24 * 0.5);
+  const edited = buildEquipmentLoad(fridge24, 1, { powerW: 45.6, hoursPerDay: 24, dutyCycle: 0.3 });
+  assert.equal(edited.basis.dutyCycle, 0.3);
+  const ac12 = equipmentCatalog.find((item) => item.id === 'resfriar-rt8000-12v');
+  assert.equal(calculateDailyConsumption([ac12.defaultLoad], 12, 1, 0, 0).totalAtBatteryBusWhPerDay, 650 * 8 * 0.6);
+  const cfx3 = equipmentCatalog.find((item) => item.id === 'dometic-cfx3-45');
+  assert.ok(Math.abs(cfx3.defaultLoad.basis.energyWhPerDay - 1.03 * 24 * 12) < 1e-9);
 });
 
 test('editar o cenário atualiza energia e potência AC sem alterar a referência do catálogo', () => {
