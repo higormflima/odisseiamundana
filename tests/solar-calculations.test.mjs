@@ -9,6 +9,7 @@ import {
   calculatePvSizing,
   calculateSolarCoverage,
   calculateSolarSystem,
+  suggestChargeControllers,
 } from '../src/lib/solar/calculations.ts';
 
 const lifepo4 = {
@@ -112,7 +113,25 @@ test('estima potência ideal, cobertura e déficit solar pela Eq. 6.3 do CRESESB
   assert.ok(Math.abs(withoutLimit.minimumControllerChargeCurrentA - withoutLimit.idealArrayPowerWp / 24) < 1e-9);
   const surplus = calculateSolarCoverage({ ...input, availableArrayPowerWp: 800 });
   assert.equal(surplus.deficitWhPerDay, 0);
+  assert.ok(Math.abs(surplus.controllerArrayPowerWp - surplus.idealArrayPowerWp) < 1e-9, 'controlador usa a potência ideal quando o teto comporta mais');
   assert.throws(() => calculateSolarCoverage({ ...input, moduleDeratingFactor: 1.2 }), /Red1/);
+});
+
+test('controlador usa a potência a instalar e sugere tamanhos comerciais ou divisão do arranjo', () => {
+  // Cenário relatado: ideal de ~165 Wp com 900 Wp de espaço no teto em 12 V.
+  const roof = calculateSolarCoverage({
+    dailyEnergyAtBatteryBusWh: 165 * 5 * 0.75 * 0.9 * 0.86,
+    peakSunHours: 5, moduleDeratingFactor: 0.75, systemDeratingFactor: 0.9, batteryRoundTripEfficiency: 0.86,
+    systemVoltageV: 12, availableArrayPowerWp: 900,
+  });
+  assert.ok(Math.abs(roof.controllerArrayPowerWp - 165) < 1e-9);
+  assert.equal(Math.ceil(roof.minimumControllerChargeCurrentA), 14);
+  assert.deepEqual(roof.controllerSuggestion, { count: 1, unitCurrentA: 20, arrayPowerPerControllerWp: roof.controllerArrayPowerWp });
+
+  assert.deepEqual(suggestChargeControllers(75, 900), { count: 2, unitCurrentA: 40, arrayPowerPerControllerWp: 450 });
+  assert.deepEqual(suggestChargeControllers(40, 480), { count: 1, unitCurrentA: 40, arrayPowerPerControllerWp: 480 });
+  assert.deepEqual(suggestChargeControllers(41, 492), { count: 2, unitCurrentA: 30, arrayPowerPerControllerWp: 246 });
+  assert.deepEqual(suggestChargeControllers(8, 96).unitCurrentA, 10);
 });
 
 test('converte consumo AC pela eficiência do inversor e inclui seu consumo em espera', () => {

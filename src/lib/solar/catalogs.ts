@@ -193,7 +193,7 @@ function resfriArFridge67(voltageV: 12 | 24, currentA: number): EquipmentCatalog
     referenceKind: 'manufacturer',
     id: `resfriar-geladeira-67l-${voltageV}v`,
     categoryId: 'refrigeration',
-    namePt: `Geladeira com compressor de 67 L ${voltageV} V — referência Resfri Ar`,
+    namePt: `Resfri Ar 67 L (${voltageV} V) — geladeira com compressor e freezer`,
     keywordsPt: 'resfriar freezer portátil compressor',
     defaultLoad: {
       id: `resfriar-geladeira-67l-${voltageV}v`,
@@ -224,7 +224,7 @@ function resfriArRt8000(voltageV: 12 | 24, maxPowerW: number, currentA: number, 
     referenceKind: 'manufacturer',
     id: `resfriar-rt8000-${voltageV}v`,
     categoryId: 'climate',
-    namePt: `Ar-condicionado de teto RT8000 ${voltageV} V — referência Resfri Ar`,
+    namePt: `Resfri Ar RT8000 (${voltageV} V) — ar-condicionado de teto`,
     keywordsPt: 'resfriar climatizador split inverter',
     defaultLoad: {
       id: `resfriar-rt8000-${voltageV}v`,
@@ -255,7 +255,7 @@ export const equipmentCatalog: readonly EquipmentCatalogItem[] = [
     referenceKind: 'manufacturer',
     id: 'dometic-cfx5-45',
     categoryId: 'refrigeration',
-    namePt: 'Geladeira portátil com compressor de 45 L — referência CFX5 45',
+    namePt: 'Dometic CFX5 45 — geladeira portátil com compressor, 45 L',
     keywordsPt: 'dometic portátil compressor',
     defaultLoad: {
       id: 'dometic-cfx5-45',
@@ -282,7 +282,7 @@ export const equipmentCatalog: readonly EquipmentCatalogItem[] = [
     referenceKind: 'manufacturer',
     id: 'dometic-cfx3-45',
     categoryId: 'refrigeration',
-    namePt: 'Geladeira portátil com compressor de 45 L — referência CFX3 45',
+    namePt: 'Dometic CFX3 45 — geladeira portátil com compressor, 45 L',
     keywordsPt: 'dometic portátil compressor',
     defaultLoad: {
       id: 'dometic-cfx3-45',

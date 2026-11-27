@@ -126,7 +126,8 @@ test('inclui a seção solar somente quando a estimativa é pedida', () => {
   const solarEntries = Object.fromEntries(document.solar);
   assert.equal(solarEntries['Potência ideal de painéis'], '297 Wp para repor 100% do consumo diário');
   assert.equal(solarEntries['Cobertura do consumo'], '67,5%');
-  assert.equal(solarEntries['Controlador de carga (MPPT): corrente mínima'], '17 A para 200 Wp em banco de 12 V');
+  assert.equal(solarEntries['Controlador de carga (MPPT): corrente mínima'], '17 A em 12 V, para 200 Wp de painéis');
+  assert.equal(solarEntries['Controlador sugerido'], '1 controlador MPPT de 20 A');
   assert.match(document.solarNote, /alternador/);
   assert.ok(document.summary.some((metric) => metric.label === 'Cobertura solar'));
   assert.match(document.notes.join(' '), /CRESESB/);

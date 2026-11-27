@@ -1,0 +1,57 @@
+---
+import { supportChannels, visibleSupportChannels } from '../../lib/support.ts';
+
+const channels = visibleSupportChannels(supportChannels);
+const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+const hasChannels = Boolean(channels.pix || channels.githubSponsorsUrl);
+---
+
+{hasChannels && (
+  <section class="solar-support" aria-labelledby="solar-support-title" data-solar-support>
+    <h3 id="solar-support-title">Gostou da ferramenta? Apoie o projeto</h3>
+    <p>O Planejador Elétrico é gratuito, sem anúncios e sem cadastro. Se ele ajudou no seu projeto, você pode contribuir com qualquer valor para mantermos a ferramenta e o catálogo atualizados.</p>
+    <div class="solar-support-channels">
+      {channels.pix && (
+        <div class="solar-support-pix">
+          <h4>Pix</h4>
+          {channels.pix.qrImageSrc && (
+            <img src={`${base}${channels.pix.qrImageSrc.replace(/^\//, '')}`} alt="QR Code Pix para contribuir com o Planejador Elétrico" width="180" height="180" loading="lazy" />
+          )}
+          <p class="solar-field-note">Aponte a câmera do app do banco para o QR Code ou, no celular, copie o código e use a opção Pix Copia e Cola. Você escolhe o valor.</p>
+          <div class="solar-support-actions">
+            <button class="button" type="button" data-copy-pix data-copy-value={channels.pix.copyPasteCode ?? channels.pix.key}>
+              {channels.pix.copyPasteCode ? 'Copiar código Pix' : 'Copiar chave Pix'}
+            </button>
+            {channels.pix.paymentUrl && (
+              <a class="button button-secondary" href={channels.pix.paymentUrl} target="_blank" rel="noopener noreferrer">Abrir página de pagamento</a>
+            )}
+          </div>
+          <p class="solar-field-note" data-copy-pix-status role="status" aria-live="polite"></p>
+          <p class="solar-field-note">Chave aleatória: <code data-pix-key>{channels.pix.key}</code><br />Recebedor: {channels.pix.recipientNamePt}</p>
+        </div>
+      )}
+      {channels.githubSponsorsUrl && (
+        <div class="solar-support-github">
+          <h4>GitHub Sponsors</h4>
+          <p class="solar-field-note">Contribuição única ou mensal com cartão, para quem tem conta no GitHub.</p>
+          <a class="button button-secondary" href={channels.githubSponsorsUrl} target="_blank" rel="noopener noreferrer">Apoiar no GitHub</a>
+        </div>
+      )}
+    </div>
+  </section>
+)}
+
+<script>
+  const button = document.querySelector<HTMLButtonElement>('[data-copy-pix]');
+  const status = document.querySelector<HTMLElement>('[data-copy-pix-status]');
+  button?.addEventListener('click', async () => {
+    if (!status) return;
+    const value = button.dataset.copyValue ?? '';
+    try {
+      await navigator.clipboard.writeText(value);
+      status.textContent = 'Copiado. No app do seu banco, escolha Pix Copia e Cola (ou Pix com chave) e cole.';
+    } catch {
+      window.prompt('Copie o código Pix:', value);
+    }
+  });
+</script>

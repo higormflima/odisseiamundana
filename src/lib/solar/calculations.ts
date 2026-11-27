@@ -401,10 +401,32 @@ export interface SolarCoverage extends SolarCoverageInput {
   estimatedGenerationWhPerDay?: number;
   coverageFraction?: number;
   deficitWhPerDay?: number;
-  /** Potência considerada para o controlador: a disponível, ou a ideal quando não há limite informado. */
+  /** Potência a instalar e considerada no controlador: a ideal, limitada ao que cabe no veículo. */
   controllerArrayPowerWp: number;
   /** Estimativa conservadora: potência nominal do arranjo ÷ tensão nominal do banco, sem perdas. */
   minimumControllerChargeCurrentA: number;
+  /** Sugestão de controladores em correntes comerciais comuns, dividindo o arranjo quando passa do maior tamanho. */
+  controllerSuggestion: ChargeControllerSuggestion;
+}
+
+/** Correntes nominais de controladores de carga mais comuns no varejo, usadas apenas para sugerir tamanhos. */
+export const commonChargeControllerCurrentsA = [10, 20, 30, 40] as const;
+
+export interface ChargeControllerSuggestion {
+  count: number;
+  unitCurrentA: number;
+  /** Potência aproximada de painéis por controlador quando o arranjo é dividido. */
+  arrayPowerPerControllerWp: number;
+}
+
+/** Escolhe o menor tamanho comum que atende à corrente; acima do maior, divide em controladores iguais. */
+export function suggestChargeControllers(minimumCurrentA: number, arrayPowerWp: number): ChargeControllerSuggestion {
+  requirePositive(minimumCurrentA, 'Corrente mínima do controlador');
+  const largest = commonChargeControllerCurrentsA[commonChargeControllerCurrentsA.length - 1];
+  const count = Math.ceil(minimumCurrentA / largest);
+  const perController = minimumCurrentA / count;
+  const unitCurrentA = commonChargeControllerCurrentsA.find((size) => size >= perController) ?? largest;
+  return { count, unitCurrentA, arrayPowerPerControllerWp: arrayPowerWp / count };
 }
 
 /**
@@ -424,13 +446,15 @@ export function calculateSolarCoverage(input: SolarCoverageInput): SolarCoverage
   const energyToGenerateWhPerDay = input.dailyEnergyAtBatteryBusWh / input.batteryRoundTripEfficiency;
   const yieldWhPerWp = input.peakSunHours * input.moduleDeratingFactor * input.systemDeratingFactor;
   const idealArrayPowerWp = energyToGenerateWhPerDay / yieldWhPerWp;
-  const controllerArrayPowerWp = input.availableArrayPowerWp ?? idealArrayPowerWp;
+  const controllerArrayPowerWp = Math.min(input.availableArrayPowerWp ?? idealArrayPowerWp, idealArrayPowerWp);
+  const minimumControllerChargeCurrentA = controllerArrayPowerWp / input.systemVoltageV;
   const result: SolarCoverage = {
     ...input,
     energyToGenerateWhPerDay,
     idealArrayPowerWp,
     controllerArrayPowerWp,
-    minimumControllerChargeCurrentA: controllerArrayPowerWp / input.systemVoltageV,
+    minimumControllerChargeCurrentA,
+    controllerSuggestion: suggestChargeControllers(minimumControllerChargeCurrentA, controllerArrayPowerWp),
   };
   if (input.availableArrayPowerWp !== undefined) {
     const estimatedGenerationWhPerDay = input.availableArrayPowerWp * yieldWhPerWp * input.batteryRoundTripEfficiency;

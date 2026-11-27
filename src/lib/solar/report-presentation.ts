@@ -1,6 +1,22 @@
 import type { SolarReport } from './report.ts';
+import type { SolarCoverage } from './calculations.ts';
 
 export type ReportEntry = [label: string, value: string];
+
+/** Texto da sugestão de controladores, compartilhado entre tela, PDF e planilha. */
+export function describeChargeControllers(coverage: Pick<SolarCoverage, 'minimumControllerChargeCurrentA' | 'controllerArrayPowerWp' | 'controllerSuggestion' | 'systemVoltageV'>): {
+  minimumPt: string;
+  suggestionPt: string;
+} {
+  const format = (value: number) => new Intl.NumberFormat('pt-BR', { maximumFractionDigits: 0 }).format(value);
+  const { count, unitCurrentA, arrayPowerPerControllerWp } = coverage.controllerSuggestion;
+  return {
+    minimumPt: `${format(Math.ceil(coverage.minimumControllerChargeCurrentA))} A em ${coverage.systemVoltageV} V, para ${format(coverage.controllerArrayPowerWp)} Wp de painéis`,
+    suggestionPt: count === 1
+      ? `1 controlador MPPT de ${unitCurrentA} A`
+      : `${count} controladores MPPT de ${unitCurrentA} A, cada um ligado a uma parte dos painéis (cerca de ${format(arrayPowerPerControllerWp)} Wp por controlador). Os controladores comuns no mercado vão até 40 A; também existem modelos de corrente maior.`,
+  };
+}
 
 export interface BatteryBankDescription {
   /** Ex.: "3 baterias de 100 Ah". */
@@ -138,11 +154,15 @@ export function presentSolarReport(
     ['Potência ideal de painéis', `${format(Math.ceil(solar.idealArrayPowerWp))} Wp para repor 100% do consumo diário`],
     ...(solar.availableArrayPowerWp === undefined ? [] : [
       ['Potência que cabe no veículo', `${format(solar.availableArrayPowerWp)} Wp`],
+      ...(solar.availableArrayPowerWp > solar.idealArrayPowerWp
+        ? [['Potência recomendada para instalar', `${format(Math.ceil(solar.idealArrayPowerWp))} Wp: o espaço disponível comporta mais do que o consumo exige`]] satisfies ReportEntry[]
+        : []),
       ['Geração estimada', `${dailyEnergy(solar.estimatedGenerationWhPerDay ?? 0)} disponíveis para as cargas`],
       ['Cobertura do consumo', coverageLabel(solar.coverageFraction ?? 0)],
       ['Déficit diário', (solar.deficitWhPerDay ?? 0) > 0 ? `${dailyEnergy(solar.deficitWhPerDay ?? 0)} a repor por outra fonte` : 'Sem déficit com a HSP informada'],
     ] satisfies ReportEntry[]),
-    ['Controlador de carga (MPPT): corrente mínima', `${format(Math.ceil(solar.minimumControllerChargeCurrentA))} A para ${format(solar.controllerArrayPowerWp, 0)} Wp em banco de ${report.systemVoltageV} V`],
+    ['Controlador de carga (MPPT): corrente mínima', describeChargeControllers(solar).minimumPt],
+    ['Controlador sugerido', describeChargeControllers(solar).suggestionPt],
     ['Fatores de perda usados', `Módulos (Red1) ${format(solar.moduleDeratingFactor)} · sistema (Red2) ${format(solar.systemDeratingFactor)} · eficiência global da bateria ${percent(solar.batteryRoundTripEfficiency)}`],
     ['Como a potência foi estimada', `${dailyEnergy(solar.dailyEnergyAtBatteryBusWh)} ÷ ${percent(solar.batteryRoundTripEfficiency)} ÷ (${format(solar.peakSunHours, 3)} h × ${format(solar.moduleDeratingFactor)} × ${format(solar.systemDeratingFactor)}) = ${format(solar.idealArrayPowerWp, 0)} Wp`],
   ] : [];

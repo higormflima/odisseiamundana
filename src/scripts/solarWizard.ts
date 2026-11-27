@@ -18,7 +18,7 @@ import {
 } from '../lib/solar/calculations.ts';
 import { buildSolarReport } from '../lib/solar/report.ts';
 import type { SolarReportSolarInput } from '../lib/solar/report.ts';
-import { describeBatteryBank, presentSolarReport } from '../lib/solar/report-presentation.ts';
+import { describeBatteryBank, describeChargeControllers, presentSolarReport } from '../lib/solar/report-presentation.ts';
 import type { SolarReportDocument } from '../lib/solar/report-presentation.ts';
 import { localizeValidation } from '../lib/solar/validation.ts';
 import { createSolarPdfPreview } from '../lib/solar/pdf-preview.ts';
@@ -135,21 +135,6 @@ export function initSolarWizard(root: HTMLElement): void {
   function renderSelectedLoads() {
     const list = get<HTMLUListElement>('[data-selected-loads]');
     list.replaceChildren();
-    for (const item of equipmentCatalog) {
-      const card = root.querySelector<HTMLElement>(`[data-equipment-id="${item.id}"]`);
-      const choice = card?.querySelector<HTMLInputElement>('[data-catalog-choice]');
-      if (!choice?.checked) continue;
-      const li = document.createElement('li');
-      const text = document.createElement('span');
-      text.textContent = item.namePt;
-      li.append(text);
-      if (!item.applicableSystemVoltagesV.includes(systemVoltage())) {
-        const note = document.createElement('small');
-        note.textContent = `Não incluída: referência disponível para ${item.applicableSystemVoltagesV.join('/')} V.`;
-        li.append(note);
-      }
-      list.append(li);
-    }
     customLoads.forEach((entry, index) => {
       const li = document.createElement('li');
       const text = document.createElement('span');
@@ -686,7 +671,14 @@ export function initSolarWizard(root: HTMLElement): void {
           ['Déficit diário', (coverage.deficitWhPerDay ?? 0) > 0 ? `${format(coverage.deficitWhPerDay ?? 0)} Wh/dia` : 'Sem déficit'],
         );
       }
-      rows.push(['Controlador (MPPT): corrente mínima', `${format(Math.ceil(coverage.minimumControllerChargeCurrentA), 0)} A em ${systemVoltage()} V`]);
+      const controllers = describeChargeControllers(coverage);
+      if (coverage.availableArrayPowerWp !== undefined && coverage.availableArrayPowerWp > coverage.idealArrayPowerWp) {
+        rows.push(['Potência recomendada para instalar', `${format(Math.ceil(coverage.idealArrayPowerWp), 0)} Wp`]);
+      }
+      rows.push(
+        ['Controlador (MPPT): corrente mínima', controllers.minimumPt],
+        ['Controlador sugerido', controllers.suggestionPt],
+      );
       rows.forEach(([label, value]) => {
         const row = document.createElement('div');
         const term = document.createElement('dt');

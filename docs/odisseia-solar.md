@@ -98,14 +98,16 @@ P_ideal (Wp) = E_gerar ÷ (HSP × Red1 × Red2)
 Geração (Wh/dia) = P_disponível × HSP × Red1 × Red2 × η_bat
 Cobertura = Geração ÷ E_barramento/dia
 Déficit = max(0, E_barramento/dia − Geração)
-I_controlador_mínima = P_disponível (ou P_ideal) ÷ tensão nominal do banco
+I_controlador_mínima = P_instalar ÷ tensão nominal do banco
+P_instalar = min(P_ideal, P_disponível), ou P_ideal sem limite informado
 ```
 
 - `Red1 = 0,75` (default do manual): sujeira, degradação, tolerância de fabricação e temperatura de módulos de silício cristalino.
 - `Red2 = 0,9` (default do manual): fiação, controlador, diodos e demais perdas.
 - `η_bat` é a eficiência global da bateria: 86% para chumbo-ácido e AGM (valor sugerido pelo manual para chumbo-ácido); para LiFePO₄, o produto das eficiências de carga e descarga do perfil escolhido. Todos os valores são editáveis.
 - O limite do teto é informado como potência máxima em Wp. Sem esse limite, a ferramenta mostra só a potência ideal.
-- A corrente do controlador é conservadora: potência nominal ÷ tensão nominal do banco, sem perdas. Tensão máxima de entrada e correção por temperatura não são verificadas sem um painel e um controlador específicos.
+- A corrente do controlador é conservadora: potência a instalar ÷ tensão nominal do banco, sem perdas. Ela usa a menor potência entre a ideal e a que cabe no veículo, porque um teto maior que o necessário não obriga a instalar mais painéis; nesse caso, o relatório mostra a "potência recomendada para instalar". Tensão máxima de entrada e correção por temperatura não são verificadas sem um painel e um controlador específicos.
+- A sugestão de controlador (`suggestChargeControllers`) escolhe o menor tamanho comum entre 10, 20, 30 e 40 A — correntes nominais mais comuns no varejo, definidas pelo proprietário como referência de planejamento. Acima de 40 A, divide o arranjo em controladores iguais, cada um ligado a uma parte dos painéis, e informa que também existem modelos de corrente maior.
 - A HSP nacional é média anual; o manual dimensiona pelo mês de pior irradiação. O texto da interface e do relatório orienta o usuário a informar um valor menor para inverno ou regiões de pouco sol.
 
 A função `calculatePvSizing`, mais detalhada e dependente de módulo e MPPT específicos, continua disponível no motor, mas não é usada pela interface.
