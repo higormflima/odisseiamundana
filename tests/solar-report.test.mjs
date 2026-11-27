@@ -97,6 +97,12 @@ test('monta o guia de consumo, bateria e inversor sem seções técnicas incompl
   assert.match(document.inverterNote, /o pico não confirma/);
   const pdf = createSolarReportPdf(document, pdfFonts);
   assert.equal(Buffer.from(pdf.output('arraybuffer')).subarray(0, 5).toString(), '%PDF-');
+  const withLogo = Buffer.from(createSolarReportPdf(document, {
+    ...pdfFonts,
+    logoPng: readFileSync(new URL('../public/media/branding/optimized/logo-pdf.png', import.meta.url), 'base64'),
+  }).output('arraybuffer')).toString('latin1');
+  assert.match(withLogo, /\/Subtype \/Image/);
+  assert.match(withLogo, /\/URI \(https:\/\/odisseiamundana\.com\/pt\/planejador-eletrico\/\?utm_source=relatorio-pdf&utm_medium=pdf&utm_campaign=planejador-eletrico\)/);
   assert.ok(pdf.getNumberOfPages() > 1);
   assert.ok(pdf.getFontList().Manrope.includes('bold'));
   const longPdf = createSolarReportPdf({
@@ -163,6 +169,7 @@ test('exporta planilha Excel com abas Resumo e Consumo e valores numéricos', ()
   const summary = files.get('xl/worksheets/sheet1.xml');
   assert.match(summary, /Van &amp; &quot;Casa&quot;/);
   assert.match(summary, /Como ligar as baterias/);
+  assert.match(summary, /<f>HYPERLINK\(&quot;https:\/\/odisseiamundana\.com\/pt\/planejador-eletrico\/\?utm_source=relatorio-excel/);
   const consumption = files.get('xl/worksheets/sheet2.xml');
   assert.match(consumption, /Luminária &lt;LED&gt;/);
   assert.match(consumption, /<c r="D2"><v>4<\/v><\/c>/);

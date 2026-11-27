@@ -1,6 +1,6 @@
 # Relatório PDF — Planejador Elétrico
 
-Para a arquitetura, as fórmulas e as limitações gerais da ferramenta, consulte [odisseia-solar.md](./odisseia-solar.md).
+Para a arquitetura, as fórmulas e as limitações gerais da ferramenta, consulte [planejador-eletrico.md](./planejador-eletrico.md).
 
 ## Relatório
 
@@ -8,7 +8,7 @@ O guia básico é montado localmente no navegador a partir da configuração atu
 
 Freedom DF4100 e Rolls AGM usam a capacidade de descarga publicada e DoD para estimar energia e quantidade de baterias, sem exigir eficiências direcionais desconhecidas. LiFePO₄ preserva o método com eficiência de descarga do perfil. Nenhum método promete capacidade real em qualquer temperatura ou regime.
 
-Não são inventados parâmetros ausentes. Recarga por alternador ou tomada, carregadores, cabos e proteções ficam fora do escopo deste guia, explicitados em uma nota de limites em vez de várias seções incompletas. Painéis e controlador só aparecem quando a etapa solar é ativada, com o método e os fatores de perda do CRESESB descritos em [odisseia-solar.md](./odisseia-solar.md). Avisos de incompatibilidades conhecidas, como ultrapassar limite publicado de paralelos ou descarga, continuam visíveis.
+Não são inventados parâmetros ausentes. Recarga por alternador ou tomada, carregadores, cabos e proteções ficam fora do escopo deste guia, explicitados em uma nota de limites em vez de várias seções incompletas. Painéis e controlador só aparecem quando a etapa solar é ativada, com o método e os fatores de perda do CRESESB descritos em [planejador-eletrico.md](./planejador-eletrico.md). Avisos de incompatibilidades conhecidas, como ultrapassar limite publicado de paralelos ou descarga, continuam visíveis.
 
 O cálculo do inversor informa potências mínimas contínua e de pico e verifica correntes da bateria/BMS. A potência contínua escolhida é comparada à mínima calculada; insuficiência gera aviso. A potência de pico e a duração de partida ainda exigem conferência na ficha do modelo.
 

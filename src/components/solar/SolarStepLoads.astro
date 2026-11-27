@@ -1,5 +1,5 @@
 ---
-import { equipmentCategories, equipmentCatalog, initialInverterScenario, loadProfiles } from '../../lib/solar/catalogs.ts';
+import { dcDcConverterReference, equipmentCategories, equipmentCatalog, initialInverterScenario, loadProfiles } from '../../lib/solar/catalogs.ts';
 import type { EquipmentCatalogItem } from '../../lib/solar/catalogs.ts';
 
 const defaultSelectedIds = new Set(['dometic-cfx5-45']);
@@ -62,7 +62,20 @@ function tags(item: EquipmentCatalogItem): string[] {
     </label>
     <p class="solar-load-total" data-load-total role="status" aria-live="polite"></p>
   </div>
-  <p class="solar-field-note" data-catalog-voltage-note></p>
+  <p class="solar-field-note" data-catalog-voltage-note role="status" aria-live="polite"></p>
+  <div class="solar-converter" data-dc-converter-panel hidden>
+    <label class="solar-checkbox">
+      <input type="checkbox" data-dc-converter />
+      Usar conversor 24→12 V para aparelhos que só existem em 12 V
+    </label>
+    <div data-dc-converter-fields hidden>
+      <label class="solar-field" for="solar-dc-converter-efficiency">
+        Eficiência do conversor (%)
+        <input id="solar-dc-converter-efficiency" type="number" min="1" max="100" step="any" value={dcDcConverterReference.efficiency * 100} data-dc-converter-efficiency required />
+      </label>
+      <p class="solar-field-note">Referência: {dcDcConverterReference.namePt}. {dcDcConverterReference.notePt} <a class="solar-source-link" href={dcDcConverterReference.source.url} target="_blank" rel="noopener noreferrer">Ver ficha</a></p>
+    </div>
+  </div>
 
   <div class="solar-catalog">
     {equipmentCategories.map((category) => {
@@ -97,6 +110,7 @@ function tags(item: EquipmentCatalogItem): string[] {
                     Quantidade
                     <input type="number" min="1" step="1" value="1" data-catalog-quantity disabled={!checked} />
                   </label>
+                  <p class="solar-equipment-voltage" data-card-voltage-note hidden></p>
                   {basis.kind === 'power-time' && (
                     <div class="solar-custom-grid" data-catalog-fields hidden={!checked}>
                       <label class="solar-field">Potência durante o uso (W)<input type="number" min="0.1" step="any" value={basis.powerW} data-catalog-power disabled required /></label>

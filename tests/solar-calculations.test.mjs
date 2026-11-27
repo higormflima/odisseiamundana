@@ -134,6 +134,19 @@ test('controlador usa a potência a instalar e sugere tamanhos comerciais ou div
   assert.deepEqual(suggestChargeControllers(8, 96).unitCurrentA, 10);
 });
 
+test('carga DC por conversor 24→12 V soma a perda do conversor ao consumo da bateria', () => {
+  const result = calculateDailyConsumption([
+    { id: 'fridge-12v', supply: 'dc', quantity: 1, simultaneous: true, dcConverterEfficiency: 0.88, basis: { kind: 'daily-energy', energyWhPerDay: 220 } },
+    { id: 'led-24v', supply: 'dc', quantity: 1, simultaneous: true, basis: { kind: 'daily-energy', energyWhPerDay: 50 } },
+  ], 24, 1, 0, 0);
+  assert.equal(result.dcLoadsWhPerDay, 270);
+  assert.ok(Math.abs(result.dcConverterLossWhPerDay - (220 / 0.88 - 220)) < 1e-9);
+  assert.ok(Math.abs(result.totalAtBatteryBusWhPerDay - (220 / 0.88 + 50)) < 1e-9);
+  assert.throws(() => calculateDailyConsumption([
+    { id: 'x', supply: 'dc', quantity: 1, simultaneous: true, dcConverterEfficiency: 1.2, basis: { kind: 'daily-energy', energyWhPerDay: 10 } },
+  ], 24, 1, 0, 0), /conversor/);
+});
+
 test('converte consumo AC pela eficiência do inversor e inclui seu consumo em espera', () => {
   const result = calculateDailyConsumption([
     { id: 'screen', supply: 'ac', quantity: 1, simultaneous: true, ratedPowerW: 100, basis: { kind: 'daily-energy', energyWhPerDay: 100 } },

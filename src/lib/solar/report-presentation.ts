@@ -140,6 +140,9 @@ export function presentSolarReport(
   const solar = report.solar;
   const consumptionWh: Array<[string, number]> = [
     ['Equipamentos DC', consumption.dcLoadsWhPerDay],
+    ...(consumption.dcConverterLossWhPerDay > 0
+      ? [['Perdas no conversor 24→12 V', consumption.dcConverterLossWhPerDay]] satisfies Array<[string, number]>
+      : []),
     ...(inverter ? [
       ['Equipamentos AC, antes das perdas', consumption.acLoadsWhPerDay],
       ['Perdas estimadas no inversor', consumption.inverterInputWhPerDay - consumption.acLoadsWhPerDay],

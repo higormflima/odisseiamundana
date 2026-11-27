@@ -116,30 +116,30 @@ interface UsageExample {
 
 /** Tabela pública da RVing Toolbox (Brian Hamilton), atualizada em 10/10/2026; cenários genéricos, não medições. */
 const usageExamples: readonly UsageExample[] = [
-  { id: 'example-led-light', categoryId: 'lighting', namePt: 'Luminária LED 12 V — exemplo', keywordsPt: 'luz lâmpada spot fita', powerW: 3, hoursPerDay: 4, usagePt: '4 h/dia por luminária', supply: 'dc', voltageV: 12 },
+  { id: 'example-led-light', categoryId: 'lighting', namePt: 'Luminária LED DC — exemplo', keywordsPt: 'luz lâmpada spot fita', powerW: 3, hoursPerDay: 4, usagePt: '4 h/dia por luminária', supply: 'dc', voltageV: 12 },
   { id: 'example-coffee-maker', categoryId: 'cooking', namePt: 'Cafeteira elétrica AC — exemplo', keywordsPt: 'café', powerW: 900, hoursPerDay: 0.25, usagePt: '15 min/dia', supply: 'ac', voltageV: 120 },
   { id: 'example-laptop', categoryId: 'electronics', namePt: 'Notebook com carregador AC — exemplo', keywordsPt: 'computador laptop trabalho remoto', powerW: 60, hoursPerDay: 4, usagePt: '4 h/dia', supply: 'ac', voltageV: 120 },
-  { id: 'example-water-pump', categoryId: 'water', namePt: 'Bomba de água 12 V — exemplo', keywordsPt: 'pressurizadora torneira chuveiro', powerW: 75, hoursPerDay: 1 / 3, usagePt: '20 min/dia de funcionamento efetivo', supply: 'dc', voltageV: 12 },
-  { id: 'example-roof-fan', categoryId: 'climate', namePt: 'Exaustor de teto 12 V — exemplo', keywordsPt: 'ventilação claraboia maxxfan ventilador', powerW: 30, hoursPerDay: 6, usagePt: '6 h/dia', supply: 'dc', voltageV: 12 },
-  { id: 'example-background-loads', categoryId: 'other', namePt: 'Detectores e controles em espera 12 V — exemplo', keywordsPt: 'alarme detector gás fumaça painel rastreador', powerW: 6, hoursPerDay: 24, usagePt: '24 h/dia para o conjunto de pequenos consumos', supply: 'dc', voltageV: 12 },
-  { id: 'example-absorption-fridge-gas', categoryId: 'refrigeration', namePt: 'Geladeira de absorção a gás (controles 12 V) — exemplo', keywordsPt: 'trivolt gás propano', powerW: 12, hoursPerDay: 24, usagePt: '24 h/dia', supply: 'dc', voltageV: 12, accessedOn: '2026-11-27' },
-  { id: 'example-compressor-fridge-12v', categoryId: 'refrigeration', namePt: 'Geladeira com compressor 12 V — exemplo', keywordsPt: 'portátil compressor', powerW: 55, hoursPerDay: 24, dutyCycle: 0.5, usagePt: '24 h/dia, compressor ligado 50% do tempo', supply: 'dc', voltageV: 12, accessedOn: '2026-11-27' },
+  { id: 'example-water-pump', categoryId: 'water', namePt: 'Bomba de água DC — exemplo', keywordsPt: 'pressurizadora torneira chuveiro', powerW: 75, hoursPerDay: 1 / 3, usagePt: '20 min/dia de funcionamento efetivo', supply: 'dc', voltageV: 12 },
+  { id: 'example-roof-fan', categoryId: 'climate', namePt: 'Exaustor de teto DC — exemplo', keywordsPt: 'ventilação claraboia maxxfan ventilador', powerW: 30, hoursPerDay: 6, usagePt: '6 h/dia', supply: 'dc', voltageV: 12 },
+  { id: 'example-background-loads', categoryId: 'other', namePt: 'Detectores e controles em espera DC — exemplo', keywordsPt: 'alarme detector gás fumaça painel rastreador', powerW: 6, hoursPerDay: 24, usagePt: '24 h/dia para o conjunto de pequenos consumos', supply: 'dc', voltageV: 12 },
+  { id: 'example-absorption-fridge-gas', categoryId: 'refrigeration', namePt: 'Geladeira de absorção a gás (controles DC) — exemplo', keywordsPt: 'trivolt gás propano', powerW: 12, hoursPerDay: 24, usagePt: '24 h/dia', supply: 'dc', voltageV: 12, accessedOn: '2026-11-27' },
+  { id: 'example-compressor-fridge-12v', categoryId: 'refrigeration', namePt: 'Geladeira com compressor DC — exemplo', keywordsPt: 'portátil compressor', powerW: 55, hoursPerDay: 24, dutyCycle: 0.5, usagePt: '24 h/dia, compressor ligado 50% do tempo', supply: 'dc', voltageV: 12, accessedOn: '2026-11-27' },
   { id: 'example-residential-fridge', categoryId: 'refrigeration', namePt: 'Geladeira residencial AC — exemplo', keywordsPt: 'refrigerador doméstico', powerW: 150, hoursPerDay: 24, dutyCycle: 0.4, usagePt: '24 h/dia, compressor ligado 40% do tempo', supply: 'ac', voltageV: 120, accessedOn: '2026-11-27' },
   { id: 'example-absorption-fridge-ac', categoryId: 'refrigeration', namePt: 'Geladeira de absorção ligada na tomada AC — exemplo', keywordsPt: 'trivolt', powerW: 325, hoursPerDay: 24, dutyCycle: 0.6, usagePt: '24 h/dia, aquecedor ligado 60% do tempo', supply: 'ac', voltageV: 120, accessedOn: '2026-11-27', usageNotePt: hookupNotePt },
-  { id: 'example-furnace-blower', categoryId: 'climate', namePt: 'Ventilador de aquecedor a gás 12 V — exemplo', keywordsPt: 'calefação aquecimento furnace', powerW: 100, hoursPerDay: 4.3, usagePt: '4,3 h/dia', supply: 'dc', voltageV: 12, accessedOn: '2026-11-27' },
+  { id: 'example-furnace-blower', categoryId: 'climate', namePt: 'Ventilador de aquecedor a gás DC — exemplo', keywordsPt: 'calefação aquecimento furnace', powerW: 100, hoursPerDay: 4.3, usagePt: '4,3 h/dia', supply: 'dc', voltageV: 12, accessedOn: '2026-11-27' },
   { id: 'example-air-conditioner-13500', categoryId: 'climate', namePt: 'Ar-condicionado AC de 13.500 BTU — exemplo', keywordsPt: 'climatizador split', powerW: 1500, hoursPerDay: 8, dutyCycle: 0.6, usagePt: '8 h/dia, compressor ligado 60% do tempo', supply: 'ac', voltageV: 120, accessedOn: '2026-11-27', usageNotePt: hookupNotePt },
   { id: 'example-air-conditioner-15000', categoryId: 'climate', namePt: 'Ar-condicionado AC de 15.000 BTU — exemplo', keywordsPt: 'climatizador split', powerW: 1700, hoursPerDay: 8, dutyCycle: 0.6, usagePt: '8 h/dia, compressor ligado 60% do tempo', supply: 'ac', voltageV: 120, accessedOn: '2026-11-27', usageNotePt: hookupNotePt },
   { id: 'example-space-heater', categoryId: 'climate', namePt: 'Aquecedor elétrico AC — exemplo', keywordsPt: 'calefação', powerW: 1500, hoursPerDay: 4, dutyCycle: 0.7, usagePt: '4 h/dia, ligado 70% do tempo', supply: 'ac', voltageV: 120, accessedOn: '2026-11-27' },
   { id: 'example-electric-blanket', categoryId: 'climate', namePt: 'Cobertor elétrico AC — exemplo', keywordsPt: 'manta térmica', powerW: 60, hoursPerDay: 8, dutyCycle: 0.5, usagePt: '8 h/dia, ligado 50% do tempo', supply: 'ac', voltageV: 120, accessedOn: '2026-11-27' },
-  { id: 'example-tank-heating-pad', categoryId: 'water', namePt: 'Manta de aquecimento de tanque 12 V — exemplo', keywordsPt: 'antecongelamento inverno', powerW: 100, hoursPerDay: 24, dutyCycle: 0.4, usagePt: '24 h/dia, ligada 40% do tempo', supply: 'dc', voltageV: 12, accessedOn: '2026-11-27' },
+  { id: 'example-tank-heating-pad', categoryId: 'water', namePt: 'Manta de aquecimento de tanque DC — exemplo', keywordsPt: 'antecongelamento inverno', powerW: 100, hoursPerDay: 24, dutyCycle: 0.4, usagePt: '24 h/dia, ligada 40% do tempo', supply: 'dc', voltageV: 12, accessedOn: '2026-11-27' },
   { id: 'example-electric-water-heater', categoryId: 'water', namePt: 'Aquecedor de água elétrico AC — exemplo', keywordsPt: 'boiler banho quente', powerW: 1400, hoursPerDay: 1.5, usagePt: '1,5 h/dia', supply: 'ac', voltageV: 120, accessedOn: '2026-11-27', usageNotePt: hookupNotePt },
-  { id: 'example-phone-charging', categoryId: 'electronics', namePt: 'Carregamento de celular 12 V — exemplo', keywordsPt: 'smartphone usb tablet', powerW: 10, hoursPerDay: 3, usagePt: '3 h/dia', supply: 'dc', voltageV: 12, accessedOn: '2026-11-27' },
+  { id: 'example-phone-charging', categoryId: 'electronics', namePt: 'Carregamento de celular (USB/DC) — exemplo', keywordsPt: 'smartphone usb tablet', powerW: 10, hoursPerDay: 3, usagePt: '3 h/dia', supply: 'dc', voltageV: 12, accessedOn: '2026-11-27' },
   { id: 'example-tv-32', categoryId: 'electronics', namePt: 'TV LED de 32" AC — exemplo', keywordsPt: 'televisão monitor', powerW: 50, hoursPerDay: 3, usagePt: '3 h/dia', supply: 'ac', voltageV: 120, accessedOn: '2026-11-27' },
   { id: 'example-starlink-standard', categoryId: 'electronics', namePt: 'Starlink Standard (Gen 3) — exemplo', keywordsPt: 'internet satélite antena', powerW: 88, hoursPerDay: 8, usagePt: '8 h/dia', supply: 'ac', voltageV: 120, accessedOn: '2026-11-27' },
   { id: 'example-starlink-mini', categoryId: 'electronics', namePt: 'Starlink Mini — exemplo', keywordsPt: 'internet satélite antena', powerW: 25, hoursPerDay: 8, usagePt: '8 h/dia', supply: 'ac', voltageV: 120, accessedOn: '2026-11-27' },
-  { id: 'example-router-hotspot', categoryId: 'electronics', namePt: 'Roteador ou hotspot 4G/5G 12 V — exemplo', keywordsPt: 'internet wifi modem', powerW: 10, hoursPerDay: 24, usagePt: '24 h/dia', supply: 'dc', voltageV: 12, accessedOn: '2026-11-27' },
+  { id: 'example-router-hotspot', categoryId: 'electronics', namePt: 'Roteador ou hotspot 4G/5G DC — exemplo', keywordsPt: 'internet wifi modem', powerW: 10, hoursPerDay: 24, usagePt: '24 h/dia', supply: 'dc', voltageV: 12, accessedOn: '2026-11-27' },
   { id: 'example-game-console', categoryId: 'electronics', namePt: 'Console de videogame AC — exemplo', keywordsPt: 'jogos entretenimento', powerW: 150, hoursPerDay: 2, usagePt: '2 h/dia', supply: 'ac', voltageV: 120, accessedOn: '2026-11-27' },
-  { id: 'example-cpap', categoryId: 'other', namePt: 'CPAP 12 V — exemplo', keywordsPt: 'saúde apneia respirador', powerW: 40, hoursPerDay: 8, usagePt: '8 h/dia', supply: 'dc', voltageV: 12, accessedOn: '2026-11-27' },
+  { id: 'example-cpap', categoryId: 'other', namePt: 'CPAP DC — exemplo', keywordsPt: 'saúde apneia respirador', powerW: 40, hoursPerDay: 8, usagePt: '8 h/dia', supply: 'dc', voltageV: 12, accessedOn: '2026-11-27' },
   { id: 'example-microwave', categoryId: 'cooking', namePt: 'Micro-ondas AC — exemplo', keywordsPt: 'forno', powerW: 1200, hoursPerDay: 10 / 60, usagePt: '10 min/dia', supply: 'ac', voltageV: 120, accessedOn: '2026-11-27' },
   { id: 'example-electric-kettle', categoryId: 'cooking', namePt: 'Chaleira elétrica AC — exemplo', keywordsPt: 'água quente chá chimarrão', powerW: 1500, hoursPerDay: 0.1, usagePt: '6 min/dia', supply: 'ac', voltageV: 120, accessedOn: '2026-11-27' },
   { id: 'example-toaster', categoryId: 'cooking', namePt: 'Torradeira AC — exemplo', keywordsPt: 'sanduicheira pão', powerW: 1100, hoursPerDay: 5 / 60, usagePt: '5 min/dia', supply: 'ac', voltageV: 120, accessedOn: '2026-11-27' },
@@ -171,7 +171,8 @@ function usageExampleItem(example: UsageExample): EquipmentCatalogItem {
       basis,
       ...(example.supply === 'ac' ? { ratedPowerW: example.powerW } : {}),
     },
-    applicableSystemVoltagesV: example.supply === 'dc' ? [12] : [12, 24],
+    // Cenário de potência: vale para a versão 12 V ou 24 V do aparelho, sem conversor.
+    applicableSystemVoltagesV: [12, 24],
     sourceMeasurement: {
       value: example.powerW,
       unit: 'W',
@@ -181,22 +182,40 @@ function usageExampleItem(example: UsageExample): EquipmentCatalogItem {
     derivationPt: example.dutyCycle === undefined
       ? `${example.powerW} W × ${formatPt(example.hoursPerDay)} h/dia = ${formatPt(dailyWh, 2)} Wh/dia por unidade, antes das perdas do inversor.${example.id === 'example-water-pump' ? ' O tempo é 20/60 h, sem arredondamento no cálculo.' : ''}`
       : `${example.powerW} W × ${formatPt(example.hoursPerDay)} h/dia × ${formatPt(example.dutyCycle * 100)}% = ${formatPt(dailyWh, 2)} Wh/dia por unidade, antes das perdas do inversor.`,
-    ...(example.usageNotePt ? { usageNotePt: example.usageNotePt } : {}),
+    ...(example.usageNotePt || example.supply === 'dc'
+      ? { usageNotePt: example.usageNotePt ?? 'Cenário de potência válido para a versão 12 V ou 24 V do aparelho: escolha o modelo na tensão do seu banco. A fonte mede o circuito de 12 V.' }
+      : {}),
     source: { ...rvingToolboxSource, accessedOn: example.accessedOn ?? rvingToolboxSource.accessedOn },
   };
 }
 
 const genericCompressorDutyNotePt = 'O fabricante publica a corrente, mas não o tempo de funcionamento do compressor. O ciclo inicial é o cenário genérico da RVing Toolbox para o mesmo tipo de aparelho; ajuste-o ao seu uso.';
 
-function resfriArFridge67(voltageV: 12 | 24, currentA: number): EquipmentCatalogItem {
+interface ResfriArFridgeModel {
+  litres: number;
+  reference: string;
+  label: string;
+  url: string;
+  currentA: { 12: number; 24: number };
+}
+
+const resfriArFridges: readonly ResfriArFridgeModel[] = [
+  { litres: 67, reference: 'RESGED67', label: 'geladeira com compressor e freezer', url: 'https://resfriar.com.br/product/refrigerator-67-liters-refrigerator', currentA: { 12: 3.8, 24: 1.9 } },
+  { litres: 75, reference: 'RESGED75', label: 'geladeira externa com compressor e freezer', url: 'https://resfriar.com.br/product/refrigerator-75-liters-external', currentA: { 12: 3.8, 24: 1.9 } },
+  { litres: 110, reference: 'RESGE110', label: 'geladeira side by side com freezer', url: 'https://resfriar.com.br/product/refrigerator-110-liters-side-by-side', currentA: { 12: 6.4, 24: 3.2 } },
+];
+
+function resfriArFridge(model: ResfriArFridgeModel, voltageV: 12 | 24): EquipmentCatalogItem {
+  const currentA = model.currentA[voltageV];
+  const id = `resfriar-geladeira-${model.litres}l-${voltageV}v`;
   return {
     referenceKind: 'manufacturer',
-    id: `resfriar-geladeira-67l-${voltageV}v`,
+    id,
     categoryId: 'refrigeration',
-    namePt: `Resfri Ar 67 L (${voltageV} V) — geladeira com compressor e freezer`,
-    keywordsPt: 'resfriar freezer portátil compressor',
+    namePt: `Resfri Ar ${model.litres} L (${voltageV} V) — ${model.label}`,
+    keywordsPt: 'resfriar freezer compressor caminhão',
     defaultLoad: {
-      id: `resfriar-geladeira-67l-${voltageV}v`,
+      id,
       supply: 'dc',
       quantity: 1,
       simultaneous: true,
@@ -212,8 +231,8 @@ function resfriArFridge67(voltageV: 12 | 24, currentA: number): EquipmentCatalog
     derivationPt: `${formatPt(currentA)} A × ${voltageV} V = ${formatPt(currentA * voltageV, 2)} W em funcionamento; × 24 h/dia × 50% = ${formatPt(currentA * voltageV * 12, 2)} Wh/dia.`,
     usageNotePt: genericCompressorDutyNotePt,
     source: {
-      name: 'Resfri Ar — Geladeira 67 litros (RESGED67), especificações do fabricante',
-      url: 'https://resfriar.com.br/product/refrigerator-67-liters-refrigerator',
+      name: `Resfri Ar — Geladeira ${model.litres} litros (${model.reference}), especificações do fabricante`,
+      url: model.url,
       accessedOn: '2026-11-27',
     },
   };
@@ -305,8 +324,7 @@ export const equipmentCatalog: readonly EquipmentCatalogItem[] = [
       accessedOn: '2026-11-27',
     },
   },
-  resfriArFridge67(12, 3.8),
-  resfriArFridge67(24, 1.9),
+  ...resfriArFridges.flatMap((model) => [resfriArFridge(model, 12), resfriArFridge(model, 24)]),
   resfriArRt8000(12, 650, 55, 6500),
   resfriArRt8000(24, 750, 31, 7500),
   ...usageExamples.map(usageExampleItem),
@@ -316,7 +334,8 @@ export interface LoadProfile {
   id: string;
   namePt: string;
   descriptionPt: string;
-  items: ReadonlyArray<{ equipmentId: string; quantity: number }>;
+  /** substituteAt24V: item usado no lugar de uma referência que só existe em 12 V. */
+  items: ReadonlyArray<{ equipmentId: string; quantity: number; substituteAt24V?: string }>;
 }
 
 /** Pontos de partida para a seleção do catálogo; não representam consumo médio de viajantes. */
@@ -326,7 +345,7 @@ export const loadProfiles: readonly LoadProfile[] = [
     namePt: 'Fim de semana',
     descriptionPt: 'Geladeira, iluminação, bomba de água, ventilação e celulares.',
     items: [
-      { equipmentId: 'dometic-cfx5-45', quantity: 1 },
+      { equipmentId: 'dometic-cfx5-45', quantity: 1, substituteAt24V: 'example-compressor-fridge-12v' },
       { equipmentId: 'example-led-light', quantity: 4 },
       { equipmentId: 'example-water-pump', quantity: 1 },
       { equipmentId: 'example-roof-fan', quantity: 1 },
@@ -338,7 +357,7 @@ export const loadProfiles: readonly LoadProfile[] = [
     namePt: 'Viagem em tempo integral',
     descriptionPt: 'O fim de semana, mais cafeteira, notebook, TV, roteador e pequenos consumos contínuos.',
     items: [
-      { equipmentId: 'dometic-cfx5-45', quantity: 1 },
+      { equipmentId: 'dometic-cfx5-45', quantity: 1, substituteAt24V: 'example-compressor-fridge-12v' },
       { equipmentId: 'example-led-light', quantity: 6 },
       { equipmentId: 'example-water-pump', quantity: 1 },
       { equipmentId: 'example-roof-fan', quantity: 1 },
@@ -355,7 +374,7 @@ export const loadProfiles: readonly LoadProfile[] = [
     namePt: 'Trabalho remoto',
     descriptionPt: 'Tempo integral com dois notebooks e internet via satélite (Starlink Mini).',
     items: [
-      { equipmentId: 'dometic-cfx5-45', quantity: 1 },
+      { equipmentId: 'dometic-cfx5-45', quantity: 1, substituteAt24V: 'example-compressor-fridge-12v' },
       { equipmentId: 'example-led-light', quantity: 6 },
       { equipmentId: 'example-water-pump', quantity: 1 },
       { equipmentId: 'example-roof-fan', quantity: 1 },
@@ -410,6 +429,19 @@ export interface SolarCatalogSource {
   url: string;
   accessedOn: string;
 }
+
+/** Referência editável para ligar aparelhos de 12 V em banco de 24 V por conversor DC-DC. */
+export const dcDcConverterReference = {
+  namePt: 'Victron Orion-Tr Smart 24/12-30 (360 W), isolado',
+  efficiency: 0.88,
+  noLoadInputCurrentA: 0.1,
+  notePt: 'Eficiência publicada na tabela de especificações (88%), sem indicar se é típica ou máxima; o consumo sem carga (< 100 mA) não entra no cálculo. Ajuste para o conversor escolhido.',
+  source: {
+    name: 'Victron Energy — Orion-Tr Smart DC-DC Charger Isolated, especificações',
+    url: 'https://www.victronenergy.com/media/pg/Orion-Tr_Smart_DC-DC_Charger_-_Isolated/en/specifications.html',
+    accessedOn: '2026-11-27',
+  },
+} as const;
 
 /** Valores default do método do mês crítico (CRESESB/CEPEL, 2014, seção 6.2, p. 309), editáveis no formulário. */
 export const solarCoverageDefaults = {

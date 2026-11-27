@@ -113,13 +113,22 @@ export function initSolarWizard(root: HTMLElement): void {
     return true;
   }
 
-  function getCompatibleLoads(): ElectricalLoad[] {
+  /** Como um item do catálogo entra no banco atual: direto, por conversor 24→12 V ou não entra. */
+  function catalogItemMode(item: (typeof equipmentCatalog)[number]): 'native' | 'converter' | 'incompatible' {
     const voltage = systemVoltage();
+    if (item.applicableSystemVoltagesV.includes(voltage)) return 'native';
+    if (voltage === 24 && item.defaultLoad.supply === 'dc' && item.applicableSystemVoltagesV.includes(12)
+      && get<HTMLInputElement>('[data-dc-converter]').checked) return 'converter';
+    return 'incompatible';
+  }
+
+  function getCompatibleLoads(): ElectricalLoad[] {
     const catalogLoads = equipmentCatalog.flatMap((item) => {
       const card = root.querySelector<HTMLElement>(`[data-equipment-id="${item.id}"]`);
       const choice = card?.querySelector<HTMLInputElement>('[data-catalog-choice]');
       const quantity = card?.querySelector<HTMLInputElement>('[data-catalog-quantity]');
-      if (!choice?.checked || !item.applicableSystemVoltagesV.includes(voltage) || !quantity) return [];
+      const mode = catalogItemMode(item);
+      if (!choice?.checked || mode === 'incompatible' || !quantity) return [];
       const kind = item.defaultLoad.basis.kind;
       const scope = `[data-equipment-id="${item.id}"]`;
       const usage = kind === 'power-time' || kind === 'compressor-cycle' ? {
@@ -127,7 +136,10 @@ export function initSolarWizard(root: HTMLElement): void {
         hoursPerDay: numeric(`${scope} [data-catalog-hours]`) ?? Number.NaN,
         ...(kind === 'compressor-cycle' ? { dutyCycle: (numeric(`${scope} [data-catalog-duty]`) ?? Number.NaN) / 100 } : {}),
       } : undefined;
-      return [buildEquipmentLoad(item, Number(quantity.value), usage)];
+      const load = buildEquipmentLoad(item, Number(quantity.value), usage);
+      return [mode === 'converter'
+        ? { ...load, dcConverterEfficiency: (numeric('[data-dc-converter-efficiency]') ?? Number.NaN) / 100 }
+        : load];
     });
     return [...catalogLoads, ...customLoads.map(({ load }) => load)];
   }
@@ -177,17 +189,30 @@ export function initSolarWizard(root: HTMLElement): void {
     const voltage = systemVoltage();
     const query = normalizeSearch(get<HTMLInputElement>('[data-catalog-search]').value);
     const terms = query.split(/\s+/).filter(Boolean);
-    let hiddenByVoltage = 0;
+    const converterPanel = get<HTMLElement>('[data-dc-converter-panel]');
+    const converterOn = voltage === 24 && get<HTMLInputElement>('[data-dc-converter]').checked;
+    converterPanel.hidden = voltage !== 24;
+    get<HTMLInputElement>('[data-dc-converter]').disabled = voltage !== 24;
+    get<HTMLElement>('[data-dc-converter-fields]').hidden = !converterOn;
+    get<HTMLInputElement>('[data-dc-converter-efficiency]').disabled = !converterOn;
+    const unchecked: string[] = [];
+    let unavailable = 0;
     equipmentCatalog.forEach((item) => {
       const card = root.querySelector<HTMLElement>(`[data-equipment-id="${item.id}"]`);
       const choice = card?.querySelector<HTMLInputElement>('[data-catalog-choice]');
       const quantity = card?.querySelector<HTMLInputElement>('[data-catalog-quantity]');
       if (!card || !choice || !quantity) return;
-      const compatible = item.applicableSystemVoltagesV.includes(voltage);
+      const mode = catalogItemMode(item);
+      const compatible = mode !== 'incompatible';
+      if (!compatible && choice.checked) {
+        choice.checked = false;
+        unchecked.push(item.namePt);
+      }
+      if (!compatible) unavailable += 1;
       const matches = terms.every((term) => (card.dataset.searchText ?? '').includes(term));
-      if (!compatible && !choice.checked) hiddenByVoltage += 1;
-      card.hidden = !matches || (!compatible && !choice.checked);
-      choice.disabled = !compatible && !choice.checked;
+      card.hidden = !matches;
+      card.classList.toggle('is-unavailable', !compatible);
+      choice.disabled = !compatible;
       const active = compatible && choice.checked;
       quantity.disabled = !active;
       const fields = card.querySelector<HTMLElement>('[data-catalog-fields]');
@@ -195,6 +220,16 @@ export function initSolarWizard(root: HTMLElement): void {
       card.querySelectorAll<HTMLInputElement>('[data-catalog-power], [data-catalog-hours], [data-catalog-duty]').forEach((field) => {
         field.disabled = !active;
       });
+      const voltageNote = card.querySelector<HTMLElement>('[data-card-voltage-note]');
+      if (voltageNote) {
+        const only = item.applicableSystemVoltagesV.join('/');
+        voltageNote.hidden = mode === 'native';
+        voltageNote.textContent = mode === 'converter'
+          ? `Aparelho de ${only} V ligado pelo conversor 24→12 V; as perdas do conversor entram no consumo.`
+          : voltage === 24 && item.applicableSystemVoltagesV.includes(12) && item.defaultLoad.supply === 'dc'
+            ? `Só ${only} V. No banco de 24 V, ative o conversor 24→12 V acima ou escolha um modelo de 24 V.`
+            : `Só ${only} V: não é compatível com o banco de ${voltage} V.`;
+      }
     });
     let visibleTotal = 0;
     root.querySelectorAll<HTMLDetailsElement>('[data-catalog-category]').forEach((category) => {
@@ -211,9 +246,14 @@ export function initSolarWizard(root: HTMLElement): void {
       if (count) count.textContent = selected ? `${selected} ${selected === 1 ? 'selecionado' : 'selecionados'} · ${itemsLabel}` : itemsLabel;
     });
     get<HTMLElement>('[data-catalog-no-results]').hidden = visibleTotal > 0;
-    get<HTMLElement>('[data-catalog-voltage-note]').textContent = hiddenByVoltage
-      ? `${hiddenByVoltage} equipamentos DC de referência existem apenas para outra tensão e estão ocultos no banco de ${voltage} V. Se usar um conversor, adicione-os manualmente com o consumo do seu aparelho.`
-      : '';
+    const voltageNote = get<HTMLElement>('[data-catalog-voltage-note]');
+    if (unchecked.length) {
+      voltageNote.textContent = `Desmarcamos ${unchecked.join('; ')}: ${unchecked.length === 1 ? 'esse modelo não é compatível' : 'esses modelos não são compatíveis'} com o banco de ${voltage} V.${voltage === 24 ? ' Para usar aparelhos de 12 V, ative o conversor 24→12 V.' : ''}`;
+    } else if (!voltageNote.textContent?.startsWith('Desmarcamos')) {
+      voltageNote.textContent = unavailable
+        ? `${unavailable} ${unavailable === 1 ? 'modelo de fabricante aparece desabilitado' : 'modelos de fabricante aparecem desabilitados'} porque ${unavailable === 1 ? 'só existe' : 'só existem'} em outra tensão.`
+        : '';
+    }
     renderSelectedLoads();
   }
 
@@ -223,7 +263,12 @@ export function initSolarWizard(root: HTMLElement): void {
     const choices = Array.from(root.querySelectorAll<HTMLInputElement>('[data-catalog-choice]'));
     if (choices.some((choice) => choice.checked)
       && !window.confirm(`Substituir a seleção atual do catálogo pelo perfil “${profile.namePt}”? Os equipamentos adicionados manualmente serão mantidos.`)) return;
-    const quantities = new Map(profile.items.map((item) => [item.equipmentId, item.quantity]));
+    const voltage = systemVoltage();
+    const quantities = new Map(profile.items.map((item) => {
+      const original = equipmentCatalog.find((equipment) => equipment.id === item.equipmentId);
+      const useSubstitute = voltage === 24 && item.substituteAt24V && !original?.applicableSystemVoltagesV.includes(24);
+      return [useSubstitute ? item.substituteAt24V as string : item.equipmentId, item.quantity];
+    }));
     equipmentCatalog.forEach((item) => {
       const card = root.querySelector<HTMLElement>(`[data-equipment-id="${item.id}"]`);
       if (!card) return;
@@ -252,10 +297,12 @@ export function initSolarWizard(root: HTMLElement): void {
     updateInverterFields();
     updateSummary();
     scheduleSave();
-    const unavailable = profile.items.filter(({ equipmentId }) =>
-      !equipmentCatalog.find((item) => item.id === equipmentId)?.applicableSystemVoltagesV.includes(systemVoltage()));
+    const unavailable = [...quantities.keys()].filter((equipmentId) => {
+      const item = equipmentCatalog.find((equipment) => equipment.id === equipmentId);
+      return !item || catalogItemMode(item) === 'incompatible';
+    });
     get<HTMLElement>('[data-profile-status]').textContent = unavailable.length
-      ? `Perfil “${profile.namePt}” aplicado. ${unavailable.length} ${unavailable.length === 1 ? 'item DC de referência só existe' : 'itens DC de referência só existem'} em 12 V e não entram no banco de ${systemVoltage()} V; adicione-os manualmente se tiver a versão ${systemVoltage()} V.`
+      ? `Perfil “${profile.namePt}” aplicado. ${unavailable.length} ${unavailable.length === 1 ? 'item ficou de fora' : 'itens ficaram de fora'} por não ser compatível com o banco de ${systemVoltage()} V.`
       : `Perfil “${profile.namePt}” aplicado. Ajuste os valores à sua rotina.`;
   }
 
@@ -810,9 +857,9 @@ export function initSolarWizard(root: HTMLElement): void {
           return {
             name: catalogItem.namePt,
             categoryLabelPt: categoryLabel(catalogItem.categoryId),
-            originLabelPt: catalogItem.referenceKind === 'usage-example'
+            originLabelPt: `${catalogItem.referenceKind === 'usage-example'
               ? 'Cenário genérico de uso; valores editáveis'
-              : load.quantity === 1 ? 'Referência do catálogo (editável)' : 'Referência do catálogo; quantidade ajustada',
+              : load.quantity === 1 ? 'Referência do catálogo (editável)' : 'Referência do catálogo; quantidade ajustada'}${load.dcConverterEfficiency === undefined ? '' : ' · via conversor 24→12 V'}`,
             load,
           };
         }
@@ -860,7 +907,7 @@ export function initSolarWizard(root: HTMLElement): void {
       const excludedCatalogLoads = equipmentCatalog.flatMap((item) => {
         const card = root.querySelector<HTMLElement>(`[data-equipment-id="${item.id}"]`);
         const choice = card?.querySelector<HTMLInputElement>('[data-catalog-choice]');
-        return choice?.checked && !item.applicableSystemVoltagesV.includes(systemVoltage())
+        return choice?.checked && catalogItemMode(item) === 'incompatible'
           ? [item.namePt]
           : [];
       });
@@ -912,7 +959,7 @@ export function initSolarWizard(root: HTMLElement): void {
       .replace(/[\u0300-\u036f]/g, '')
       .toLowerCase()
       .replace(/[^a-z0-9]+/g, '-')
-      .replace(/^-|-$/g, '') || 'odisseia-solar';
+      .replace(/^-|-$/g, '') || 'planejador-eletrico';
   }
 
   let summaryBusEnergyWh: number | undefined;
@@ -1061,6 +1108,7 @@ export function initSolarWizard(root: HTMLElement): void {
     radio.addEventListener('change', updateBatteryChoice));
   root.querySelectorAll<HTMLInputElement>('input[name="systemVoltageV"]').forEach((radio) => {
     radio.addEventListener('change', () => {
+      get<HTMLElement>('[data-catalog-voltage-note]').textContent = '';
       updateCatalogChoices();
       if (selectedChemistry() === 'lifepo4') applyLifepo4Profile(profileForCurrentVoltage().id);
       updateBatteryChoice();
@@ -1071,10 +1119,16 @@ export function initSolarWizard(root: HTMLElement): void {
   });
   root.querySelectorAll<HTMLInputElement>('[data-catalog-choice]').forEach((choice) => {
     choice.addEventListener('change', () => {
+      get<HTMLElement>('[data-catalog-voltage-note]').textContent = '';
       updateCatalogChoices();
       updateInverterFields();
       updateSummary();
     });
+  });
+  get<HTMLInputElement>('[data-dc-converter]').addEventListener('change', () => {
+    get<HTMLElement>('[data-catalog-voltage-note]').textContent = '';
+    updateCatalogChoices();
+    updateSummary();
   });
   get<HTMLInputElement>('[data-catalog-search]').addEventListener('input', updateCatalogChoices);
   root.querySelectorAll<HTMLButtonElement>('[data-load-profile]').forEach((button) => {
@@ -1130,17 +1184,24 @@ export function initSolarWizard(root: HTMLElement): void {
     button.textContent = 'Gerando PDF…';
     status.textContent = 'Preparando seu PDF neste dispositivo…';
     try {
-      const [{ createSolarReportPdf }, [regular, bold, display]] = await Promise.all([
+      const toBase64 = async (response: Response) => {
+        const bytes = new Uint8Array(await response.arrayBuffer());
+        return btoa(bytes.reduce((text, byte) => text + String.fromCharCode(byte), ''));
+      };
+      const [{ createSolarReportPdf }, [regular, bold, display], logoPng] = await Promise.all([
         import('../lib/solar/report-pdf.ts'),
         Promise.all(['Manrope-Regular.ttf', 'Manrope-Bold.ttf', 'DMSerifDisplay-Regular.ttf'].map(async (filename) => {
           const response = await fetch(`${import.meta.env.BASE_URL}media/branding/fonts/${filename}`);
           if (!response.ok) throw new Error('Não foi possível carregar as fontes do PDF.');
-          const bytes = new Uint8Array(await response.arrayBuffer());
-          return btoa(bytes.reduce((text, byte) => text + String.fromCharCode(byte), ''));
+          return toBase64(response);
         })),
+        // O logo é opcional: sem ele, o PDF continua sendo gerado.
+        fetch(`${import.meta.env.BASE_URL}media/branding/optimized/logo-pdf.png`)
+          .then((response) => (response.ok ? toBase64(response) : undefined))
+          .catch(() => undefined),
       ]);
       if (generation !== pdfGeneration) return;
-      const pdf = createSolarReportPdf(reportDocument, { regular, bold, display });
+      const pdf = createSolarReportPdf(reportDocument, { regular, bold, display, logoPng });
       preparedPdfFile = new File([pdf.output('blob')], `${filenameBase(reportDocument.title)}.pdf`, { type: 'application/pdf' });
       preparedPdfUrl = URL.createObjectURL(preparedPdfFile);
       get<HTMLButtonElement>('[data-open-pdf]').hidden = false;

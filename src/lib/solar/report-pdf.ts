@@ -1,10 +1,13 @@
 import { jsPDF } from 'jspdf';
 import type { ReportEntry, SolarReportDocument } from './report-presentation.ts';
+import { plannerDisplayUrl, plannerShareUrl } from './links.ts';
 
 export interface SolarPdfFonts {
   regular: string;
   bold: string;
   display: string;
+  /** Logo oficial em PNG (base64), exibido no canto da primeira página. Opcional. */
+  logoPng?: string;
 }
 
 export function createSolarReportPdf(report: SolarReportDocument, fonts: SolarPdfFonts): jsPDF {
@@ -50,9 +53,9 @@ export function createSolarReportPdf(report: SolarReportDocument, fonts: SolarPd
     return true;
   }
 
-  function paragraph(text: string, size = 10, bold = false, color = ink, family = 'Manrope') {
+  function paragraph(text: string, size = 10, bold = false, color = ink, family = 'Manrope', maxWidth = width) {
     font(size, bold, color, family);
-    const lines: string[] = pdf.splitTextToSize(text, width);
+    const lines: string[] = pdf.splitTextToSize(text, maxWidth);
     const lineHeight = size * 0.352778 * 1.5;
     for (const line of lines) {
       ensureSpace(lineHeight);
@@ -85,9 +88,15 @@ export function createSolarReportPdf(report: SolarReportDocument, fonts: SolarPd
   }
 
   pageHeader();
-  paragraph('GUIA BÁSICO DO SISTEMA ELÉTRICO', 9, true, copper);
-  paragraph(report.title, 22, false, ocean, 'DM Serif Display');
-  paragraph('Consumo, baterias, inversor e energia solar: um ponto de partida para planejar seu veículo.', 10, false, muted);
+  const logoSize = 22;
+  const titleWidth = fonts.logoPng ? width - logoSize - 4 : width;
+  if (fonts.logoPng) {
+    pdf.addImage(`data:image/png;base64,${fonts.logoPng}`, 'PNG', margin + width - logoSize, y - 2, logoSize, logoSize);
+    pdf.link(margin + width - logoSize, y - 2, logoSize, logoSize, { url: plannerShareUrl('relatorio-pdf') });
+  }
+  paragraph('GUIA BÁSICO DO SISTEMA ELÉTRICO', 9, true, copper, 'Manrope', titleWidth);
+  paragraph(report.title, 22, false, ocean, 'DM Serif Display', titleWidth);
+  paragraph('Consumo, baterias, inversor e energia solar: um ponto de partida para planejar seu veículo.', 10, false, muted, 'Manrope', titleWidth);
   entries(report.identification);
 
   heading(1, 'Seu sistema em resumo');
@@ -172,13 +181,27 @@ export function createSolarReportPdf(report: SolarReportDocument, fonts: SolarPd
   for (const note of report.notes) paragraph(`• ${note}`, 9, false, muted);
   y += 3;
   paragraph(report.disclaimer, 10, true);
+  ensureSpace(22);
+  y += 4;
+  pdf.setDrawColor('#D18E59');
+  pdf.setLineWidth(0.3);
+  pdf.line(margin, y, margin + width, y);
+  y += 5;
+  paragraph('Ajuste seu planejamento ou compartilhe a ferramenta gratuita:', 10, true, ocean);
+  font(11, true, copper);
+  pdf.textWithLink(plannerDisplayUrl, margin, y + 3.9, { url: plannerShareUrl('relatorio-pdf') });
+  y += 8;
 
   const pages = pdf.getNumberOfPages();
   for (let page = 1; page <= pages; page += 1) {
     pdf.setPage(page);
     font(8, false, muted);
-    pdf.text('Guia de planejamento · não substitui projeto executivo', margin, 285);
-    pdf.text(`${page} / ${pages}`, margin + width, 285, { align: 'right' });
+    const footerLead = 'Gerado no Planejador Elétrico · ';
+    pdf.text(footerLead, margin, 285);
+    font(8, true, ocean);
+    pdf.textWithLink(plannerDisplayUrl, margin + pdf.getTextWidth(footerLead), 285, { url: plannerShareUrl('relatorio-pdf') });
+    font(8, false, muted);
+    pdf.text(`não substitui projeto executivo · ${page} / ${pages}`, margin + width, 285, { align: 'right' });
   }
   return pdf;
 }

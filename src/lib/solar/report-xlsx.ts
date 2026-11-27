@@ -1,11 +1,12 @@
 import type { ReportEntry, SolarReportDocument } from './report-presentation.ts';
+import { plannerDisplayUrl, plannerShareUrl } from './links.ts';
 
 /*
  * Planilha .xlsx sem dependências: um pacote ZIP (sem compressão) com as partes mínimas do
  * formato Office Open XML. Abre no Excel, no Numbers e no Google Planilhas.
  */
 
-type Cell = string | number | { value: string | number; style: CellStyle } | null;
+type Cell = string | number | { value: string | number; style: CellStyle } | { link: string; text: string } | null;
 type CellStyle = 'bold' | 'number' | 'boldNumber' | 'wrap' | 'title';
 type Row = Cell[];
 
@@ -35,6 +36,10 @@ function columnName(index: number): string {
 
 function cellXml(cell: Cell, reference: string): string {
   if (cell === null || cell === '') return '';
+  if (typeof cell === 'object' && 'link' in cell) {
+    const quoted = (text: string) => `"${text.replace(/"/g, '""')}"`;
+    return `<c r="${reference}" t="str" s="${styleIndex.bold}"><f>${escapeXml(`HYPERLINK(${quoted(cell.link)},${quoted(cell.text)})`)}</f><v>${escapeXml(cell.text)}</v></c>`;
+  }
   const { value, style } = typeof cell === 'object' ? cell : { value: cell, style: undefined };
   const styleAttribute = style ? ` s="${styleIndex[style]}"` : '';
   if (typeof value === 'number') {
@@ -180,6 +185,7 @@ export function createSolarReportWorkbook(report: SolarReportDocument): Uint8Arr
     rows: [
       [{ value: report.title, style: 'title' }],
       ['Guia básico do sistema elétrico — Odisseia Mundana'],
+      ['Gerado no Planejador Elétrico', { link: plannerShareUrl('relatorio-excel'), text: plannerDisplayUrl }],
       [],
       ...entryRows('Identificação', report.identification),
       ...entryRows('Seu sistema em resumo', report.summary.map((metric) => [metric.label, `${metric.value} — ${metric.detail}`])),

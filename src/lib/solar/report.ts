@@ -220,6 +220,9 @@ export function buildSolarReport(input: SolarReportInput): SolarReport {
     warnings,
     calculationNotes: [
       'Consumo da bateria: soma dos equipamentos DC, dos equipamentos AC com as perdas do inversor e do consumo do inversor ligado sem carga.',
+      ...(consumption.dcConverterLossWhPerDay > 0
+        ? ['Conversor 24→12 V: a energia dos aparelhos de 12 V é dividida pela eficiência informada do conversor; o consumo sem carga do conversor não foi incluído.']
+        : []),
       battery.capacityBasis === 'published-discharge'
         ? `Capacidade publicada: usamos a descarga da referência ${battery.chemistry === 'agm' ? 'Rolls S12-230AGM-RE' : 'Freedom DF4100'} em C20 a 25 °C. A energia em Wh é aproximada; não foi presumida eficiência de 100%. Valores editados precisam corresponder à bateria escolhida.`
         : 'Capacidade do banco: consideramos o consumo diário, a autonomia, a profundidade de descarga (DoD) e a eficiência de descarga informada.',

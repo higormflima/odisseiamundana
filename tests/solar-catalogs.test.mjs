@@ -4,6 +4,7 @@ import {
   batteryCatalog,
   batteryTechnologyCatalog,
   buildEquipmentLoad,
+  dcDcConverterReference,
   equipmentCatalog,
   inverterCatalog,
   loadProfiles,
@@ -91,8 +92,9 @@ test('todo item do catálogo tem fonte, id único e calcula nas tensões declara
     assert.ok(item.source.url.startsWith('https://'), item.id);
     assert.match(item.source.accessedOn, /^\d{4}-\d{2}-\d{2}$/);
     assert.equal(item.defaultLoad.id, item.id);
-    if (item.referenceKind === 'usage-example' && item.defaultLoad.supply === 'dc') {
-      assert.deepEqual(item.applicableSystemVoltagesV, [12], `${item.id}: DC genérico só em 12 V`);
+    if (item.referenceKind === 'usage-example') {
+      assert.deepEqual(item.applicableSystemVoltagesV, [12, 24], `${item.id}: cenário genérico vale em 12 e 24 V`);
+      assert.doesNotMatch(item.namePt, /12 V/, `${item.id}: nome não deve prender o exemplo a 12 V`);
     }
     for (const voltage of item.applicableSystemVoltagesV) {
       const [load] = calculateDailyConsumption([buildEquipmentLoad(item, 1)], voltage, 1, 0, 0).loads;
@@ -108,11 +110,24 @@ test('perfis prontos usam apenas equipamentos existentes, sem repetição e com 
   for (const profile of loadProfiles) {
     const ids = profile.items.map((item) => item.equipmentId);
     assert.equal(new Set(ids).size, ids.length, profile.id);
-    for (const { equipmentId, quantity } of profile.items) {
-      assert.ok(equipmentCatalog.some((item) => item.id === equipmentId), `${profile.id}: ${equipmentId}`);
+    for (const { equipmentId, quantity, substituteAt24V } of profile.items) {
+      const item = equipmentCatalog.find((equipment) => equipment.id === equipmentId);
+      assert.ok(item, `${profile.id}: ${equipmentId}`);
       assert.ok(Number.isInteger(quantity) && quantity >= 1);
+      const at24 = substituteAt24V ? equipmentCatalog.find((equipment) => equipment.id === substituteAt24V) : item;
+      assert.ok(at24?.applicableSystemVoltagesV.includes(24), `${profile.id}: ${equipmentId} precisa de alternativa em 24 V`);
     }
   }
+});
+
+test('referências de fabricante em 24 V e conversor 24→12 V vêm de fichas oficiais', () => {
+  for (const litres of [67, 75, 110]) {
+    assert.ok(equipmentCatalog.some((item) => item.id === `resfriar-geladeira-${litres}l-24v`), `${litres} L em 24 V`);
+  }
+  const fridge110 = equipmentCatalog.find((item) => item.id === 'resfriar-geladeira-110l-24v');
+  assert.equal(fridge110.defaultLoad.basis.runningPowerW, 3.2 * 24);
+  assert.equal(dcDcConverterReference.efficiency, 0.88);
+  assert.match(dcDcConverterReference.source.url, /^https:\/\/www\.victronenergy\.com\//);
 });
 
 test('referências Resfri Ar cobrem 12 e 24 V com a corrente publicada e ciclo genérico editável', () => {

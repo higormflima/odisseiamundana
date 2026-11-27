@@ -2,7 +2,7 @@
 
 Os catálogos são dados locais; a aplicação não consulta essas fontes durante o uso. Valores sem fonte adequada não são completados por suposição.
 
-Para a arquitetura, as fórmulas e o processo de atualização dos registros, consulte [odisseia-solar.md](./odisseia-solar.md).
+Para a arquitetura, as fórmulas e o processo de atualização dos registros, consulte [planejador-eletrico.md](./planejador-eletrico.md).
 
 ## Insolação por país
 
@@ -30,7 +30,7 @@ Dados consultados em 27/11/2026, com licença CC BY 4.0. A página identifica a 
 
 ## Equipamentos consumidores
 
-O catálogo tem 36 itens em sete categorias: seis referências de fabricante e 30 cenários genéricos de uso. Cada item registra fonte, data de consulta, condições e derivação, exibidas em **Fonte e premissas** no cartão.
+O catálogo tem 40 itens em sete categorias: dez referências de fabricante e 30 cenários genéricos de uso. Cada item registra fonte, data de consulta, condições e derivação, exibidas em **Fonte e premissas** no cartão.
 
 ### Referências de fabricante
 
@@ -40,10 +40,12 @@ O catálogo tem 36 itens em sete categorias: seis referências de fabricante e 3
 | Dometic CFX3 45 (12 V) | 1,03 Ah/h, ambiente 32 °C e interior 4 °C | 1,03 × 24 h × 12 V = 296,64 Wh/dia | [Dometic](https://www.dometic.com/en-ae/product/dometic-cfx3-45-9620009573), 27/11/2026 |
 | Resfri Ar geladeira 67 L (RESGED67), 12 V | 3,8 ± 0,5 A (Turbo: 5,6 A) | 45,6 W × 24 h × 50% = 547,2 Wh/dia | [Resfri Ar](https://resfriar.com.br/product/refrigerator-67-liters-refrigerator), 27/11/2026 |
 | Resfri Ar geladeira 67 L (RESGED67), 24 V | 1,9 ± 0,5 A (Turbo: 2,8 A) | 45,6 W × 24 h × 50% = 547,2 Wh/dia | idem |
+| Resfri Ar geladeira 75 L externa (RESGED75), 12/24 V | 3,8 ± 0,5 A em 12 V; 1,9 ± 0,5 A em 24 V | 45,6 W × 24 h × 50% = 547,2 Wh/dia | [Resfri Ar](https://resfriar.com.br/product/refrigerator-75-liters-external), 27/11/2026 |
+| Resfri Ar geladeira 110 L side by side (RESGE110), 12/24 V | 6,4 ± 0,5 A em 12 V; 3,2 ± 0,5 A em 24 V | 76,8 W × 24 h × 50% = 921,6 Wh/dia | [Resfri Ar](https://resfriar.com.br/product/refrigerator-110-liters-side-by-side), 27/11/2026 |
 | Resfri Ar RT8000 (400AC), 12 V | consumo máximo 650 W, 55 A, 6.500 BTU/h | 650 W × 8 h × 60% = 3.120 Wh/dia | [Resfri Ar](https://www.resfriar.com.br/produto/ar-condicionado-rt8000-serie-4-inverter), 27/11/2026 |
 | Resfri Ar RT8000 (400AC), 24 V | consumo máximo 750 W, 31 A, 7.500 BTU/h | 750 W × 8 h × 60% = 3.600 Wh/dia | idem |
 
-Os valores Dometic são consumos médios por hora nas condições publicadas e não recebem horas adicionais. A Resfri Ar publica corrente (geladeira) e consumo máximo (ar-condicionado), mas não o tempo de funcionamento do compressor. Para esses itens, o ciclo inicial vem do cenário genérico da RVing Toolbox para o mesmo tipo de aparelho (geladeira com compressor: 24 h a 50%; ar-condicionado: 8 h a 60%). O cartão informa essa combinação, e potência, horas e ciclo são editáveis. O RT8000 usa o consumo máximo; o modo inverter tende a consumir menos. As referências Resfri Ar são as únicas cargas DC do catálogo publicadas também em 24 V.
+Os valores Dometic são consumos médios por hora nas condições publicadas e não recebem horas adicionais. A Resfri Ar publica corrente (geladeira) e consumo máximo (ar-condicionado), mas não o tempo de funcionamento do compressor. Para esses itens, o ciclo inicial vem do cenário genérico da RVing Toolbox para o mesmo tipo de aparelho (geladeira com compressor: 24 h a 50%; ar-condicionado: 8 h a 60%). O cartão informa essa combinação, e potência, horas e ciclo são editáveis. O RT8000 usa o consumo máximo; o modo inverter tende a consumir menos. As referências Resfri Ar têm valores publicados em 12 V e 24 V e aparecem como itens separados por tensão. As Dometic CFX5 45 e CFX3 45 têm consumo publicado só em 12 V; em banco de 24 V ficam visíveis, porém desabilitadas, a menos que o usuário ative o conversor 24→12 V.
 
 ### Cenários genéricos (RVing Toolbox)
 
@@ -51,11 +53,11 @@ Por autorização do proprietário, há cenários genéricos pré-preenchidos, i
 
 | Categoria | Exemplo | Potência | Uso diário | Energia por unidade |
 |---|---|---|---|---|
-| Refrigeração | Geladeira de absorção a gás (controles 12 V) | 12 W | 24 h | 288 Wh |
-| Refrigeração | Geladeira com compressor 12 V | 55 W | 24 h × 50% | 660 Wh |
+| Refrigeração | Geladeira de absorção a gás (controles DC) | 12 W | 24 h | 288 Wh |
+| Refrigeração | Geladeira com compressor DC | 55 W | 24 h × 50% | 660 Wh |
 | Refrigeração | Geladeira residencial AC | 150 W | 24 h × 40% | 1.440 Wh |
 | Refrigeração | Geladeira de absorção na tomada AC* | 325 W | 24 h × 60% | 4.680 Wh |
-| Iluminação | Luminária LED 12 V | 3 W | 4 h | 12 Wh |
+| Iluminação | Luminária LED DC | 3 W | 4 h | 12 Wh |
 | Cozinha | Cafeteira AC | 900 W | 15 min | 225 Wh |
 | Cozinha | Micro-ondas AC | 1.200 W | 10 min | 200 Wh |
 | Cozinha | Chaleira elétrica AC | 1.500 W | 6 min | 150 Wh |
@@ -63,34 +65,38 @@ Por autorização do proprietário, há cenários genéricos pré-preenchidos, i
 | Cozinha | Cooktop de indução AC | 1.800 W | 30 min × 70% | 630 Wh |
 | Cozinha | Panela elétrica ou airfryer AC | 1.000 W | 30 min × 60% | 300 Wh |
 | Eletrônicos e Internet | Notebook com carregador AC | 60 W | 4 h | 240 Wh |
-| Eletrônicos e Internet | Carregamento de celular 12 V | 10 W | 3 h | 30 Wh |
+| Eletrônicos e Internet | Carregamento de celular DC | 10 W | 3 h | 30 Wh |
 | Eletrônicos e Internet | TV LED 32" AC | 50 W | 3 h | 150 Wh |
 | Eletrônicos e Internet | Starlink Standard (Gen 3) | 88 W | 8 h | 704 Wh |
 | Eletrônicos e Internet | Starlink Mini | 25 W | 8 h | 200 Wh |
-| Eletrônicos e Internet | Roteador ou hotspot 12 V | 10 W | 24 h | 240 Wh |
+| Eletrônicos e Internet | Roteador ou hotspot DC | 10 W | 24 h | 240 Wh |
 | Eletrônicos e Internet | Console de videogame AC | 150 W | 2 h | 300 Wh |
-| Água e Higiene | Bomba 12 V | 75 W | 20 min | 25 Wh |
-| Água e Higiene | Manta de aquecimento de tanque 12 V | 100 W | 24 h × 40% | 960 Wh |
+| Água e Higiene | Bomba DC | 75 W | 20 min | 25 Wh |
+| Água e Higiene | Manta de aquecimento de tanque DC | 100 W | 24 h × 40% | 960 Wh |
 | Água e Higiene | Aquecedor de água elétrico AC* | 1.400 W | 1,5 h | 2.100 Wh |
 | Água e Higiene | Secador de cabelo AC | 1.500 W | 6 min | 150 Wh |
-| Climatização e Aquecimento | Exaustor de teto 12 V | 30 W | 6 h | 180 Wh |
-| Climatização e Aquecimento | Ventilador de aquecedor a gás 12 V | 100 W | 4,3 h | 430 Wh |
+| Climatização e Aquecimento | Exaustor de teto DC | 30 W | 6 h | 180 Wh |
+| Climatização e Aquecimento | Ventilador de aquecedor a gás DC | 100 W | 4,3 h | 430 Wh |
 | Climatização e Aquecimento | Ar-condicionado AC 13.500 BTU* | 1.500 W | 8 h × 60% | 7.200 Wh |
 | Climatização e Aquecimento | Ar-condicionado AC 15.000 BTU* | 1.700 W | 8 h × 60% | 8.160 Wh |
 | Climatização e Aquecimento | Aquecedor elétrico AC | 1.500 W | 4 h × 70% | 4.200 Wh |
 | Climatização e Aquecimento | Cobertor elétrico AC | 60 W | 8 h × 50% | 240 Wh |
-| Saúde e Outros | CPAP 12 V | 40 W | 8 h | 320 Wh |
-| Saúde e Outros | Detectores e controles em espera 12 V | 6 W | 24 h | 144 Wh |
+| Saúde e Outros | CPAP DC | 40 W | 8 h | 320 Wh |
+| Saúde e Outros | Detectores e controles em espera DC | 6 W | 24 h | 144 Wh |
 
 \* Na fonte, uso típico com energia externa (tomada); o cartão avisa que o consumo é alto para sistemas somente com bateria.
 
 O percentual indica o tempo em que o aparelho efetivamente funciona dentro das horas informadas (base `compressor-cycle`). O motor multiplica potência × horas × ciclo × quantidade, sem arredondamento intermediário. A tabela da fonte arredonda alguns totais de forma diferente (micro-ondas 204 Wh, torradeira 88 Wh, ventilador do aquecedor 432 Wh); o catálogo usa a potência e o tempo publicados. As energias da tabela são anteriores às perdas do inversor.
 
-Os exemplos AC da fonte são para 120 V. A potência serve como cenário de consumo, não confirma compatibilidade com aparelhos ou inversores de 127/220/230 V. Não foram encontradas tabelas oficiais brasileiras acessíveis com potência e tempo de uso por aparelho (a Pesquisa de Posse e Hábitos do Procel/Eletrobras foi localizada apenas por fontes secundárias); para aparelhos com ENCE do Inmetro, o usuário pode informar o consumo mensal em kWh/mês. Não foram presumidos picos de partida. Os exemplos DC genéricos ficam disponíveis apenas para banco de 12 V; não se presume conversor DC-DC em banco de 24 V.
+Os exemplos AC da fonte são para 120 V. A potência serve como cenário de consumo, não confirma compatibilidade com aparelhos ou inversores de 127/220/230 V. Não foram encontradas tabelas oficiais brasileiras acessíveis com potência e tempo de uso por aparelho (a Pesquisa de Posse e Hábitos do Procel/Eletrobras foi localizada apenas por fontes secundárias); para aparelhos com ENCE do Inmetro, o usuário pode informar o consumo mensal em kWh/mês. Não foram presumidos picos de partida. Os exemplos DC genéricos são cenários de potência (W × horas) e valem para banco de 12 V ou 24 V: a energia diária é a mesma na versão 12 V ou 24 V do aparelho. Por isso os nomes dizem "DC", e não "12 V"; a fonte mede o circuito de 12 V.
+
+### Conversor 24→12 V
+
+Em banco de 24 V, o usuário pode ativar **"Usar conversor 24→12 V"** para incluir referências de fabricante que só existem em 12 V. A energia desses aparelhos é dividida pela eficiência do conversor, e a perda aparece separada na composição do consumo. A referência editável é o Victron Orion-Tr Smart 24/12-30 (360 W), isolado: 88% de eficiência e consumo sem carga menor que 100 mA, segundo a [tabela oficial de especificações](https://www.victronenergy.com/media/pg/Orion-Tr_Smart_DC-DC_Charger_-_Isolated/en/specifications.html), consultada em 27/11/2026. A tabela não indica se a eficiência é típica ou máxima; o consumo sem carga não entra no cálculo. Sem o conversor, os itens só 12 V ficam desabilitados e, se estavam marcados, são desmarcados com aviso.
 
 ### Perfis prontos
 
-`loadProfiles` marca conjuntos de itens do catálogo como ponto de partida: **Fim de semana**, **Viagem em tempo integral** e **Trabalho remoto**. São escolhas editoriais de exemplo, não consumo médio de viajantes. Ao aplicar um perfil, potência, horas e ciclo voltam aos valores do catálogo; equipamentos adicionados manualmente são mantidos.
+`loadProfiles` marca conjuntos de itens do catálogo como ponto de partida: **Fim de semana**, **Viagem em tempo integral** e **Trabalho remoto**. São escolhas editoriais de exemplo, não consumo médio de viajantes. Ao aplicar um perfil, potência, horas e ciclo voltam aos valores do catálogo; equipamentos adicionados manualmente são mantidos. Em banco de 24 V, a Dometic CFX5 45 (só 12 V) é substituída pela geladeira genérica com compressor (`substituteAt24V`).
 
 ## Fatores da estimativa solar
 

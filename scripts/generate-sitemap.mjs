@@ -1,4 +1,4 @@
-import { readdir, writeFile } from 'node:fs/promises';
+import { readdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -16,6 +16,11 @@ export function buildSitemap(htmlFiles, siteUrl) {
   return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${entries.join('\n')}\n</urlset>\n`;
 }
 
+/** Páginas com meta robots "noindex" (ex.: redirecionamentos) ficam fora do sitemap. */
+export function isIndexable(html) {
+  return !/<meta\s+name="robots"\s+content="[^"]*noindex/i.test(html);
+}
+
 async function listHtmlFiles(directory, prefix = '') {
   const entries = await readdir(directory, { withFileTypes: true });
   const files = await Promise.all(entries.map(async (entry) => {
@@ -29,7 +34,12 @@ async function listHtmlFiles(directory, prefix = '') {
 if (process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.argv[1])) {
   const { default: astroConfig } = await import('../astro.config.mjs');
   const distDirectory = path.resolve('dist');
-  const sitemap = buildSitemap(await listHtmlFiles(distDirectory), astroConfig.site);
+  const htmlFiles = await listHtmlFiles(distDirectory);
+  const indexable = [];
+  for (const file of htmlFiles) {
+    if (isIndexable(await readFile(path.join(distDirectory, file), 'utf8'))) indexable.push(file);
+  }
+  const sitemap = buildSitemap(indexable, astroConfig.site);
   await writeFile(path.join(distDirectory, 'sitemap.xml'), sitemap, 'utf8');
   console.log(`sitemap.xml gerado com ${sitemap.match(/<url>/g)?.length ?? 0} páginas.`);
 }

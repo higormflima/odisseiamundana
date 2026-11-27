@@ -2,9 +2,9 @@
 
 ## Finalidade
 
-O Planejador Elétrico é uma ferramenta local de pré-dimensionamento de sistemas off-grid, com o título de página **Planejador Elétrico para Motorhome e Van**, disponível em `/pt/odisseia-solar/`. Ele soma o consumo dos equipamentos e estima banco de baterias, inversor e, opcionalmente, painéis solares e corrente mínima do controlador de carga. Não substitui um projeto executivo nem a validação de um profissional qualificado.
+O Planejador Elétrico é uma ferramenta local de pré-dimensionamento de sistemas off-grid, com o título de página **Planejador Elétrico para Motorhome e Van**, disponível em `/pt/planejador-eletrico/`. O endereço antigo `/pt/odisseia-solar/` redireciona para o novo, preservando parâmetros como `utm_source`, e não é indexado. Ele soma o consumo dos equipamentos e estima banco de baterias, inversor e, opcionalmente, painéis solares e corrente mínima do controlador de carga. Não substitui um projeto executivo nem a validação de um profissional qualificado.
 
-O nome anterior era Odisseia Solar. O endereço e os identificadores internos permanecem, para não quebrar links já divulgados. A interface pública oferece o relatório PDF e a planilha Excel (.xlsx), sem importação ou exportação JSON.
+O nome anterior era Odisseia Solar. Os identificadores internos de código (pastas `solar/`, classes `.solar-*` e o formato legado `odisseia-solar-project`) permanecem; só o endereço público mudou. A interface pública oferece o relatório PDF e a planilha Excel (.xlsx), sem importação ou exportação JSON.
 
 As etapas são: **Veículo → Cargas → Bateria → Solar (opcional) → Relatório**. Nas cargas, o usuário pode começar por um perfil pronto, buscar no catálogo, ajustar potência, horas e ciclo de funcionamento, ou adicionar equipamentos próprios. Uma ajuda explica como descobrir o consumo pela etiqueta, pela ENCE do Inmetro, por medidor de tomada ou por monitor de bateria.
 
@@ -12,7 +12,7 @@ As etapas são: **Veículo → Cargas → Bateria → Solar (opcional) → Relat
 
 | Responsabilidade | Arquivo |
 |---|---|
-| Rota Astro em português, metadados e JSON-LD | `src/pages/pt/odisseia-solar.astro` |
+| Rota Astro em português, metadados e JSON-LD | `src/pages/pt/planejador-eletrico.astro` (redirecionamento em `src/pages/pt/odisseia-solar.astro`) |
 | Integração ao layout e à navegação do site | `src/layouts/SiteLayout.astro` |
 | Estrutura da página, progresso e diálogo do PDF | `src/components/SolarConfigurationWizard.astro` |
 | Marcação de cada etapa e do resumo lateral | `src/components/solar/*.astro` |
@@ -43,7 +43,7 @@ Nas fórmulas, `η` representa eficiência em fração decimal (por exemplo, 95%
 | Potência e tempo | `P × horas por dia` |
 | Potência média contínua | `P_média × 24` |
 | Ciclo de compressor | `P_funcionamento × janela diária × ciclo de trabalho` |
-| Energia diária publicada ou informada | `Wh/dia informado` — não se multiplica novamente por 24 |
+| Carga DC por conversor 24→12 V | energia do aparelho ÷ η_conversor; a diferença aparece como perda do conversor |`n| Energia diária publicada ou informada | `Wh/dia informado` — não se multiplica novamente por 24 |
 | Corrente e tempo | `I × V × horas por dia`; somente para carga DC na tensão do banco |
 | Consumo mensal de etiqueta (kWh/mês) | `kWh/mês × 1.000 ÷ 30`; convenção de mês de 30 dias, sem correção para as condições do veículo |
 | Consumo diário em Ah | `Ah/dia × V`; somente para carga DC na tensão do banco |
@@ -154,7 +154,7 @@ Ao atualizar um registro:
 - As HSP cadastradas são médias nacionais anuais modeladas, não medições locais nem o mês crítico usado no método do CRESESB.
 - As três opções são LiFePO₄ (perfis NPP), chumbo-ácido (Freedom DF4100, 220 Ah C20) e AGM (Rolls S12-230AGM-RE, 210 Ah C20). DoD inicial de Freedom/AGM é 20%/50%, editável e com bases distintas documentadas; não há eficiências genéricas nem ajuste automático por regime de descarga.
 - O guia não dimensiona recarga por alternador ou tomada, carregadores, cabos, fusíveis ou disjuntores. Painéis e controlador recebem apenas a estimativa de cobertura e a corrente mínima; tensão máxima de entrada, arranjo série/paralelo e correção térmica exigem as fichas do painel e do controlador escolhidos.
-- Há exemplos genéricos de potência e uso diário em todas as categorias, além das referências de fabricante (Dometic, Resfri Ar); não representam especificações universais. Cargas DC genéricas de 12 V não são disponibilizadas silenciosamente em banco de 24 V: ficam ocultas, com aviso, e só as referências publicadas em 24 V aparecem.
+- Há exemplos genéricos de potência e uso diário em todas as categorias, além das referências de fabricante (Dometic, Resfri Ar); não representam especificações universais. Os exemplos DC genéricos valem em 12 e 24 V; referências de fabricante de outra tensão ficam visíveis porém desabilitadas, e em banco de 24 V podem ser incluídas pelo conversor 24→12 V, com a perda do conversor no consumo.
 - Os perfis prontos (fim de semana, tempo integral, trabalho remoto) apenas marcam itens do catálogo; não representam consumo médio de viajantes.
 - A referência Victron SUN é para saída nominal de 230 V; o cenário inicial de 220 V é uma hipótese de planejamento editável, não a indicação de um produto. A comparação de potência contínua não confirma picos de partida.
 - Não há importação/exportação JSON nem sincronização entre dispositivos; o progresso salvo vale só para o navegador em uso. O PDF e a planilha são gerados localmente, mas o navegador e o sistema operacional controlam permissões e destino do salvamento.

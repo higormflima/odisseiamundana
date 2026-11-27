@@ -62,6 +62,11 @@
 .solar-equipment-select .solar-equipment-tags { flex-direction: row; flex-wrap: wrap; gap: 6px; }
 .solar-equipment-tags em { padding: 2px 7px; border: 1px solid var(--line); color: var(--muted); font-size: 10px; font-style: normal; font-weight: 700; letter-spacing: .03em; }
 .solar-equipment-details { grid-column: 1 / -1; color: var(--muted); font-size: 11px; line-height: 1.6; }
+.solar-equipment-voltage { grid-column: 1 / -1; margin: 0; color: var(--accent-dark); font-size: 11px; font-weight: 700; line-height: 1.5; }
+.solar-equipment.is-unavailable { background: var(--surface); }
+.solar-equipment.is-unavailable .solar-equipment-select { cursor: not-allowed; opacity: .6; }
+.solar-converter { margin: 0 0 14px; padding: 14px 16px; border-left: 3px solid var(--gold); background: var(--surface); }
+.solar-converter [data-dc-converter-fields] { margin-top: 10px; }
 .solar-equipment-details summary { width: fit-content; color: var(--accent-dark); cursor: pointer; font-weight: 700; }
 .solar-equipment-details p { margin: 6px 0 0; }
 .solar-custom-grid.solar-custom-grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
@@ -196,6 +201,10 @@
 @media (max-width: 900px) {
   .solar-layout { grid-template-columns: minmax(0, 1fr); }
   .solar-summary { position: static; }
+}
+/* No iOS, campos com fonte menor que 16 px disparam zoom automático ao receber foco. */
+@media (max-width: 900px), (pointer: coarse) {
+  .solar-page input, .solar-page select, .solar-page textarea { font-size: 16px; }
 }
 @media (max-width: 600px) {
   body { min-width: 0; }

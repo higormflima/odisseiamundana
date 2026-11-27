@@ -20,6 +20,8 @@ export interface ElectricalLoad {
   simultaneous: boolean;
   ratedPowerW?: number;
   startupPowerW?: number;
+  /** Carga DC de outra tensão ligada ao banco por conversor DC-DC (ex.: aparelho 12 V em banco 24 V). */
+  dcConverterEfficiency?: number;
 }
 
 export interface BatteryParameters {
@@ -97,6 +99,7 @@ export interface AcDcChargePlan {
 export interface DailyConsumption {
   loads: Array<{ id: string; supply: 'dc' | 'ac'; applianceEnergyWhPerDay: number; batteryBusEnergyWhPerDay: number }>;
   dcLoadsWhPerDay: number;
+  dcConverterLossWhPerDay: number;
   acLoadsWhPerDay: number;
   inverterInputWhPerDay: number;
   inverterStandbyWhPerDay: number;
@@ -296,16 +299,24 @@ export function calculateDailyConsumption(
     if (!load.id.trim() || ids.has(load.id)) throw new TypeError(`Identificador de carga vazio ou repetido: "${load.id}".`);
     ids.add(load.id);
     const applianceEnergyWhPerDay = calculateLoadEnergy(load, systemVoltageV);
+    if (load.dcConverterEfficiency !== undefined) {
+      if (load.supply !== 'dc') throw new TypeError(`O conversor DC-DC da carga "${load.id}" só se aplica a cargas DC.`);
+      requireEfficiency(load.dcConverterEfficiency, `Eficiência do conversor DC-DC da carga "${load.id}"`);
+    }
     return {
       id: load.id,
       supply: load.supply,
       applianceEnergyWhPerDay,
-      batteryBusEnergyWhPerDay: load.supply === 'ac' ? applianceEnergyWhPerDay / inverterEfficiency : applianceEnergyWhPerDay,
+      batteryBusEnergyWhPerDay: load.supply === 'ac'
+        ? applianceEnergyWhPerDay / inverterEfficiency
+        : applianceEnergyWhPerDay / (load.dcConverterEfficiency ?? 1),
     };
   });
 
   const dcLoadsWhPerDay = calculatedLoads.filter((load) => load.supply === 'dc')
     .reduce((sum, load) => sum + load.applianceEnergyWhPerDay, 0);
+  const dcConverterLossWhPerDay = calculatedLoads.filter((load) => load.supply === 'dc')
+    .reduce((sum, load) => sum + load.batteryBusEnergyWhPerDay - load.applianceEnergyWhPerDay, 0);
   const acLoadsWhPerDay = calculatedLoads.filter((load) => load.supply === 'ac')
     .reduce((sum, load) => sum + load.applianceEnergyWhPerDay, 0);
   const inverterInputWhPerDay = acLoadsWhPerDay / inverterEfficiency;
@@ -314,10 +325,11 @@ export function calculateDailyConsumption(
   return {
     loads: calculatedLoads,
     dcLoadsWhPerDay,
+    dcConverterLossWhPerDay,
     acLoadsWhPerDay,
     inverterInputWhPerDay,
     inverterStandbyWhPerDay,
-    totalAtBatteryBusWhPerDay: dcLoadsWhPerDay + inverterInputWhPerDay + inverterStandbyWhPerDay,
+    totalAtBatteryBusWhPerDay: dcLoadsWhPerDay + dcConverterLossWhPerDay + inverterInputWhPerDay + inverterStandbyWhPerDay,
   };
 }
 
